@@ -22,7 +22,7 @@ const COOKIE_NAME = 'eo_preview';
 const COOKIE_SALT = 'eo-staging-v1';
 
 const OPEN_EXACT = new Set(['/gate', '/gate.html', '/api/gate', '/robots.txt', '/favicon.ico']);
-const OPEN_PREFIXES = ['/css/', '/assets/fonts/'];
+const OPEN_PREFIXES = ['/css/', '/assets/fonts/', '/assets/logo/'];
 
 async function sha256Hex(input) {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input));

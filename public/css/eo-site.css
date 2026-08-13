@@ -90,10 +90,12 @@ p  { margin: 0 0 1em; }
   font-weight: 800; font-size: 1.02rem; letter-spacing: 0.16em;
   color: var(--eo-purple); white-space: nowrap;
 }
-.site-nav ul {
+.site-nav > ul {
   display: flex; align-items: center; gap: 1.6rem;
   list-style: none; margin: 0; padding: 0;
 }
+.brand-lockup__img { height: 46px; width: auto; display: block; }
+.brand-lockup__img--invert { filter: brightness(0) invert(1); }
 .site-nav a {
   font-family: var(--eo-font-display);
   font-weight: 600; font-size: 0.95rem;
@@ -117,7 +119,10 @@ p  { margin: 0 0 1em; }
 }
 .nav-toggle svg { display: block; }
 
-/* Two-level nav: dropdown panels on desktop, tap-to-expand on mobile */
+/* Two-level nav: dropdown panels on desktop, tap-to-expand on mobile.
+ * Submenu selectors are scoped as .site-nav .sub-menu so they always beat
+ * the .site-nav > ul flex rule — a bare .sub-menu loses that specificity
+ * fight and every panel renders open (the bug this replaced). */
 .nav-item-row { display: flex; align-items: center; gap: 0.15rem; }
 .sub-toggle {
   background: none; border: none; cursor: pointer;
@@ -127,13 +132,13 @@ p  { margin: 0 0 1em; }
 }
 .sub-toggle:hover { color: var(--eo-purple); }
 .has-sub { position: relative; }
-.sub-menu {
+.site-nav .sub-menu {
   list-style: none; margin: 0; padding: 0;
   display: none;
 }
 
 @media (min-width: 901px) {
-  .has-sub .sub-menu {
+  .site-nav .sub-menu {
     position: absolute; top: 100%; left: -0.9rem;
     min-width: 250px;
     background: #fff;
@@ -144,20 +149,29 @@ p  { margin: 0 0 1em; }
     padding: 0.5rem 0;
     z-index: 120;
   }
-  .has-sub:hover .sub-menu,
-  .has-sub:focus-within .sub-menu,
-  .has-sub.open .sub-menu { display: block; }
-  .sub-menu li { border: none; }
-  .sub-menu a {
+  .site-nav .has-sub:hover .sub-menu,
+  .site-nav .has-sub:focus-within .sub-menu,
+  .site-nav .has-sub.open .sub-menu { display: block; }
+  @media (prefers-reduced-motion: no-preference) {
+    .site-nav .has-sub:hover .sub-menu,
+    .site-nav .has-sub:focus-within .sub-menu,
+    .site-nav .has-sub.open .sub-menu { animation: eo-drop 0.18s ease both; }
+  }
+  .site-nav .sub-menu li { border: none; }
+  .site-nav .sub-menu a {
     display: block; padding: 0.55rem 1.1rem;
     font-size: 0.9rem; font-weight: 600;
     border-bottom: none; white-space: nowrap;
   }
-  .sub-menu a:hover { background: var(--eo-purple-soft); color: var(--eo-purple); }
-  .sub-menu a[aria-current="page"] { color: var(--eo-purple); }
+  .site-nav .sub-menu a:hover { background: var(--eo-purple-soft); color: var(--eo-purple); }
+  .site-nav .sub-menu a[aria-current="page"] { color: var(--eo-purple); }
   .sub-toggle svg { transition: var(--eo-transition); }
   .has-sub:hover .sub-toggle svg,
   .has-sub.open .sub-toggle svg { transform: rotate(180deg); }
+}
+@keyframes eo-drop {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
 }
 
 @media (max-width: 900px) {
@@ -170,7 +184,7 @@ p  { margin: 0 0 1em; }
     max-height: calc(100vh - var(--eo-nav-height)); overflow-y: auto;
   }
   .site-nav.open { display: block; }
-  .site-nav ul { flex-direction: column; align-items: stretch; gap: 0; padding: 0.5rem 0; }
+  .site-nav > ul { flex-direction: column; align-items: stretch; gap: 0; padding: 0.5rem 0; }
   .site-nav li { border-top: 1px solid var(--eo-bg-soft); }
   .site-nav a { display: block; padding: 0.9rem 1.5rem; border-bottom: none; }
   .site-nav .nav-cta { padding: 0.9rem 1.5rem; }
@@ -180,8 +194,8 @@ p  { margin: 0 0 1em; }
   .sub-toggle { padding: 0.9rem 1.5rem; }
   .sub-toggle svg { width: 14px; height: 10px; transition: var(--eo-transition); }
   .has-sub.open .sub-toggle svg { transform: rotate(180deg); }
-  .has-sub.open .sub-menu { display: block; background: var(--eo-bg-soft); }
-  .sub-menu a { padding-left: 2.4rem; font-size: 0.93rem; }
+  .site-nav .has-sub.open .sub-menu { display: block; background: var(--eo-bg-soft); }
+  .site-nav .sub-menu a { padding-left: 2.4rem; font-size: 0.93rem; }
 }
 
 /* -- Buttons ------------------------------------------------------------- */
@@ -207,14 +221,24 @@ p  { margin: 0 0 1em; }
 .btn--lg { padding: 1rem 2.3rem; font-size: 1.08rem; }
 
 /* -- Hero ---------------------------------------------------------------- */
+/* Texture: the logomark's bars, tiled faint behind hero content. */
 .hero {
   position: relative;
   background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg opacity='0.045'%3E%3Crect x='18' y='24' width='9' height='52' fill='%239FCF67'/%3E%3Crect x='32' y='24' width='9' height='52' fill='%239FCF67'/%3E%3Crect x='150' y='150' width='52' height='13' fill='%235A3F99'/%3E%3Crect x='150' y='176' width='52' height='13' fill='%235A3F99'/%3E%3Crect x='196' y='40' width='9' height='52' fill='%230093D0'/%3E%3Crect x='210' y='40' width='9' height='52' fill='%230093D0'/%3E%3C/g%3E%3C/svg%3E") 0 0/240px 240px repeat,
     radial-gradient(56vw 56vw at 112% -18%, rgba(0, 128, 192, 0.10), transparent 62%),
     radial-gradient(48vw 48vw at -14% 118%, rgba(106, 202, 62, 0.10), transparent 60%),
     var(--eo-bg);
   padding: 5rem 0 4.5rem;
   overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero .container > * { animation: eo-rise 0.65s ease both; }
+  .hero .container > * + * { animation-delay: 0.12s; }
+}
+@keyframes eo-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
 }
 .hero .container { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3rem; align-items: center; }
 .hero__lede { font-size: 1.22rem; color: var(--eo-mute); max-width: 34em; }
@@ -239,7 +263,9 @@ p  { margin: 0 0 1em; }
 
 /* -- Purple band (stats / big CTA) --------------------------------------- */
 .band {
-  background: var(--eo-purple);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg opacity='0.07' fill='%23ffffff'%3E%3Crect x='24' y='30' width='10' height='58'/%3E%3Crect x='40' y='30' width='10' height='58'/%3E%3Crect x='168' y='168' width='58' height='14'/%3E%3Crect x='168' y='196' width='58' height='14'/%3E%3C/g%3E%3C/svg%3E") 0 0/260px 260px repeat,
+    linear-gradient(120deg, var(--eo-purple-deep) 0%, var(--eo-purple) 55%, #6B4BB5 100%);
   color: #fff;
   padding: 3.6rem 0;
 }
@@ -501,7 +527,17 @@ legend { font-family: var(--eo-font-display); font-weight: 600; font-size: 0.9re
 }
 .preview-ribbon strong { color: var(--eo-gold); }
 
+/* -- Scroll reveal (added by eo-site-template.js; motion-safe only) ------- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in-view { opacity: 1; transform: none; }
+  .card-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
+  .card-grid .reveal:nth-child(3) { transition-delay: 0.16s; }
+  .card-grid .reveal:nth-child(4) { transition-delay: 0.24s; }
+}
+
 /* -- Misc ---------------------------------------------------------------- */
+@media (max-width: 720px) { .clinic-hero-mark { display: none; } }
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
 @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
 .lede { font-size: 1.15rem; color: var(--eo-mute); }

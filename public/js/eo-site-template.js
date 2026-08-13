@@ -12,31 +12,17 @@
 (function () {
   'use strict';
 
-  /* -- Brand marks -------------------------------------------------------- */
-  var LOGO_BARS =
-    '<svg class="brand-lockup__mark" viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">' +
-    '<rect x="20" y="10" width="22" height="120" fill="#9FCF67"/>' +
-    '<rect x="52" y="10" width="22" height="120" fill="#9FCF67"/>' +
-    '<rect x="120" y="22" width="120" height="32" fill="#5A3F99"/>' +
-    '<rect x="120" y="88" width="120" height="32" fill="#5A3F99"/>' +
-    '<rect x="288" y="10" width="22" height="120" fill="#0093D0"/>' +
-    '<rect x="320" y="10" width="22" height="120" fill="#0093D0"/>' +
-    '</svg>';
+  /* -- Brand marks --------------------------------------------------------
+     Official Equality Ohio logo artwork (grabbed from equalityohio.org).
+     The footer reuses the same file, inverted to white via CSS filter.    */
+  var LOGO_IMG =
+    '<img class="brand-lockup__img" src="/assets/logo/equality-ohio-logo.png" alt="Equality Ohio" width="400" height="174" />';
+  var LOGO_IMG_WHITE =
+    '<img class="brand-lockup__img brand-lockup__img--invert" src="/assets/logo/equality-ohio-logo.png" alt="Equality Ohio" width="400" height="174" />';
 
-  var LOGO_BARS_WHITE = LOGO_BARS.replace(/#9FCF67|#5A3F99|#0093D0/g, '#ffffff');
-
-  /* GuideStar Silver Transparency 2021 badge — SVG stand-in drawn from the
-     official badge; swap for EO's official asset file at content migration. */
+  /* Official GuideStar Silver Transparency 2021 seal (from equalityohio.org). */
   var GUIDESTAR_BADGE =
-    '<svg viewBox="0 0 120 120" role="img" aria-label="GuideStar Silver Transparency 2021" xmlns="http://www.w3.org/2000/svg">' +
-    '<defs><path id="gs-arc" d="M 60 112 A 52 52 0 1 1 60.01 112"/></defs>' +
-    '<circle cx="60" cy="60" r="58" fill="#ffffff" stroke="#b9b9b9" stroke-width="2"/>' +
-    '<circle cx="60" cy="60" r="30" fill="#a5a5a5"/>' +
-    '<path fill="#ffffff" d="M60 30 L65 52 L82 38 L70 57 L92 60 L70 64 L80 84 L64 68 L60 92 L55 68 L40 82 L50 62 L28 58 L51 55 L44 36 L58 51 Z"/>' +
-    '<text font-family="Open Sans, Arial, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.4" fill="#6d6d6d">' +
-    '<textPath href="#gs-arc" startOffset="8%">GUIDESTAR SILVER TRANSPARENCY</textPath></text>' +
-    '<text x="60" y="106" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="12" font-weight="700" fill="#6d6d6d">2021</text>' +
-    '</svg>';
+    '<img src="/assets/logo/guidestar-silver-2021.png" alt="GuideStar Silver Transparency 2021" width="54" height="54" loading="lazy" />';
 
   /* -- Navigation model ----------------------------------------------------
      `page` matches <body data-page="...">. A section header is marked
@@ -126,8 +112,7 @@
       '<header class="site-header">' +
         '<div class="nav-inner">' +
           '<a class="brand-lockup" href="/" aria-label="Equality Ohio home">' +
-            LOGO_BARS +
-            '<span class="brand-lockup__word">EQUALITY OHIO</span>' +
+            LOGO_IMG +
           '</a>' +
           '<button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">' +
             '<svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
@@ -154,8 +139,7 @@
         '<div class="footer-main">' +
           '<div class="footer-brand">' +
             '<a class="brand-lockup" href="/" aria-label="Equality Ohio home">' +
-              LOGO_BARS_WHITE +
-              '<span class="brand-lockup__word">EQUALITY OHIO</span>' +
+              LOGO_IMG_WHITE +
             '</a>' +
             '<p class="mt-1">Ohio’s statewide LGBTQ+ advocacy and legal aid organization — working toward an Ohio where justice, dignity, and self-determination belong to everyone.</p>' +
             '<ul class="footer-contact">' +
@@ -254,6 +238,24 @@
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
     });
+
+    /* Scroll-reveal: sections and cards rise in as they enter the viewport.
+       Motion-safe only; the CSS no-ops without the reveal classes anyway. */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      var targets = document.querySelectorAll('main .section, main .band, main .card-grid > .card');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach(function (el) {
+        el.classList.add('reveal');
+        io.observe(el);
+      });
+    }
 
     /* Mock form handling — design preview only, nothing is transmitted */
     document.querySelectorAll('form[data-mock="true"]').forEach(function (form) {
