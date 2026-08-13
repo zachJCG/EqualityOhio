@@ -87,7 +87,31 @@ const nextConfig = {
       { source: '/our-work/events', destination: '/get-involved/events', permanent: true },
       { source: '/event/:slug*', destination: '/get-involved/events', permanent: true },
 
-      // People. Profile pages fold into the staff and leadership rosters.
+      // People. Profile pages fold into the staff and leadership rosters:
+      // staff slugs deep-link to their card (ids on /about/staff-interns
+      // match the live profile slugs), board slugs land on the boards page,
+      // anything else (e.g. the mike-dewine entry) falls back to staff.
+      ...[
+        'josh-meeks', 'paul-peters', 'jen-kuhn', 'becca-alexander', 'dwayne-steward',
+        'sheena-barnes', 'serah-munroe', 'joseph-soza', 'leandrah-alexis', 'jessi-sadaka',
+        'justin-joseph', 'kate-mozynski', 'sol-a-kersey', 'kim-welter-2', 'mary-zaller-2',
+      ].map((slug) => ({
+        source: `/people/${slug}`,
+        destination: `/about/staff-interns#${slug}`,
+        permanent: true,
+      })),
+      ...[
+        'julie-posey', 'rini-das', 'randle-moore', 'zach-mccune',
+        'patrick-mckelvey-mscp-lpcc-s-ncc-ecmhc-oimhp-iii', 'laraun-clayton-mba-lsw',
+        'dominiece-hoelyfield-ms-and-shrm-cp', 'eileen-galvin', 'shelly-riggs',
+        'brandon-west', 'heidi-bostelman', 'tamara-lunan', 'kevin-mcgruder',
+        'kathy-bowman', 'tim-johnson', 'tayo-clyburn-ph-d', 'levent-talgar',
+        'mary-lynn-readey',
+      ].map((slug) => ({
+        source: `/people/${slug}`,
+        destination: '/about/leadership',
+        permanent: true,
+      })),
       { source: '/people', destination: '/about/staff-interns', permanent: true },
       { source: '/people/:slug*', destination: '/about/staff-interns', permanent: true },
       { source: '/about/staff-interns/:slug', destination: '/about/staff-interns', permanent: true },
