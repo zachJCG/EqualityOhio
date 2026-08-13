@@ -1,0 +1,4 @@
+# STAGING — the whole preview stays out of search engines until launch.
+# Replace with the production robots.txt (allow + sitemap line) at go-live.
+User-agent: *
+Disallow: /

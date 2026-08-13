@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- MOCKUP: keep noindex until production launch -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Volunteer — Equality Ohio</title>
+    <meta name="description" content="Volunteer with Equality Ohio — sign up for opportunities in Northeast, Central, and Southwest Ohio, or virtual opportunities from anywhere in the state." />
+    <meta name="theme-color" content="#5A3F99" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Equality Ohio — Design Preview" />
+    <meta property="og:title" content="Volunteer — Equality Ohio" />
+    <meta property="og:description" content="Volunteer with Equality Ohio — sign up for opportunities in Northeast, Central, and Southwest Ohio, or virtual opportunities from anywhere in the state." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='%230093D0'/%3E%3Crect x='55' y='78' width='90' height='16' fill='white'/%3E%3Crect x='55' y='108' width='90' height='16' fill='white'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/css/eo-fonts.css" />
+    <link rel="stylesheet" href="/css/eo-site.css" />
+  </head>
+  <body data-page="volunteer">
+    <div data-site-header></div>
+    <main id="main">
+
+<section class="hero hero--interior">
+  <div class="container">
+    <span class="eyebrow">Get Involved</span>
+    <h1>Volunteer</h1>
+    <p class="hero__lede" style="max-width:46em;">We&rsquo;re on the front lines of the issues that affect LGBTQ Ohioans &mdash; from discrimination to HIV policy reform to pushing back against conversion therapy &mdash; Equality Ohio is there. Join us: tell us where you are and how you&rsquo;d like to help.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container" style="max-width:880px;">
+    <div class="form-shell">
+      <p class="form-note">Design preview &mdash; this recreates Equality Ohio&rsquo;s volunteer sign&#8209;up form, but it isn&rsquo;t connected yet and nothing you type is saved or sent. To volunteer today, use the live form at <a href="https://equalityohio.org/get-involved/volunteer/" rel="noopener" target="_blank">equalityohio.org</a> or email <a href="mailto:info@equalityohio.org">info@equalityohio.org</a>.</p>
+      <form data-mock="true" aria-label="Volunteer sign-up" class="mt-2">
+        <div class="form-grid">
+          <div>
+            <label for="v-first">First name</label>
+            <input type="text" id="v-first" name="first-name" autocomplete="given-name" required />
+          </div>
+          <div>
+            <label for="v-last">Last name</label>
+            <input type="text" id="v-last" name="last-name" autocomplete="family-name" required />
+          </div>
+          <div>
+            <label for="v-pronouns">Pronouns <span style="font-weight:400;color:var(--eo-mute);">(optional)</span></label>
+            <select id="v-pronouns" name="pronouns">
+              <option value="">Select your pronouns&hellip;</option>
+              <option>(F)ae/(F)aer/(F)aers</option>
+              <option>Any/All Pronouns</option>
+              <option>E/Em/Eirs</option>
+              <option>Ey/Em/Eirs</option>
+              <option>He/Him/His</option>
+              <option>He/She/They</option>
+              <option>He/Them/Theirs</option>
+              <option>Name Only</option>
+              <option>Per/Per/Pers</option>
+              <option>She/Her/Hers</option>
+              <option>She/Them/Theirs</option>
+              <option>Sie/Sie/Hirs</option>
+              <option>Tey/Ter/Ters</option>
+              <option>They/Them/Theirs</option>
+              <option>Ve/Ver/Vers</option>
+              <option>Ve/Ver/Vis</option>
+              <option>Xe/Xem/Xyrs</option>
+              <option>Ze/Hir/Hirs</option>
+              <option>Zie/Zim/Zis</option>
+            </select>
+          </div>
+          <div>
+            <label for="v-address">Street address <span style="font-weight:400;color:var(--eo-mute);">(optional)</span></label>
+            <input type="text" id="v-address" name="address" autocomplete="street-address" />
+          </div>
+          <div>
+            <label for="v-city">City</label>
+            <input type="text" id="v-city" name="city" autocomplete="address-level2" required />
+          </div>
+          <div>
+            <label for="v-state">State</label>
+            <select id="v-state" name="state" required>
+              <option value="">Select your state&hellip;</option>
+              <option selected>Ohio</option>
+            </select>
+            <p class="hint">All states will be listed in the production build.</p>
+          </div>
+          <div>
+            <label for="v-zip">Postal code</label>
+            <input type="text" id="v-zip" name="zip" inputmode="numeric" autocomplete="postal-code" required />
+          </div>
+          <div>
+            <label for="v-phone">Mobile phone</label>
+            <input type="tel" id="v-phone" name="phone" autocomplete="tel" required />
+          </div>
+          <div>
+            <label for="v-email">Email</label>
+            <input type="email" id="v-email" name="email" autocomplete="email" required />
+          </div>
+          <div class="full">
+            <fieldset>
+              <legend>Interests</legend>
+              <div class="choice"><input type="checkbox" id="i-ne" name="interests" value="northeast" /><label for="i-ne">I&rsquo;m interested in volunteer opportunities in Northeast Ohio</label></div>
+              <div class="choice"><input type="checkbox" id="i-ce" name="interests" value="central" /><label for="i-ce">I&rsquo;m interested in volunteer opportunities in Central Ohio</label></div>
+              <div class="choice"><input type="checkbox" id="i-sw" name="interests" value="southwest" /><label for="i-sw">I&rsquo;m interested in volunteer opportunities in Southwest Ohio</label></div>
+              <div class="choice"><input type="checkbox" id="i-virtual" name="interests" value="virtual" /><label for="i-virtual">I&rsquo;m interested in virtual/online volunteer opportunities, or opportunities in a region that is not listed above</label></div>
+            </fieldset>
+          </div>
+          <div class="full">
+            <button class="btn btn--primary btn--lg" type="submit">Sign Up to Volunteer</button>
+          </div>
+        </div>
+      </form>
+      <div class="form-success" role="status">
+        <h3>You&rsquo;re signed up &mdash; in the real build.</h3>
+        <p>This preview didn&rsquo;t save or send anything. In production, your sign&#8209;up would go to Equality Ohio&rsquo;s organizing team through EveryAction. Want to volunteer right now? Use the live form at <a href="https://equalityohio.org/get-involved/volunteer/" rel="noopener" target="_blank">equalityohio.org</a> or email <a href="mailto:info@equalityohio.org">info@equalityohio.org</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">More Ways to Show Up</span>
+      <h2>Keep going</h2>
+    </div>
+    <div class="card-grid card-grid--3">
+      <div class="card card--path is-blue">
+        <span class="card__kicker">Events</span>
+        <h3>Come to an event</h3>
+        <p>If you support LGBTQ equality, you&rsquo;re a part of the Equality Ohio family. Come and help us make Ohio a state we can all call home!</p>
+        <a class="card__link" href="/get-involved/events">See upcoming events &rarr;</a>
+      </div>
+      <div class="card card--path">
+        <span class="card__kicker">For Attorneys</span>
+        <h3>Join the Legal Network</h3>
+        <p>Attorneys can volunteer their skills through the Equality Ohio Legal Clinic&rsquo;s attorney referral network.</p>
+        <a class="card__link" href="/legal-clinic/legal-network">Join the Legal Network &rarr;</a>
+      </div>
+      <div class="card card--path is-green">
+        <span class="card__kicker">Newsletter</span>
+        <h3>Stay in the loop</h3>
+        <p>Real change starts with you. Get updates on the work of Equality Ohio and our partners across the state and country.</p>
+        <a class="card__link" href="/newsletter">Sign up for updates &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+    </main>
+    <div data-site-footer></div>
+    <script src="/js/eo-site-template.js" defer></script>
+  </body>
+</html>

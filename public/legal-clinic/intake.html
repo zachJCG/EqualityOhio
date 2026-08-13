@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- MOCKUP: keep noindex until production launch -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Legal Clinic Intake — Equality Ohio</title>
+    <meta name="description" content="Start a confidential intake with the Equality Ohio Legal Clinic. Free legal help for LGBTQ+ Ohioans." />
+    <meta name="theme-color" content="#5A3F99" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Equality Ohio — Design Preview" />
+    <meta property="og:title" content="Legal Clinic Intake — Equality Ohio" />
+    <meta property="og:description" content="Start a confidential intake with the Equality Ohio Legal Clinic. Free legal help for LGBTQ+ Ohioans." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='%230093D0'/%3E%3Crect x='55' y='78' width='90' height='16' fill='white'/%3E%3Crect x='55' y='108' width='90' height='16' fill='white'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/css/eo-fonts.css" />
+    <link rel="stylesheet" href="/css/eo-site.css" />
+  </head>
+  <body data-page="legal-clinic-intake">
+    <div data-site-header></div>
+    <main id="main">
+
+<section class="hero hero--interior">
+  <div class="container">
+    <span class="eyebrow">Legal Clinic</span>
+    <h1>Start your intake</h1>
+    <p class="hero__lede" style="max-width:44em;">About 10 minutes. Everything you share stays confidential within the clinic team, and submitting this form does not create an attorney-client relationship. Prefer to talk? Call <a href="tel:18555428529" style="white-space:nowrap;">855-LGBT-LAW</a>.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container" style="max-width:880px;">
+    <div class="form-shell">
+      <p class="form-note">Design preview — this form isn&rsquo;t connected yet and nothing you type is saved or sent. If you need legal help today, call <strong>855-LGBT-LAW</strong>.</p>
+      <form data-mock="true" aria-label="Legal clinic intake" class="mt-2">
+        <div class="form-grid">
+          <div>
+            <label for="in-name">Name</label>
+            <input type="text" id="in-name" name="name" autocomplete="name" required />
+            <p class="hint">The name you go by — it doesn&rsquo;t need to match your documents.</p>
+          </div>
+          <div>
+            <label for="in-pronouns">Pronouns <span style="font-weight:400;color:var(--eo-mute);">(optional)</span></label>
+            <input type="text" id="in-pronouns" name="pronouns" />
+          </div>
+          <div>
+            <label for="in-email">Email</label>
+            <input type="email" id="in-email" name="email" autocomplete="email" required />
+          </div>
+          <div>
+            <label for="in-phone">Phone <span style="font-weight:400;color:var(--eo-mute);">(optional)</span></label>
+            <input type="tel" id="in-phone" name="phone" autocomplete="tel" />
+          </div>
+          <div>
+            <label for="in-county">County</label>
+            <select id="in-county" name="county" required>
+              <option value="">Select your county&hellip;</option>
+              <option>Cuyahoga</option><option>Franklin</option><option>Hamilton</option>
+              <option>Summit</option><option>Montgomery</option><option>Lucas</option>
+              <option>Stark</option><option>Butler</option><option>Lorain</option>
+              <option>Mahoning</option><option>Other / not listed here</option>
+            </select>
+            <p class="hint">All 88 counties will be listed in the production build.</p>
+          </div>
+          <div>
+            <fieldset>
+              <legend>Safe ways to contact you</legend>
+              <div class="choice"><input type="checkbox" id="c-email" name="contact" value="email" /><label for="c-email">Email is safe</label></div>
+              <div class="choice"><input type="checkbox" id="c-call" name="contact" value="call" /><label for="c-call">Calls are safe</label></div>
+              <div class="choice"><input type="checkbox" id="c-vm" name="contact" value="voicemail" /><label for="c-vm">OK to leave a voicemail</label></div>
+            </fieldset>
+          </div>
+          <div class="full">
+            <fieldset>
+              <legend>What kind of issue is this?</legend>
+              <div class="choice"><input type="radio" id="t-name" name="issue" value="name-change" /><label for="t-name">Name or gender marker change</label></div>
+              <div class="choice"><input type="radio" id="t-family" name="issue" value="family" /><label for="t-family">Family law</label></div>
+              <div class="choice"><input type="radio" id="t-discrim" name="issue" value="discrimination" /><label for="t-discrim">Discrimination — housing, work, or public places</label></div>
+              <div class="choice"><input type="radio" id="t-consumer" name="issue" value="consumer" /><label for="t-consumer">Consumer issue — fraud, identity theft, debt</label></div>
+              <div class="choice"><input type="radio" id="t-benefits" name="issue" value="benefits" /><label for="t-benefits">Public benefits — SSI, disability</label></div>
+              <div class="choice"><input type="radio" id="t-other" name="issue" value="other" /><label for="t-other">Something else</label></div>
+            </fieldset>
+          </div>
+          <div class="full">
+            <label for="in-story">What&rsquo;s going on?</label>
+            <textarea id="in-story" name="story" rows="6" placeholder="Share as much or as little as you're comfortable with."></textarea>
+          </div>
+          <div class="full">
+            <div class="choice">
+              <input type="checkbox" id="in-income" name="income-ack" required />
+              <label for="in-income">I understand that representation by a clinic lawyer depends on income (within 300% of the federal poverty level), and clinic staff will review this with me.</label>
+            </div>
+          </div>
+          <div class="full">
+            <button class="btn btn--primary btn--lg" type="submit">Submit Intake</button>
+          </div>
+        </div>
+      </form>
+      <div class="form-success" role="status">
+        <h3>Intake received — in the real build.</h3>
+        <p>This preview didn&rsquo;t save or send anything. In production, your intake would go securely to the clinic team and you&rsquo;d get a confirmation email. Need help right now? Call <strong>855-LGBT-LAW</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+    </main>
+    <div data-site-footer></div>
+    <script src="/js/eo-site-template.js" defer></script>
+  </body>
+</html>

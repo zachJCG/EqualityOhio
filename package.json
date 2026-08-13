@@ -1,0 +1,17 @@
+{
+  "name": "equalityohio-web",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Equality Ohio website redesign. Next.js on Vercel; static pages served from public/ until each is ported to the App Router. Supabase-backed forms arrive in Phase 2.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "check:links": "node scripts/check-links.mjs"
+  },
+  "dependencies": {
+    "next": "^15.5.22",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  }
+}

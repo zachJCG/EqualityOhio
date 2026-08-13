@@ -1,0 +1,81 @@
+/* ==========================================================================
+   EQUALITY OHIO — Brand Tokens (Mockup v1, rev 2)
+   --------------------------------------------------------------------------
+   Single source of truth for brand color, type, and layout variables.
+
+   CANONICAL PALETTE = the official logo artwork supplied by EO (Aug 2026),
+   which matches the 2026 Brand Style Guide PDF's RGB annotations:
+     purple 90,63,153 = #5A3F99 · blue 0,147,208 = #0093D0 ·
+     green 159,207,103 = #9FCF67.
+   The PDF's printed hex codes (#401385/#0080C0/#6ACA3E) are stale — do not
+   use them. See NOTES in the project's 2026 Brand Tokens doc.
+
+   Architecture mirrors the JCG platform token layer: one token file,
+   imported by the site stylesheet, never redefined in page styles.
+   ========================================================================== */
+
+:root {
+  /* -- Primary brand colors (official logo artwork) ----------------------- */
+  --eo-purple:        #5A3F99;   /* equals mark + wordmark — primary        */
+  --eo-blue:          #0093D0;   /* right bars, sub mark — large accents    */
+  --eo-green:         #9FCF67;   /* left bars — decorative use only         */
+
+  /* Derived tints/shades (JCG, for web use — not in the style guide) */
+  --eo-purple-deep:   #3E2A70;   /* hover states, footer band               */
+  --eo-purple-soft:   #F5F3FA;   /* tinted section backgrounds              */
+  --eo-purple-border: #E4DFF1;
+  --eo-blue-ink:      #006C99;   /* small-text link blue, AA on white       */
+
+  /* -- Secondary palette (Policy Update Brand Style Sheet) ---------------- */
+  --eo-cornflower:    #4677D0;
+  --eo-indigo:        #6E63E2;
+  --eo-gold:          #EEBE05;
+  --eo-coral:         #FF914D;
+  --eo-violet:        #5E17EB;
+
+  /* -- Neutrals ----------------------------------------------------------- */
+  --eo-ink:           #1B1B2F;
+  --eo-body-text:     #33333F;
+  --eo-mute:          #5E5E70;
+  --eo-bg:            #FFFFFF;
+  --eo-bg-soft:       #F7F6FB;
+  --eo-border:        #E6E4EF;
+
+  /* -- Accessibility rules (WCAG 2.1 AA — computed, not guessed) ----------
+     • --eo-purple on white: 8.1:1 — safe for all text; white on it: 8.1:1.
+     • --eo-purple-deep as bg: white text 11.9:1.
+     • --eo-blue on white: 3.5:1 — LARGE text (24px+/19px bold) and
+       graphics only. Small-text links use --eo-blue-ink (5.8:1).
+     • --eo-green on white: 1.8:1 — decorative bars/icons ONLY, never text.
+     • --eo-gold pills: --eo-ink text (9.7:1), never white. Gold numerals on
+       --eo-purple band: 4.6:1 — large text only.                          */
+
+  /* -- Gradients ----------------------------------------------------------
+     Equality bar: the logomark read left→right (green bars, purple equals,
+     blue bars) as a hairline accent. Policy gradient per the 2026 guide.  */
+  --eo-equality-bar: linear-gradient(
+    90deg,
+    var(--eo-green)  0%,  var(--eo-green)  33.3%,
+    var(--eo-purple) 33.3%, var(--eo-purple) 66.6%,
+    var(--eo-blue)   66.6%, var(--eo-blue)  100%
+  );
+  --eo-policy-gradient: linear-gradient(135deg, #FF914D 0%, #C84BC8 55%, #5E17EB 100%);
+
+  /* -- Typography (2026 Brand Style Guide) --------------------------------
+     Body: Open Sans. Display: Montserrat ("Montserrat Classic" in the
+     guide). Emphasis/eyebrows: League Spartan, uppercase.                 */
+  --eo-font-body:     'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  --eo-font-display:  'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --eo-font-emphasis: 'League Spartan', 'Montserrat', Arial, sans-serif;
+
+  /* -- Layout / chrome (carried over from the platform) ------------------- */
+  --eo-nav-height:    76px;
+  --eo-radius-sm:     6px;
+  --eo-radius-md:     10px;
+  --eo-radius-lg:     16px;
+  --eo-shadow-card:   0 2px 14px rgba(90, 63, 153, 0.08);
+  --eo-shadow-lift:   0 10px 30px rgba(90, 63, 153, 0.16);
+  --eo-focus-ring:    0 0 0 3px rgba(0, 147, 208, 0.45);
+  --eo-transition:    all 0.25s ease;
+  --eo-max-width:     1160px;
+}
