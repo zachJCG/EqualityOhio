@@ -77,6 +77,22 @@ Compiled from page authoring; keep this list current as items land.
   municipal-map dataset (257 municipalities); affirming-congregations
   directory (108 entries); events as data rows.
 
+**Notable specifics found during authoring**
+- EveryAction form URLs recorded: one-time `EdZ6NpoEMUWWZvFdaAdqJQ2`, EOEF
+  `0VkWv2FL0UeGdLOF6aMsiw2`, Defenders `O2F5qByi8kSgvOAQysPEIQ2` (all on
+  secure.everyaction.com/v1/Forms/); events calendar embed page
+  `secure.everyaction.com/p/p8xo4ZmRSUmLA57z1RaA7w2`; volunteer form
+  `actions.everyaction.com/v1/Forms/wmSqb0UnU0-23sWMyhoAQg2`.
+- Legal Network interest form is Lawmatics id `2563c615-…` (SPA — field list
+  needs a JS browser to extract); clinic-updates form is also Lawmatics.
+- Newsletter is Gravity Forms on WordPress; downstream email platform not
+  revealed by the embed — confirm with EO.
+- Voters guide: per-candidate letter grades exist only inside the live
+  portrait PNGs; grade data or badge art needed from EO.
+- Live-site bugs worth flagging to EO: many links point at the retired
+  `equalityoh.wpengine.com` staging host, and the live "Share Your Story"
+  button 404s through it.
+
 **Assets**
 - Official logo files + GuideStar badge artwork (SVG stand-ins are
   exact-geometry recreations; swap the official files).
