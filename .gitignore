@@ -1,8 +1,11 @@
 node_modules/
 .next/
 out/
-.env
-.env.local
+# Every env file but the documented example (the repo is public).
+.env*
+!.env.example
 .vercel
 *.log
 .DS_Store
+playwright-report/
+test-results/

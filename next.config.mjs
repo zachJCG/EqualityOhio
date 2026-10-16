@@ -1,64 +1,118 @@
-import { readdirSync, statSync } from 'node:fs';
-import { dirname, join, relative, sep } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { LEGACY_POST_PATHS } from './lib/legacy-post-paths.mjs';
+import { LAUNCHED } from './lib/site.mjs';
+import { staticPages } from './lib/static-pages.mjs';
 
 /* ===========================================================================
  * Equality Ohio: Next.js configuration.
  *
  * Same platform pattern as the JCG nonprofit stack: every page ships as
- * static HTML under public/, and clean URLs are generated here by walking
- * public/ for .html files. The rewrites are afterFiles, so the day a page
+ * static HTML under public/, and clean URLs are generated here from
+ * lib/static-pages.mjs (one walk of public/ shared with the page generator,
+ * the sitemap and the tests). The rewrites are afterFiles, so the day a page
  * becomes a real app/<path>/page.js the real route wins with no change here.
  *
  * The redirects section also carries the FULL legacy URL map for
  * equalityohio.org: every URL in the live WordPress sitemaps (captured
- * 2026-08-13) either keeps its path in the redesign or 301s to its
- * replacement. See docs/site-map.md for the page-by-page mapping.
+ * 2026-08-13, re-checked 2026-10-16 against docs/legacy-sitemap-urls.txt by
+ * `npm run check:redirects`) either keeps its path in the redesign or
+ * redirects to its replacement. See docs/site-map.md for the page-by-page
+ * mapping.
  * ======================================================================== */
 
-const PUBLIC_DIR = join(dirname(fileURLToPath(import.meta.url)), 'public');
+/** Every public/**\/*.html as { file: '/about.html', url: '/about' }. */
+const pages = staticPages();
 
-/** Absolute paths of every .html file under public/. */
-function htmlFiles(dir = PUBLIC_DIR, found = []) {
-  for (const entry of readdirSync(dir)) {
-    const full = join(dir, entry);
-    if (statSync(full).isDirectory()) htmlFiles(full, found);
-    else if (entry.endsWith('.html')) found.push(full);
-  }
-  return found;
+/* Porting a page to the App Router: delete public/<path>.html, add its clean
+ * URL here (so old /<path>.html and /<path>/index.html links still land),
+ * and move its lib/seo.mjs entry to the route's own `metadata` export. The
+ * generated .html redirect below disappears with the file; this keeps it. */
+const PORTED = [];
+
+/* ---------------------------------------------------------------------------
+ * Indexing. X-Robots-Tag goes on every response until launch, and on every
+ * non-production Vercel deployment (previews, local builds) after it, so a
+ * preview URL can never be indexed. Read at build time.
+ * ------------------------------------------------------------------------- */
+const sendNoindex = !LAUNCHED || process.env.VERCEL_ENV !== 'production';
+
+/* ---------------------------------------------------------------------------
+ * Content-Security-Policy, ported from the MVFHC builder (next.config.ts).
+ * Audited 2026-10-16: the static pages load only same-origin CSS, JS, fonts
+ * and images (plus data: images); there are no iframes, no third-party
+ * scripts and no inline executable scripts (scripts/build-pages.mjs --check
+ * fails on one). So:
+ *
+ *   strict   (every static page URL) script-src 'self'. Nothing inline runs.
+ *   baseline (everything else, '/:path*') adds 'unsafe-inline' to script-src
+ *            only for Next-rendered routes. The branded 404 (pages/404.js)
+ *            needs none today: it is prerendered static HTML that ships
+ *            without Next's client runtime. But App Router pages hydrate
+ *            through inline RSC payload scripts, so a page ported to app/
+ *            would break silently without it. A nonce-based policy is the
+ *            tightening follow-up once real app routes exist.
+ *
+ * style-src keeps 'unsafe-inline' for the inline style attributes in the
+ * pages and gate.html's <style> block.
+ *
+ * Later header rules override earlier ones for the same key, which is how
+ * the per-page strict rule replaces the baseline policy.
+ *
+ * When the later-phase embeds land, extend exactly these directives:
+ *   EveryAction / NGP VAN giving and signup forms (secure.everyaction.com,
+ *     actions.everyaction.com, *.ngpvan.com): script-src, frame-src,
+ *     connect-src, form-action.
+ *   Lawmatics intake / legal-network forms (app.lawmatics.com): frame-src,
+ *     or script-src + connect-src for the JS embed.
+ *   YouTube know-your-rights videos (www.youtube-nocookie.com): frame-src;
+ *     img-src i.ytimg.com for thumbnails.
+ * Today all of those are plain outbound links, which CSP does not govern.
+ * ------------------------------------------------------------------------- */
+const isDev = process.env.NODE_ENV === 'development';
+// The Vercel toolbar (comments, preview feedback) is allowed only on preview
+// deployments so the production policy stays tight.
+const isVercelPreview = process.env.VERCEL_ENV === 'preview';
+
+function contentSecurityPolicy({ inlineScripts }) {
+  return [
+    "default-src 'self'",
+    // next dev needs eval (react-refresh); never shipped in production or
+    // preview builds, and never on the static pages.
+    `script-src 'self'${inlineScripts ? " 'unsafe-inline'" : ''}${inlineScripts && isDev ? " 'unsafe-eval'" : ''}${isVercelPreview ? ' https://vercel.live' : ''}`,
+    `style-src 'self' 'unsafe-inline'${isVercelPreview ? ' https://vercel.live' : ''}`,
+    `img-src 'self' data:${isVercelPreview ? ' blob: https://vercel.live https://vercel.com' : ''}`,
+    `font-src 'self'${isVercelPreview ? ' https://vercel.live https://assets.vercel.com' : ''}`,
+    `connect-src 'self'${isVercelPreview ? ' https://vercel.live wss://ws-us3.pusher.com' : ''}`,
+    `frame-src ${isVercelPreview ? 'https://vercel.live' : "'none'"}`,
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+    'upgrade-insecure-requests',
+  ].join('; ');
 }
 
-/**
- * Map a file to the URL it must answer on.
- *   public/index.html               -> /
- *   public/about.html               -> /about
- *   public/legal-clinic/intake.html -> /legal-clinic/intake
- */
-function urlPathFor(file) {
-  return '/' + relative(PUBLIC_DIR, file).split(sep).join('/');
-}
+const BASELINE_CSP = contentSecurityPolicy({ inlineScripts: true });
+const STRICT_CSP = contentSecurityPolicy({ inlineScripts: false });
 
-function cleanUrlFor(file) {
-  const path = urlPathFor(file);
-  if (path.endsWith('/index.html')) return path.slice(0, -'/index.html'.length) || '/';
-  return path.slice(0, -'.html'.length);
-}
-
-// 404.html is served by app/not-found.js, not by a rewrite, so it must not
-// claim the /404 URL.
-const pages = htmlFiles()
-  .map((file) => ({ file: urlPathFor(file), url: cleanUrlFor(file) }))
-  .filter((p) => p.url !== '/404');
+/* Brand art, images and the mirrored PDFs: one day fresh, a week
+ * stale-while-revalidate. Not immutable, because placeholder art, the logo and
+ * EO's documents are swapped in place. */
+const ASSET_CACHE = 'public, max-age=86400, stale-while-revalidate=604800';
 
 const nextConfig = {
   trailingSlash: false,
   reactStrictMode: true,
+  poweredByHeader: false,
 
   async redirects() {
     return [
       // Requesting the file directly lands on the canonical clean URL.
       ...pages.map((p) => ({ source: p.file, destination: p.url, permanent: true })),
+      // Pages ported to the App Router keep their old .html spellings.
+      ...PORTED.flatMap((url) => [
+        { source: `${url}.html`, destination: url, permanent: true },
+        { source: `${url}/index.html`, destination: url, permanent: true },
+      ]),
 
       /* -- Legacy equalityohio.org URLs (WordPress) ------------------------
        * Sources cover the no-trailing-slash spelling; trailingSlash: false
@@ -86,6 +140,13 @@ const nextConfig = {
       { source: '/events-2', destination: '/get-involved/events', permanent: true },
       { source: '/our-work/events', destination: '/get-involved/events', permanent: true },
       { source: '/event/:slug*', destination: '/get-involved/events', permanent: true },
+      // The Events Calendar's category archives (/events/category/<slug>/)
+      // and any other path under /events. Must stay after the exact /events.
+      { source: '/events/:path*', destination: '/get-involved/events', permanent: true },
+      // Advocates & Allies 2026 event page (live 2026-10-07): the honorees now
+      // lead the Legacy of Equality page. Temporary, because the next event
+      // may want this short URL back.
+      { source: '/aa2026', destination: '/our-work/legacy-of-equality#honorees', permanent: false },
 
       // People. Profile pages fold into the staff and leadership rosters:
       // staff slugs deep-link to their card (ids on /about/staff-interns
@@ -114,12 +175,20 @@ const nextConfig = {
       })),
       { source: '/people', destination: '/about/staff-interns', permanent: true },
       { source: '/people/:slug*', destination: '/about/staff-interns', permanent: true },
+      // People taxonomy archives (people-category-sitemap.xml): the two board
+      // categories land on the boards page, the rest (staff-interns,
+      // statewide-candidates, cle-instructor) on the staff roster.
+      { source: '/people-category/equality-ohio-education-fund-board', destination: '/about/leadership', permanent: true },
+      { source: '/people-category/equality-ohio-board', destination: '/about/leadership', permanent: true },
+      { source: '/people-category/:slug*', destination: '/about/staff-interns', permanent: true },
       { source: '/about/staff-interns/:slug', destination: '/about/staff-interns', permanent: true },
 
       // Jobs.
       { source: '/job-opening', destination: '/about/jobs-internships', permanent: true },
       { source: '/job-opening/:slug*', destination: '/about/jobs-internships', permanent: true },
       { source: '/single-jobs-internships-template', destination: '/about/jobs-internships', permanent: true },
+      // Job taxonomy archives (job-category-sitemap.xml, e.g. /job-category/externship/).
+      { source: '/job-category/:slug*', destination: '/about/jobs-internships', permanent: true },
 
       // Newsletter signup (long WordPress slug).
       { source: '/sign-up-for-the-latest-news-from-equality-ohio', destination: '/newsletter', permanent: true },
@@ -155,16 +224,34 @@ const nextConfig = {
       { source: '/conflict-of-interest-forms', destination: '/about/leadership#governance', permanent: true },
 
       // WordPress template/scratch pages that were public but never real.
+      // (/news/news-template is a post in the post sitemap, so it is covered
+      // by LEGACY_POST_PATHS below rather than repeated here.)
       { source: '/news-template', destination: '/news', permanent: true },
       { source: '/news-template-2', destination: '/news', permanent: true },
-      { source: '/news/news-template', destination: '/news', permanent: true },
       { source: '/thankyou', destination: '/', permanent: true },
 
       // News categories and every legacy post URL land on News & Policy.
       // Old posts are not ported; lib/legacy-post-paths.mjs is generated
       // from the live post sitemap (see its header for regeneration notes).
       { source: '/category/:slug*', destination: '/news', permanent: true },
+      { source: '/tag/:slug*', destination: '/news', permanent: true },
       ...LEGACY_POST_PATHS.map((path) => ({ source: path, destination: '/news', permanent: true })),
+
+      // WordPress media the pages used to link, now hosted in public/assets/docs/
+      // (each link carries its source URL in an HTML comment). Exact paths, so
+      // old links and EO's bit.ly short links keep resolving after launch.
+      // Not mirrored: the 2025 Trans Know Your Rights PDF (live withdrew it
+      // on 2026-08-20) and the 25 MB Family Law Guide (over the deployment's
+      // per-file limit; EO keeps hosting it). Re-pull the files at launch.
+      ...[
+        '/wp-content/uploads/2026/06/EQ_Candidate-Scorecard_September-Edits_9-18-v2.pdf',
+        '/wp-content/uploads/2023/02/EOEF-Organizational-Financial-Conflict-of-Interest-combined.pdf',
+        '/wp-content/uploads/2024/11/Privacy-Policy-November-2024.pdf',
+      ].map((source) => ({
+        source,
+        destination: `/assets/docs/${source.split('/').pop()}`,
+        permanent: true,
+      })),
 
       // Old flat mockup filenames from design review round 1.
       { source: '/board', destination: '/about/leadership', permanent: true },
@@ -185,19 +272,32 @@ const nextConfig = {
       {
         source: '/:path*',
         headers: [
+          { key: 'Content-Security-Policy', value: BASELINE_CSP },
+          // Belt and braces with frame-ancestors 'none' for older browsers.
           { key: 'X-Frame-Options', value: 'DENY' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=()' },
-          // STAGING: the whole deployment stays out of search indexes until
-          // launch. Remove this header (and the gate middleware) to go live.
-          { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
+          ...(sendNoindex ? [{ key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' }] : []),
         ],
       },
+      // Every static page: no inline script may run (overrides the baseline).
+      ...pages.map((p) => ({
+        source: p.url,
+        headers: [{ key: 'Content-Security-Policy', value: STRICT_CSP }],
+      })),
       {
         source: '/assets/fonts/:path*',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        source: '/assets/:dir(img|logo|brand|og|textures|docs)/:path*',
+        headers: [{ key: 'Cache-Control', value: ASSET_CACHE }],
+      },
+      {
+        source: '/:file(favicon\\.ico|favicon\\.svg|apple-touch-icon\\.png)',
+        headers: [{ key: 'Cache-Control', value: ASSET_CACHE }],
       },
       {
         source: '/:dir(css|js)/:path*',

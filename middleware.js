@@ -1,51 +1,41 @@
 /* Root middleware: staging password gate.
  *
- * The whole deployment is a design preview until launch, so every request is
- * gated behind a shared password (EO2026 unless STAGING_PASSWORD overrides
- * it). The visitor lands on /gate, posts the password to /api/gate, and gets
- * an HttpOnly cookie holding a salted SHA-256 of the password; this
- * middleware recomputes the digest per request, so rotating the password
- * invalidates every existing cookie at once.
+ * While lib/site.mjs LAUNCHED is false, the whole deployment is a design
+ * preview behind a shared password (EO2026 unless STAGING_PASSWORD overrides
+ * it). A visitor without the cookie is redirected to /gate, posts the
+ * password to /api/gate, and gets an HttpOnly cookie holding an HMAC keyed by
+ * the password (lib/preview-gate.mjs), so rotating the password signs every
+ * browser out at once.
  *
- * What stays reachable without the cookie: the gate page itself, the gate
- * endpoint, robots.txt (which disallows everything anyway), and the css/font
- * assets the gate page is styled with. Nothing under those paths reveals page
- * content.
+ * Reachable without the cookie: the open paths in lib/preview-gate-paths.mjs
+ * (the gate page and its script, the gate endpoint, robots/sitemap/manifest
+ * and icons) and the real css/font/brand files the gate page and share cards
+ * use, listed in lib/open-files.generated.mjs by `npm run pages:build`. A
+ * missing file under those directories is gated like any other path.
  *
- * REMOVE THIS FILE (and public/gate.html + app/api/gate/) at production
- * launch, together with the noindex headers in next.config.mjs.
+ * Once LAUNCHED is true this is a pass-through. Delete it (with app/api/gate/,
+ * lib/preview-gate.mjs, lib/preview-gate-paths.mjs,
+ * lib/open-files.generated.mjs and public/gate.html) in a cleanup after
+ * launch.
  */
 import { NextResponse } from 'next/server';
-
-const PASSWORD = process.env.STAGING_PASSWORD || 'EO2026';
-const COOKIE_NAME = 'eo_preview';
-const COOKIE_SALT = 'eo-staging-v1';
-
-const OPEN_EXACT = new Set(['/gate', '/gate.html', '/api/gate', '/robots.txt', '/favicon.ico']);
-const OPEN_PREFIXES = ['/css/', '/assets/fonts/', '/assets/logo/'];
-
-async function sha256Hex(input) {
-  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input));
-  return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
-}
+import { COOKIE_NAME, hasValidCookie, isOpenPath } from './lib/preview-gate.mjs';
+import { LAUNCHED } from './lib/site.mjs';
 
 export async function middleware(req) {
+  if (LAUNCHED) return NextResponse.next();
+
   const { pathname, search } = req.nextUrl;
-  const lower = pathname.toLowerCase();
-
-  if (OPEN_EXACT.has(lower) || OPEN_PREFIXES.some((p) => lower.startsWith(p))) {
-    return NextResponse.next();
-  }
-
-  const expected = await sha256Hex(`${PASSWORD}|${COOKIE_SALT}`);
-  if (req.cookies.get(COOKIE_NAME)?.value === expected) {
-    return NextResponse.next();
-  }
+  if (isOpenPath(pathname)) return NextResponse.next();
+  if (await hasValidCookie(req.cookies.get(COOKIE_NAME)?.value)) return NextResponse.next();
 
   const to = req.nextUrl.clone();
   to.pathname = '/gate';
   to.search = pathname === '/' ? '' : `?from=${encodeURIComponent(pathname + search)}`;
-  return NextResponse.redirect(to);
+  const res = NextResponse.redirect(to);
+  // Never let a browser or CDN cache "this URL goes to the gate".
+  res.headers.set('Cache-Control', 'private, no-store');
+  return res;
 }
 
 // Excludes Next internals; everything else (pages, static files, api) is gated.

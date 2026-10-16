@@ -1,279 +1,635 @@
 /* ==========================================================================
-   EQUALITY OHIO — Site Template (Migration draft)
-   Shared header/footer injection + small behaviors. Pattern ported from the
-   JCG nonprofit platform: every page carries
-   <div data-site-header></div> / <div data-site-footer></div> placeholders
-   and declares itself via <body data-page="...">.
-   Nav is two-level: top sections with dropdown panels (hover/focus on
-   desktop, tap-to-expand on mobile).
-   NOTE (staging): forms marked data-mock="true" do not transmit anything —
-   they render a success state for design review only.
+   EQUALITY OHIO: site behaviors.
+   The header, footer, preview ribbon and phone help bar are not injected
+   here: they are prerendered into every page by scripts/build-pages.mjs from
+   lib/chrome.mjs (and server-rendered on the 404), so they exist without
+   JavaScript. This file only wires behavior onto that markup. The static
+   pages are served with script-src 'self', so everything a page does lives
+   in /js/ files like this one, never inline.
+
+     phone menu      a modal sheet: inert page, scroll lock, focus in and
+                     back out, Escape, Tab stays inside, closes on desktop.
+                     The served toggle is a link to the footer nav (the
+                     fallback if this file never runs); it becomes the
+                     sheet's <button> here
+     dropdowns       desktop disclosures: button or hover opens one at a
+                     time, aria-expanded always true to the screen, Escape
+                     and outside click close
+     help bar        slides away while an on-page clinic callout is on
+                     screen, except once it has come to rest above the
+                     footer
+     scroll reveal   below-the-fold blocks rise in (desktop, motion allowed)
+     new-tab links   announce that they open a new tab
+     mock forms      validation (error summary, inline errors) and the
+                     preview success state; nothing is transmitted
+
+   Ported from MVFHC (MobileNav, StickyActionBar, Reveal, the form fields),
+   jcg2026 (Header, ScrollReveal) and Ohio Pride (site-template.js nav
+   groups, main.js reveal threshold fix).
    ========================================================================== */
 (function () {
   'use strict';
 
-  /* -- Brand marks --------------------------------------------------------
-     Official Equality Ohio logo artwork (grabbed from equalityohio.org).
-     The footer reuses the same file, inverted to white via CSS filter.    */
-  var LOGO_IMG =
-    '<img class="brand-lockup__img" src="/assets/logo/equality-ohio-logo.png" alt="Equality Ohio" width="400" height="174" />';
-  var LOGO_IMG_WHITE =
-    '<img class="brand-lockup__img brand-lockup__img--invert" src="/assets/logo/equality-ohio-logo.png" alt="Equality Ohio" width="400" height="174" />';
+  /* Same breakpoint as eo-site.css: the full nav from 901px, the sheet below. */
+  var DESKTOP_QUERY = '(min-width: 901px)';
+  var root = document.documentElement;
 
-  /* Official GuideStar Silver Transparency 2021 seal (from equalityohio.org). */
-  var GUIDESTAR_BADGE =
-    '<img src="/assets/logo/guidestar-silver-2021.png" alt="GuideStar Silver Transparency 2021" width="54" height="54" loading="lazy" />';
-
-  /* -- Navigation model ----------------------------------------------------
-     `page` matches <body data-page="...">. A section header is marked
-     current when its own page or any child's page matches.               */
-  var NAV_ITEMS = [
-    {
-      label: 'Legal Clinic', href: '/legal-clinic', page: 'legal-clinic',
-      children: [
-        { href: '/legal-clinic',                              page: 'legal-clinic',          label: 'About the Clinic' },
-        { href: '/legal-clinic/intake',                       page: 'legal-clinic-intake',   label: 'Start an Intake' },
-        { href: '/legal-clinic/ohio-lgbtq-family-law-guide',  page: 'family-law-guide',      label: 'Ohio LGBTQ+ Family Law Guide' },
-        { href: '/legal-clinic/trans-know-your-rights',       page: 'trans-know-your-rights', label: 'Trans Know Your Rights' },
-        { href: '/legal-clinic/legal-network',                page: 'legal-network',         label: 'Legal Network for Attorneys' }
-      ]
-    },
-    {
-      label: 'Our Work', href: '/our-work', page: 'our-work',
-      children: [
-        { href: '/our-work',                     page: 'our-work',       label: 'What We Do' },
-        { href: '/our-work/local',               page: 'our-work-local', label: 'Local Progress' },
-        { href: '/our-work/local/municipal-map', page: 'municipal-map',  label: 'Municipal Equality Map' },
-        { href: '/our-work/business',            page: 'business',       label: 'Business Engagement' },
-        { href: '/our-work/legacy-of-equality',  page: 'legacy',         label: 'Legacy of Equality' },
-        { href: '/votersguide',                  page: 'votersguide',    label: 'Voters Guide' }
-      ]
-    },
-    {
-      label: 'Get Involved', href: '/get-involved', page: 'get-involved',
-      children: [
-        { href: '/get-involved',           page: 'get-involved', label: 'Ways to Get Involved' },
-        { href: '/get-involved/volunteer', page: 'volunteer',    label: 'Volunteer' },
-        { href: '/get-involved/events',    page: 'events',       label: 'Events' },
-        { href: '/stories',                page: 'stories',      label: 'Share Your Story' },
-        { href: '/newsletter',             page: 'newsletter',   label: 'Newsletter' }
-      ]
-    },
-    {
-      label: 'About', href: '/about', page: 'about',
-      children: [
-        { href: '/about',                  page: 'about',      label: 'Mission & Values' },
-        { href: '/about/history',          page: 'history',    label: 'Our History' },
-        { href: '/about/leadership',       page: 'leadership', label: 'Board of Directors' },
-        { href: '/about/staff-interns',    page: 'staff',      label: 'Staff & Interns' },
-        { href: '/about/jobs-internships', page: 'jobs',       label: 'Jobs & Internships' },
-        { href: '/contact',                page: 'contact',    label: 'Contact' }
-      ]
-    },
-    { label: 'News & Policy', href: '/news', page: 'news' }
-  ];
-
-  var CARET =
-    '<svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-    '<path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
-    '</svg>';
-
-  function isCurrent(item, page) {
-    if (item.page === page) return true;
-    return (item.children || []).some(function (c) { return c.page === page; });
+  function reducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+  function scrollBehavior() {
+    return reducedMotion() ? 'auto' : 'smooth';
+  }
+  function setInert(el, on) {
+    if (on) el.setAttribute('inert', '');
+    else el.removeAttribute('inert');
+  }
+  function forEach(list, fn) {
+    Array.prototype.forEach.call(list, fn);
   }
 
-  function headerHTML(current) {
-    var links = NAV_ITEMS.map(function (item) {
-      var sectionCurrent = isCurrent(item, current);
-      var topCur = sectionCurrent ? ' aria-current="' + (item.page === current ? 'page' : 'true') + '"' : '';
-      if (!item.children) {
-        return '<li><a href="' + item.href + '"' + topCur + '>' + item.label + '</a></li>';
-      }
-      var sub = item.children.map(function (c) {
-        var cur = c.page === current ? ' aria-current="page"' : '';
-        return '<li><a href="' + c.href + '"' + cur + '>' + c.label + '</a></li>';
-      }).join('');
-      var subId = 'sub-' + item.page;
-      return (
-        '<li class="has-sub">' +
-          '<div class="nav-item-row">' +
-            '<a href="' + item.href + '"' + topCur + '>' + item.label + '</a>' +
-            '<button class="sub-toggle" aria-expanded="false" aria-controls="' + subId + '" aria-label="Open ' + item.label + ' menu">' + CARET + '</button>' +
-          '</div>' +
-          '<ul class="sub-menu" id="' + subId + '">' + sub + '</ul>' +
-        '</li>'
-      );
-    }).join('');
-    return (
-      '<a class="skip-link" href="#main">Skip to main content</a>' +
-      '<div class="preview-ribbon">Design preview — <strong>staging only</strong>, forms and donations are not live · Prepared by Joseph Carter Group</div>' +
-      '<div class="equality-bar" aria-hidden="true"></div>' +
-      '<header class="site-header">' +
-        '<div class="nav-inner">' +
-          '<a class="brand-lockup" href="/" aria-label="Equality Ohio home">' +
-            LOGO_IMG +
-          '</a>' +
-          '<button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">' +
-            '<svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-              '<rect width="22" height="2.5" rx="1.25" fill="currentColor"/>' +
-              '<rect y="6.75" width="22" height="2.5" rx="1.25" fill="currentColor"/>' +
-              '<rect y="13.5" width="22" height="2.5" rx="1.25" fill="currentColor"/>' +
-            '</svg>' +
-          '</button>' +
-          '<nav class="site-nav" id="site-nav" aria-label="Primary">' +
-            '<ul>' + links +
-              '<li class="nav-cta"><a href="/give"' + (current === 'give' ? ' aria-current="page"' : '') + '>Donate</a></li>' +
-            '</ul>' +
-          '</nav>' +
-        '</div>' +
-      '</header>'
-    );
-  }
+  /* -- Phone help bar ---------------------------------------------------------
+   * Prerendered on the Legal Clinic pages (lib/chrome.mjs HELP_BAR_PAGES).
+   * While any on-page clinic callout ([data-cta]) is on screen the same two
+   * actions are already visible, so the bar slides away; it is inert while
+   * hidden and while the phone menu is open, so it never holds focus or
+   * reads out from behind something else.
+   * Once the footer is on screen the bar has come to rest in its own slot
+   * above it (sticky, so it stays in the flow), and it stays shown there:
+   * hiding it then would leave that slot as an empty band between the
+   * page's closing callout and the footer. Keeping the slot filled, rather
+   * than collapsing it, means nothing moves while the page scrolls. */
+  function initHelpBar(state) {
+    var bar = document.querySelector('.help-bar');
+    var api = { el: bar, sync: function () {} };
+    if (!bar) return api;
 
-  /* -- Footer ------------------------------------------------------------- */
-  function footerHTML() {
-    return (
-      '<footer class="site-footer">' +
-        '<div class="equality-bar" aria-hidden="true"></div>' +
-        '<div class="footer-main">' +
-          '<div class="footer-brand">' +
-            '<a class="brand-lockup" href="/" aria-label="Equality Ohio home">' +
-              LOGO_IMG_WHITE +
-            '</a>' +
-            '<p class="mt-1">Ohio’s statewide LGBTQ+ advocacy and legal aid organization — working toward an Ohio where justice, dignity, and self-determination belong to everyone.</p>' +
-            '<ul class="footer-contact">' +
-              '<li><a href="tel:16142240400">(614) 224-0400</a></li>' +
-              '<li><a href="mailto:info@equalityohio.org">info@equalityohio.org</a></li>' +
-              '<li><a href="https://twitter.com/equalityohio" rel="noopener">@equalityohio</a></li>' +
-            '</ul>' +
-          '</div>' +
-          '<div>' +
-            '<h4>Legal Clinic</h4>' +
-            '<ul>' +
-              '<li><a href="/legal-clinic">About the Clinic</a></li>' +
-              '<li><a href="/legal-clinic/intake">Start an Intake</a></li>' +
-              '<li><a href="/legal-clinic/ohio-lgbtq-family-law-guide">Family Law Guide</a></li>' +
-              '<li><a href="/legal-clinic/trans-know-your-rights">Trans Know Your Rights</a></li>' +
-              '<li><a href="/legal-clinic/legal-network">Legal Network</a></li>' +
-              '<li><a href="tel:18555428529">855-LGBT-LAW</a></li>' +
-            '</ul>' +
-          '</div>' +
-          '<div>' +
-            '<h4>Our Work</h4>' +
-            '<ul>' +
-              '<li><a href="/our-work">What We Do</a></li>' +
-              '<li><a href="/our-work/local">Local Progress</a></li>' +
-              '<li><a href="/our-work/local/municipal-map">Municipal Equality Map</a></li>' +
-              '<li><a href="/our-work/business">Business Engagement</a></li>' +
-              '<li><a href="/our-work/legacy-of-equality">Legacy of Equality</a></li>' +
-              '<li><a href="/votersguide">Voters Guide</a></li>' +
-            '</ul>' +
-          '</div>' +
-          '<div>' +
-            '<h4>Get Involved</h4>' +
-            '<ul>' +
-              '<li><a href="/give">Ways to Give</a></li>' +
-              '<li><a href="/give#defenders">Defenders of Equality</a></li>' +
-              '<li><a href="/jim-obergefell-john-arthur-society">Obergefell–Arthur Society</a></li>' +
-              '<li><a href="/get-involved/volunteer">Volunteer</a></li>' +
-              '<li><a href="/get-involved/events">Events</a></li>' +
-              '<li><a href="/newsletter">Newsletter</a></li>' +
-            '</ul>' +
-          '</div>' +
-          '<div>' +
-            '<h4>About</h4>' +
-            '<ul>' +
-              '<li><a href="/about">Mission & Values</a></li>' +
-              '<li><a href="/about/history">Our History</a></li>' +
-              '<li><a href="/about/leadership">Board of Directors</a></li>' +
-              '<li><a href="/about/staff-interns">Staff & Interns</a></li>' +
-              '<li><a href="/about/jobs-internships">Jobs & Internships</a></li>' +
-              '<li><a href="/news">News & Policy</a></li>' +
-              '<li><a href="/contact">Contact</a></li>' +
-            '</ul>' +
-          '</div>' +
-        '</div>' +
-        '<div class="footer-legal">' +
-          '<div class="footer-legal__inner">' +
-            '<span class="footer-badge">' + GUIDESTAR_BADGE +
-              '<span>Equality Ohio Education Fund is a 501(c)(3) — EIN 02-0743268 · Equality Ohio is a 501(c)(4) — EIN 02-0743270</span>' +
-            '</span>' +
-            '<span>© <span data-year>2026</span> Equality Ohio · <a href="#">Privacy Policy</a> · Design preview by Joseph Carter Group</span>' +
-          '</div>' +
-        '</div>' +
-      '</footer>'
-    );
-  }
-
-  /* -- Mount -------------------------------------------------------------- */
-  document.addEventListener('DOMContentLoaded', function () {
-    var page = document.body.getAttribute('data-page') || '';
-
-    var headerMount = document.querySelector('[data-site-header]');
-    if (headerMount) headerMount.innerHTML = headerHTML(page);
-
-    var footerMount = document.querySelector('[data-site-footer]');
-    if (footerMount) footerMount.innerHTML = footerHTML();
-
-    var year = document.querySelector('[data-year]');
-    if (year) year.textContent = String(new Date().getFullYear());
-
-    /* Mobile nav toggle */
-    var toggle = document.querySelector('.nav-toggle');
-    var nav = document.getElementById('site-nav');
-    if (toggle && nav) {
-      toggle.addEventListener('click', function () {
-        var open = nav.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
+    var visible = [];
+    var parked = false;
+    function sync() {
+      var hidden = visible.length > 0 && !parked;
+      bar.setAttribute('data-hidden', hidden ? 'true' : 'false');
+      setInert(bar, hidden || state.menuOpen);
     }
+    api.sync = sync;
 
-    /* Submenu toggles (mobile tap; harmless on desktop where hover rules) */
-    document.querySelectorAll('.sub-toggle').forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        var li = btn.closest('.has-sub');
-        var open = li.classList.toggle('open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var ctas = document.querySelectorAll('[data-cta]');
+    if (ctas.length && 'IntersectionObserver' in window) {
+      // First state synchronously, so a callout already on screen at load
+      // never shows the bar sliding away.
+      var onScreen = function (el) {
+        var r = el.getBoundingClientRect();
+        return r.bottom > 0 && r.top < window.innerHeight;
+      };
+      forEach(ctas, function (el) {
+        if (onScreen(el)) visible.push(el);
       });
-    });
-
-    /* Scroll-reveal: sections and cards rise in as they enter the viewport.
-       Motion-safe only; the CSS no-ops without the reveal classes anyway. */
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
-      var targets = document.querySelectorAll('main .section, main .band, main .card-grid > .card');
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            io.unobserve(entry.target);
-          }
+          var i = visible.indexOf(entry.target);
+          if (entry.isIntersecting && i === -1) visible.push(entry.target);
+          if (!entry.isIntersecting && i !== -1) visible.splice(i, 1);
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      targets.forEach(function (el) {
-        el.classList.add('reveal');
-        io.observe(el);
+        sync();
+      });
+      forEach(ctas, function (el) { io.observe(el); });
+
+      // The bar's resting place: the footer directly after it.
+      var footer = bar.nextElementSibling;
+      if (footer && footer.classList.contains('site-footer')) {
+        parked = onScreen(footer);
+        new IntersectionObserver(function (entries) {
+          parked = entries[entries.length - 1].isIntersecting;
+          sync();
+        }).observe(footer);
+      }
+    }
+    sync();
+    return api;
+  }
+
+  /* -- Phone menu ---------------------------------------------------------------
+   * The nav becomes a sheet from the header's bottom edge to the bottom of the
+   * viewport. Everything outside the header is inert while it is open, page
+   * scroll is locked (body.nav-open), focus moves to the first link and
+   * returns to the toggle on Escape.
+   *
+   * The served toggle is <a class="nav-toggle" href="#footer-nav">, so a
+   * page whose script never runs still has a working Menu (it jumps to the
+   * footer's navigation). upgradeToggle makes it the real control: a
+   * <button> with the same classes and icons, so the box does not move. */
+  function upgradeToggle(link) {
+    if (!link || link.tagName === 'BUTTON') return link;
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = link.className;
+    button.setAttribute('aria-label', link.getAttribute('aria-label') || 'Menu');
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', 'site-nav');
+    while (link.firstChild) button.appendChild(link.firstChild);
+    var hadFocus = document.activeElement === link;
+    link.parentNode.replaceChild(button, link);
+    if (hadFocus) button.focus({ preventScroll: true });
+    return button;
+  }
+
+  function initPhoneMenu(state, helpBar, closeSubmenus) {
+    var nav = document.getElementById('site-nav');
+    var header = document.querySelector('.site-header');
+    if (!nav || !header) return;
+    var toggle = upgradeToggle(header.querySelector('.nav-toggle'));
+    if (!toggle) return;
+    var desktop = window.matchMedia(DESKTOP_QUERY);
+    var inerted = [];
+
+    function placeSheet() {
+      var bottom = Math.max(0, Math.round(header.getBoundingClientRect().bottom));
+      root.style.setProperty('--eo-nav-top', bottom + 'px');
+    }
+
+    /* Every element outside the header: the siblings of the header and of
+       each of its ancestors up to <body> (the 404 wraps the chrome in a
+       display: contents element, so the header is not always a body child). */
+    function outsideHeader() {
+      var out = [];
+      for (var node = header; node && node !== document.body; node = node.parentElement) {
+        var parent = node.parentElement;
+        if (!parent) break;
+        forEach(parent.children, function (sibling) {
+          if (sibling === node || sibling === helpBar.el) return;
+          if (/^(SCRIPT|STYLE|TEMPLATE|NOSCRIPT)$/.test(sibling.tagName)) return;
+          out.push(sibling);
+        });
+      }
+      return out;
+    }
+
+    function setOpen(open, returnFocus) {
+      if (open === state.menuOpen) return;
+      state.menuOpen = open;
+      if (open) placeSheet();
+      nav.classList.toggle('open', open);
+      document.body.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
+      if (open) {
+        inerted = outsideHeader().filter(function (el) { return !el.hasAttribute('inert'); });
+        inerted.forEach(function (el) { setInert(el, true); });
+        var first = nav.querySelector('a[href]');
+        if (first) first.focus({ preventScroll: true });
+      } else {
+        inerted.forEach(function (el) { setInert(el, false); });
+        inerted = [];
+        if (returnFocus) toggle.focus();
+      }
+      helpBar.sync();
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(!state.menuOpen, false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (!state.menuOpen) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setOpen(false, true);
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      // Keep Tab inside the header (logo, toggle, the sheet's links).
+      var items = Array.prototype.filter.call(
+        header.querySelectorAll('a[href], button:not([disabled])'),
+        function (el) { return el.getClientRects().length > 0; }
+      );
+      if (!items.length) return;
+      var first = items[0];
+      var last = items[items.length - 1];
+      var active = document.activeElement;
+      var inside = header.contains(active);
+      if (e.shiftKey && (active === first || !inside)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (active === last || !inside)) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    // A tap on a link (including a same-page anchor) closes the sheet.
+    nav.addEventListener('click', function (e) {
+      if (state.menuOpen && e.target.closest && e.target.closest('a[href]')) setOpen(false, false);
+    });
+
+    function onBreakpoint() {
+      closeSubmenus();
+      if (desktop.matches) setOpen(false, false);
+    }
+    if (desktop.addEventListener) desktop.addEventListener('change', onBreakpoint);
+    else if (desktop.addListener) desktop.addListener(onBreakpoint);
+
+    window.addEventListener('resize', function () {
+      if (state.menuOpen) placeSheet();
+    });
+  }
+
+  /* -- Section menus --------------------------------------------------------------
+   * Desktop: each section's caret button is a disclosure for its panel. A
+   * mouse hover opens a panel too (and closes it again on leave), but a
+   * click pins it open. Only one is open at a time; Escape closes it (focus
+   * goes back to its button if focus was inside), and so do a click
+   * elsewhere and keyboard focus leaving the section. Phone: the same
+   * buttons expand sections inside the sheet, several at once if wanted.
+   * Returns a function that closes every section. */
+  function initSectionMenus() {
+    var groups = Array.prototype.slice.call(document.querySelectorAll('#site-nav .has-sub'));
+    var desktop = window.matchMedia(DESKTOP_QUERY);
+
+    function buttonOf(li) { return li.querySelector('.sub-toggle'); }
+    function setGroup(li, open, how) {
+      li.classList.toggle('open', open);
+      if (open) li.setAttribute('data-open-by', how || 'click');
+      else li.removeAttribute('data-open-by');
+      var btn = buttonOf(li);
+      if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    function closeAll(except) {
+      groups.forEach(function (g) {
+        if (g !== except && g.classList.contains('open')) setGroup(g, false);
       });
     }
 
-    /* Mock form handling — design preview only, nothing is transmitted */
-    document.querySelectorAll('form[data-mock="true"]').forEach(function (form) {
-      form.addEventListener('submit', function (e) {
+    groups.forEach(function (li) {
+      var btn = buttonOf(li);
+      if (!btn) return;
+      var leaveTimer = 0;
+
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
-        var success = form.parentElement.querySelector('.form-success') ||
-                      document.getElementById(form.getAttribute('data-success') || '');
-        if (success) {
-          success.classList.add('show');
-          success.setAttribute('tabindex', '-1');
-          success.focus({ preventScroll: false });
-          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        var open = li.classList.contains('open');
+        if (open && li.getAttribute('data-open-by') === 'hover' && desktop.matches) {
+          // Opened by the hover that brought the pointer here: the click
+          // keeps it open after the pointer leaves.
+          li.setAttribute('data-open-by', 'click');
+          return;
         }
-        form.querySelectorAll('button[type="submit"]').forEach(function (b) {
-          b.disabled = true;
-          b.textContent = 'Submitted (preview)';
-        });
+        if (open) {
+          setGroup(li, false);
+        } else {
+          if (desktop.matches) closeAll(li);
+          setGroup(li, true, 'click');
+        }
+      });
+
+      li.addEventListener('pointerenter', function (e) {
+        if (e.pointerType !== 'mouse' || !desktop.matches) return;
+        window.clearTimeout(leaveTimer);
+        closeAll(li);
+        if (!li.classList.contains('open')) setGroup(li, true, 'hover');
+      });
+      li.addEventListener('pointerleave', function (e) {
+        if (e.pointerType !== 'mouse' || !desktop.matches) return;
+        if (li.getAttribute('data-open-by') !== 'hover') return;
+        leaveTimer = window.setTimeout(function () {
+          if (li.getAttribute('data-open-by') === 'hover') setGroup(li, false);
+        }, 160);
+      });
+      li.addEventListener('focusout', function (e) {
+        if (!desktop.matches || !li.classList.contains('open')) return;
+        var next = e.relatedTarget;
+        // Focus moving within the section, or a click (the document click
+        // handler decides), or a panel the pointer is holding open.
+        if (!next || li.contains(next) || li.getAttribute('data-open-by') === 'hover') return;
+        setGroup(li, false);
       });
     });
-  });
+
+    document.addEventListener('click', function (e) {
+      if (!desktop.matches) return;
+      if (!(e.target.closest && e.target.closest('#site-nav .has-sub'))) closeAll(null);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !desktop.matches) return;
+      var open = groups.filter(function (g) { return g.classList.contains('open'); })[0];
+      if (!open) return;
+      var hadFocus = open.contains(document.activeElement);
+      setGroup(open, false);
+      if (hadFocus && buttonOf(open)) buttonOf(open).focus();
+    });
+
+    return function () { closeAll(null); };
+  }
+
+  /* -- Skip link target ----------------------------------------------------------
+   * tabindex="-1" lets the skip link move focus into <main> itself, so the
+   * next Tab continues from the content in every browser. */
+  function initSkipTarget() {
+    var main = document.getElementById('main');
+    if (main && !main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+  }
+
+  /* -- Scroll reveal -----------------------------------------------------------------
+   * Progressive: the HTML paints fully visible and only this script hides
+   * anything, and only what is still below the fold when the page loads
+   * (nothing on screen ever blinks out and back). html.eo-reveal gates the
+   * CSS, so without the script nothing is hidden. Skipped for reduced
+   * motion and on phones, where a single column is flicked through fast and
+   * a late fade reads as a blank gap.
+   * threshold must stay 0: a ratio threshold can never be reached by a block
+   * taller than the viewport, which left those sections permanently hidden
+   * (Ohio Pride 9a8485c). The negative bottom margin keeps the "meaningfully
+   * in view" feel. Everything is revealed before printing. */
+  function initReveal() {
+    if (reducedMotion() || !('IntersectionObserver' in window)) return;
+    if (!window.matchMedia('(min-width: 768px)').matches) return;
+    var targets = document.querySelectorAll('main .section, main .band, main .card-grid > .card');
+    if (!targets.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+    var fold = window.innerHeight;
+    forEach(targets, function (el) {
+      if (el.getBoundingClientRect().top < fold) return; // already seen: never hide it
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+    root.classList.add('eo-reveal');
+
+    function revealAll() {
+      forEach(document.querySelectorAll('.reveal:not(.in-view)'), function (el) {
+        el.classList.add('in-view');
+        io.unobserve(el);
+      });
+    }
+    window.addEventListener('beforeprint', revealAll);
+    if (window.matchMedia) {
+      var print = window.matchMedia('print');
+      var onPrint = function (e) { if (e.matches) revealAll(); };
+      if (print.addEventListener) print.addEventListener('change', onPrint);
+      else if (print.addListener) print.addListener(onPrint);
+    }
+  }
+
+  /* -- New-tab links ------------------------------------------------------------------
+   * Every link that opens a new tab says so to screen readers. The chrome's
+   * own links get the same span at build time (lib/chrome.mjs NEW_TAB_NOTE). */
+  function initNewTabLinks() {
+    forEach(document.querySelectorAll('a[target="_blank"]'), function (a) {
+      if (a.querySelector('.new-tab-note')) return;
+      var note = document.createElement('span');
+      note.className = 'sr-only new-tab-note';
+      note.textContent = ' (opens in a new tab)';
+      a.appendChild(note);
+    });
+  }
+
+  /* -- Mock forms ------------------------------------------------------------------------
+   * Design preview only: forms marked data-mock="true" transmit nothing. The
+   * script takes over validation (form.noValidate, so browsers without it
+   * keep their native checks) and renders, on an invalid submit:
+   *   - .error-summary at the top of the form: role="alert", tabindex="-1",
+   *     focused, a heading and one link per problem that focuses its field.
+   *     While the person fixes fields the summary updates silently (its
+   *     role drops to "group", so the assertive live region does not
+   *     re-read the whole list over their typing); the next submit makes
+   *     it an alert again
+   *   - p.field-error under each invalid field, named in its
+   *     aria-describedby, plus aria-invalid="true"
+   * A field's error clears as soon as it becomes valid. Messages are built
+   * from the field's label ("Enter your email"); data-error="..." on a field
+   * overrides it. A valid submit shows the form's .form-success and moves
+   * focus to its heading. */
+  function labelText(control) {
+    var label = control.labels && control.labels[0];
+    var text;
+    if (label) {
+      var copy = label.cloneNode(true);
+      forEach(copy.querySelectorAll('.req, .optional'), function (el) { el.remove(); });
+      text = copy.textContent;
+    } else {
+      text = control.getAttribute('aria-label') || control.name || 'this field';
+    }
+    return text.replace(/\*/g, '').replace(/\((?:optional|required)\)/gi, '').replace(/\s+/g, ' ').trim();
+  }
+
+  function messageFor(control) {
+    var custom = control.getAttribute('data-error');
+    if (custom) return custom;
+    var v = control.validity;
+    var name = labelText(control);
+    var lower = name.charAt(0).toLowerCase() + name.slice(1);
+    if (control.type === 'checkbox') return 'Check this box to continue';
+    if (control.type === 'radio') return 'Choose an answer for ' + lower;
+    if (v.valueMissing) return (control.tagName === 'SELECT' ? 'Choose your ' : 'Enter your ') + lower;
+    if (v.typeMismatch && control.type === 'email') return 'Enter an email address like name@example.com';
+    if (v.typeMismatch && control.type === 'url') return 'Enter a web address like https://example.com';
+    return 'Check your ' + lower;
+  }
+
+  /* The element the inline error goes after: the tile for a checkbox, the
+     fieldset for a radio group, the inline signup row, else the field. */
+  function errorAnchor(control) {
+    if (control.type === 'radio') return control.closest('fieldset') || control;
+    if (control.type === 'checkbox') return control.closest('.choice') || control;
+    return control.closest('.newsletter') || control;
+  }
+
+  function fieldKey(control) {
+    return control.id || control.name;
+  }
+
+  function describedBy(control) {
+    return (control.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
+  }
+
+  function clearFieldError(control) {
+    var id = fieldKey(control) + '-error';
+    var msg = document.getElementById(id);
+    if (msg) msg.remove();
+    var refs = describedBy(control).filter(function (ref) { return ref !== id; });
+    if (refs.length) control.setAttribute('aria-describedby', refs.join(' '));
+    else control.removeAttribute('aria-describedby');
+    control.removeAttribute('aria-invalid');
+  }
+
+  function showFieldError(control, message) {
+    var id = fieldKey(control) + '-error';
+    var msg = document.getElementById(id);
+    if (!msg) {
+      msg = document.createElement('p');
+      msg.className = 'field-error';
+      msg.id = id;
+      errorAnchor(control).insertAdjacentElement('afterend', msg);
+    }
+    msg.innerHTML = '';
+    var prefix = document.createElement('span');
+    prefix.className = 'sr-only';
+    prefix.textContent = 'Error: ';
+    msg.appendChild(prefix);
+    msg.appendChild(document.createTextNode(message));
+    var refs = describedBy(control).filter(function (ref) { return ref !== id; });
+    control.setAttribute('aria-describedby', [id].concat(refs).join(' '));
+    control.setAttribute('aria-invalid', 'true');
+  }
+
+  function controlsOf(form) {
+    return Array.prototype.filter.call(form.elements, function (el) {
+      return el.willValidate && !el.disabled && /^(INPUT|SELECT|TEXTAREA)$/.test(el.tagName);
+    });
+  }
+
+  /* Invalid controls, one entry per radio group. */
+  function invalidControls(form) {
+    var seen = {};
+    return controlsOf(form).filter(function (el) {
+      if (el.validity.valid) return false;
+      if (el.type === 'radio') {
+        if (seen[el.name]) return false;
+        seen[el.name] = true;
+      }
+      return true;
+    });
+  }
+
+  function focusField(control) {
+    control.focus({ preventScroll: true });
+    var target = control.type === 'radio' ? (control.closest('fieldset') || control) : (control.closest('.choice') || control);
+    target.scrollIntoView({ block: 'center', behavior: scrollBehavior() });
+  }
+
+  /* announce: true on submit (role="alert", read out once), false while the
+     person edits (role="group": the same labelled box, no live region). */
+  function renderSummary(form, problems, announce) {
+    var summary = form.querySelector('.error-summary');
+    if (!problems.length) {
+      if (summary) summary.remove();
+      return null;
+    }
+    if (summary) summary.setAttribute('role', announce ? 'alert' : 'group');
+    if (!summary) {
+      summary = document.createElement('div');
+      summary.className = 'error-summary';
+      summary.setAttribute('role', announce ? 'alert' : 'group');
+      summary.setAttribute('tabindex', '-1');
+      var title = document.createElement('h2');
+      title.className = 'error-summary__title';
+      title.id = (form.id || fieldKey(problems[0].control)) + '-error-summary';
+      summary.setAttribute('aria-labelledby', title.id);
+      summary.appendChild(title);
+      summary.appendChild(document.createElement('ul'));
+      summary.addEventListener('click', function (e) {
+        var link = e.target.closest && e.target.closest('a[href^="#"]');
+        if (!link) return;
+        var control = document.getElementById(link.getAttribute('href').slice(1));
+        if (!control) return;
+        e.preventDefault();
+        focusField(control);
+      });
+      form.insertBefore(summary, form.firstChild);
+    }
+    summary.querySelector('.error-summary__title').textContent =
+      problems.length === 1 ? 'Please check this item:' : 'Please check these ' + problems.length + ' items:';
+    var list = summary.querySelector('ul');
+    list.innerHTML = '';
+    problems.forEach(function (p) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + fieldKey(p.control);
+      a.textContent = p.message;
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+    return summary;
+  }
+
+  function validate(form) {
+    var problems = invalidControls(form).map(function (control) {
+      return { control: control, message: messageFor(control) };
+    });
+    var invalidKeys = problems.map(function (p) { return fieldKey(p.control); });
+    controlsOf(form).forEach(function (control) {
+      if (control.hasAttribute('aria-invalid') && invalidKeys.indexOf(fieldKey(control)) === -1) clearFieldError(control);
+    });
+    problems.forEach(function (p) { showFieldError(p.control, p.message); });
+    return problems;
+  }
+
+  function showSuccess(form) {
+    var success = form.parentElement.querySelector('.form-success') ||
+                  document.getElementById(form.getAttribute('data-success') || '');
+    form.querySelectorAll('button[type="submit"]').forEach(function (b) {
+      b.disabled = true;
+      b.textContent = 'Submitted (preview)';
+    });
+    controlsOf(form).forEach(function (el) { el.disabled = true; });
+    if (!success) return;
+    success.classList.add('show');
+    var heading = success.querySelector('h2, h3') || success;
+    heading.setAttribute('tabindex', '-1');
+    heading.focus({ preventScroll: true });
+    success.scrollIntoView({ block: 'center', behavior: scrollBehavior() });
+  }
+
+  function initMockForms() {
+    forEach(document.querySelectorAll('form[data-mock="true"]'), function (form) {
+      form.noValidate = true;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var problems = validate(form);
+        var summary = renderSummary(form, problems, true);
+        if (summary) {
+          window.requestAnimationFrame(function () {
+            summary.focus({ preventScroll: true });
+            summary.scrollIntoView({ block: 'center', behavior: scrollBehavior() });
+          });
+          return;
+        }
+        showSuccess(form);
+      });
+
+      // Clear a field's error the moment it is fixed (the summary follows).
+      function onEdit(e) {
+        var control = e.target;
+        if (!control || control.getAttribute('aria-invalid') !== 'true' || !control.validity) return;
+        var group = control.type === 'radio' ? form.querySelectorAll('input[type="radio"][name="' + control.name + '"]') : [control];
+        if (!control.validity.valid) return;
+        forEach(group, clearFieldError);
+        var remaining = invalidControls(form).filter(function (el) { return el.getAttribute('aria-invalid') === 'true'; });
+        renderSummary(form, remaining.map(function (el) { return { control: el, message: messageFor(el) }; }), false);
+      }
+      form.addEventListener('input', onEdit);
+      form.addEventListener('change', onEdit);
+    });
+  }
+
+  /* ------------------------------------------------------------------------- */
+
+  function init() {
+    if (window.__eoSiteInit) return; // loaded twice: wire listeners once
+    window.__eoSiteInit = true;
+    root.classList.add('eo-js');
+
+    var state = { menuOpen: false };
+    var helpBar = initHelpBar(state);
+    var closeSubmenus = initSectionMenus();
+    initPhoneMenu(state, helpBar, closeSubmenus);
+    initSkipTarget();
+    initReveal();
+    initNewTabLinks();
+    initMockForms();
+  }
+
+  /* The static pages load this with defer, so the DOM is parsed already; a
+     page that loads it later (e.g. after DOMContentLoaded) still initializes. */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();

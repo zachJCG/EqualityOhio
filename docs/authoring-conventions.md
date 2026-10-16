@@ -1,8 +1,10 @@
-# Page authoring conventions — Equality Ohio redesign
+# Page authoring conventions: Equality Ohio redesign
 
-Every static page under `public/` follows the same pattern. `public/give.html`
-is the reference exemplar for an interior page; `public/index.html` for the
-home page. Read one before writing a new page.
+Every page is static HTML under `public/`. The page file holds only its own
+content: the `<head>` metadata, the header and the footer are generated into
+it by `npm run pages:build` (`scripts/build-pages.mjs`). `public/give.html` is
+the reference interior page and `public/index.html` the home page; read one
+before writing a new page.
 
 ## Skeleton
 
@@ -12,96 +14,198 @@ home page. Read one before writing a new page.
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- STAGING: keep noindex until production launch -->
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Page Name — Equality Ohio</title>
-    <meta name="description" content="..." />
-    <meta name="theme-color" content="#5A3F99" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Equality Ohio — Design Preview" />
-    <meta property="og:title" content="Page Name — Equality Ohio" />
-    <meta property="og:description" content="..." />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='%230093D0'/%3E%3Crect x='55' y='78' width='90' height='16' fill='white'/%3E%3Crect x='55' y='108' width='90' height='16' fill='white'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="/css/eo-fonts.css" />
-    <link rel="stylesheet" href="/css/eo-site.css" />
+    <!-- seo:start -->
+    <!-- seo:end -->
   </head>
   <body data-page="PAGE-ID">
-    <div data-site-header></div>
+    <!-- chrome:header:start -->
+    <!-- chrome:header:end -->
     <main id="main">
+      <section class="hero hero--interior">
+        <div class="container">
+          <span class="eyebrow">Section</span>
+          <h1>Page title</h1>
+          <p class="hero__lede">…</p>
+        </div>
+      </section>
       <!-- sections -->
     </main>
-    <div data-site-footer></div>
+    <!-- chrome:footer:start -->
+    <!-- chrome:footer:end -->
     <script src="/js/eo-site-template.js" defer></script>
   </body>
 </html>
 ```
 
-(Copy the favicon line exactly from an existing page — do not retype it.)
+Then:
 
-- `data-page` must match the page's id in the nav model in
-  `public/js/eo-site-template.js` (that is what highlights the current nav
-  item). Header, footer, and preview ribbon are injected by that script —
-  never hand-write them into a page.
-- Interior pages open with `<section class="hero hero--interior">` containing
+1. **`data-page`** must be one of `KNOWN_PAGE_IDS` in `lib/chrome.mjs`: a
+   `page` in `NAV_ITEMS` (that is what marks the current nav item with
+   `aria-current`) or one of the extras (`home`, `give`, `privacy`, `terms`,
+   `gate`, `not-found`). A new section of the site gets a `NAV_ITEMS` entry.
+   Add the page to `HELP_BAR_PAGES` only if it is a Legal Clinic guide people
+   read in a hurry.
+2. **Add a `PAGES` entry in `lib/seo.mjs`**: `url`, `title` (`Page — Equality
+   Ohio`), `description` (EO's own words, at most 160 characters), `section`
+   (which share card) and the sitemap `priority` / `changefreq`, or
+   `noindex: true` for pages that stay out of search.
+3. **Run `npm run pages:build`**, then `npm test`. `check:pages` fails on a
+   missing or orphaned registry entry, an unknown `data-page`, more or fewer
+   than one `<h1>`, a skipped heading level, a missing `<main id="main">`, an
+   inline script or handler, or a stale region. Markup inside comments is
+   ignored, so a commented-out old hero does not count as a second `<h1>`.
+
+Never type anything between the markers: the next build overwrites it.
+Outside them, the generator also removes any hand-written tag it owns
+(title, description, robots, `og:`/`twitter:` metas, canonical, icons,
+manifest, font preloads, the site stylesheets, JSON-LD), so a duplicate
+cannot linger. Page-scoped `<style>` blocks stay where they are.
+
+## Page rules
+
+- One `<h1>`; headings never skip a level. When a card title must look small
+  under an `<h2>` section, keep it an `<h2>` or `<h3>` in the outline and use
+  `.h3` for the look.
+- Interior pages open with `<section class="hero hero--interior">` holding
   `.eyebrow` + `<h1>` + `.hero__lede`.
+- Every `<img>` has `alt`, `width` and `height`.
+- **No inline `<script>` and no `on*=` attributes.** The static pages are
+  served with `script-src 'self'`; behavior goes in `public/js/`. JSON-LD is
+  generated.
+- **No color literals.** Colors come from `var(--eo-*)` in
+  `public/css/eo-brand-tokens.css`, including in `style=""` and SVG paint
+  (`currentColor` works). `npm run check:tokens` fails otherwise.
+- Prefer component classes and the `.mt-*` utilities over `style=""`.
 
-## Components available (css/eo-site.css)
+## Components (`public/css/eo-site.css`)
 
-`.section` / `.section--soft` (alt background) / `.band` (purple CTA band) ·
-`.container` · `.section__head` · `.card-grid--2/--3/--4` + `.card`
-(`.card__kicker`, `.card__link`, `.card--path is-blue/is-green`) ·
-`.tier-card` (giving) · `.news-card` · `.person-card` (avatar initials — no
-photography anywhere) · `.value-row` · `.timeline` (`.timeline__year`) ·
-`.stat-grid` (`.stat__num`, `.stat__label`) · `.callout--clinic` ·
-`.form-shell`, `.form-grid`, `.form-note`, `.form-success` · `.newsletter` ·
-`.quote-block` · `.resource-links` (link list with `.ext` annotation) ·
-`.pill--breaking/--policy/--program` · `.btn--primary/--outline/--gold/--on-dark/--lg` ·
-`.split` · `.lede` · `.center` · `.mt-0/1/2/3` · `.eyebrow--on-dark`.
+**Layout** `.container` (`--narrow`) · `.section` / `.section--soft` · `.band`
+(purple band, `.eyebrow--on-dark`, `.btn--on-dark`) · `.section__head` ·
+`.split` (`--center`) · `.card-grid--1/--2/--3/--4` · `.center` · `.lede` ·
+`.mt-0/1/2/3` · `.sr-only`
 
-## Brand rules (WCAG AA — computed, do not re-derive)
+**Hero** `.hero`, `.hero--interior`, `.hero__lede`, `.hero__ctas`,
+`.hero__art`, `.hero__split`
 
-- Purple `var(--eo-purple)` is the primary; white text on it is safe.
-- `--eo-blue` on white: LARGE text and graphics only. Small links use
-  `--eo-blue-ink`.
-- `--eo-green`: decorative bars/icons ONLY, never text.
-- Gold pills take `--eo-ink` text, never white.
-- Photography is intentionally absent (nothing licensed yet) — brand-color
-  art blocks hold those slots.
+**Cards** `.card` (`.card__kicker`, `.card__link`, `.card__phone`); a card
+with a `.card__link` lifts and is clickable as a whole unless it is
+`.card--flat` · `.card--path` with `is-blue` / `is-green` · `.news-card`
+(`__media` with `alt-a/b/c`, `__body`, `__date`, `__title`,
+`.news-card--feature`) · `.person-card` (`__avatar` initials, `__role`; no
+photography) · `.tier-card` (`--featured`, `__flag`, `__price`, `__cadence`,
+`__per`) with `.perk-list`
+
+**Content** `.value-row` (`__num`) · `.timeline` (`__year`) · `.stat-grid`
+(`.stat__num`, `.stat__label`) · `.quote-block` · `.resource-links` (with an
+`.ext` note) · `.pill--breaking/--policy/--program/--on-media`, plus
+`.pill--as-written` where case matters (501(c)(3)) ·
+`.btn--primary/--outline/--gold/--on-dark/--lg`
+
+**Legal Clinic** `.callout--clinic` (`__text`, `__body`, `__phone`) marked
+`data-cta`, so the phone **help bar** (generated on `HELP_BAR_PAGES`) slides
+away while the callout is on screen, except once the bar has come to rest
+above the footer (then it stays, so its slot is never an empty band).
+
+**Forms** `.form-shell` (`--narrow`, `__title`) · `.form-grid` with `.full`
+rows · `.req` (visible asterisk, `aria-hidden`) and `.optional` in labels ·
+`.hint` tied to its field with `aria-describedby` · `.form-legend-note`
+(“*” indicates required fields) · `.choice` tiles (44px; a checkbox or radio
+plus its label, inside a `<fieldset>` with a `<legend>`; `.choice-grid` for
+two columns) · `.newsletter` (inline signup row) · `.form-note` (preview or
+pending-embed notice) · `.form-success` (shown after a valid mock submit).
+The **error summary** (`.error-summary`) and inline **field errors**
+(`.field-error`) are created by the script; give a control `data-error="…"`
+when the default message would not read well.
+
+## Mock forms
+
+```html
+<p class="form-note">Design preview — this form isn&rsquo;t connected yet and nothing you type is saved or sent. …</p>
+<form data-mock="true" aria-label="Contact form">
+  … every control has an id and a <label for>; required ones carry `required` …
+  <button class="btn btn--primary" type="submit">Send Message</button>
+</form>
+<div class="form-success"><h2>…</h2><p>…</p></div>
+```
+
+The script validates on submit: an empty or invalid submit focuses the error
+summary (each entry links to its field, each field gets `aria-invalid` and an
+inline message). The summary is `role="alert"` on submit; while the person
+fixes fields it updates silently (`role="group"`), so it never re-reads the
+whole list over their typing. A valid submit disables the form and shows
+`.form-success`, which says nothing was transmitted and routes to a real
+channel. The success block sits in the form's parent, or anywhere with
+`data-success="id"` on the form. Mock forms are launch blockers: `npm test` fails on any
+`form[data-mock="true"]` once `LAUNCHED` is true.
+
+## Brand, accessibility and motion
+
+- Purple (`--eo-purple`) is the primary; white text on it is safe.
+- `--eo-blue` on white is for **large** text and graphics only; small links
+  and avatar initials use `--eo-blue-ink`.
+- `--eo-green` is decorative (bars, icons), never text.
+- Gold backgrounds take `--eo-ink` text, never white.
+- Focus is a solid outline (purple on light, gold on dark), never removed.
+- Targets: at least 24px everywhere (desktop dropdown toggles), 44px for
+  the menu button, the phone dropdown toggles and the choice tiles.
+- Motion uses the `--eo-dur-*` and `--eo-ease-*` tokens and animates only
+  `transform` and `opacity`. Under `prefers-reduced-motion` the durations
+  and delays are 0 and smooth scrolling is off. Scroll reveal is automatic
+  (desktop, below the fold only); never add your own hidden-until-scrolled
+  styles.
+- Short viewports (below 30em tall: 400% zoom, a phone in landscape): the
+  sticky header and help bar scroll with the page instead.
+- Phone numbers never wrap: `a[href^="tel:"]` is `white-space: nowrap`, and
+  the clinic number in running text is `855&#8209;LGBT&#8209;LAW`
+  (`npm test` fails on a plain-hyphen one). Long addresses do wrap; nothing
+  may scroll sideways at 320px, with or without user text spacing (WCAG
+  1.4.12).
+- In print, buttons are ink outlines (the fill is dropped on paper).
+- Photography is intentionally absent (nothing licensed yet).
 
 ## Content rules
 
-- **Copy comes from equalityohio.org only.** Fetch the live page(s) and reuse
-  Equality Ohio's actual language (tightened for the new layout is fine).
-  Never invent programs, statistics, names, dates, or eligibility rules.
-- **Nothing expired gets ported.** Old campaigns, past events, and stale
-  template pages stay behind — they are 301s in `next.config.mjs`, not pages.
-  Events pages include only events dated today or later; each event block is
-  self-contained so it can be deleted in one cut when it passes.
-- **Forms are visual only**: `data-mock="true"`, a `.form-success` block
-  explaining nothing was transmitted, and a route to a real channel
-  (855-LGBT-LAW for clinic matters, info@equalityohio.org otherwise).
-- **Embeds that can't be recreated yet** (interactive maps, video players,
-  EveryAction/NGP giving forms, Mailchimp/EveryAction signup embeds): render
-  a `.form-note` block that names the pending embed, and link out to the live
-  equalityohio.org page in the meantime (`rel="noopener" target="_blank"`).
-- **Donations link out to EveryAction (NGP)** — direct `secure.everyaction.com`
-  URLs, opened in a new tab. Never a fake donation form.
-- Internal links use clean URLs (`/legal-clinic/intake`, never `.html`).
-- External links: `rel="noopener"` and `target="_blank"`.
-- Phone links: `tel:` URIs (855-LGBT-LAW is `tel:18555428529`).
-- Escape entities in copy: `&rsquo;` `&amp;` `&mdash;` etc.; non-breaking
-  hyphen `&#8209;` in "855&#8209;LGBT&#8209;LAW".
+- **Copy comes from equalityohio.org only.** Reuse Equality Ohio's own
+  language (tightened for the layout is fine). Never invent programs,
+  statistics, names, dates, eligibility rules or legal guidance.
+- **Nothing expired ships.** Old campaigns, past events and template pages
+  are redirects in `next.config.mjs`, not pages. On
+  `/get-involved/events`, each event `<article>` sits between
+  `<!-- EVENT: name — YYYY-MM-DD -->` and `<!-- /EVENT -->`, and its first
+  `<time datetime>` dates it; with none left, the "There are no upcoming
+  events." callout shows (the comment in the page explains the swap, and the
+  freshness failure prints the exact callout markup to restore). Anything
+  else with an end date carries `data-expires="YYYY-MM-DD"` (election
+  content, including the home page's election news card: `2026-11-04`).
+  `npm test` fails the day after.
+- **Embeds that can't be recreated yet** (maps, video, EveryAction or
+  Lawmatics forms, story feeds): a `.form-note` naming the pending embed and
+  a link to the live page or the live form host.
+- **Donations link out to EveryAction (NGP)**: the human
+  `https://secure.everyaction.com/<formId>` page, in a new tab. Never a fake
+  donation form, never the `/v1/Forms/` JSON endpoint. Form ids:
+  `docs/site-map.md`.
+- Internal links use clean URLs (`/legal-clinic/intake`): never `.html`,
+  never a trailing slash, anchors must exist.
+- External links: `rel="noopener"` and `target="_blank"`. The script adds
+  the screen-reader "(opens in a new tab)" note.
+- Phone links: `tel:+1…` (855-LGBT-LAW is `tel:+18555428529`). Every `tel:`
+  and `mailto:` must be an `ORG` fact in `lib/site.mjs` or on the allowlist
+  in `tests/site-rules.test.mjs`.
+- Entities in copy: `&rsquo;` `&amp;` `&mdash;`; non-breaking hyphens in
+  `855&#8209;LGBT&#8209;LAW`.
 
 ## Canonical URL map (internal links must use these)
 
 `/` · `/about` · `/about/history` · `/about/leadership` ·
-`/about/staff-interns` · `/about/jobs-internships` · `/legal-clinic` ·
-`/legal-clinic/intake` · `/legal-clinic/intake/thank-you` ·
+`/about/staff-interns` · `/about/jobs-internships` · `/contact` ·
+`/legal-clinic` · `/legal-clinic/intake` · `/legal-clinic/intake/thank-you` ·
 `/legal-clinic/ohio-lgbtq-family-law-guide` ·
 `/legal-clinic/trans-know-your-rights` · `/legal-clinic/legal-network` ·
 `/get-involved` · `/get-involved/volunteer` · `/get-involved/events` ·
-`/our-work` · `/our-work/local` · `/our-work/local/municipal-map` ·
-`/our-work/business` · `/our-work/legacy-of-equality` · `/votersguide` ·
-`/stories` · `/newsletter` · `/jim-obergefell-john-arthur-society` · `/give`
-(anchors: `#one-time` `#defenders` `#society` `#daf` `#stock` `#legacy`
-`#in-kind`) · `/news` · `/contact`
+`/stories` · `/newsletter` · `/our-work` · `/our-work/local` ·
+`/our-work/local/municipal-map` · `/our-work/business` ·
+`/our-work/legacy-of-equality` · `/votersguide` · `/give` (anchors:
+`#one-time` `#defenders` `#society` `#daf` `#stock` `#legacy` `#in-kind`) ·
+`/jim-obergefell-john-arthur-society` · `/news` · `/privacy-policy` ·
+`/terms-conditions`
