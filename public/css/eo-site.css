@@ -43,6 +43,11 @@ body {
   color: var(--eo-body-text);
   background: var(--eo-bg);
   -webkit-font-smoothing: antialiased;
+  /* A single word wider than its column ("nondiscrimination" in a heading,
+     "LexisNexis/Westlaw" in a list) wraps instead of pushing the page past
+     320px under WCAG 1.4.12 text spacing. break-word only breaks a word
+     that cannot fit on its own line, so normal layouts are unchanged. */
+  overflow-wrap: break-word;
 }
 img, svg { max-width: 100%; height: auto; }
 a {
