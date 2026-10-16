@@ -138,47 +138,14 @@
       <h2>Upcoming events</h2>
     </div>
 
-    <!-- PRE-DEPLOY CHECK: verify every event below is still upcoming; delete any block whose date has passed. -->
-    <div class="card-grid card-grid--2" style="align-items:stretch;">
-
-      <!-- EVENT: Evening for Equality in Dayton — 2026-08-27. Delete this entire <article> once the date has passed. -->
-      <article class="card card--path is-blue">
-        <span class="card__kicker">Evening for Equality &middot; Dayton</span>
-        <h3>The Roadmap Back to Equality</h3>
-        <p><strong><time datetime="2026-08-27">Thursday, August 27, 2026</time></strong><br />
-        5:30 PM arrival &middot; 6:45 PM program<br />
-        Private home in the Deweese Park neighborhood, Dayton &mdash; address provided upon RSVP.</p>
-        <p>Equality Ohio&rsquo;s CEO and ED Dwayne Steward and the Obergefell &amp; Arthur Society invite you for a conversation with Jim Obergefell, plaintiff in the historic marriage equality case, to learn how Ohioans can join the journey back to equality.</p>
-        <p>No cost to attend. Plentiful street parking available. Please RSVP by Monday, August 24.</p>
-        <p class="hint">Special thanks to the host committee and sponsors, including Gary Greenberg &amp; Margie McLellan; Randle B. Moore, III &amp; Ronald A. Frost, Jr.; Kristin Powell; and Lynn Readey &amp; Sandy Anderson.</p>
-        <a class="btn btn--primary" style="margin-top:auto;align-self:flex-start;" href="https://tinyurl.com/DaytonE4E" rel="noopener" target="_blank">RSVP for Dayton</a>
-      </article>
-      <!-- /EVENT -->
-
-      <!-- EVENT: Advocates & Allies 2026 — 2026-10-01. Delete this entire <article> once the date has passed. -->
-      <article class="card card--path">
-        <span class="card__kicker">Signature Fall Event</span>
-        <h3>Advocates &amp; Allies 2026</h3>
-        <p><strong><time datetime="2026-10-01">Thursday, October 1, 2026</time></strong><br />
-        6&ndash;8 PM reception &middot; Happy hour add&#8209;on 5&ndash;6 PM with special guests (announcements coming soon)<br />
-        <a href="https://www.thefivescolumbus.com/" rel="noopener" target="_blank">The Fives</a>, 550 Reach Blvd, Columbus, OH 43215</p>
-        <p>Equality Ohio&rsquo;s signature fall event honoring the advocates across the spectrum, from joy as resistance to policy wins. Plus, learn how you can help fund the fight ahead on Ohio&rsquo;s Roadmap Back to Equality.</p>
-        <p>Join us for program updates, an awards ceremony, and entertainment, along with heavy appetizers and drinks available.</p>
-        <p class="hint">Interested in sponsoring this event? <a href="mailto:developmentstaff@equalityohio.org">Reach out</a>.</p>
-        <a class="btn btn--gold" style="margin-top:auto;align-self:flex-start;" href="https://secure.ngpvan.com/ogzjsrdJZkeM8YFd6865yQ2" rel="noopener" target="_blank">Get Tickets</a>
-      </article>
-      <!-- /EVENT -->
-
-    </div>
-
-    <!-- EMPTY STATE: if every event block above has been deleted, remove the card grid
-         and un-comment this block in its place.
+    <!-- ADDING AN EVENT: put a card grid back in place of the callout below and wrap each
+         <article> in an "EVENT: name — YYYY-MM-DD" / "/EVENT" comment pair; tests/freshness.test.mjs
+         fails the day after the block's first <time datetime>. Delete the callout while any event shows.
+         Empty-state wording is the live https://equalityohio.org/events/ text (2026-10-16). -->
     <div class="callout center">
-      <h3>No upcoming events right now</h3>
-      <p style="max-width:38em;margin:0.4rem auto 1.2rem;">New gatherings are always in the works across the state. Sign up for the newsletter and be the first to hear when the next one is announced.</p>
-      <a class="btn btn--primary" href="/newsletter">Get Event Announcements</a>
+      <h3>There are no upcoming events.</h3>
+      <a class="btn btn--primary mt-1" href="/newsletter">Get Event Announcements</a>
     </div>
-    -->
   </div>
 </section>
 
@@ -190,7 +157,7 @@
         <h2>Every event, statewide</h2>
         <p>From signature evenings to volunteer shifts and community actions, Equality Ohio&rsquo;s full events calendar lists everything happening near you.</p>
         <div class="form-note" style="margin-top:1.2rem;">
-          <strong>Pending embed:</strong> the live site&rsquo;s events calendar is an EveryAction embed that isn&rsquo;t recreated in this preview. Browse the current calendar on the live site: <a href="https://equalityohio.org/our-work/events/" rel="noopener" target="_blank">equalityohio.org events calendar</a>.
+          <strong>Pending embed:</strong> the live site&rsquo;s events calendar is an EveryAction embed that isn&rsquo;t recreated in this preview. Browse the current calendar on EveryAction: <a href="https://secure.everyaction.com/p/p8xo4ZmRSUmLA57z1RaA7w2" rel="noopener" target="_blank">Equality Ohio events calendar</a>.
         </div>
       </div>
       <div>
@@ -222,7 +189,7 @@
           <ul class="footer-contact">
             <li><a href="tel:+16142240400">(614) 224-0400</a></li>
             <li><a href="mailto:info@equalityohio.org">info@equalityohio.org</a></li>
-            <li><a href="https://twitter.com/equalityohio" rel="noopener">@equalityohio</a></li>
+            <li class="footer-social"><a href="https://x.com/equalityohio" rel="noopener" target="_blank">X</a> · <a href="https://www.facebook.com/equalityohio" rel="noopener" target="_blank">Facebook</a> · <a href="https://www.instagram.com/equality.ohio/" rel="noopener" target="_blank">Instagram</a> · <a href="https://www.youtube.com/channel/UCxKjvM_REomRkFAacq7dcwQ" rel="noopener" target="_blank">YouTube</a> · <a href="https://www.linkedin.com/company/equalityohio/" rel="noopener" target="_blank">LinkedIn</a> · <a href="https://www.threads.com/@equality.ohio" rel="noopener" target="_blank">Threads</a></li>
           </ul>
         </div>
         <div>
@@ -274,7 +241,7 @@
       <div class="footer-legal">
         <div class="footer-legal__inner">
           <span class="footer-badge"><img src="/assets/logo/guidestar-silver-2021.png" alt="GuideStar Silver Transparency 2021" width="54" height="54" loading="lazy" /><span>Equality Ohio Education Fund is a 501(c)(3) — EIN 02-0743268 · Equality Ohio is a 501(c)(4) — EIN 02-0743270</span></span>
-          <span>© 2026 Equality Ohio · <a href="#">Privacy Policy</a> · Design preview by Joseph Carter Group</span>
+          <span>© 2026 Equality Ohio · <a href="/privacy-policy">Privacy Policy</a> · <a href="/terms-conditions">Terms &amp; Conditions</a> · Design preview by Joseph Carter Group</span>
         </div>
       </div>
     </footer>

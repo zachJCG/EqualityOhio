@@ -127,15 +127,18 @@
 
 <section class="section" style="padding-top:0;">
   <div class="container">
-    <div class="card news-card card--flat" style="flex-direction:row; align-items:stretch; flex-wrap:wrap;">
+    <!-- ELECTION: 2026-11-03. This alert carries https://equalityohio.org/gotv2026/ ("Make your plan to vote in 2026!",
+         2026-09-18) until Election Day; data-expires fails npm test from 2026-11-05. Then replace it with the next
+         policy alert or delete the whole section. -->
+    <div class="card news-card card--flat" style="flex-direction:row; align-items:stretch; flex-wrap:wrap;" data-expires="2026-11-04">
       <div class="news-card__media" style="flex:1 1 280px; height:auto; min-height:170px;">
-        <span class="pill pill--breaking">Policy Alert</span>
+        <span class="pill pill--breaking">Election 2026</span>
       </div>
       <div class="news-card__body" style="flex:2 1 380px;">
-        <div class="news-card__date">Sample alert — styled per the 2026 Policy Update brand sheet</div>
-        <h3 style="font-size:1.45rem;">This is where urgent policy updates land first.</h3>
-        <p>When a bill moves, a ruling drops, or action is needed, the alert pattern puts it above the fold — with the action to take right beside it.</p>
-        <a class="btn btn--primary" href="https://equalityohio.org/get-involved/" rel="noopener" style="align-self:flex-start;" target="_blank">Take Action</a>
+        <div class="news-card__date">September 2026</div>
+        <h3 style="font-size:1.45rem;">Make your plan to vote in 2026!</h3>
+        <p>Ohio&rsquo;s 2026 General Election is coming, and the plan starts now. <strong><time datetime="2026-11-03">November 3</time>: Election Day in Ohio! Polls open 6:30am &ndash; 7:30pm.</strong></p>
+        <a class="btn btn--primary" href="/votersguide" style="align-self:flex-start;">Make Your Plan</a>
       </div>
     </div>
   </div>
@@ -145,11 +148,29 @@
   <div class="container">
     <div class="card-grid card-grid--2">
       <article class="card news-card">
-        <div class="news-card__media alt-c"><span class="pill pill--breaking">New</span></div>
+        <div class="news-card__media alt-b"><span class="pill pill--breaking">Press Release</span></div>
         <div class="news-card__body">
-          <div class="news-card__date">June 2026</div>
+          <div class="news-card__date">September 2026</div>
+          <h3>Press Release: $750,000 Legacy Gift Strengthens the Future of LGBTQIA+ Organizations in Central Ohio</h3>
+          <p>Through his estate, Stout left a combined $750,000 legacy gift to Stonewall Columbus, Kaleidoscope Youth Center, and Equality Ohio, creating a lasting investment in LGBTQIA+ advocacy, young people, community, and belonging.</p>
+          <a class="card__link" href="https://equalityohio.org/dannystoutlegacygift/" rel="noopener" target="_blank">Read more &rarr;</a>
+        </div>
+      </article>
+      <article class="card news-card">
+        <div class="news-card__media"><span class="pill pill--policy">Election 2026</span></div>
+        <div class="news-card__body">
+          <div class="news-card__date">September 2026</div>
+          <h3>Make your plan to vote in 2026!</h3>
+          <p>Ohio&rsquo;s 2026 General Election is coming, and the plan starts now.</p>
+          <a class="card__link" href="https://equalityohio.org/gotv2026/" rel="noopener" target="_blank">Read more &rarr;</a>
+        </div>
+      </article>
+      <article class="card news-card">
+        <div class="news-card__media alt-c"><span class="pill pill--breaking">Scorecard</span></div>
+        <div class="news-card__body">
+          <div class="news-card__date">June 2026 &middot; updated September 2026</div>
           <h3>Equality Ohio&rsquo;s 2026 Candidate Scorecard Is Here</h3>
-          <p>Our scorecard examines 30 critical races, including statewide elections — see where candidates stand on equality before you vote.</p>
+          <p>Our scorecard examines multiple critical races, including statewide elections — see where candidates stand on equality before you vote.</p>
           <a class="card__link" href="https://equalityohio.org/equality-ohios-2026-candidate-scorecard-is-here/" rel="noopener" target="_blank">Read more &rarr;</a>
         </div>
       </article>
@@ -177,11 +198,11 @@
           <div class="news-card__date">October 2025</div>
           <h3>Ohio House Passes &ldquo;My Child, My Chart,&rdquo; Undermining Youth Privacy</h3>
           <p>Our statement on the House vote and what it means for young Ohioans and their care.</p>
-          <a class="card__link" href="https://equalityohio.org/news/" rel="noopener" target="_blank">Read more &rarr;</a>
+          <a class="card__link" href="https://equalityohio.org/press-release-from-equality-ohio-ohio-house-passes-my-child-my-chart-undermining-youth-privacy/" rel="noopener" target="_blank">Read more &rarr;</a>
         </div>
       </article>
     </div>
-    <p class="hint mt-2">Mockup shows four recent posts from equalityohio.org. Production build includes the full archive with categories, search, and pagination.</p>
+    <p class="hint mt-2">Mockup shows six recent posts from equalityohio.org. Production build includes the full archive with categories, search, and pagination.</p>
   </div>
 </section>
 
@@ -203,7 +224,7 @@
           <ul class="footer-contact">
             <li><a href="tel:+16142240400">(614) 224-0400</a></li>
             <li><a href="mailto:info@equalityohio.org">info@equalityohio.org</a></li>
-            <li><a href="https://twitter.com/equalityohio" rel="noopener">@equalityohio</a></li>
+            <li class="footer-social"><a href="https://x.com/equalityohio" rel="noopener" target="_blank">X</a> · <a href="https://www.facebook.com/equalityohio" rel="noopener" target="_blank">Facebook</a> · <a href="https://www.instagram.com/equality.ohio/" rel="noopener" target="_blank">Instagram</a> · <a href="https://www.youtube.com/channel/UCxKjvM_REomRkFAacq7dcwQ" rel="noopener" target="_blank">YouTube</a> · <a href="https://www.linkedin.com/company/equalityohio/" rel="noopener" target="_blank">LinkedIn</a> · <a href="https://www.threads.com/@equality.ohio" rel="noopener" target="_blank">Threads</a></li>
           </ul>
         </div>
         <div>
@@ -255,7 +276,7 @@
       <div class="footer-legal">
         <div class="footer-legal__inner">
           <span class="footer-badge"><img src="/assets/logo/guidestar-silver-2021.png" alt="GuideStar Silver Transparency 2021" width="54" height="54" loading="lazy" /><span>Equality Ohio Education Fund is a 501(c)(3) — EIN 02-0743268 · Equality Ohio is a 501(c)(4) — EIN 02-0743270</span></span>
-          <span>© 2026 Equality Ohio · <a href="#">Privacy Policy</a> · Design preview by Joseph Carter Group</span>
+          <span>© 2026 Equality Ohio · <a href="/privacy-policy">Privacy Policy</a> · <a href="/terms-conditions">Terms &amp; Conditions</a> · Design preview by Joseph Carter Group</span>
         </div>
       </div>
     </footer>

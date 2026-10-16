@@ -104,4 +104,4 @@ photography anywhere) · `.value-row` · `.timeline` (`.timeline__year`) ·
 `/our-work/business` · `/our-work/legacy-of-equality` · `/votersguide` ·
 `/stories` · `/newsletter` · `/jim-obergefell-john-arthur-society` · `/give`
 (anchors: `#one-time` `#defenders` `#society` `#daf` `#stock` `#legacy`
-`#in-kind`) · `/news` · `/contact`
+`#in-kind`) · `/news` · `/contact` · `/privacy-policy` · `/terms-conditions`

@@ -13,8 +13,10 @@ import { staticPages } from './lib/static-pages.mjs';
  *
  * The redirects section also carries the FULL legacy URL map for
  * equalityohio.org: every URL in the live WordPress sitemaps (captured
- * 2026-08-13) either keeps its path in the redesign or 301s to its
- * replacement. See docs/site-map.md for the page-by-page mapping.
+ * 2026-08-13, re-checked 2026-10-16 against docs/legacy-sitemap-urls.txt by
+ * `npm run check:redirects`) either keeps its path in the redesign or
+ * redirects to its replacement. See docs/site-map.md for the page-by-page
+ * mapping.
  * ======================================================================== */
 
 /** Every public/**\/*.html as { file: '/about.html', url: '/about' }. */
@@ -92,8 +94,9 @@ function contentSecurityPolicy({ inlineScripts }) {
 const BASELINE_CSP = contentSecurityPolicy({ inlineScripts: true });
 const STRICT_CSP = contentSecurityPolicy({ inlineScripts: false });
 
-/* Brand art and images: one day fresh, a week stale-while-revalidate. Not
- * immutable, because placeholder art and the logo are swapped in place. */
+/* Brand art, images and the mirrored PDFs: one day fresh, a week
+ * stale-while-revalidate. Not immutable, because placeholder art, the logo and
+ * EO's documents are swapped in place. */
 const ASSET_CACHE = 'public, max-age=86400, stale-while-revalidate=604800';
 
 const nextConfig = {
@@ -137,6 +140,13 @@ const nextConfig = {
       { source: '/events-2', destination: '/get-involved/events', permanent: true },
       { source: '/our-work/events', destination: '/get-involved/events', permanent: true },
       { source: '/event/:slug*', destination: '/get-involved/events', permanent: true },
+      // The Events Calendar's category archives (/events/category/<slug>/)
+      // and any other path under /events. Must stay after the exact /events.
+      { source: '/events/:path*', destination: '/get-involved/events', permanent: true },
+      // Advocates & Allies 2026 event page (live 2026-10-07): the honorees now
+      // lead the Legacy of Equality page. Temporary, because the next event
+      // may want this short URL back.
+      { source: '/aa2026', destination: '/our-work/legacy-of-equality#honorees', permanent: false },
 
       // People. Profile pages fold into the staff and leadership rosters:
       // staff slugs deep-link to their card (ids on /about/staff-interns
@@ -165,12 +175,20 @@ const nextConfig = {
       })),
       { source: '/people', destination: '/about/staff-interns', permanent: true },
       { source: '/people/:slug*', destination: '/about/staff-interns', permanent: true },
+      // People taxonomy archives (people-category-sitemap.xml): the two board
+      // categories land on the boards page, the rest (staff-interns,
+      // statewide-candidates, cle-instructor) on the staff roster.
+      { source: '/people-category/equality-ohio-education-fund-board', destination: '/about/leadership', permanent: true },
+      { source: '/people-category/equality-ohio-board', destination: '/about/leadership', permanent: true },
+      { source: '/people-category/:slug*', destination: '/about/staff-interns', permanent: true },
       { source: '/about/staff-interns/:slug', destination: '/about/staff-interns', permanent: true },
 
       // Jobs.
       { source: '/job-opening', destination: '/about/jobs-internships', permanent: true },
       { source: '/job-opening/:slug*', destination: '/about/jobs-internships', permanent: true },
       { source: '/single-jobs-internships-template', destination: '/about/jobs-internships', permanent: true },
+      // Job taxonomy archives (job-category-sitemap.xml, e.g. /job-category/externship/).
+      { source: '/job-category/:slug*', destination: '/about/jobs-internships', permanent: true },
 
       // Newsletter signup (long WordPress slug).
       { source: '/sign-up-for-the-latest-news-from-equality-ohio', destination: '/newsletter', permanent: true },
@@ -206,16 +224,34 @@ const nextConfig = {
       { source: '/conflict-of-interest-forms', destination: '/about/leadership#governance', permanent: true },
 
       // WordPress template/scratch pages that were public but never real.
+      // (/news/news-template is a post in the post sitemap, so it is covered
+      // by LEGACY_POST_PATHS below rather than repeated here.)
       { source: '/news-template', destination: '/news', permanent: true },
       { source: '/news-template-2', destination: '/news', permanent: true },
-      { source: '/news/news-template', destination: '/news', permanent: true },
       { source: '/thankyou', destination: '/', permanent: true },
 
       // News categories and every legacy post URL land on News & Policy.
       // Old posts are not ported; lib/legacy-post-paths.mjs is generated
       // from the live post sitemap (see its header for regeneration notes).
       { source: '/category/:slug*', destination: '/news', permanent: true },
+      { source: '/tag/:slug*', destination: '/news', permanent: true },
       ...LEGACY_POST_PATHS.map((path) => ({ source: path, destination: '/news', permanent: true })),
+
+      // WordPress media the pages used to link, now hosted in public/assets/docs/
+      // (each link carries its source URL in an HTML comment). Exact paths, so
+      // old links and EO's bit.ly short links keep resolving after launch.
+      // Not mirrored: the 2025 Trans Know Your Rights PDF (live withdrew it
+      // on 2026-08-20) and the 25 MB Family Law Guide (over the deployment's
+      // per-file limit; EO keeps hosting it). Re-pull the files at launch.
+      ...[
+        '/wp-content/uploads/2026/06/EQ_Candidate-Scorecard_September-Edits_9-18-v2.pdf',
+        '/wp-content/uploads/2023/02/EOEF-Organizational-Financial-Conflict-of-Interest-combined.pdf',
+        '/wp-content/uploads/2024/11/Privacy-Policy-November-2024.pdf',
+      ].map((source) => ({
+        source,
+        destination: `/assets/docs/${source.split('/').pop()}`,
+        permanent: true,
+      })),
 
       // Old flat mockup filenames from design review round 1.
       { source: '/board', destination: '/about/leadership', permanent: true },
@@ -256,7 +292,7 @@ const nextConfig = {
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
       {
-        source: '/assets/:dir(img|logo|brand|og|textures)/:path*',
+        source: '/assets/:dir(img|logo|brand|og|textures|docs)/:path*',
         headers: [{ key: 'Cache-Control', value: ASSET_CACHE }],
       },
       {
