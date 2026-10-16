@@ -1,42 +1,73 @@
 /* Staging gate endpoint: checks the shared preview password and sets the
- * cookie middleware.js verifies. Remove with the rest of the gate at launch. */
+ * cookie middleware.js verifies. Remove with the rest of the gate after
+ * launch.
+ *
+ *   POST form fields `password`, `from`
+ *     success           303 to the same-origin `from` (else /), Set-Cookie
+ *     wrong password    303 /gate?error=1 (keeps a safe `from`)
+ *     too many failures 303 /gate?error=rate: 10 failed attempts per address
+ *                       per 15 minutes, in memory per server instance
+ *     not a form body   400
+ */
 import { NextResponse } from 'next/server';
+import {
+  COOKIE_MAX_AGE,
+  COOKIE_NAME,
+  expectedCookieValue,
+  passwordMatches,
+  safeFrom,
+} from '../../../lib/preview-gate.mjs';
+import { clientKey, createRateLimiter } from '../../../lib/rate-limit.mjs';
 
-const PASSWORD = process.env.STAGING_PASSWORD || 'EO2026';
-const COOKIE_NAME = 'eo_preview';
-const COOKIE_SALT = 'eo-staging-v1';
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
+export const dynamic = 'force-dynamic';
 
-async function sha256Hex(input) {
-  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input));
-  return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
-}
+const failures = createRateLimiter({ max: 10, windowMs: 15 * 60 * 1000 });
 
-// Only same-site relative paths may be used as a post-login destination.
-function safePath(raw) {
-  return raw && raw.startsWith('/') && !raw.startsWith('//') ? raw : '/';
-}
+const noStore = (res) => {
+  res.headers.set('Cache-Control', 'private, no-store');
+  return res;
+};
 
 export async function POST(request) {
-  const form = await request.formData();
-  const password = String(form.get('password') || '');
-  const from = safePath(String(form.get('from') || '/'));
-  const origin = new URL(request.url).origin;
+  let form;
+  try {
+    form = await request.formData();
+  } catch {
+    return noStore(new NextResponse('Bad request: expected a form submission.', {
+      status: 400,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    }));
+  }
 
-  if (password !== PASSWORD) {
-    const back = new URL('/gate', origin);
-    back.searchParams.set('error', '1');
-    if (from !== '/') back.searchParams.set('from', from);
-    return NextResponse.redirect(back, 303);
+  const origin = new URL(request.url).origin;
+  const rawFrom = form.get('from');
+  const from = safeFrom(typeof rawFrom === 'string' ? rawFrom : '/', origin);
+  const key = clientKey(request.headers);
+
+  const backToGate = (error) => {
+    const url = new URL('/gate', origin);
+    url.searchParams.set('error', error);
+    if (from !== '/') url.searchParams.set('from', from);
+    return noStore(NextResponse.redirect(url, 303));
+  };
+
+  // Checked before the password, so a correct guess after the limit is
+  // refused too; otherwise the limit would not slow guessing at all.
+  if (failures.limited(key)) return backToGate('rate');
+
+  const password = form.get('password');
+  if (!(await passwordMatches(typeof password === 'string' ? password : null))) {
+    failures.hit(key);
+    return backToGate('1');
   }
 
   const res = NextResponse.redirect(new URL(from, origin), 303);
-  res.cookies.set(COOKIE_NAME, await sha256Hex(`${PASSWORD}|${COOKIE_SALT}`), {
+  res.cookies.set(COOKIE_NAME, await expectedCookieValue(), {
     httpOnly: true,
     sameSite: 'lax',
     secure: origin.startsWith('https:'),
     path: '/',
     maxAge: COOKIE_MAX_AGE,
   });
-  return res;
+  return noStore(res);
 }

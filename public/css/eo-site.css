@@ -5,7 +5,6 @@
    sticky nav, hairline brand bar, section rhythm, card grids, token-driven
    theming throughout.
    ========================================================================== */
-@import url('/css/eo-brand-tokens.css');
 
 /* -- Reset / base -------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
