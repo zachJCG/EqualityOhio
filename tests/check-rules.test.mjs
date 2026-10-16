@@ -9,6 +9,7 @@
  *                                options), samples, and the map analysis
  *   scripts/check-links.mjs      the per-link rules
  *   scripts/check-tokens.mjs     literal and stale-palette detection
+ *   scripts/build-pages.mjs      page structure counts ignore comments
  */
 
 import assert from 'node:assert/strict';
@@ -28,6 +29,7 @@ import {
   statusFor,
 } from '../scripts/check-redirects.mjs';
 import { cssColorLiterals, htmlColorLiterals, stalePaletteHits } from '../scripts/check-tokens.mjs';
+import { validate } from '../scripts/build-pages.mjs';
 
 const require = createRequire(import.meta.url);
 const { pathToRegexp } = require('next/dist/compiled/path-to-regexp');
@@ -238,5 +240,34 @@ describe('token rules', () => {
     assert.deepEqual(hits.map((h) => h.line), [1, 2, 4]);
     assert.equal(inComments, 1);
     assert.equal(stalePaletteHits('<!-- #0080C0 --><p>ok</p>', '.html').hits.length, 0);
+  });
+});
+
+describe('page structure rules (scripts/build-pages.mjs validate)', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'eo-pages-'));
+  after(() => rmSync(dir, { recursive: true, force: true }));
+  const pageWith = (name, main) => {
+    const abs = join(dir, name);
+    writeFileSync(abs, [
+      '<!doctype html>',
+      '<html lang="en">',
+      '<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /></head>',
+      '<body data-page="about">',
+      main,
+      '<script src="/js/eo-site-template.js" defer></script>',
+      '</body>',
+      '</html>',
+    ].join('\n'));
+    // Only this file's own problems; the registry checks see a one-page site.
+    return validate([{ file: `/${name}`, url: '/about', abs }]).filter((p) => p.startsWith(`/${name}:`));
+  };
+
+  test('a commented-out <h1> or <main> does not count', () => {
+    assert.deepEqual(pageWith('commented.html', '<!-- <h1>Old hero</h1> <main>old</main> -->\n<main id="main"><h1>About</h1></main>'), []);
+  });
+
+  test('a page whose only <h1> is commented out still fails', () => {
+    const problems = pageWith('no-h1.html', '<main id="main"><!-- <h1>Old hero</h1> --><h2>About</h2></main>');
+    assert.ok(problems.some((p) => /0 <h1> elements/.test(p)), problems.join('\n'));
   });
 });

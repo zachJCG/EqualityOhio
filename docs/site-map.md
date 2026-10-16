@@ -163,8 +163,11 @@ Compiled from page authoring; keep this list current as items land.
   deleted BambooHR posting 29 and the live jobs index still says "$25/Hour, 12
   weeks" (BambooHR says academic credit); the Legacy of Equality page says
   "please complete the form below" but has no form; the voters guide reads
-  "His voted" for Keith Faber (fixed to "He voted" here); the live footer's
-  Community Shares of Mid-Ohio badge image is a 404 (not ported).
+  "His voted" for Keith Faber (fixed to "He voted" here) and says Allison
+  Russo opposed "Issue 1 in 2024" (the supermajority Issue 1 was August 2023;
+  EO's own September 18 scorecard PDF says 2023, and so does this page); the
+  live footer's Community Shares of Mid-Ohio badge image is a 404 (not
+  ported).
 
 **Assets**
 - Official logo files + GuideStar badge artwork (SVG stand-ins are

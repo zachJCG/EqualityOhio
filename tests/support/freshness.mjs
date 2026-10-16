@@ -8,9 +8,11 @@
  *                  The block's first <time datetime> must be today or later
  *                  in America/New_York (an event on its own day still shows).
  *   empty state    when no EVENT block remains, the page must show the
- *                  "No upcoming events" callout that the EMPTY STATE comment
- *                  in events.html holds ready (un-commented, in place of the
- *                  card grid).
+ *                  "There are no upcoming events." callout (the live
+ *                  equalityohio.org/events/ wording) in place of the card
+ *                  grid. events.html deletes it while any event shows, so
+ *                  the failure message carries the exact markup to put
+ *                  back (EMPTY_STATE_MARKUP).
  *   data-expires   any element anywhere with data-expires="YYYY-MM-DD"
  *                  expires at the end of that day: it fails once the date is
  *                  in the past. Use it for job openings, election-cycle copy
@@ -83,6 +85,11 @@ export function eventBlocks(html) {
   return blocks;
 }
 
+/** The empty-state callout to restore when the last event block goes. */
+export const EMPTY_STATE_MARKUP =
+  '<div class="callout center"><h3>There are no upcoming events.</h3>' +
+  '<a class="btn btn--primary mt-1" href="/newsletter">Get Event Announcements</a></div>';
+
 /**
  * Is the empty-state callout on the page, outside comments? It is a
  * .callout element whose text says "No upcoming events".
@@ -103,7 +110,7 @@ export function eventProblems(html, today) {
     }
   }
   if (blocks.length === 0 && !hasEmptyState(html)) {
-    problems.push('no EVENT blocks remain and the empty-state callout is missing: un-comment the EMPTY STATE block in place of the card grid');
+    problems.push(`no EVENT blocks remain and the empty-state callout is missing: replace the card grid with ${EMPTY_STATE_MARKUP}`);
   }
   return problems;
 }

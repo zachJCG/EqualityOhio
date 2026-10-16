@@ -46,23 +46,35 @@ before anything launch-related.
 
   To change the nav, footer, a title or a description, edit `lib/*.mjs` and
   run `npm run pages:build`. `npm run check:pages` (in `npm test`) fails on
-  drift.
+  drift. The same run also writes `lib/open-files.generated.mjs`, the
+  gate's list of real open files (see Staging gate); add or remove a file
+  under an open directory and rebuild.
 - **One launch switch:** `LAUNCHED` in `lib/site.mjs`. It drives the robots
   meta, canonical, `og:site_name`, the preview ribbon and footer credit (via
-  the generator), the gate (`middleware.js` becomes a pass-through),
-  `X-Robots-Tag` (`next.config.mjs`) and `/robots.txt` (`app/robots.js`).
-  Static HTML cannot read env, so flipping it means a `pages:build` and a
-  commit. Indexing is allowed only when `LAUNCHED` and
-  `VERCEL_ENV=production`, so previews stay out of search after launch too.
+  the generator), the gate (`middleware.js` becomes a pass-through and
+  `/api/gate` a 404), `X-Robots-Tag` (`next.config.mjs`) and `/robots.txt`
+  (`app/robots.js`). Static HTML cannot read env, so flipping it means a
+  `pages:build` and a commit. Indexing is allowed only when `LAUNCHED` and
+  `VERCEL_ENV=production`, so previews stay out of search after launch too;
+  the e2e suite follows the same rule (`INDEXABLE` in
+  `tests/e2e/support/env.mjs`), so a launched CI or local build is expected
+  to serve `Disallow: /` and `X-Robots-Tag`.
 - **Organization facts** (phones, email, socials, EINs) live in `ORG` in
   `lib/site.mjs`. Add only facts the site already prints.
 - **Staging gate:** `middleware.js` + `lib/preview-gate.mjs` +
+  `lib/preview-gate-paths.mjs` + `lib/open-files.generated.mjs` +
   `app/api/gate/route.js` + `public/gate.html` + `public/js/eo-gate.js`. A
   soft gate that keeps the preview out of casual view and out of search, not
   a security boundary. Password `STAGING_PASSWORD`, falling back to `EO2026`;
   the cookie is an HMAC of the password, so rotating it signs everyone out.
   Ten failed attempts per address per 15 minutes (in memory, per instance,
-  `lib/rate-limit.mjs`). `npm run dev` is gated too.
+  `lib/rate-limit.mjs`). `npm run dev` is gated too. Open without the
+  cookie: the exact paths in `lib/preview-gate-paths.mjs` and only the real
+  files under its open directories (CSS, fonts, logo, brand, og, textures),
+  listed by `pages:build` because the edge middleware cannot read the disk;
+  a missing file there goes to the gate, never to the branded 404. The
+  post-login `from` is validated after URL parsing (dot segments can yield
+  `//host`) and never lands on any spelling of the gate (`isGatePath`).
 - **CSP:** every static page is served with `script-src 'self'`. No inline
   `<script>` (JSON-LD data blocks are fine) and no `on*=` attributes, ever;
   behavior lives in `public/js/`. Next-rendered routes get a baseline policy
@@ -70,7 +82,10 @@ before anything launch-related.
   Lawmatics, YouTube) needs the directives listed in `next.config.mjs`.
 - **Behaviors only** in `public/js/eo-site-template.js`: phone menu sheet,
   desktop dropdowns, help bar, scroll reveal, new-tab announcements, mock
-  form validation. It never injects markup the page needs to work.
+  form validation. It never injects markup the page needs to work. The
+  phone Menu is served as a link to the footer navigation (`#footer-nav`),
+  so it works if the script fails; the script swaps it for the sheet's
+  `<button>` in the same box.
 - **Branded 404:** `pages/404.js` (Pages Router, prerendered, no client
   runtime) with `pages/_document.js`, using the same chrome from
   `lib/chrome.mjs`. Do not replace it with an App Router catch-all or
@@ -100,7 +115,8 @@ lib/seo.mjs               PAGES registry, share cards, robots, JSON-LD
 lib/chrome.mjs            NAV_ITEMS, KNOWN_PAGE_IDS, header/footer/help-bar markup
 lib/static-pages.mjs      the one walk of public/
 lib/legacy-post-paths.mjs 69 legacy post URLs that redirect to /news
-lib/preview-gate.mjs, lib/rate-limit.mjs, middleware.js, app/api/gate/   the staging gate
+lib/preview-gate.mjs, lib/preview-gate-paths.mjs, lib/rate-limit.mjs,
+  lib/open-files.generated.mjs, middleware.js, app/api/gate/          the staging gate
 app/robots.js, app/sitemap.js, app/manifest.js
 pages/404.js, pages/_document.js                                     the branded 404
 next.config.mjs           redirects (full legacy map), rewrites, headers, CSP, cache
@@ -123,13 +139,17 @@ npm run test:e2e       Playwright (needs `npm run build` first; starts
 npm run lint:a11y      the axe part only
 npm run check:links | check:redirects | check:tokens | check:pages
 npm run assets         regenerate icons, share cards, images, textures
+                       (idempotent: a rerun changes no bytes)
 EO_TODAY=2026-11-20 npm test     freshness as of a future day
 node scripts/check-redirects.mjs --fetch   refresh the live sitemap snapshot
 ```
 
 In this environment Chromium is preinstalled at `/opt/pw-browsers/chromium`;
 never run `playwright install`. If port 3100 already answers, Playwright
-reuses that server, so stop a stale `next start` after rebuilding.
+reuses that server, so stop a stale `next start` after rebuilding. The
+suite loads the same `.env*` files as `next start`, so a `STAGING_PASSWORD`
+in `.env.local` reaches both. CI runs keep no Playwright traces (they would
+record the cookie and the password in a public artifact).
 
 ## Authoring a page
 
@@ -145,9 +165,10 @@ entry in `lib/seo.mjs` (and a nav entry if it belongs in the menu), then
 - Copy from equalityohio.org only. Never invent programs, statistics, names,
   dates, eligibility rules or legal guidance.
 - House style: entities in markup (`&rsquo;` `&amp;` `&mdash;`),
-  `855&#8209;LGBT&#8209;LAW` with non-breaking hyphens, clean internal URLs
-  (never `.html`, never a trailing slash), external links with
-  `rel="noopener" target="_blank"`, `tel:+1…` links.
+  `855&#8209;LGBT&#8209;LAW` with non-breaking hyphens in running text
+  (`npm test` fails on a plain-hyphen one outside a `tel:` link), clean
+  internal URLs (never `.html`, never a trailing slash), external links
+  with `rel="noopener" target="_blank"`, `tel:+1…` links.
 - Nothing expired ships. Events appear only while upcoming; dated content
   carries `data-expires`.
 - Mock forms say nothing was sent and route people to a real channel
@@ -171,11 +192,18 @@ entry in `lib/seo.mjs` (and a nav entry if it belongs in the menu), then
   focused error summary linking each invalid field, inline errors with
   `aria-invalid`. Checkbox and radio rows are 44px `.choice` tiles.
 - Motion: name the property, use the `--eo-dur-*` tokens, animate only
-  `transform` and `opacity`. All durations collapse to 0 under
+  `transform` and `opacity`. All durations and delays collapse to 0 under
   `prefers-reduced-motion`; smooth scrolling is off there too. Scroll reveal
   runs only on desktop with motion allowed, hides only what starts below the
   fold, and never on print.
-- No horizontal scroll at 320 or 390.
+- Below 30em of viewport height (400% zoom, phone landscape) the sticky
+  header and help bar scroll with the page. On help-bar pages Tab stops
+  clear the bar (`scroll-padding-bottom`), and the bar stays shown once it
+  rests above the footer.
+- The error summary is `role="alert"` on submit and a silent
+  `role="group"` while fields are fixed.
+- No horizontal scroll at 320 or 390, also under WCAG 1.4.12 text spacing
+  at 320.
 
 ## Redirects and legacy coverage
 
@@ -192,8 +220,9 @@ Playwright routes spec requests every rule and every legacy family.
   later (America/New_York); with none left, the empty-state callout must be
   on the page.
 - Any `data-expires="YYYY-MM-DD"` in the past fails. The 2026 election
-  content on `/`, `/votersguide` and `/news` expires 2026-11-04, so
-  `npm test` turns red on 2026-11-05 until it is removed.
+  content on `/` (the section and its news card), `/votersguide` and
+  `/news` expires 2026-11-04, so `npm test` turns red on 2026-11-05 until it
+  is removed.
 - The footer prints the build year, so on January 1 `check:pages` reports
   drift; run `npm run pages:build` and commit.
 
@@ -209,8 +238,11 @@ outside the tokens file. `docs/site-map.md` updated with any URL change.
 `docs/launch-checklist.md` is the list. The tests enforce the core of it:
 with `LAUNCHED = true`, `npm test` fails on any self-link to
 equalityohio.org or `/wp-content/`, any staging-only copy ("Design preview",
-"in the real build", "pending embed", the 404's preview wording) and any
-`form[data-mock="true"]`.
+"in the real build", "pending embed", "Mockup note", "content migration",
+"Pending —", the 404's preview wording) and any `form[data-mock="true"]`.
+Nothing in the suite requires a mock form to exist once launched, so after
+those are cleared the launch commit passes `npm test`, the build and the
+e2e suite.
 
 ## Things to never do
 

@@ -17,8 +17,10 @@ Agent sessions: read `CLAUDE.md` too.
   `lib/seo.mjs` (title, description, Open Graph, icons, stylesheets, JSON-LD),
   and the header and footer from `lib/chrome.mjs` (skip link, preview ribbon,
   nav, phone help bar, footer). They are real HTML in the served page, so
-  navigation works without JavaScript. `public/js/eo-site-template.js` only
-  adds behavior (phone menu, dropdowns, help bar, reveal, form validation).
+  navigation works without JavaScript (the phone Menu is served as a link
+  to the footer navigation, and becomes the sheet's button when the script
+  runs). `public/js/eo-site-template.js` only adds behavior (phone menu,
+  dropdowns, help bar, reveal, form validation).
 - **One launch switch:** `LAUNCHED` in `lib/site.mjs` controls robots metas,
   canonicals, the preview ribbon and footer credit, `og:site_name`, the gate,
   `X-Robots-Tag` and `/robots.txt`.
@@ -57,7 +59,9 @@ The individual checks inside `npm test` also run alone: `check:links`,
 `check:redirects`, `check:tokens`, `check:pages`. CI
 (`.github/workflows/ci.yml`) runs `npm test`, the build and the Playwright
 suite on every pull request and on `main`. Copy `.env.example` to
-`.env.local` for local overrides.
+`.env.local` for local overrides; the Playwright suite loads the same env
+files `next start` does, so a `STAGING_PASSWORD` set there reaches both.
+`EO_TODAY` (for `npm test`) is read from the shell only.
 
 ## Staging gate
 
@@ -73,11 +77,21 @@ security boundary for anything secret.
   memory per server instance. It slows a guesser; it does not stop a
   distributed one.
 - **Open paths** (reachable without the cookie): the gate page and its
-  script, the gate endpoint, robots, sitemap, manifest, icons, and the CSS,
-  font, logo, brand, share-card and texture assets. Everything else,
-  including `npm run dev`, is gated.
+  script, the gate endpoint, robots, sitemap, manifest and icons
+  (`lib/preview-gate-paths.mjs`), plus the real CSS, font, logo, brand,
+  share-card and texture files, listed exactly in
+  `lib/open-files.generated.mjs` (written by `npm run pages:build`; the
+  edge middleware cannot read the disk). A missing file under those
+  directories goes to the gate like everything else, including
+  `npm run dev`.
+- **Post-login redirect:** `from` must be a same-origin path, checked after
+  URL parsing too (dot segments can turn `/.//evil.example` into
+  `//evil.example`), and never any spelling of the gate itself.
+- Once `LAUNCHED` is true the middleware is a pass-through and `/api/gate`
+  answers 404.
 - Playwright signs in once with `STAGING_PASSWORD` (or the fallback) and
-  reuses the cookie.
+  reuses the cookie. CI keeps no traces (they would record the cookie and
+  the password), since its report is uploaded from a public repository.
 
 ## Authoring a page
 
@@ -110,11 +124,16 @@ blocker, each with its file or command. The core steps:
 1. Clear the blockers `npm test` warns about today (links back to
    equalityohio.org, staging-only copy, mock forms). Once `LAUNCHED` is true
    those warnings become failures.
-2. Set `LAUNCHED = true` in `lib/site.mjs`, run `npm run pages:build`, commit
-   the regenerated pages, and deploy to production. The gate becomes a
-   pass-through, the ribbon goes, and robots, canonicals and the sitemap
-   switch on (production only).
+2. Set `LAUNCHED = true` in `lib/site.mjs`, run `npm run pages:build`, then
+   `npm test`, `npm run build` and `npm run test:e2e` (all must pass; the
+   e2e suite expects `Disallow: /` and `X-Robots-Tag` from any build that is
+   not Vercel production, CI and a local `next start` included). Commit the
+   regenerated pages and deploy to production. The gate becomes a
+   pass-through, `/api/gate` a 404, the ribbon goes, and robots, canonicals
+   and the sitemap switch on (production only).
 3. In a cleanup PR after launch, delete the gate (`middleware.js`,
-   `lib/preview-gate.mjs`, `lib/rate-limit.mjs` if unused,
+   `lib/preview-gate.mjs`, `lib/preview-gate-paths.mjs`,
+   `lib/open-files.generated.mjs` and its step in
+   `scripts/build-pages.mjs`, `lib/rate-limit.mjs` if unused,
    `app/api/gate/`, `public/gate.html`, `public/js/eo-gate.js`, the gate
    tests) and the `STAGING_PASSWORD` env var.

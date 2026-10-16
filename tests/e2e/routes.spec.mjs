@@ -7,7 +7,8 @@
  *   static pages   every page answers 200 with the strict page headers:
  *                  Content-Security-Policy script-src exactly 'self',
  *                  frame-ancestors 'none', object-src 'none', base-uri 'self';
- *                  X-Robots-Tag noindex while staging; no X-Powered-By. The
+ *                  X-Robots-Tag noindex unless the server under test may be
+ *                  indexed (support/env.mjs INDEXABLE); no X-Powered-By. The
  *                  trailing-slash spelling 308s to the clean URL.
  *   redirects      every rule in next.config.mjs redirects() (params filled
  *                  with sample values) answers its status (308 permanent,
@@ -16,20 +17,27 @@
  *   legacy URLs    the live-sitemap snapshot (docs/legacy-sitemap-urls.txt),
  *                  requested as the live site spells it, lands on a 200 page
  *                  and its #anchor
- *   plumbing       /robots.txt, /sitemap.xml, /manifest.webmanifest and the
- *                  branded 404
- *   staging gate   redirects, open paths, login, the open-redirect defenses,
- *                  wrong password, malformed body, forged cookie
+ *   plumbing       /robots.txt (Disallow: / unless INDEXABLE, which only a
+ *                  launched production build is), /sitemap.xml,
+ *                  /manifest.webmanifest and the branded 404
+ *   staging gate   redirects, open paths (exact files only: a missing file
+ *                  under an open directory is gated), login, the
+ *                  open-redirect defenses (incl. dot segments and every
+ *                  spelling of the gate), wrong password, malformed body,
+ *                  forged cookie
+ *   launched       pages answer signed out and /api/gate is a 404
  *
  * When testing a deployment (PLAYWRIGHT_BASE_URL), a Vercel preview may add
  * https://vercel.live to script-src for the toolbar; that one host is
  * accepted there and nowhere else.
  */
-import { readdirSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { randomInt } from 'node:crypto';
 import { expect, test as base } from '@playwright/test';
+import { OPEN_FILES } from '../../lib/open-files.generated.mjs';
+import { isGatePath } from '../../lib/preview-gate.mjs';
+import { OPEN_EXACT as OPEN_EXACT_SET, OPEN_PREFIXES } from '../../lib/preview-gate-paths.mjs';
 import { LAUNCHED, SITE_URL } from '../../lib/site.mjs';
-import { EXTERNAL, GATE_PASSWORD, ROOT, UNAUTHENTICATED } from './support/env.mjs';
+import { EXTERNAL, GATE_PASSWORD, INDEXABLE, UNAUTHENTICATED } from './support/env.mjs';
 import {
   NOT_FOUND_PATH,
   PAGES,
@@ -68,7 +76,8 @@ function expectPageHeaders(res, label) {
   expect(csp['base-uri'], `${label}: base-uri`).toEqual(["'self'"]);
   expect(headers['x-content-type-options'], `${label}: X-Content-Type-Options`).toBe('nosniff');
   expect(headers['x-powered-by'], `${label}: X-Powered-By must not be sent`).toBeUndefined();
-  if (!LAUNCHED) expect(headers['x-robots-tag'], `${label}: X-Robots-Tag while staging`).toBe(STAGING_ROBOTS);
+  if (INDEXABLE) expect(headers['x-robots-tag'], `${label}: no X-Robots-Tag on an indexable build`).toBeUndefined();
+  else expect(headers['x-robots-tag'], `${label}: X-Robots-Tag (staging, or not production)`).toBe(STAGING_ROBOTS);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -140,17 +149,22 @@ test.describe('legacy equalityohio.org URLs land on a page', () => {
 /* ------------------------------------------------------------------------- */
 
 test.describe('robots, sitemap, manifest', () => {
-  test('/robots.txt blocks everything while staging', async ({ anon }) => {
+  /* Same rule as app/robots.js: only a launched production build may be
+   * crawled. A launched build anywhere else (CI, a local `next start`, a
+   * preview deployment) still disallows everything. */
+  test(`/robots.txt matches the indexing switch (${INDEXABLE ? 'indexable' : 'Disallow: /'})`, async ({ anon }) => {
     const res = await anon.get('/robots.txt', { maxRedirects: 0 });
     expect(res.status()).toBe(200);
     expect(res.headers()['content-type']).toMatch(/^text\/plain/);
     const body = await res.text();
     expect(body).toMatch(/^User-Agent: \*$/im);
-    if (!LAUNCHED) {
+    if (INDEXABLE) {
+      expect(body).toContain(`Sitemap: ${SITE_URL}/sitemap.xml`);
+      expect(body).not.toMatch(/^Disallow: \/\s*$/m);
+    } else {
       expect(body).toMatch(/^Disallow: \/\s*$/m);
       expect(body).not.toMatch(/^Allow:/m);
-    } else {
-      expect(body).toContain(`Sitemap: ${SITE_URL}/sitemap.xml`);
+      expect(body).not.toMatch(/^Sitemap:/m);
     }
   });
 
@@ -189,7 +203,8 @@ test.describe('unknown URLs', () => {
       expect(res.status(), `GET ${path}`).toBe(404);
       const headers = res.headers();
       expect(headers['x-powered-by']).toBeUndefined();
-      if (!LAUNCHED) expect(headers['x-robots-tag']).toBe(STAGING_ROBOTS);
+      if (INDEXABLE) expect(headers['x-robots-tag']).toBeUndefined();
+      else expect(headers['x-robots-tag']).toBe(STAGING_ROBOTS);
       const html = await res.text();
       expect(html).toMatch(/<html[^>]*\blang="en"/i);
       expect(html.match(/<main\b[^>]*\bid="main"/gi)?.length ?? 0, 'exactly one <main id="main">').toBe(1);
@@ -204,18 +219,25 @@ test.describe('unknown URLs', () => {
 
 /* ------------------------------------------------------------------------- */
 
-/* Contract 6: reachable without the cookie. One real file per prefix. */
-const OPEN_EXACT = ['/gate', '/robots.txt', '/sitemap.xml', '/manifest.webmanifest', '/favicon.svg', '/favicon.ico', '/apple-touch-icon.png', '/js/eo-gate.js'];
-const OPEN_PREFIXES = ['/css/', '/assets/fonts/', '/assets/logo/', '/assets/brand/', '/assets/og/', '/assets/textures/'];
-function firstFileUnder(prefix) {
-  const dir = join(ROOT, 'public', prefix);
-  try {
-    const entry = readdirSync(dir).sort().find((e) => statSync(join(dir, e)).isFile());
-    return entry ? `${prefix}${entry}` : null;
-  } catch {
-    return null;
-  }
-}
+/* Contract 6: reachable without the cookie. The exact open paths (GET
+ * /api/gate is checked separately: it only takes a POST) and every real file
+ * under the open directories (lib/open-files.generated.mjs); nothing else
+ * under those directories. */
+const OPEN_EXACT = [...OPEN_EXACT_SET].filter((p) => p !== '/api/gate');
+/* Missing files, probes and encoded traversals under the open directories:
+ * each must go to the gate, never to the branded 404 and its site chrome. */
+const MISSING_UNDER_OPEN = [
+  '/css/x',
+  '/css/does-not-exist.css',
+  '/assets/og/x',
+  '/assets/fonts/x.woff2',
+  '/assets/logo/x.png',
+  '/assets/brand/x.svg',
+  '/assets/textures/nothing.svg',
+  '/css/%2E%2E%2Fjs/eo-site-template.js',
+  '/css/..%2fabout',
+  '/assets/og/..%2Fimg%2Fcandidate-scorecard-2026-banner.png',
+];
 
 test.describe('staging gate', () => {
   test.skip(LAUNCHED, 'lib/site.mjs LAUNCHED is true: the gate is a pass-through');
@@ -247,15 +269,28 @@ test.describe('staging gate', () => {
     }
   });
 
-  test('signed out, the open paths are reachable', async ({ anon }) => {
-    const paths = [...OPEN_EXACT, ...OPEN_PREFIXES.map(firstFileUnder)];
-    expect(paths.filter((p) => !p), `an open prefix has no file under public/: ${OPEN_PREFIXES.join(', ')}`).toEqual([]);
-    for (const path of paths) {
+  test('signed out, the open paths and every real open file are reachable', async ({ anon }) => {
+    for (const prefix of OPEN_PREFIXES) {
+      expect([...OPEN_FILES].some((f) => f.startsWith(prefix)), `no file under public${prefix} in lib/open-files.generated.mjs`).toBe(true);
+    }
+    for (const path of [...OPEN_EXACT, ...OPEN_FILES]) {
       const res = await anon.get(path, { maxRedirects: 0 });
       expect(res.status(), `GET ${path} signed out`).toBe(200);
     }
     const api = await anon.get('/api/gate', { maxRedirects: 0 });
     expect(api.headers().location || '', 'GET /api/gate is not sent to the gate').not.toMatch(/\/gate\?/);
+  });
+
+  test('signed out, a missing file under an open directory goes to the gate, not the site chrome', async ({ anon, baseURL }) => {
+    for (const path of MISSING_UNDER_OPEN) {
+      const res = await anon.get(path, { maxRedirects: 0 });
+      expect([302, 303, 307, 308], `GET ${path} signed out: status ${res.status()} is a redirect`).toContain(res.status());
+      const to = resolve(res.headers().location, baseURL);
+      expect(to.origin, `GET ${path} redirect stays on the site`).toBe(new URL(baseURL).origin);
+      expect(to.pathname, `GET ${path} goes to the gate`).toBe('/gate');
+      const body = await res.text();
+      expect(body, `GET ${path}: no site header`).not.toMatch(/site-header|site-nav|preview-ribbon/);
+    }
   });
 
   test('the right password sets an HttpOnly cookie and lands on "from"', async ({ anon, baseURL }) => {
@@ -285,8 +320,22 @@ test.describe('staging gate', () => {
     '/\\/evil.example',
     'https://evil.example/',
     'javascript:alert(1)',
+    // URL parsing removes dot segments, so each of these parses to the
+    // protocol-relative "//evil.example".
+    '/.//evil.example',
+    '/..//evil.example',
+    '/a/..//evil.example',
+    '/%2e%2e//evil.example',
+    '/%2E//evil.example',
+    '/%2e%2e/%2e%2e//evil.example/phish',
+    // Every spelling that serves the gate.
     '/gate',
+    '/gate/',
+    '/GATE',
+    '/gate.html',
+    '/%67ate',
     '/api/gate',
+    '/api/gate/',
   ];
   test('"from" can never send a signed-in visitor off the site (open-redirect attempts)', async ({ anon, baseURL }) => {
     const origin = new URL(baseURL).origin;
@@ -299,14 +348,17 @@ test.describe('staging gate', () => {
       expect(location, `raw Location for from=${JSON.stringify(from)} is not protocol-relative`).not.toMatch(/^\s*\/\//);
       const to = resolve(location, baseURL);
       expect(to.origin, `from=${JSON.stringify(from)} stays on ${origin}`).toBe(origin);
-      expect(['/gate', '/api/gate'], `from=${JSON.stringify(from)} never loops back into the gate`).not.toContain(to.pathname);
+      expect(isGatePath(to.pathname), `from=${JSON.stringify(from)} never loops back into the gate (landed on ${to.pathname})`).toBe(false);
     }
   });
 
   test('a wrong password goes back to /gate?error=1 without a cookie', async ({ anon, baseURL }) => {
-    // A documentation-range address keeps this attempt in its own
-    // rate-limit bucket wherever the server honors forwarded headers.
-    const headers = { 'x-real-ip': '192.0.2.77', 'x-forwarded-for': '192.0.2.77' };
+    // A fresh documentation-range address (2001:db8::/32) per attempt keeps
+    // each run in its own rate-limit bucket wherever the server honors
+    // forwarded headers, so rerunning against one long-lived server
+    // (reuseExistingServer, --repeat-each) never trips the limit.
+    const ip = `2001:db8::${randomInt(1, 0xffff).toString(16)}:${randomInt(1, 0xffff).toString(16)}`;
+    const headers = { 'x-real-ip': ip, 'x-forwarded-for': ip };
     const res = await anon.post('/api/gate', { form: { password: 'not-the-password', from: '/about' }, headers, maxRedirects: 0 });
     expect(res.status()).toBe(303);
     const to = resolve(res.headers().location, baseURL);
@@ -339,5 +391,11 @@ test.describe('launched', () => {
   test.skip(!LAUNCHED, 'staging: the gate is on');
   test('signed out visitors reach pages directly', async ({ anon }) => {
     expect((await anon.get('/about', { maxRedirects: 0 })).status()).toBe(200);
+  });
+  test('/api/gate is dead: a 404 with no cookie and no redirect', async ({ anon }) => {
+    const res = await anon.post('/api/gate', { form: { password: GATE_PASSWORD, from: '/.//evil.example' }, maxRedirects: 0 });
+    expect(res.status()).toBe(404);
+    expect(res.headers().location).toBeUndefined();
+    expect(setCookies(res).some((c) => c.startsWith('eo_preview='))).toBe(false);
   });
 });

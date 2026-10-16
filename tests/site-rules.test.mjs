@@ -20,10 +20,14 @@
  *     true (at launch those URLs are this site, so each one is a loop or a
  *     404 unless it has been replaced)
  *   - staging-only copy ("Design preview", "in the real build", "pending
- *     embed", the 404's "part of the preview") and mock forms: the same
+ *     embed", "Mockup note", "content migration", "Pending —", the 404's
+ *     "part of the preview") and mock forms: the same
  *     warning while staging, a failure once LAUNCHED is true (a launched
  *     site must not tell visitors it is a preview, and a mock form there
  *     would silently discard a real person's legal intake or message)
+ *   - the clinic number in running text is written 855&#8209;LGBT&#8209;LAW
+ *     (non-breaking hyphens), so it never breaks as "855-" / "LGBT-LAW" on a
+ *     phone; tel: links are exempt (CSS keeps them on one line)
  *   - every tel: and mailto: (pages and chrome) is an organization fact from
  *     lib/site.mjs ORG or on the explicit allowlist below, and a tel: link
  *     whose text is a phone number dials that number (keypad letters count:
@@ -39,6 +43,7 @@ import { LAUNCHED, ORG } from '../lib/site.mjs';
 import { staticPages } from '../lib/static-pages.mjs';
 import {
   cleanText,
+  closest,
   decodeEntities,
   elements,
   find,
@@ -202,7 +207,10 @@ test('every mock form has its .form-success, and real forms post somewhere expli
       }
     }
   }
-  assert.ok(mockForms > 0, 'expected at least one form[data-mock="true"] on the site');
+  // While staging, guard against this test silently checking nothing. At
+  // launch every mock form is wired or removed (the launch rule below fails
+  // on any that is left), so none is required.
+  if (!LAUNCHED) assert.ok(mockForms > 0, 'expected at least one form[data-mock="true"] on the site');
   report(problems);
 });
 
@@ -285,6 +293,12 @@ const STAGING_COPY = [
   /\bin the real build\b/i,
   /\bproduction build\b/i,
   /\bpending (?:embed|asset)\b/i,
+  // "Mockup note: headshots ... load in during content migration" and the
+  // "Pending — ... a visual-only mock of it replaces this note" notes.
+  /\bmockup\b/i,
+  /\bcontent migration\b/i,
+  /\bvisual-only mock\b/i,
+  /\bpending\s*(?:—|&mdash;|:)/i,
 ];
 const GENERATED_REGION = /<!-- (seo|chrome:header|chrome:footer):start -->[\s\S]*?<!-- \1:end -->/g;
 const keepLines = (m) => m.replace(/[^\n]/g, ' ');
@@ -321,6 +335,23 @@ test('staging-only copy and mock forms are gone before launch', (t) => {
     return;
   }
   report(hits);
+});
+
+test('the clinic number in running text uses non-breaking hyphens', () => {
+  const problems = [];
+  for (const p of [...pages, ...chromeDocs]) {
+    for (const el of elements(p.doc)) {
+      if (['head', 'script', 'style', 'title'].includes(el.name) || closest(el, (n) => n.name === 'head')) continue;
+      // a[href^="tel:"] is white-space: nowrap in eo-site.css.
+      if (closest(el, (n) => n.name === 'a' && /^tel:/i.test(n.attrs.href || ''))) continue;
+      for (const child of el.children) {
+        if (child.type === 'text' && /855-LGBT-LAW/i.test(decodeEntities(child.text))) {
+          problems.push(`${p.where} line ${el.line}: <${el.name}> has "855-LGBT-LAW" with plain hyphens; write 855&#8209;LGBT&#8209;LAW`);
+        }
+      }
+    }
+  }
+  report(problems);
 });
 
 test('every tel: and mailto: is an organization fact or allowlisted, and tel: text matches its number', () => {

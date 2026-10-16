@@ -22,6 +22,7 @@ import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { staticPages } from '../lib/static-pages.mjs';
 import {
+  EMPTY_STATE_MARKUP,
   contentToday,
   eventBlocks,
   eventProblems,
@@ -87,7 +88,10 @@ describe('freshness rules (injected today)', () => {
   });
 
   test('no events left requires the uncommented empty-state callout', () => {
-    assert.match(eventProblems(page('<div class="card-grid"></div>'), today)[0], /empty-state callout is missing/);
+    const [missing] = eventProblems(page('<div class="card-grid"></div>'), today);
+    assert.match(missing, /empty-state callout is missing/);
+    assert.ok(missing.includes(EMPTY_STATE_MARKUP), 'the failure carries the exact markup to restore');
+    assert.deepEqual(eventProblems(page(EMPTY_STATE_MARKUP), today), [], 'the markup it names satisfies the rule');
     assert.match(eventProblems(page(`<!-- EMPTY STATE: un-comment ${EMPTY_STATE} -->`), today)[0], /empty-state callout is missing/);
     assert.deepEqual(eventProblems(page(EMPTY_STATE), today), []);
     assert.equal(hasEmptyState(page(EMPTY_STATE)), true);

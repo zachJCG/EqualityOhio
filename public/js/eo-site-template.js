@@ -8,11 +8,16 @@
    in /js/ files like this one, never inline.
 
      phone menu      a modal sheet: inert page, scroll lock, focus in and
-                     back out, Escape, Tab stays inside, closes on desktop
+                     back out, Escape, Tab stays inside, closes on desktop.
+                     The served toggle is a link to the footer nav (the
+                     fallback if this file never runs); it becomes the
+                     sheet's <button> here
      dropdowns       desktop disclosures: button or hover opens one at a
                      time, aria-expanded always true to the screen, Escape
                      and outside click close
-     help bar        slides away while an on-page clinic callout is on screen
+     help bar        slides away while an on-page clinic callout is on
+                     screen, except once it has come to rest above the
+                     footer
      scroll reveal   below-the-fold blocks rise in (desktop, motion allowed)
      new-tab links   announce that they open a new tab
      mock forms      validation (error summary, inline errors) and the
@@ -48,15 +53,21 @@
    * While any on-page clinic callout ([data-cta]) is on screen the same two
    * actions are already visible, so the bar slides away; it is inert while
    * hidden and while the phone menu is open, so it never holds focus or
-   * reads out from behind something else. */
+   * reads out from behind something else.
+   * Once the footer is on screen the bar has come to rest in its own slot
+   * above it (sticky, so it stays in the flow), and it stays shown there:
+   * hiding it then would leave that slot as an empty band between the
+   * page's closing callout and the footer. Keeping the slot filled, rather
+   * than collapsing it, means nothing moves while the page scrolls. */
   function initHelpBar(state) {
     var bar = document.querySelector('.help-bar');
     var api = { el: bar, sync: function () {} };
     if (!bar) return api;
 
     var visible = [];
+    var parked = false;
     function sync() {
-      var hidden = visible.length > 0;
+      var hidden = visible.length > 0 && !parked;
       bar.setAttribute('data-hidden', hidden ? 'true' : 'false');
       setInert(bar, hidden || state.menuOpen);
     }
@@ -66,9 +77,12 @@
     if (ctas.length && 'IntersectionObserver' in window) {
       // First state synchronously, so a callout already on screen at load
       // never shows the bar sliding away.
-      forEach(ctas, function (el) {
+      var onScreen = function (el) {
         var r = el.getBoundingClientRect();
-        if (r.bottom > 0 && r.top < window.innerHeight) visible.push(el);
+        return r.bottom > 0 && r.top < window.innerHeight;
+      };
+      forEach(ctas, function (el) {
+        if (onScreen(el)) visible.push(el);
       });
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -79,6 +93,16 @@
         sync();
       });
       forEach(ctas, function (el) { io.observe(el); });
+
+      // The bar's resting place: the footer directly after it.
+      var footer = bar.nextElementSibling;
+      if (footer && footer.classList.contains('site-footer')) {
+        parked = onScreen(footer);
+        new IntersectionObserver(function (entries) {
+          parked = entries[entries.length - 1].isIntersecting;
+          sync();
+        }).observe(footer);
+      }
     }
     sync();
     return api;
@@ -88,12 +112,33 @@
    * The nav becomes a sheet from the header's bottom edge to the bottom of the
    * viewport. Everything outside the header is inert while it is open, page
    * scroll is locked (body.nav-open), focus moves to the first link and
-   * returns to the toggle on Escape. */
+   * returns to the toggle on Escape.
+   *
+   * The served toggle is <a class="nav-toggle" href="#footer-nav">, so a
+   * page whose script never runs still has a working Menu (it jumps to the
+   * footer's navigation). upgradeToggle makes it the real control: a
+   * <button> with the same classes and icons, so the box does not move. */
+  function upgradeToggle(link) {
+    if (!link || link.tagName === 'BUTTON') return link;
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = link.className;
+    button.setAttribute('aria-label', link.getAttribute('aria-label') || 'Menu');
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', 'site-nav');
+    while (link.firstChild) button.appendChild(link.firstChild);
+    var hadFocus = document.activeElement === link;
+    link.parentNode.replaceChild(button, link);
+    if (hadFocus) button.focus({ preventScroll: true });
+    return button;
+  }
+
   function initPhoneMenu(state, helpBar, closeSubmenus) {
-    var toggle = document.querySelector('.nav-toggle');
     var nav = document.getElementById('site-nav');
     var header = document.querySelector('.site-header');
-    if (!toggle || !nav || !header) return;
+    if (!nav || !header) return;
+    var toggle = upgradeToggle(header.querySelector('.nav-toggle'));
+    if (!toggle) return;
     var desktop = window.matchMedia(DESKTOP_QUERY);
     var inerted = [];
 
@@ -348,7 +393,11 @@
    * script takes over validation (form.noValidate, so browsers without it
    * keep their native checks) and renders, on an invalid submit:
    *   - .error-summary at the top of the form: role="alert", tabindex="-1",
-   *     focused, a heading and one link per problem that focuses its field
+   *     focused, a heading and one link per problem that focuses its field.
+   *     While the person fixes fields the summary updates silently (its
+   *     role drops to "group", so the assertive live region does not
+   *     re-read the whole list over their typing); the next submit makes
+   *     it an alert again
    *   - p.field-error under each invalid field, named in its
    *     aria-describedby, plus aria-invalid="true"
    * A field's error clears as soon as it becomes valid. Messages are built
@@ -453,16 +502,19 @@
     target.scrollIntoView({ block: 'center', behavior: scrollBehavior() });
   }
 
-  function renderSummary(form, problems) {
+  /* announce: true on submit (role="alert", read out once), false while the
+     person edits (role="group": the same labelled box, no live region). */
+  function renderSummary(form, problems, announce) {
     var summary = form.querySelector('.error-summary');
     if (!problems.length) {
       if (summary) summary.remove();
       return null;
     }
+    if (summary) summary.setAttribute('role', announce ? 'alert' : 'group');
     if (!summary) {
       summary = document.createElement('div');
       summary.className = 'error-summary';
-      summary.setAttribute('role', 'alert');
+      summary.setAttribute('role', announce ? 'alert' : 'group');
       summary.setAttribute('tabindex', '-1');
       var title = document.createElement('h2');
       title.className = 'error-summary__title';
@@ -530,7 +582,7 @@
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var problems = validate(form);
-        var summary = renderSummary(form, problems);
+        var summary = renderSummary(form, problems, true);
         if (summary) {
           window.requestAnimationFrame(function () {
             summary.focus({ preventScroll: true });
@@ -549,7 +601,7 @@
         if (!control.validity.valid) return;
         forEach(group, clearFieldError);
         var remaining = invalidControls(form).filter(function (el) { return el.getAttribute('aria-invalid') === 'true'; });
-        renderSummary(form, remaining.map(function (el) { return { control: el, message: messageFor(el) }; }));
+        renderSummary(form, remaining.map(function (el) { return { control: el, message: messageFor(el) }; }), false);
       }
       form.addEventListener('input', onEdit);
       form.addEventListener('change', onEdit);

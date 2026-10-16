@@ -114,6 +114,43 @@ export async function scrollThrough(page, { step = 0.6, pause = 60 } = {}) {
   );
 }
 
+/**
+ * Bring every scroll-reveal target (main .reveal) into view one at a time
+ * and wait, up to `timeout` each, for its IntersectionObserver to mark it
+ * .in-view, then finish at the bottom of the page. Deterministic where a
+ * timed scroll is not: a fixed pause can pass without a rendering frame on
+ * a busy machine, and an observer that never sees a position never fires.
+ * A target that still has no .in-view after its wait is left for the
+ * caller to report.
+ */
+export async function revealEverything(page, { timeout = 2_000 } = {}) {
+  const targets = page.locator('main .reveal');
+  const n = await targets.count();
+  for (let i = 0; i < n; i++) {
+    const target = targets.nth(i);
+    await target.evaluate((el) => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
+    await target.evaluate(
+      (el, ms) =>
+        new Promise((resolve) => {
+          if (el.classList.contains('in-view')) return resolve();
+          let timer = 0;
+          const observer = new MutationObserver(() => {
+            if (el.classList.contains('in-view')) done();
+          });
+          function done() {
+            observer.disconnect();
+            clearTimeout(timer);
+            resolve();
+          }
+          observer.observe(el, { attributes: true, attributeFilter: ['class'] });
+          timer = setTimeout(done, ms);
+        }),
+      timeout,
+    );
+  }
+  await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+}
+
 /** Fonts loaded and every finite animation or transition finished. */
 export async function settle(page, { timeout = 5_000 } = {}) {
   await page.evaluate(async () => {

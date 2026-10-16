@@ -61,6 +61,9 @@ jobs:
         if: ${{ !cancelled() && steps.browsers.outcome == 'success' }}
         run: npm run test:e2e
 
+      # Traces are off when CI is set (playwright.config.mjs), so the report
+      # holds no eo_preview cookie and no STAGING_PASSWORD: this repository
+      # is public, and GitHub masks secrets in logs but not in artifacts.
       - name: Upload Playwright report
         if: ${{ failure() && steps.browsers.outcome == 'success' }}
         uses: actions/upload-artifact@v4

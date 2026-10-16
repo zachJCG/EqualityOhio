@@ -90,7 +90,7 @@
     <header class="site-header">
       <div class="nav-inner">
         <a class="brand-lockup" href="/" aria-label="Equality Ohio home"><img class="brand-lockup__img" src="/assets/logo/equality-ohio-logo.png" alt="Equality Ohio" width="400" height="174" /></a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg class="icon-menu" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="22" height="2.5" rx="1.25" fill="currentColor"/><rect y="6.75" width="22" height="2.5" rx="1.25" fill="currentColor"/><rect y="13.5" width="22" height="2.5" rx="1.25" fill="currentColor"/></svg><svg class="icon-close" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 2 L17 14 M17 2 L5 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></button>
+        <a class="nav-toggle" href="#footer-nav" aria-label="Menu"><svg class="icon-menu" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="22" height="2.5" rx="1.25" fill="currentColor"/><rect y="6.75" width="22" height="2.5" rx="1.25" fill="currentColor"/><rect y="13.5" width="22" height="2.5" rx="1.25" fill="currentColor"/></svg><svg class="icon-close" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 2 L17 14 M17 2 L5 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></a>
         <nav class="site-nav" id="site-nav" aria-label="Primary">
           <ul>
             <li class="has-sub">
@@ -266,7 +266,8 @@
           <a class="card__link" href="/news">Read more<span class="sr-only">: $750,000 Legacy Gift Strengthens the Future of LGBTQIA+ Organizations in Central Ohio</span></a>
         </div>
       </article>
-      <article class="card news-card">
+      <!-- ELECTION: 2026-11-03. Delete this card after Election Day with the election section above (data-expires fails npm test from 2026-11-05). -->
+      <article class="card news-card" data-expires="2026-11-04">
         <div class="news-card__media"><span class="pill pill--on-media">Election 2026</span></div>
         <div class="news-card__body">
           <div class="news-card__date">September 2026</div>
@@ -311,7 +312,7 @@
     <!-- chrome:footer:start -->
     <footer class="site-footer">
       <div class="equality-bar" aria-hidden="true"></div>
-      <div class="footer-main">
+      <div class="footer-main" id="footer-nav">
         <div class="footer-brand">
           <a class="brand-lockup" href="/" aria-label="Equality Ohio home"><img class="brand-lockup__img brand-lockup__img--invert" src="/assets/logo/equality-ohio-logo.png" alt="Equality Ohio" width="400" height="174" /></a>
           <p class="mt-1">Ohio’s statewide LGBTQ+ advocacy and legal aid organization — working toward an Ohio where justice, dignity, and self-determination belong to everyone.</p>

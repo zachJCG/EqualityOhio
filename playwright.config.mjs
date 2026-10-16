@@ -13,7 +13,14 @@
  *   PLAYWRIGHT_BASE_URL     test a running deployment instead of starting one
  *   PLAYWRIGHT_PORT         local port (default 3100)
  *   STAGING_PASSWORD        the preview gate password (default EO2026, the
- *                           same fallback lib/preview-gate.mjs uses)
+ *                           same fallback lib/preview-gate.mjs uses). Read
+ *                           from the shell or the same .env files `next
+ *                           start` loads (.env.local, ...), so a local
+ *                           override reaches the server and the suite alike
+ *   VERCEL_ENV              set to production (at build time and here) only
+ *                           to test a launched build's indexable robots.txt
+ *                           and headers locally (tests/e2e/support/env.mjs
+ *                           INDEXABLE)
  *   PLAYWRIGHT_CHROMIUM_PATH  a local Chromium; defaults to the preinstalled
  *                           /opt/pw-browsers/chromium when present (never run
  *                           `playwright install` in that environment). In CI
@@ -24,13 +31,18 @@
  * The global setup logs in through the gate once (POST /api/gate) and saves
  * the cookie to tests/e2e/.auth/preview.json; every test starts signed in.
  * Gate tests opt out with an empty storage state.
+ *
+ * Traces are kept for failed tests locally but never in CI: a trace records
+ * every request, so it would hold the eo_preview cookie and, for the gate
+ * tests, STAGING_PASSWORD in a POST body, and CI uploads the report from a
+ * public repository (GitHub masks secrets in logs, not in artifacts).
  */
 import { existsSync } from 'node:fs';
 import { defineConfig, devices } from '@playwright/test';
-import { STORAGE_STATE, bypassHeaders } from './tests/e2e/support/env.mjs';
+import { EXTERNAL_BASE_URL, STORAGE_STATE, bypassHeaders } from './tests/e2e/support/env.mjs';
 
 const PORT = Number(process.env.PLAYWRIGHT_PORT || 3100);
-const externalBaseURL = process.env.PLAYWRIGHT_BASE_URL?.trim().replace(/\/+$/, '') || undefined;
+const externalBaseURL = EXTERNAL_BASE_URL;
 const baseURL = externalBaseURL ?? `http://localhost:${PORT}`;
 const chromiumPath = process.env.PLAYWRIGHT_CHROMIUM_PATH?.trim() || '/opt/pw-browsers/chromium';
 
@@ -48,7 +60,7 @@ export default defineConfig({
     baseURL,
     storageState: STORAGE_STATE,
     extraHTTPHeaders: bypassHeaders(),
-    trace: 'retain-on-failure',
+    trace: process.env.CI ? 'off' : 'retain-on-failure',
   },
   projects: [
     {

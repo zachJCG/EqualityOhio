@@ -14,9 +14,12 @@ npm test 2>&1 | grep -A50 '\[site-rules\]'
 
 With `LAUNCHED = true` in `lib/site.mjs`, both become failures, so the
 launch commit cannot pass CI until sections B and C below are clear. On
-2026-10-16 that is 12 self-links, 32 lines of staging-only copy (29 in pages,
+2026-10-16 that is 12 self-links, 36 lines of staging-only copy (33 in pages,
 3 in the 404) and 6 mock forms; with `LAUNCHED` flipped and the pages
 regenerated, `npm test` fails exactly those two tests and nothing else.
+Once B and C are cleared (forms wired, notes removed), the rest of the
+suite already passes launched: no test requires a mock form to exist, and
+the e2e intake audit uses whatever form `/legal-clinic/intake` carries.
 
 ## A. Decisions EO must make
 
@@ -47,8 +50,9 @@ before launch`.
 ## C. Staging-only copy and mock forms (fail at launch)
 
 Rule: `staging-only copy and mock forms are gone before launch`. It matches
-"Design preview", "this/the preview", "in the real build", "production build"
-and "pending embed/asset" outside comments and generated regions, every
+"Design preview", "this/the preview", "in the real build", "production build",
+"pending embed/asset", "mockup", "content migration", "visual-only mock" and
+"Pending —" / "Pending:" outside comments and generated regions, every
 `form[data-mock="true"]`, and the preview wording of the 404.
 
 | Page | What to replace |
@@ -62,12 +66,14 @@ and "pending embed/asset" outside comments and generated regions, every
 | `/legal-clinic/legal-network` | Interest mock form (live form: Lawmatics `2563c615-…`), preview note, success note |
 | `/legal-clinic/ohio-lgbtq-family-law-guide` | "Pending asset" note (with the PDF decision) |
 | `/about/history` | "Pending embed" note for the 2014 Gay Games video |
+| `/about/leadership`, `/about/staff-interns` | "Mockup note: headshots and full bios load in during content migration" (with the headshots, section A) |
+| `/our-work/legacy-of-equality` | "Mockup note: honoree headshots and the 2026 event photos load in during content migration" (with the photos; its press-release link is in section B) |
 | `/get-involved/events` | "Pending embed" note for the EveryAction calendar |
 | `/give`, `/jim-obergefell-john-arthur-society` | "In the production build, giving flows are embedded" notes |
 | `/news` | "Mockup shows six recent posts… Production build includes the full archive" |
 | `/our-work` | Congregation directory "pending data migration" note |
 | `/our-work/local/municipal-map` | "Interactive map coming to this preview" and the organizing-help note |
-| `/stories` | "Pending embed" note for the story archive |
+| `/stories` | "Pending embed" note for the story archive, and the "Pending — … Share Your Story submission page currently returns a 404" note (until EO provides the submission form) |
 | `/votersguide` | "Design preview" note about portraits and grade badges |
 | 404 (`pages/404.js`, `NOT_FOUND` in `lib/seo.mjs`) | "This page isn't part of the preview yet", "The full production build covers every page…", and the description "That page isn't part of this preview." |
 
@@ -83,11 +89,11 @@ pages. Nothing here is edited by hand.
 | `og:site_name` "Equality Ohio — Design Preview" | `lib/seo.mjs` `OG_SITE_NAME` | "Equality Ohio" |
 | Preview ribbon | `lib/chrome.mjs` `headerHTML()` | Gone |
 | Footer "Design preview by Joseph Carter Group" | `lib/chrome.mjs` `footerHTML()` | Gone |
-| Staging gate | `middleware.js` | Pass-through |
+| Staging gate | `middleware.js`, `app/api/gate/route.js` | Middleware is a pass-through; `/api/gate` answers 404 (no login, no redirect) |
 | `X-Robots-Tag: noindex, nofollow, noarchive` | `next.config.mjs` | Only on non-production deployments (previews stay out of search) |
-| `/robots.txt` `Disallow: /` | `app/robots.js` | On production: allow all but `/api/`, with `Sitemap:` |
+| `/robots.txt` `Disallow: /` | `app/robots.js` | On production: allow all but `/api/`, with `Sitemap:`. Everywhere else (previews, CI, a local `next start`) still `Disallow: /` |
 | `/sitemap.xml` | `app/sitemap.js` | Unchanged (28 indexable URLs); now referenced from robots |
-| Playwright gate tests | `tests/e2e/routes.spec.mjs` | Skip; the `launched` test runs |
+| Playwright gate tests | `tests/e2e/routes.spec.mjs` | Skip; the `launched` tests run (pages answer signed out, `/api/gate` is a 404). The robots and `X-Robots-Tag` tests follow `INDEXABLE` (`tests/e2e/support/env.mjs`): indexable only for a launched build that is Vercel production, so the launch PR's CI run still expects `Disallow: /` |
 
 ## E. Launch day, in order
 
@@ -103,7 +109,9 @@ pages. Nothing here is edited by hand.
    BambooHR posting on `/about/jobs-internships` is still open.
 4. **Flip:** `LAUNCHED = true` in `lib/site.mjs`, `npm run pages:build`,
    then `npm test` (must pass with no `[site-rules]` warnings left),
-   `npm run build`, `npm run test:e2e`. Commit and merge.
+   `npm run build`, `npm run test:e2e` (a local or CI build is not
+   production, so it still serves `Disallow: /` and `X-Robots-Tag`, and the
+   suite expects exactly that). Commit and merge.
 5. **Domain:** on Vercel, serve the apex `equalityohio.org` as the primary
    domain with `www` redirecting to it (the live site canonicalizes to the
    apex, and every canonical and sitemap URL here uses it). Cut DNS over.
@@ -112,7 +120,10 @@ pages. Nothing here is edited by hand.
    `/robots.txt` lists the sitemap, responses carry no `X-Robots-Tag`, and a
    preview deployment still does.
 7. **Remove the gate** in a cleanup PR: `middleware.js`,
-   `lib/preview-gate.mjs`, `lib/rate-limit.mjs` (gate-only today),
+   `lib/preview-gate.mjs`, `lib/preview-gate-paths.mjs`,
+   `lib/open-files.generated.mjs` and the step that writes it in
+   `scripts/build-pages.mjs` (`openFiles`, `openFilesSource`),
+   `tests/gate.test.mjs`, `lib/rate-limit.mjs` (gate-only today),
    `app/api/gate/`, `public/gate.html`, `public/js/eo-gate.js`, the
    `.gate-*` rules in `public/css/eo-site.css`, the `/gate` entry in
    `lib/seo.mjs` `PAGES`, `gate` in `EXTRA_PAGE_IDS` (`lib/chrome.mjs`),

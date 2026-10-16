@@ -7,12 +7,16 @@
  * the password (lib/preview-gate.mjs), so rotating the password signs every
  * browser out at once.
  *
- * Reachable without the cookie: the open paths in lib/preview-gate.mjs (the
- * gate page and its script, the gate endpoint, robots/sitemap/manifest and
- * icons, and the css/font/brand assets the gate page and share cards use).
+ * Reachable without the cookie: the open paths in lib/preview-gate-paths.mjs
+ * (the gate page and its script, the gate endpoint, robots/sitemap/manifest
+ * and icons) and the real css/font/brand files the gate page and share cards
+ * use, listed in lib/open-files.generated.mjs by `npm run pages:build`. A
+ * missing file under those directories is gated like any other path.
  *
  * Once LAUNCHED is true this is a pass-through. Delete it (with app/api/gate/,
- * lib/preview-gate.mjs and public/gate.html) in a cleanup after launch.
+ * lib/preview-gate.mjs, lib/preview-gate-paths.mjs,
+ * lib/open-files.generated.mjs and public/gate.html) in a cleanup after
+ * launch.
  */
 import { NextResponse } from 'next/server';
 import { COOKIE_NAME, hasValidCookie, isOpenPath } from './lib/preview-gate.mjs';

@@ -52,7 +52,8 @@ Then:
 3. **Run `npm run pages:build`**, then `npm test`. `check:pages` fails on a
    missing or orphaned registry entry, an unknown `data-page`, more or fewer
    than one `<h1>`, a skipped heading level, a missing `<main id="main">`, an
-   inline script or handler, or a stale region.
+   inline script or handler, or a stale region. Markup inside comments is
+   ignored, so a commented-out old hero does not count as a second `<h1>`.
 
 Never type anything between the markers: the next build overwrites it.
 Outside them, the generator also removes any hand-written tag it owns
@@ -102,7 +103,8 @@ photography) · `.tier-card` (`--featured`, `__flag`, `__price`, `__cadence`,
 
 **Legal Clinic** `.callout--clinic` (`__text`, `__body`, `__phone`) marked
 `data-cta`, so the phone **help bar** (generated on `HELP_BAR_PAGES`) slides
-away while the callout is on screen.
+away while the callout is on screen, except once the bar has come to rest
+above the footer (then it stays, so its slot is never an empty band).
 
 **Forms** `.form-shell` (`--narrow`, `__title`) · `.form-grid` with `.full`
 rows · `.req` (visible asterisk, `aria-hidden`) and `.optional` in labels ·
@@ -128,10 +130,12 @@ when the default message would not read well.
 
 The script validates on submit: an empty or invalid submit focuses the error
 summary (each entry links to its field, each field gets `aria-invalid` and an
-inline message); a valid submit disables the form and shows `.form-success`,
-which says nothing was transmitted and routes to a real channel. The success
-block sits in the form's parent, or anywhere with `data-success="id"` on the
-form. Mock forms are launch blockers: `npm test` fails on any
+inline message). The summary is `role="alert"` on submit; while the person
+fixes fields it updates silently (`role="group"`), so it never re-reads the
+whole list over their typing. A valid submit disables the form and shows
+`.form-success`, which says nothing was transmitted and routes to a real
+channel. The success block sits in the form's parent, or anywhere with
+`data-success="id"` on the form. Mock forms are launch blockers: `npm test` fails on any
 `form[data-mock="true"]` once `LAUNCHED` is true.
 
 ## Brand, accessibility and motion
@@ -145,11 +149,18 @@ form. Mock forms are launch blockers: `npm test` fails on any
 - Targets: at least 24px everywhere (desktop dropdown toggles), 44px for
   the menu button, the phone dropdown toggles and the choice tiles.
 - Motion uses the `--eo-dur-*` and `--eo-ease-*` tokens and animates only
-  `transform` and `opacity`. Under `prefers-reduced-motion` the durations are
-  0 and smooth scrolling is off. Scroll reveal is automatic (desktop, below
-  the fold only); never add your own hidden-until-scrolled styles.
-- Phone numbers never wrap (`a[href^="tel:"]`), long addresses do; nothing
-  may scroll sideways at 320px.
+  `transform` and `opacity`. Under `prefers-reduced-motion` the durations
+  and delays are 0 and smooth scrolling is off. Scroll reveal is automatic
+  (desktop, below the fold only); never add your own hidden-until-scrolled
+  styles.
+- Short viewports (below 30em tall: 400% zoom, a phone in landscape): the
+  sticky header and help bar scroll with the page instead.
+- Phone numbers never wrap: `a[href^="tel:"]` is `white-space: nowrap`, and
+  the clinic number in running text is `855&#8209;LGBT&#8209;LAW`
+  (`npm test` fails on a plain-hyphen one). Long addresses do wrap; nothing
+  may scroll sideways at 320px, with or without user text spacing (WCAG
+  1.4.12).
+- In print, buttons are ink outlines (the fill is dropped on paper).
 - Photography is intentionally absent (nothing licensed yet).
 
 ## Content rules
@@ -162,9 +173,11 @@ form. Mock forms are launch blockers: `npm test` fails on any
   `/get-involved/events`, each event `<article>` sits between
   `<!-- EVENT: name — YYYY-MM-DD -->` and `<!-- /EVENT -->`, and its first
   `<time datetime>` dates it; with none left, the "There are no upcoming
-  events." callout shows (the comment in the page explains the swap). Anything else with an end date carries
-  `data-expires="YYYY-MM-DD"` (election content: `2026-11-04`). `npm test`
-  fails the day after.
+  events." callout shows (the comment in the page explains the swap, and the
+  freshness failure prints the exact callout markup to restore). Anything
+  else with an end date carries `data-expires="YYYY-MM-DD"` (election
+  content, including the home page's election news card: `2026-11-04`).
+  `npm test` fails the day after.
 - **Embeds that can't be recreated yet** (maps, video, EveryAction or
   Lawmatics forms, story feeds): a `.form-note` naming the pending embed and
   a link to the live page or the live form host.

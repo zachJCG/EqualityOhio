@@ -25,6 +25,13 @@ html {
      sticky header instead of under it. */
   scroll-padding-top: calc(var(--eo-nav-height) + 1rem);
 }
+/* Pages with the phone help bar (.help-bar, sticky at the bottom): a control
+   that Tab scrolls into view stops above the bar instead of under it. The
+   height is the bar's 48px links plus its padding. Not on short viewports,
+   where the bar is not sticky (see "Short viewports"). */
+@media (max-width: 767.98px) and (min-height: 30.01em) {
+  html:has(.help-bar) { scroll-padding-bottom: calc(48px + 1.4rem + 1rem); }
+}
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
@@ -176,6 +183,9 @@ p  { margin: 0 0 1em; text-wrap: pretty; }
 .site-nav .nav-cta a:hover,
 .site-nav .nav-cta a[aria-current] { background: var(--eo-purple-deep); color: var(--eo-on-dark); }
 
+/* Served as a link to the footer navigation (lib/chrome.mjs), so Menu still
+   leads somewhere if the behaviors script never runs; the script swaps it
+   for a <button> that opens the sheet. Both spellings render the same box. */
 .nav-toggle {
   display: none;
   align-items: center; justify-content: center;
@@ -183,6 +193,7 @@ p  { margin: 0 0 1em; text-wrap: pretty; }
   background: none; border: 1px solid var(--eo-border);
   border-radius: var(--eo-radius-sm);
   padding: 0.5rem 0.65rem; cursor: pointer; color: var(--eo-purple);
+  font: inherit; line-height: 1; text-decoration: none;
 }
 .nav-toggle svg { display: block; }
 .nav-toggle .icon-close { display: none; }
@@ -412,7 +423,11 @@ p  { margin: 0 0 1em; text-wrap: pretty; }
   font-weight: 800; font-size: 2.6rem; line-height: 1;
   color: var(--eo-gold);
 }
-.stat__label { margin-top: 0.5rem; font-size: 0.98rem; color: var(--eo-on-dark-strong); }
+/* overflow-wrap: anywhere lets a long unbreakable word (anti-LGBTQ+ with
+   non-breaking hyphens, nondiscrimination) wrap under user text spacing at
+   320px instead of widening the two-column phone grid past the viewport
+   (WCAG 1.4.12). */
+.stat__label { margin-top: 0.5rem; font-size: 0.98rem; color: var(--eo-on-dark-strong); overflow-wrap: anywhere; }
 
 /* -- Cards --------------------------------------------------------------- */
 .card-grid { display: grid; gap: 1.6rem; }
@@ -961,12 +976,28 @@ html.eo-reveal .card-grid > .reveal:nth-child(4) { transition-delay: 210ms; }
    The duration tokens are already 0ms here (eo-brand-tokens.css); this
    catches anything timed without them. */
 @media (prefers-reduced-motion: reduce) {
+  /* Delays too: the hero's staggered children use animation-delay with
+     fill-mode both, so a kept delay would paint them at their start offset
+     for a few frames and then snap into place. */
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* -- Short viewports ------------------------------------------------------
+   At 400% zoom (1280x800 is 320x200 CSS px) or a phone in landscape, the
+   sticky header and the sticky help bar together would leave a line or two
+   of page to read. Below 30em of height both scroll with the page instead
+   (WCAG technique C34). position: relative keeps the header's stacking
+   context for the dropdown panels. */
+@media (max-height: 30em) {
+  .site-header { position: relative; }
+  .help-bar { position: static; }
 }
 
 /* -- Print ----------------------------------------------------------------
@@ -993,6 +1024,9 @@ html.eo-reveal .card-grid > .reveal:nth-child(4) { transition-delay: 210ms; }
     word-break: break-all;
   }
   main .card__link[href^="http"]::after { content: " (" attr(href) ")"; }
+  /* Print drops button fills (print-color-adjust: economy), which would
+     leave white labels as pale grey on paper. */
+  main .btn { color: var(--eo-ink); background: none; border-color: var(--eo-ink); box-shadow: none; }
   .site-footer { margin-top: 1rem; background: none; color: var(--eo-ink); }
   .footer-legal { border-top: 1px solid var(--eo-border); padding: 0.6rem 0 0; }
   .footer-legal__inner { padding: 0; }

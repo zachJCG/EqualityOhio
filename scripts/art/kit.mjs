@@ -4,8 +4,11 @@
  *
  * The palette is NOT mirrored here by hand. `C` is read at import time from
  * public/css/eo-brand-tokens.css with a regex over the `--eo-*:` hex
- * declarations, so a token change is one CSS edit plus `npm run assets`.
- * Keys are camelCased token names: --eo-purple-deep becomes C.purpleDeep.
+ * declarations, plus the aliases that name another token
+ * (`--eo-bg: var(--eo-white);`), so a token change is one CSS edit plus
+ * `npm run assets`. Keys are camelCased token names: --eo-purple-deep
+ * becomes C.purpleDeep. tests/art-kit.test.mjs imports this module, so a
+ * token the art needs that stops resolving fails `npm test`.
  *
  * Everything here is plain string and file helpers. Nothing rasterizes;
  * the modules that need sharp import it themselves.
@@ -23,12 +26,27 @@ export const TOKENS_FILE = join(PUBLIC, "css", "eo-brand-tokens.css");
 
 const camel = (s) => s.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());
 
-/** Every `--eo-name: #hex;` declaration in the tokens file, camelCased. */
+/**
+ * Every `--eo-name: #hex;` declaration in the tokens file, camelCased, and
+ * every `--eo-name: var(--eo-other);` alias resolved to its hex (aliases of
+ * aliases too). A hex declaration wins over an alias of the same name.
+ */
 export function readTokens(file = TOKENS_FILE) {
   const css = readFileSync(file, "utf8");
   const out = {};
   for (const m of css.matchAll(/--eo-([a-z0-9-]+)\s*:\s*(#[0-9a-fA-F]{3,8})\s*;/g)) {
     out[camel(m[1])] = m[2].toUpperCase();
+  }
+  const aliases = [...css.matchAll(/--eo-([a-z0-9-]+)\s*:\s*var\(\s*--eo-([a-z0-9-]+)\s*\)\s*;/g)]
+    .map((m) => [camel(m[1]), camel(m[2])]);
+  for (let pass = 0, resolved = true; resolved && pass < aliases.length; pass++) {
+    resolved = false;
+    for (const [name, target] of aliases) {
+      if (!out[name] && out[target]) {
+        out[name] = out[target];
+        resolved = true;
+      }
+    }
   }
   return out;
 }

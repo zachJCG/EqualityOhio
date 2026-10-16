@@ -8,8 +8,8 @@
  *   - the branded 404 (HTTP 404)
  *   - /gate and /gate?error=1, signed out
  *   - interactive states a page load never shows: the mobile menu open, a
- *     desktop dropdown open, and the legal clinic intake form after an
- *     empty submit
+ *     desktop dropdown open, and the legal clinic intake form (mock or
+ *     wired) after an empty submit
  *
  * Each page is scrolled top to bottom first so scroll-reveal content is in
  * its final state, then fonts and transitions settle before axe runs.
@@ -76,7 +76,10 @@ for (const viewport of VIEWPORTS) {
     test('the legal clinic intake form after an empty submit has no WCAG 2.1 AA violations', async ({ page }, testInfo) => {
       const response = await page.goto('/legal-clinic/intake', { waitUntil: 'load' });
       expect(response?.status()).toBe(200);
-      const form = page.locator('form[data-mock="true"]').first();
+      // Any form in <main>, mock or wired: the audit must outlive the launch,
+      // when the intake stops being data-mock (docs/launch-checklist.md C).
+      const form = page.locator('#main form').first();
+      test.skip((await form.count()) === 0, 'the intake has no on-page form (an outbound link or an embed)');
       await form.locator('[type="submit"]').first().click();
       // The error UI is asserted in behavior.spec.mjs; here, audit whatever renders.
       await page.locator('.error-summary').first().waitFor({ state: 'visible', timeout: 3_000 }).catch(() => {});

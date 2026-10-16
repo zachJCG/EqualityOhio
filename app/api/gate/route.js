@@ -1,7 +1,10 @@
 /* Staging gate endpoint: checks the shared preview password and sets the
  * cookie middleware.js verifies. Remove with the rest of the gate after
- * launch.
+ * launch; until that cleanup it is already dead once lib/site.mjs LAUNCHED
+ * is true (a plain 404), so the public site never answers a login or
+ * redirects anywhere from here.
  *
+ *   LAUNCHED          404, nothing read, no cookie
  *   POST form fields `password`, `from`
  *     success           303 to the same-origin `from` (else /), Set-Cookie
  *     wrong password    303 /gate?error=1 (keeps a safe `from`)
@@ -18,6 +21,7 @@ import {
   safeFrom,
 } from '../../../lib/preview-gate.mjs';
 import { clientKey, createRateLimiter } from '../../../lib/rate-limit.mjs';
+import { LAUNCHED } from '../../../lib/site.mjs';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,7 +32,15 @@ const noStore = (res) => {
   return res;
 };
 
+const notFound = () =>
+  noStore(new NextResponse('Not found', {
+    status: 404,
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+  }));
+
 export async function POST(request) {
+  if (LAUNCHED) return notFound();
+
   let form;
   try {
     form = await request.formData();
