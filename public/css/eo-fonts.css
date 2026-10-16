@@ -1,7 +1,7 @@
 /* ==========================================================================
    EQUALITY OHIO — Self-hosted brand fonts (Open Sans, Montserrat, League
-   Spartan via @fontsource, latin subset). Self-hosting keeps the mockup
-   demo-safe offline and avoids third-party font CDNs in production.
+   Spartan via @fontsource, latin subset). Self-hosting keeps the site
+   working offline in review and avoids third-party font CDNs in production.
    Every face uses font-display: swap. The two above-the-fold faces (Open
    Sans 400 body text, Montserrat 800 headings) are preloaded from the page
    head (lib/seo.mjs FONT_PRELOADS); keep those file names in step.

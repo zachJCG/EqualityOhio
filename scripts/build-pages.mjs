@@ -20,7 +20,9 @@
  *            and <header>, as direct children of <body> so the sticky header
  *            is bounded by the body. From lib/chrome.mjs.
  *            <!-- chrome:footer:start --> ... <!-- chrome:footer:end -->, where
- *            the page had <div data-site-footer></div> (or after </main>).
+ *            the page had <div data-site-footer></div> (or after </main>):
+ *            the phone help bar on lib/chrome.mjs HELP_BAR_PAGES, then the
+ *            <footer>.
  *
  * public/gate.html gets the seo region but no chrome.
  *
@@ -40,8 +42,10 @@
  * entry a file, titles are unique, descriptions are present and at most 160
  * characters, share images / icons / stylesheets / preloaded fonts exist on
  * disk, every page has exactly one <h1>, one <main id="main">, a known
- * data-page id, and no inline executable script or inline event handler (the
- * static pages are served with script-src 'self').
+ * data-page id, no heading that skips a level (an h3 straight after the h1,
+ * say; promote it and keep its look with a class), and no inline executable
+ * script or inline event handler (the static pages are served with
+ * script-src 'self').
  */
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
@@ -224,7 +228,7 @@ function applyChrome(source, page, pageId) {
 
   // Footer: replace the region or the legacy mount in place; otherwise place
   // it right after </main>.
-  const footer = wantChrome ? region(FOOTER_START, FOOTER_END, footerHTML(), indent) : '';
+  const footer = wantChrome ? region(FOOTER_START, FOOTER_END, footerHTML(pageId), indent) : '';
   const existing = out.match(new RegExp(`^([ \\t]*)${escRe(FOOTER_START)}[\\s\\S]*?${escRe(FOOTER_END)}[ \\t]*$`, 'm'));
   if (existing) {
     out = wantChrome
@@ -342,6 +346,15 @@ export function validate(pages = staticPages()) {
     if (!/<html\b[^>]*\blang="en"/i.test(source)) problems.push(`${where}: <html> has no lang="en"`);
     const h1s = (source.match(/<h1\b/gi) || []).length;
     if (h1s !== 1) problems.push(`${where}: ${h1s} <h1> elements, want exactly 1`);
+    let previous = 0;
+    for (const [, level, rest] of source.replace(/<!--[\s\S]*?-->/g, '').matchAll(/<h([1-6])\b([^>]*)>/gi)) {
+      const n = Number(level);
+      if (previous && n > previous + 1) {
+        const cls = (rest.match(/class="([^"]*)"/) || [])[1];
+        problems.push(`${where}: <h${n}${cls ? ` class="${cls}"` : ''}> follows an <h${previous}> (heading levels must not skip; promote it and keep its look with a class)`);
+      }
+      previous = n;
+    }
     const mains = (source.match(/<main\b/gi) || []).length;
     if (mains !== 1 || !/<main\b[^>]*\bid="main"/i.test(source)) problems.push(`${where}: want exactly one <main id="main">`);
 

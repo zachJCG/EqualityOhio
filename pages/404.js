@@ -22,7 +22,8 @@
  * and sticky .site-header lay out exactly as on the static pages.
  *
  * Title, description and robots come from NOT_FOUND in lib/seo.mjs; the rest
- * of the head is in pages/_document.js. Replaces public/404.html, which was
+ * of the head is in pages/_document.js. Its styles are the .not-found rules in
+ * public/css/eo-site.css (no inline style objects), so colors stay tokens. Replaces public/404.html, which was
  * never actually served.
  *
  * Porting pages to the App Router later: once app/ has a page route and a
@@ -53,25 +54,16 @@ export default function NotFound({ header, footer }) {
       <div data-chrome="header" style={contents} dangerouslySetInnerHTML={{ __html: header }} />
       <main id="main">
         <section className="hero hero--interior">
-          <div className="container center" style={{ padding: '3rem 1.5rem' }}>
-            <div
-              aria-hidden="true"
-              style={{
-                fontFamily: 'var(--eo-font-display)',
-                fontWeight: 800,
-                fontSize: '5rem',
-                lineHeight: 1,
-                color: 'var(--eo-purple)',
-              }}
-            >
+          <div className="container center not-found">
+            <div className="not-found__mark" aria-hidden="true">
               4=4
             </div>
-            <h1 style={{ marginTop: '0.6rem' }}>This page isn&rsquo;t part of the preview yet.</h1>
-            <p className="hero__lede" style={{ maxWidth: '34em', margin: '0 auto' }}>
+            <h1 className="not-found__title">This page isn&rsquo;t part of the preview yet.</h1>
+            <p className="hero__lede not-found__lede">
               The full production build covers every page in the sitemap. For now, head somewhere
               that exists:
             </p>
-            <div className="hero__ctas" style={{ justifyContent: 'center' }}>
+            <div className="hero__ctas">
               <a className="btn btn--primary" href="/">Home</a>
               <a className="btn btn--outline" href="/legal-clinic">Legal Clinic</a>
               <a className="btn btn--gold" href="/give">Donate</a>

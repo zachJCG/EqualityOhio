@@ -1,7 +1,10 @@
 /* ==========================================================================
-   EQUALITY OHIO — Brand Tokens (Mockup v1, rev 2)
+   EQUALITY OHIO: brand tokens (staging build, 2026-10)
    --------------------------------------------------------------------------
-   Single source of truth for brand color, type, and layout variables.
+   Single source of truth for brand color, type, layout and motion
+   variables. It is the ONLY file allowed to hold color literals: every other
+   stylesheet, page <style> block and style="" attribute reads var(--eo-*)
+   (`npm run check:tokens` fails otherwise).
 
    CANONICAL PALETTE = the official logo artwork supplied by EO (Aug 2026),
    which matches the 2026 Brand Style Guide PDF's RGB annotations:
@@ -11,7 +14,8 @@
    use them. See NOTES in the project's 2026 Brand Tokens doc.
 
    Architecture mirrors the JCG platform token layer: one token file,
-   imported by the site stylesheet, never redefined in page styles.
+   linked before the component layer (eo-site.css), never redefined in page
+   styles.
    ========================================================================== */
 
 :root {
@@ -22,33 +26,74 @@
 
   /* Derived tints/shades (JCG, for web use — not in the style guide) */
   --eo-purple-deep:   #3E2A70;   /* hover states, footer band               */
+  --eo-purple-bright: #6B4BB5;   /* light end of the purple band gradient   */
   --eo-purple-soft:   #F5F3FA;   /* tinted section backgrounds              */
   --eo-purple-border: #E4DFF1;
   --eo-blue-ink:      #006C99;   /* small-text link blue, AA on white       */
+  --eo-blue-soft:     #E8F3FA;   /* program pill background                 */
+
+  /* Hero glows: the canonical blue and green at 10%. */
+  --eo-blue-wash:     rgba(0, 147, 208, 0.10);
+  --eo-green-wash:    rgba(159, 207, 103, 0.10);
 
   /* -- Secondary palette (Policy Update Brand Style Sheet) ---------------- */
   --eo-cornflower:    #4677D0;
   --eo-indigo:        #6E63E2;
   --eo-gold:          #EEBE05;
   --eo-coral:         #FF914D;
+  --eo-magenta:       #C84BC8;   /* midpoint of the policy gradient         */
   --eo-violet:        #5E17EB;
 
   /* -- Neutrals ----------------------------------------------------------- */
+  --eo-white:         #FFFFFF;
   --eo-ink:           #1B1B2F;
   --eo-body-text:     #33333F;
   --eo-mute:          #5E5E70;
-  --eo-bg:            #FFFFFF;
+  --eo-bg:            var(--eo-white);
   --eo-bg-soft:       #F7F6FB;
-  --eo-border:        #E6E4EF;
+  --eo-border:        #E6E4EF;   /* decorative card/section rules only      */
+  --eo-input-line:    #7F7C9F;   /* form-control boundary, 3:1+             */
+
+  /* -- Text and rules on the dark surfaces (footer, .band, help bar) ------ */
+  --eo-on-dark:         var(--eo-white);
+  --eo-on-dark-strong:  rgba(255, 255, 255, 0.88);  /* band body text       */
+  --eo-on-dark-muted:   rgba(255, 255, 255, 0.85);  /* footer links         */
+  --eo-on-dark-subtle:  rgba(255, 255, 255, 0.75);  /* footer small print   */
+  --eo-on-dark-faint:   rgba(255, 255, 255, 0.65);  /* footer legal line    */
+  --eo-rule-on-dark:    rgba(255, 255, 255, 0.15);
+  --eo-glass:           rgba(255, 255, 255, 0.96);  /* sticky header        */
+  --eo-pill-on-media:   rgba(255, 255, 255, 0.92);  /* pill on a news image */
+
+  /* -- Feedback ----------------------------------------------------------- */
+  --eo-error:         #B3261E;
+  --eo-error-soft:    #FDECEA;
+  --eo-success-bg:    #F0F9EB;
+  --eo-success-ink:   #2F6B14;
+
+  /* -- Focus indicator: a solid outline, never a box-shadow, so it survives
+     Windows forced-colors mode. Purple on light surfaces, gold on dark.   */
+  --eo-focus:         var(--eo-purple);
+  --eo-focus-on-dark: var(--eo-gold);
 
   /* -- Accessibility rules (WCAG 2.1 AA — computed, not guessed) ----------
-     • --eo-purple on white: 8.1:1 — safe for all text; white on it: 8.1:1.
-     • --eo-purple-deep as bg: white text 11.9:1.
-     • --eo-blue on white: 3.5:1 — LARGE text (24px+/19px bold) and
-       graphics only. Small-text links use --eo-blue-ink (5.8:1).
+     • --eo-purple on white: 8.06:1 — safe for all text; white on it: 8.06:1.
+     • --eo-purple-deep as bg: white text 11.86:1.
+     • --eo-blue on white: 3.45:1 — LARGE text (24px+/18.66px bold) and
+       graphics only. Small-text links use --eo-blue-ink (5.83:1); white
+       initials on an avatar use --eo-blue-ink too, never --eo-blue.
      • --eo-green on white: 1.8:1 — decorative bars/icons ONLY, never text.
-     • --eo-gold pills: --eo-ink text (9.7:1), never white. Gold numerals on
-       --eo-purple band: 4.6:1 — large text only.                          */
+     • --eo-gold backgrounds take --eo-ink text (9.65:1), never white. Gold
+       numerals on the --eo-purple band: 4.61:1 — large text only.
+     • --eo-input-line on white: 3.97:1, on --eo-bg-soft 3.69:1 (control
+       boundaries need 3:1). --eo-border (1.26:1) is decoration only.
+     • --eo-mute on white 6.34:1, on --eo-bg-soft 5.90:1.
+     • --eo-error on white 6.54:1, on --eo-error-soft 5.72:1.
+     • --eo-success-ink on --eo-success-bg 6.02:1.
+     • Focus: --eo-focus (purple) 8.06:1 on white, 7.50:1 on --eo-bg-soft;
+       --eo-focus-on-dark (gold) 6.78:1 on --eo-purple-deep, 4.61:1 on
+       --eo-purple, 3.64:1 on --eo-purple-bright, 9.65:1 on --eo-ink.
+     • On dark: white .65 on purple-deep 5.95:1 (the faintest text there);
+       white .88 on the band's lightest purple 5.33:1.                     */
 
   /* -- Gradients ----------------------------------------------------------
      Equality bar: the logomark read left→right (green bars, purple equals,
@@ -59,7 +104,7 @@
     var(--eo-purple) 33.3%, var(--eo-purple) 66.6%,
     var(--eo-blue)   66.6%, var(--eo-blue)  100%
   );
-  --eo-policy-gradient: linear-gradient(135deg, #FF914D 0%, #C84BC8 55%, #5E17EB 100%);
+  --eo-policy-gradient: linear-gradient(135deg, var(--eo-coral) 0%, var(--eo-magenta) 55%, var(--eo-violet) 100%);
 
   /* -- Typography (2026 Brand Style Guide) --------------------------------
      Body: Open Sans. Display: Montserrat ("Montserrat Classic" in the
@@ -75,7 +120,27 @@
   --eo-radius-lg:     16px;
   --eo-shadow-card:   0 2px 14px rgba(90, 63, 153, 0.08);
   --eo-shadow-lift:   0 10px 30px rgba(90, 63, 153, 0.16);
-  --eo-focus-ring:    0 0 0 3px rgba(0, 147, 208, 0.45);
-  --eo-transition:    all 0.25s ease;
+  --eo-shadow-bar:    0 -6px 20px rgba(27, 27, 47, 0.18);
   --eo-max-width:     1160px;
+
+  /* -- Motion --------------------------------------------------------------
+     Every transition and animation names its property, one of these
+     durations and an easing. Animate transform and opacity only. All four
+     durations collapse to 0ms under prefers-reduced-motion, so anything
+     timed with them lands on its end state immediately.                   */
+  --eo-ease-out:      cubic-bezier(0.22, 1, 0.36, 1);
+  --eo-ease-exit:     cubic-bezier(0.4, 0, 0.7, 1);
+  --eo-dur-fast:      160ms;     /* hover color, caret                      */
+  --eo-dur-base:      240ms;     /* menus, sheet, help bar                  */
+  --eo-dur-lift:      280ms;     /* card and button lift                    */
+  --eo-dur-reveal:    560ms;     /* scroll reveal, hero rise                */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --eo-dur-fast:   0ms;
+    --eo-dur-base:   0ms;
+    --eo-dur-lift:   0ms;
+    --eo-dur-reveal: 0ms;
+  }
 }

@@ -85,16 +85,16 @@
   <body data-page="home">
     <!-- chrome:header:start -->
     <a class="skip-link" href="#main">Skip to main content</a>
-    <div class="preview-ribbon">Design preview — <strong>staging only</strong>, forms and donations are not live · Prepared by Joseph Carter Group</div>
+    <aside class="preview-ribbon" aria-label="Preview notice">Design preview — <strong>staging only</strong>, forms and donations are not live · Prepared by Joseph Carter Group</aside>
     <div class="equality-bar" aria-hidden="true"></div>
     <header class="site-header">
       <div class="nav-inner">
         <a class="brand-lockup" href="/" aria-label="Equality Ohio home"><img class="brand-lockup__img" src="/assets/logo/equality-ohio-logo.png" alt="Equality Ohio" width="400" height="174" /></a>
-        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="22" height="2.5" rx="1.25" fill="currentColor"/><rect y="6.75" width="22" height="2.5" rx="1.25" fill="currentColor"/><rect y="13.5" width="22" height="2.5" rx="1.25" fill="currentColor"/></svg></button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg class="icon-menu" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="22" height="2.5" rx="1.25" fill="currentColor"/><rect y="6.75" width="22" height="2.5" rx="1.25" fill="currentColor"/><rect y="13.5" width="22" height="2.5" rx="1.25" fill="currentColor"/></svg><svg class="icon-close" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 2 L17 14 M17 2 L5 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></button>
         <nav class="site-nav" id="site-nav" aria-label="Primary">
           <ul>
             <li class="has-sub">
-              <div class="nav-item-row"><a href="/legal-clinic">Legal Clinic</a><button class="sub-toggle" aria-expanded="false" aria-controls="sub-legal-clinic" aria-label="Open Legal Clinic menu"><svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div>
+              <div class="nav-item-row"><a href="/legal-clinic">Legal Clinic</a><button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-legal-clinic" aria-label="Legal Clinic submenu"><svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div>
               <ul class="sub-menu" id="sub-legal-clinic">
                 <li><a href="/legal-clinic">About the Clinic</a></li>
                 <li><a href="/legal-clinic/intake">Start an Intake</a></li>
@@ -104,7 +104,7 @@
               </ul>
             </li>
             <li class="has-sub">
-              <div class="nav-item-row"><a href="/our-work">Our Work</a><button class="sub-toggle" aria-expanded="false" aria-controls="sub-our-work" aria-label="Open Our Work menu"><svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div>
+              <div class="nav-item-row"><a href="/our-work">Our Work</a><button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-our-work" aria-label="Our Work submenu"><svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div>
               <ul class="sub-menu" id="sub-our-work">
                 <li><a href="/our-work">What We Do</a></li>
                 <li><a href="/our-work/local">Local Progress</a></li>
@@ -115,7 +115,7 @@
               </ul>
             </li>
             <li class="has-sub">
-              <div class="nav-item-row"><a href="/get-involved">Get Involved</a><button class="sub-toggle" aria-expanded="false" aria-controls="sub-get-involved" aria-label="Open Get Involved menu"><svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div>
+              <div class="nav-item-row"><a href="/get-involved">Get Involved</a><button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-get-involved" aria-label="Get Involved submenu"><svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div>
               <ul class="sub-menu" id="sub-get-involved">
                 <li><a href="/get-involved">Ways to Get Involved</a></li>
                 <li><a href="/get-involved/volunteer">Volunteer</a></li>
@@ -125,7 +125,7 @@
               </ul>
             </li>
             <li class="has-sub">
-              <div class="nav-item-row"><a href="/about">About</a><button class="sub-toggle" aria-expanded="false" aria-controls="sub-about" aria-label="Open About menu"><svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div>
+              <div class="nav-item-row"><a href="/about">About</a><button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-about" aria-label="About submenu"><svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div>
               <ul class="sub-menu" id="sub-about">
                 <li><a href="/about">Mission &amp; Values</a></li>
                 <li><a href="/about/history">Our History</a></li>
@@ -161,10 +161,10 @@
 
 <section class="section" style="padding-top:0;">
   <div class="container">
-    <div class="callout callout--clinic">
+    <div data-cta class="callout callout--clinic">
       <div>
-        <h3 class="mt-0">Facing discrimination or a legal problem?</h3>
-        <p style="margin:0;">The Equality Ohio Legal Clinic is free. Call, or start an intake online.</p>
+        <h2 class="h3 mt-0">Facing discrimination or a legal problem?</h2>
+        <p class="callout__body">The Equality Ohio Legal Clinic is free. Call, or start an intake online.</p>
       </div>
       <a class="callout__phone" href="tel:18555428529">855&#8209;LGBT&#8209;LAW</a>
       <a class="btn btn--outline" href="/legal-clinic/intake">Start an Intake</a>
@@ -177,7 +177,7 @@
      the Election Day line is from https://equalityohio.org/gotv2026/ and the dek from the scorecard post
      https://equalityohio.org/equality-ohios-2026-candidate-scorecard-is-here/ (Sept 4, 2026 update). -->
 <section class="section" style="padding-top:0;" data-expires="2026-11-04" aria-labelledby="election-2026">
-  <div class="container split" style="align-items:center;">
+  <div class="container split split--center">
     <a href="/votersguide">
       <picture>
         <source type="image/avif" srcset="/assets/img/candidate-scorecard-2026-banner-640.avif 640w, /assets/img/candidate-scorecard-2026-banner-960.avif 960w, /assets/img/candidate-scorecard-2026-banner-1250.avif 1250w" sizes="(min-width: 1160px) 532px, (min-width: 900px) calc(50vw - 48px), calc(100vw - 48px)" />
@@ -206,19 +206,19 @@
         <span class="card__kicker">Legal Clinic</span>
         <h3>Get legal help</h3>
         <p>Free legal services for LGBTQ+ Ohioans — consumer law, family law, civil rights, and administrative help like SSI and disability.</p>
-        <a class="card__link" href="/legal-clinic">Visit the Legal Clinic &rarr;</a>
+        <a class="card__link" href="/legal-clinic">Visit the Legal Clinic</a>
       </div>
       <div class="card card--path">
         <span class="card__kicker">Give</span>
         <h3>Support the work</h3>
         <p>From one-time gifts to Defenders of Equality monthly giving and the Jim Obergefell &amp; John Arthur Society — every gift fuels equality.</p>
-        <a class="card__link" href="/give">See ways to give &rarr;</a>
+        <a class="card__link" href="/give">See ways to give</a>
       </div>
       <div class="card card--path is-green">
         <span class="card__kicker">About</span>
         <h3>Learn who we are</h3>
         <p>Founded in 2005, Equality Ohio works at city halls, the Statehouse, and in courtrooms across all 88 counties.</p>
-        <a class="card__link" href="/about">Read our story &rarr;</a>
+        <a class="card__link" href="/about">Read our story</a>
       </div>
     </div>
   </div>
@@ -263,25 +263,25 @@
           <div class="news-card__date">September 2026</div>
           <h3>$750,000 Legacy Gift Strengthens the Future of LGBTQIA+ Organizations in Central Ohio</h3>
           <p>Through his estate, Danny Stout left a combined $750,000 legacy gift to Stonewall Columbus, Kaleidoscope Youth Center, and Equality Ohio.</p>
-          <a class="card__link" href="/news">Read more &rarr;</a>
+          <a class="card__link" href="/news">Read more<span class="sr-only">: $750,000 Legacy Gift Strengthens the Future of LGBTQIA+ Organizations in Central Ohio</span></a>
         </div>
       </article>
       <article class="card news-card">
-        <div class="news-card__media"><span class="pill pill--policy" style="background:rgba(255,255,255,0.9);">Election 2026</span></div>
+        <div class="news-card__media"><span class="pill pill--on-media">Election 2026</span></div>
         <div class="news-card__body">
           <div class="news-card__date">September 2026</div>
           <h3>Make your plan to vote in 2026!</h3>
           <p>Ohio&rsquo;s 2026 General Election is coming, and the plan starts now.</p>
-          <a class="card__link" href="/votersguide">Make your plan &rarr;</a>
+          <a class="card__link" href="/votersguide">Make your plan</a>
         </div>
       </article>
       <article class="card news-card">
-        <div class="news-card__media alt-a"><span class="pill pill--policy" style="background:rgba(255,255,255,0.9);">Scorecard</span></div>
+        <div class="news-card__media alt-a"><span class="pill pill--on-media">Scorecard</span></div>
         <div class="news-card__body">
           <div class="news-card__date">June 2026 &middot; updated September 2026</div>
           <h3>Equality Ohio&rsquo;s 2026 Candidate Scorecard Is Here</h3>
           <p>Examining multiple critical races across the state, including statewide elections.</p>
-          <a class="card__link" href="/votersguide">See the scorecard &rarr;</a>
+          <a class="card__link" href="/votersguide">See the scorecard</a>
         </div>
       </article>
     </div>
@@ -290,17 +290,17 @@
 
 <section class="section">
   <div class="container">
-    <div class="card form-shell card--flat" style="max-width:760px; margin:0 auto;">
+    <div class="card form-shell card--flat form-shell--narrow">
       <span class="eyebrow">Stay Close to the Work</span>
       <h2 style="font-size:1.5rem;">Get the latest from Equality Ohio to your inbox.</h2>
       <form data-mock="true" aria-label="Newsletter signup">
         <div class="newsletter">
           <label class="sr-only" for="nl-email">Email address</label>
-          <input type="email" id="nl-email" name="email" placeholder="you@example.com" required />
+          <input type="email" id="nl-email" name="email" autocomplete="email" placeholder="you@example.com" required />
           <button class="btn btn--primary" type="submit">Sign Up</button>
         </div>
       </form>
-      <div class="form-success" role="status">
+      <div class="form-success">
         <h3>You&rsquo;re on the list — almost.</h3>
         <p>This is a design preview: nothing was submitted. The production build will connect to Equality Ohio&rsquo;s email platform.</p>
       </div>
@@ -318,11 +318,11 @@
           <ul class="footer-contact">
             <li><a href="tel:+16142240400">(614) 224-0400</a></li>
             <li><a href="mailto:info@equalityohio.org">info@equalityohio.org</a></li>
-            <li class="footer-social"><a href="https://x.com/equalityohio" rel="noopener" target="_blank">X</a> · <a href="https://www.facebook.com/equalityohio" rel="noopener" target="_blank">Facebook</a> · <a href="https://www.instagram.com/equality.ohio/" rel="noopener" target="_blank">Instagram</a> · <a href="https://www.youtube.com/channel/UCxKjvM_REomRkFAacq7dcwQ" rel="noopener" target="_blank">YouTube</a> · <a href="https://www.linkedin.com/company/equalityohio/" rel="noopener" target="_blank">LinkedIn</a> · <a href="https://www.threads.com/@equality.ohio" rel="noopener" target="_blank">Threads</a></li>
+            <li class="footer-social"><a href="https://x.com/equalityohio" rel="noopener" target="_blank">X<span class="sr-only new-tab-note"> (opens in a new tab)</span></a> · <a href="https://www.facebook.com/equalityohio" rel="noopener" target="_blank">Facebook<span class="sr-only new-tab-note"> (opens in a new tab)</span></a> · <a href="https://www.instagram.com/equality.ohio/" rel="noopener" target="_blank">Instagram<span class="sr-only new-tab-note"> (opens in a new tab)</span></a> · <a href="https://www.youtube.com/channel/UCxKjvM_REomRkFAacq7dcwQ" rel="noopener" target="_blank">YouTube<span class="sr-only new-tab-note"> (opens in a new tab)</span></a> · <a href="https://www.linkedin.com/company/equalityohio/" rel="noopener" target="_blank">LinkedIn<span class="sr-only new-tab-note"> (opens in a new tab)</span></a> · <a href="https://www.threads.com/@equality.ohio" rel="noopener" target="_blank">Threads<span class="sr-only new-tab-note"> (opens in a new tab)</span></a></li>
           </ul>
         </div>
-        <div>
-          <h2 class="footer-heading">Legal Clinic</h2>
+        <nav class="footer-col" aria-labelledby="footer-legal-clinic">
+          <h2 class="footer-heading" id="footer-legal-clinic">Legal Clinic</h2>
           <ul>
             <li><a href="/legal-clinic">About the Clinic</a></li>
             <li><a href="/legal-clinic/intake">Start an Intake</a></li>
@@ -331,9 +331,9 @@
             <li><a href="/legal-clinic/legal-network">Legal Network</a></li>
             <li><a href="tel:+18555428529">855-LGBT-LAW</a></li>
           </ul>
-        </div>
-        <div>
-          <h2 class="footer-heading">Our Work</h2>
+        </nav>
+        <nav class="footer-col" aria-labelledby="footer-our-work">
+          <h2 class="footer-heading" id="footer-our-work">Our Work</h2>
           <ul>
             <li><a href="/our-work">What We Do</a></li>
             <li><a href="/our-work/local">Local Progress</a></li>
@@ -342,9 +342,9 @@
             <li><a href="/our-work/legacy-of-equality">Legacy of Equality</a></li>
             <li><a href="/votersguide">Voters Guide</a></li>
           </ul>
-        </div>
-        <div>
-          <h2 class="footer-heading">Get Involved</h2>
+        </nav>
+        <nav class="footer-col" aria-labelledby="footer-get-involved">
+          <h2 class="footer-heading" id="footer-get-involved">Get Involved</h2>
           <ul>
             <li><a href="/give">Ways to Give</a></li>
             <li><a href="/give#defenders">Defenders of Equality</a></li>
@@ -353,9 +353,9 @@
             <li><a href="/get-involved/events">Events</a></li>
             <li><a href="/newsletter">Newsletter</a></li>
           </ul>
-        </div>
-        <div>
-          <h2 class="footer-heading">About</h2>
+        </nav>
+        <nav class="footer-col" aria-labelledby="footer-about">
+          <h2 class="footer-heading" id="footer-about">About</h2>
           <ul>
             <li><a href="/about">Mission &amp; Values</a></li>
             <li><a href="/about/history">Our History</a></li>
@@ -365,7 +365,7 @@
             <li><a href="/news">News &amp; Policy</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
-        </div>
+        </nav>
       </div>
       <div class="footer-legal">
         <div class="footer-legal__inner">

@@ -34,37 +34,14 @@
     <link rel="stylesheet" href="/css/eo-brand-tokens.css" />
     <link rel="stylesheet" href="/css/eo-site.css" />
     <!-- seo:end -->
-    <style>
-      .gate-wrap {
-        min-height: 100vh;
-        display: flex; flex-direction: column;
-        align-items: center; justify-content: center;
-        gap: 0; padding: 2rem 1.5rem;
-        background:
-          radial-gradient(56vw 56vw at 112% -18%, rgba(0, 128, 192, 0.10), transparent 62%),
-          radial-gradient(48vw 48vw at -14% 118%, rgba(106, 202, 62, 0.10), transparent 60%),
-          var(--eo-bg);
-      }
-      .gate-card { max-width: 420px; width: 100%; text-align: center; }
-      .gate-card .brand-lockup { justify-content: center; margin-bottom: 1.4rem; }
-      .gate-card .brand-lockup__mark { width: 72px; height: 36px; }
-      .gate-error {
-        display: none;
-        background: #FDF0F0; border: 1.5px solid #C0392B; color: #7A1024;
-        border-radius: var(--eo-radius-sm);
-        padding: 0.7rem 1rem; font-size: 0.92rem; margin-bottom: 1rem;
-      }
-      .gate-error.show { display: block; }
-      .gate-form { display: flex; flex-direction: column; gap: 0.9rem; text-align: left; }
-    </style>
   </head>
   <body data-page="gate">
     <main id="main" class="gate-wrap">
       <div class="card card--flat form-shell gate-card">
-        <img src="/assets/logo/equality-ohio-logo.png" alt="Equality Ohio" width="400" height="174" style="width:160px;height:auto;margin:0 auto 1.2rem;display:block;" />
+        <img class="gate-card__logo" src="/assets/logo/equality-ohio-logo.png" alt="Equality Ohio" width="400" height="174" />
         <span class="eyebrow">Design Preview</span>
-        <h1 style="font-size:1.5rem;">Equality Ohio website preview</h1>
-        <p style="color:var(--eo-mute); font-size:0.97rem;">This staging site is private. Enter the preview password to continue.</p>
+        <h1 class="gate-card__title">Equality Ohio website preview</h1>
+        <p class="gate-card__lede">This staging site is private. Enter the preview password to continue.</p>
         <div class="gate-error" id="gate-error" role="alert">That password isn&rsquo;t right — please try again.</div>
         <div class="gate-error" id="gate-error-rate" role="alert">Too many attempts from this connection. Please wait 15 minutes, then try again.</div>
         <form class="gate-form" method="POST" action="/api/gate">
@@ -75,7 +52,7 @@
           <input type="hidden" name="from" id="gate-from" value="/" />
           <button class="btn btn--primary" type="submit">Enter Preview</button>
         </form>
-        <p class="hint mt-1" style="text-align:center;">Prepared by Joseph Carter Group for Equality Ohio.</p>
+        <p class="hint mt-1 center">Prepared by Joseph Carter Group for Equality Ohio.</p>
       </div>
     </main>
     <script src="/js/eo-gate.js" defer></script>
