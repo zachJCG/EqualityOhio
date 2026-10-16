@@ -28,7 +28,7 @@
  * Sources are matched with Next's semantics: path-to-regexp 6 with
  * strict: true, sensitive: false, delimiter '/' (next/dist/lib/
  * build-custom-route.js), so :param, :param*, :param+, :param? and
- * :name(a|b) behave exactly as on Vercel. tests/routing.test.mjs pins this
+ * :name(a|b) behave exactly as on Vercel. tests/check-rules.test.mjs pins this
  * against Next's own compiled path-to-regexp.
  */
 

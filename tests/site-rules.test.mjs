@@ -19,6 +19,11 @@
  *     warning while lib/site.mjs LAUNCHED is false, a failure once it is
  *     true (at launch those URLs are this site, so each one is a loop or a
  *     404 unless it has been replaced)
+ *   - staging-only copy ("Design preview", "in the real build", "pending
+ *     embed", the 404's "part of the preview") and mock forms: the same
+ *     warning while staging, a failure once LAUNCHED is true (a launched
+ *     site must not tell visitors it is a preview, and a mock form there
+ *     would silently discard a real person's legal intake or message)
  *   - every tel: and mailto: (pages and chrome) is an organization fact from
  *     lib/site.mjs ORG or on the explicit allowlist below, and a tel: link
  *     whose text is a phone number dials that number (keypad letters count:
@@ -29,10 +34,12 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { KNOWN_PAGE_IDS, footerHTML, headerHTML } from '../lib/chrome.mjs';
+import { NOT_FOUND } from '../lib/seo.mjs';
 import { LAUNCHED, ORG } from '../lib/site.mjs';
 import { staticPages } from '../lib/static-pages.mjs';
 import {
   cleanText,
+  decodeEntities,
   elements,
   find,
   findAll,
@@ -51,7 +58,6 @@ import {
 const TEL_ALLOWLIST = new Map([
   ['18774872778', 'U.S. Department of State passport information (trans-know-your-rights)'],
   ['18888747793', 'U.S. Department of State TDD/TTY (trans-know-your-rights)'],
-  ['16144662531', 'Ohio BMV (trans-know-your-rights)'],
   ['18667086446', 'Trans Care Warmline, 866-70-TOHIO (trans-know-your-rights)'],
   ['18666878683', 'Election Protection Hotline, 866-OUR-VOTE (votersguide)'],
 ]);
@@ -265,6 +271,52 @@ test('self-links to equalityohio.org and WordPress media are resolved before lau
           `(at launch equalityohio.org is this site, so each becomes a loop or a 404):\n  ${hits.join('\n  ')}\n`,
       );
       t.diagnostic(`${hits.length} self-link(s) to equalityohio.org or /wp-content/ (warning until launch)`);
+    }
+    return;
+  }
+  report(hits);
+});
+
+/* Wording that is true only of the password-gated preview. Generated
+ * regions are skipped (they already follow LAUNCHED), and so are comments. */
+const STAGING_COPY = [
+  /design preview/i,
+  /\b(?:this|the) preview\b/i,
+  /\bin the real build\b/i,
+  /\bproduction build\b/i,
+  /\bpending (?:embed|asset)\b/i,
+];
+const GENERATED_REGION = /<!-- (seo|chrome:header|chrome:footer):start -->[\s\S]*?<!-- \1:end -->/g;
+const keepLines = (m) => m.replace(/[^\n]/g, ' ');
+
+test('staging-only copy and mock forms are gone before launch', (t) => {
+  const hits = [];
+  for (const p of pages) {
+    if (NO_CHROME.has(p.url)) continue; // the gate page is removed with the gate
+    const body = p.html.replace(GENERATED_REGION, keepLines).replace(/<!--[\s\S]*?-->/g, keepLines);
+    body.split('\n').forEach((line, i) => {
+      if (!STAGING_COPY.some((re) => re.test(line))) return;
+      const text = decodeEntities(line.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+      hits.push(`${p.where} line ${i + 1}: "${text.slice(0, 90)}${text.length > 90 ? '…' : ''}"`);
+    });
+    for (const form of findAll(p.doc, (el) => el.name === 'form' && el.attrs['data-mock'] === 'true')) {
+      hits.push(`${p.where} line ${form.line}: <form data-mock="true"${form.attrs['aria-label'] ? ` aria-label="${form.attrs['aria-label']}"` : ''}> transmits nothing; wire it or remove it`);
+    }
+  }
+  const notFound = readFileSync(new URL('../pages/404.js', import.meta.url), 'utf8');
+  notFound.split('\n').forEach((line, i) => {
+    if (/\bpreview\b|production build/i.test(line) && !/^\s*(?:\*|\/\/|\/\*)/.test(line)) {
+      hits.push(`pages/404.js line ${i + 1}: "${decodeEntities(line.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim().slice(0, 90)}"`);
+    }
+  });
+  if (/\bpreview\b/i.test(NOT_FOUND.description)) hits.push(`lib/seo.mjs NOT_FOUND.description: "${NOT_FOUND.description}"`);
+
+  if (!LAUNCHED) {
+    if (hits.length) {
+      console.warn(
+        `\n[site-rules] ${hits.length} staging-only line(s) and mock form(s); each must be replaced, wired or removed before LAUNCHED = true:\n  ${hits.join('\n  ')}\n`,
+      );
+      t.diagnostic(`${hits.length} staging-only line(s) or mock form(s) (warning until launch)`);
     }
     return;
   }

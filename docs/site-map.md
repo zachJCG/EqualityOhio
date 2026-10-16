@@ -49,7 +49,9 @@ home for the long signup slug), `/give` (consolidates the donate URLs),
 
 ## Redirects (defined in next.config.mjs)
 
-308 = permanent, 307 = temporary (a path EO may want back).
+308 = permanent, 307 = temporary (a path EO may want back). Next also 308s
+every trailing-slash spelling (`/about/` to `/about`) and every page's file
+spelling (`/about.html` to `/about`, generated from the `public/` walk).
 
 | Live URL(s) | → Destination | Why |
 |---|---|---|
@@ -62,7 +64,10 @@ home for the long signup slug), `/give` (consolidates the donate URLs),
 | `/events/`, `/events-2/`, `/our-work/events/`, `/event/<slug>/` | `/get-involved/events` | One events page |
 | `/events/category/<slug>/` (and anything else under `/events/`) | `/get-involved/events` | The Events Calendar category archives (`advocates-allies`, `evening-for-equality`) |
 | `/aa2026/` | `/our-work/legacy-of-equality#honorees` (307) | Advocates & Allies 2026 page (2026-10-07); temporary so a future event can reuse the short URL |
-| `/people/`, `/people/<slug>/` (34 profiles) | `/about/staff-interns` | Profiles fold into rosters (staff slugs deep-link to their card; board members go to `/about/leadership`) |
+| `/people/<slug>/` (15 staff profiles) | `/about/staff-interns#<slug>` | Each deep-links to that person's card (card ids match the live slugs) |
+| `/people/<slug>/` (18 board profiles) | `/about/leadership` | |
+| `/people/`, any other `/people/<slug>/` (the 34th profile, `mike-dewine`) | `/about/staff-interns` | |
+| `/about/staff-interns/<slug>/` | `/about/staff-interns` | |
 | `/people-category/equality-ohio-board/`, `/people-category/equality-ohio-education-fund-board/` | `/about/leadership` | People taxonomy archives (boards) |
 | `/people-category/<slug>/` (`staff-interns`, `statewide-candidates`, `cle-instructor`) | `/about/staff-interns` | People taxonomy archives (the 2018 candidate entry is not ported) |
 | `/job-opening/`, `/job-opening/<slug>/`, `/single-jobs-internships-template/` | `/about/jobs-internships` | |
@@ -72,7 +77,8 @@ home for the long signup slug), `/give` (consolidates the donate URLs),
 | `/get-involved/hb68/` | `/legal-clinic/trans-know-your-rights` | HB 68 became law in 2024; the durable resource is the rights guide |
 | `/our-work/business/ohio-business-competes/` | `/our-work/business#ohio-business-competes` | |
 | `/worship-database/`, `/worship-database/<slug>/` (108 congregations) | `/our-work#faith` (307) | Directory returns as Supabase-driven feature |
-| `/municipal-map/<city>/` (257 city pages) | `/our-work/local/municipal-map` (307) | Per-city data returns with the interactive map |
+| `/our-work/faith/` | `/our-work#faith` (307) | Live quirk: it 301s into a worship-database entry |
+| `/municipal-map/`, `/municipal-map/<city>/` (257 city pages) | `/our-work/local/municipal-map` (307) | Per-city data returns with the interactive map |
 | `/conflict-of-interest-forms/` | `/about/leadership#governance` | The forms PDF is linked there |
 | `/news-template/`, `/news-template-2/` | `/news` | WordPress scratch pages (`/news/news-template/` is in the post sitemap, so the post list covers it) |
 | `/thankyou/` | `/` | Orphan thank-you page |
@@ -179,14 +185,16 @@ Compiled from page authoring; keep this list current as items land.
   mirrored and linked from `/about/leadership#governance`.
 - 2026 Candidate Scorecard: the September update PDF is mirrored.
 
-**Pre-deploy checks** (deployment is a few weeks out)
-- `npm test` enforces event and `data-expires` dates (`EO_TODAY=YYYY-MM-DD
-  npm test` checks launch day) and live-sitemap coverage.
+**Pre-deploy and launch checks**
+- Before every deploy: `npm run pages:build` (a no-op), `npm test`,
+  `npm run build`, `npm run test:e2e`, and `EO_TODAY=<deploy date> npm test`
+  so nothing expires before the deploy lands. `npm test` enforces event and
+  `data-expires` dates and live-sitemap coverage.
 - `/about/jobs-internships`: confirm the BambooHR posting is still open.
-- Regenerate `lib/legacy-post-paths.mjs` from the live post sitemap and
-  refresh the snapshot (`node scripts/check-redirects.mjs --fetch`).
-- Re-pull the mirrored PDFs in `public/assets/docs/` in case EO revised them.
-- Decide launch handling for legacy news posts (archive import vs. permanent
-  redirect to `/news`). The news "Read more" links and the remaining embed
-  fallbacks to equalityohio.org are listed by the site-rules test and become
-  failures when `LAUNCHED = true`.
+- When EO publishes posts: regenerate `lib/legacy-post-paths.mjs` from the
+  live post sitemap and refresh the snapshot
+  (`node scripts/check-redirects.mjs --fetch`).
+- Launch: `docs/launch-checklist.md`. While staging, `npm test` warns about
+  every link back to equalityohio.org or `/wp-content/`, every line of
+  staging-only copy and every mock form; with `LAUNCHED = true` each one
+  fails.

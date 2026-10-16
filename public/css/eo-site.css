@@ -522,6 +522,9 @@ p  { margin: 0 0 1em; text-wrap: pretty; }
 /* A light pill on a colored news-card image. */
 .pill--on-media { background: var(--eo-pill-on-media); color: var(--eo-purple); }
 .pill--on-media.is-blue { color: var(--eo-blue-ink); }
+/* Keeps the case as written, for labels where case carries meaning
+   (IRS sections are 501(c)(3), never 501(C)(3)). */
+.pill--as-written { text-transform: none; letter-spacing: 0.04em; }
 
 /* -- News / policy cards ------------------------------------------------- */
 /* The image rounds its own top corners (no overflow: hidden on the card),
@@ -797,12 +800,14 @@ legend { font-family: var(--eo-font-display); font-weight: 600; font-size: 0.9re
 .footer-main a { color: var(--eo-on-dark-muted); text-decoration: none; font-size: 0.95rem; }
 .footer-main a:hover { color: var(--eo-on-dark); text-decoration: underline; }
 .footer-brand p { font-size: 0.92rem; color: var(--eo-on-dark-subtle); }
+/* The inline padding sits on the inner box, as on .footer-main and
+   .container, so the legal row lines up with the columns above it. */
 .footer-legal {
   border-top: 1px solid var(--eo-rule-on-dark);
-  padding: 1.4rem 1.5rem 2rem;
+  padding: 1.4rem 0 2rem;
 }
 .footer-legal__inner {
-  max-width: var(--eo-max-width); margin: 0 auto;
+  max-width: var(--eo-max-width); margin: 0 auto; padding: 0 1.5rem;
   display: flex; flex-wrap: wrap; gap: 0.6rem 2rem;
   justify-content: space-between;
   font-size: 0.82rem; color: var(--eo-on-dark-faint);
@@ -990,6 +995,7 @@ html.eo-reveal .card-grid > .reveal:nth-child(4) { transition-delay: 210ms; }
   main .card__link[href^="http"]::after { content: " (" attr(href) ")"; }
   .site-footer { margin-top: 1rem; background: none; color: var(--eo-ink); }
   .footer-legal { border-top: 1px solid var(--eo-border); padding: 0.6rem 0 0; }
+  .footer-legal__inner { padding: 0; }
   .footer-legal__inner, .footer-legal__inner a { color: var(--eo-ink); }
   .footer-badge img { display: none; }
 }
