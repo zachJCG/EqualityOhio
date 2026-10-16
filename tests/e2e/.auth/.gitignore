@@ -1,0 +1,3 @@
+# Gate cookies written by tests/e2e/global-setup.mjs. Never commit them.
+*
+!.gitignore
