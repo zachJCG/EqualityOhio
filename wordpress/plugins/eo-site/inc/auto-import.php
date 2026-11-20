@@ -37,15 +37,22 @@ register_activation_hook(
 	}
 );
 
-/** Ability: eo-site/import. */
+/** Ability category (its own action, per the Abilities API). */
+add_action(
+	'wp_abilities_api_categories_init',
+	function () {
+		if ( function_exists( 'wp_register_ability_category' ) ) {
+			wp_register_ability_category( 'eo-site', array( 'label' => 'Equality Ohio site', 'description' => 'Import and staging tools for the Equality Ohio site.' ) );
+		}
+	}
+);
+
+/** Abilities: eo-site/import and eo-site/staging. */
 add_action(
 	'wp_abilities_api_init',
 	function () {
 		if ( ! function_exists( 'wp_register_ability' ) ) {
 			return;
-		}
-		if ( function_exists( 'wp_register_ability_category' ) ) {
-			wp_register_ability_category( 'eo-site', array( 'label' => 'Equality Ohio site', 'description' => 'Import and staging tools for the Equality Ohio site.' ) );
 		}
 		wp_register_ability(
 			'eo-site/import',
