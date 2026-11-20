@@ -263,3 +263,13 @@ e2e suite.
 - Never ship expired content: delete passed event blocks and expired
   `data-expires` sections instead of re-dating them.
 - Never run `playwright install` here.
+
+## WordPress port (`wordpress/`)
+
+The same site rebuilt as a WordPress block theme plus a companion plugin,
+with the 29 pages generated from the handoff content. It is self-contained:
+read `wordpress/README.md` first, then `wordpress/docs/report.md`. Its own
+rules: generated files (`theme.json`, the page files, the patterns, the
+utilities stylesheet) are never hand-edited; `eo-site.css` stays identical
+to the source and every WordPress adjustment goes in `eo-wp.css`; copy
+comes from `wordpress/source/content/` only.

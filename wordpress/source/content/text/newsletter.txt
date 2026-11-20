@@ -1,0 +1,27 @@
+Newsletter
+Sign up for the latest news from Equality Ohio
+Join our list and get the latest LGBTQ+ Ohio updates.
+E-news Signup
+Design preview — this form isn’t connected yet and nothing you type is saved or sent. To get updates today, sign up on the live page: equalityohio.org. In production this form connects to EO’s email platform (the live form runs on Gravity Forms in WordPress) — a pending integration.
+“*” indicates required fields
+First Name*
+Last Name*
+Email*
+Zip Code (Optional)
+This helps us better understand where LGBTQ+ community and our allies live.
+Phone (Optional)
+By providing your phone number, you agree to receive survey, polling, or voting-related (non-partisan) text messages from Equality Ohio Education Fund. Message and data rates may apply. Message frequency varies. Reply HELP to request help or STOP to opt out of text messages. Text messaging opt-in data and consent will not be sold or shared with third parties or affiliates for their marketing or promotional purposes
+Sign Up
+You may view our Privacy Policy here: Privacy Policy, and Terms & Conditions here: Terms & Conditions.
+You’re on the list — in the real build.
+This preview didn’t transmit anything. To actually subscribe, use the live signup page or email info@equalityohio.org.
+More Updates
+Other ways to stay in the loop
+Legal Clinic
+Get updates from the Legal Clinic
+The Equality Ohio Legal Clinic keeps its own update list, separate from the statewide e-news.
+Sign up for clinic updates
+News & Media
+Press releases and other news
+Catch up on Equality Ohio’s latest statements, policy updates, and press coverage.
+Read the latest news

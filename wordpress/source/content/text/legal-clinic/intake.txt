@@ -1,0 +1,40 @@
+Legal Clinic
+Start your intake
+About 10 minutes. Everything you share stays confidential within the clinic team, and submitting this form does not create an attorney-client relationship. Prefer to talk? Call 855-LGBT-LAW.
+Design preview — this form isn’t connected yet and nothing you type is saved or sent. If you need legal help today, call 855‑LGBT‑LAW.
+“*” indicates required fields
+Name*
+The name you go by — it doesn’t need to match your documents.
+Pronouns (optional)
+Email*
+Phone (optional)
+County*
+Select your county…
+Cuyahoga
+Franklin
+Hamilton
+Summit
+Montgomery
+Lucas
+Stark
+Butler
+Lorain
+Mahoning
+Other / not listed here
+All 88 counties will be listed in the production build.
+Safe ways to contact you
+Email is safe
+Calls are safe
+OK to leave a voicemail
+What kind of issue is this?
+Name or gender marker change
+Family law
+Discrimination — housing, work, or public places
+Consumer issue — fraud, identity theft, debt
+Public benefits — SSI, disability
+Something else
+What’s going on?
+I understand that representation by a clinic lawyer depends on income (within 300% of the federal poverty level), and clinic staff will review this with me.*
+Submit Intake
+Intake received — in the real build.
+This preview didn’t save or send anything. In production, your intake would go securely to the clinic team and you’d get a confirmation email. Need help right now? Call 855‑LGBT‑LAW.

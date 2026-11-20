@@ -1,0 +1,75 @@
+<section class="hero hero--interior">
+  <div class="container">
+    <span class="eyebrow">Newsletter</span>
+    <h1>Sign up for the latest news from Equality Ohio</h1>
+    <p class="hero__lede" style="max-width:42em;">Join our list and get the latest LGBTQ+ Ohio updates.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container container--narrow">
+    <div class="form-shell">
+      <h2 class="form-shell__title">E-news Signup</h2>
+      <p class="form-note">Design preview — this form isn&rsquo;t connected yet and nothing you type is saved or sent. To get updates today, sign up on the live page: <a href="https://equalityohio.org/sign-up-for-the-latest-news-from-equality-ohio/" rel="noopener" target="_blank">equalityohio.org</a>. In production this form connects to EO&rsquo;s email platform (the live form runs on Gravity Forms in WordPress) — a pending integration.</p>
+      <form data-mock="true" aria-label="E-news signup" class="mt-2">
+        <p class="hint form-legend-note">&ldquo;*&rdquo; indicates required fields</p>
+        <div class="form-grid">
+          <div>
+            <label for="nl-first">First Name<span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="nl-first" name="first_name" autocomplete="given-name" required />
+          </div>
+          <div>
+            <label for="nl-last">Last Name<span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="nl-last" name="last_name" autocomplete="family-name" required />
+          </div>
+          <div class="full">
+            <label for="nl-email">Email<span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="nl-email" name="email" autocomplete="email" required />
+          </div>
+          <div>
+            <label for="nl-zip">Zip Code <span class="optional">(Optional)</span></label>
+            <input type="text" id="nl-zip" name="zip" inputmode="numeric" autocomplete="postal-code" aria-describedby="nl-zip-hint" />
+            <p class="hint" id="nl-zip-hint">This helps us better understand where LGBTQ+ community and our allies live.</p>
+          </div>
+          <div>
+            <label for="nl-phone">Phone <span class="optional">(Optional)</span></label>
+            <input type="tel" id="nl-phone" name="phone" autocomplete="tel" placeholder="(999) 999-9999" aria-describedby="nl-phone-consent" />
+            <!-- SMS consent: verbatim from the live form, https://equalityohio.org/sign-up-for-the-latest-news-from-equality-ohio/
+                 (updated 2026-09-20). Compliance copy: do not edit; reuse it on any form that collects a phone number. -->
+            <p class="hint" id="nl-phone-consent">By providing your phone number, you agree to receive survey, polling, or voting-related (non-partisan) text messages from Equality Ohio Education Fund. Message and data rates may apply. Message frequency varies. Reply HELP to request help or STOP to opt out of text messages. Text messaging opt-in data and consent will not be sold or shared with third parties or affiliates for their marketing or promotional purposes</p>
+          </div>
+          <div class="full"><button class="btn btn--primary" type="submit">Sign Up</button></div>
+        </div>
+        <p class="hint">You may view our Privacy Policy <a href="/privacy-policy">here<span class="sr-only">: Privacy Policy</span></a>, and Terms &amp; Conditions <a href="/terms-conditions">here<span class="sr-only">: Terms &amp; Conditions</span></a>.</p>
+      </form>
+      <div class="form-success">
+        <h3>You&rsquo;re on the list — in the real build.</h3>
+        <p>This preview didn&rsquo;t transmit anything. To actually subscribe, use the <a href="https://equalityohio.org/sign-up-for-the-latest-news-from-equality-ohio/" rel="noopener" target="_blank">live signup page</a> or email <a href="mailto:info@equalityohio.org">info@equalityohio.org</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">More Updates</span>
+      <h2>Other ways to stay in the loop</h2>
+    </div>
+    <div class="card-grid card-grid--2">
+      <div class="card">
+        <span class="card__kicker">Legal Clinic</span>
+        <h3>Get updates from the Legal Clinic</h3>
+        <p>The Equality Ohio Legal Clinic keeps its own update list, separate from the statewide e-news.</p>
+        <a class="card__link" href="https://app.lawmatics.com/forms/share/41133a09-f56c-4b3e-96ca-270d791baf53" rel="noopener" target="_blank">Sign up for clinic updates</a>
+      </div>
+      <div class="card">
+        <span class="card__kicker">News &amp; Media</span>
+        <h3>Press releases and other news</h3>
+        <p>Catch up on Equality Ohio&rsquo;s latest statements, policy updates, and press coverage.</p>
+        <a class="card__link" href="/news">Read the latest news</a>
+      </div>
+    </div>
+  </div>
+</section>
+    

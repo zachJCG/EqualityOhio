@@ -1,0 +1,50 @@
+<section class="hero hero--interior">
+  <div class="container">
+    <span class="eyebrow">Contact</span>
+    <h1>Talk to us</h1>
+    <p class="hero__lede" style="max-width:42em;">Questions, press inquiries, partnership ideas, or just want to say hello — we&rsquo;d love to hear from you.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container split">
+    <div>
+      <div class="card-grid card-grid--1">
+        <div class="card card--flat"><span class="card__kicker">General</span><h2 class="h3"><a class="card__phone" href="tel:16142240400">(614) 224-0400</a></h2><p><a href="mailto:info@equalityohio.org">info@equalityohio.org</a></p></div>
+        <div class="card card--flat"><span class="card__kicker">Legal Clinic</span><h2 class="h3"><a class="card__phone" href="tel:18555428529">855&#8209;LGBT&#8209;LAW</a></h2><p>Or <a href="/legal-clinic/intake">start an intake online</a> — free and confidential.</p></div>
+        <div class="card card--flat"><span class="card__kicker">Giving</span><h2 class="h3">Development team</h2><p><a href="mailto:developmentstaff@equalityohio.org">developmentstaff@equalityohio.org</a></p></div>
+        <!-- Channels: the live equalityohio.org Organization JSON-LD sameAs list (2026-10-16); keep in step with lib/site.mjs ORG.socials. -->
+        <div class="card card--flat"><span class="card__kicker">Social</span><h2 class="h3">Social media &amp; store</h2><p><a href="https://x.com/equalityohio" rel="noopener" target="_blank">X</a> &middot; <a href="https://www.facebook.com/equalityohio" rel="noopener" target="_blank">Facebook</a> &middot; <a href="https://www.instagram.com/equality.ohio/" rel="noopener" target="_blank">Instagram</a> &middot; <a href="https://www.youtube.com/channel/UCxKjvM_REomRkFAacq7dcwQ" rel="noopener" target="_blank">YouTube</a> &middot; <a href="https://www.linkedin.com/company/equalityohio/" rel="noopener" target="_blank">LinkedIn</a> &middot; <a href="https://www.threads.com/@equality.ohio" rel="noopener" target="_blank">Threads</a> &middot; <a href="https://shop.equalityohio.org/" rel="noopener" target="_blank">Store</a></p></div>
+      </div>
+    </div>
+    <div>
+      <div class="form-shell">
+        <h2 class="form-shell__title">Send a message</h2>
+        <form data-mock="true" aria-label="Contact form">
+          <p class="hint form-legend-note">&ldquo;*&rdquo; indicates required fields</p>
+          <div class="form-grid">
+            <div><label for="ct-name">Name<span class="req" aria-hidden="true">*</span></label><input type="text" id="ct-name" name="name" autocomplete="name" required /></div>
+            <div><label for="ct-email">Email<span class="req" aria-hidden="true">*</span></label><input type="email" id="ct-email" name="email" autocomplete="email" required /></div>
+            <div class="full">
+              <label for="ct-topic">What&rsquo;s this about?</label>
+              <select id="ct-topic" name="topic">
+                <option>General question</option>
+                <option>Legal Clinic</option>
+                <option>Giving &amp; donations</option>
+                <option>Press &amp; media</option>
+                <option>Volunteering</option>
+              </select>
+            </div>
+            <div class="full"><label for="ct-msg">Message<span class="req" aria-hidden="true">*</span></label><textarea id="ct-msg" name="message" rows="5" required></textarea></div>
+            <div class="full"><button class="btn btn--primary" type="submit">Send Message</button></div>
+          </div>
+        </form>
+        <div class="form-success">
+          <h3>Message sent — in the real build.</h3>
+          <p>This preview didn&rsquo;t send anything. In production this routes to the right inbox automatically.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    

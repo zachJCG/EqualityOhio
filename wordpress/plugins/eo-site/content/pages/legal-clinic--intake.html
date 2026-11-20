@@ -1,0 +1,105 @@
+<!-- wp:group {"tagName":"section","className":"hero hero--interior","layout":{"type":"default"}} -->
+<section class="wp-block-group hero hero--interior"><!-- wp:group {"className":"container","layout":{"type":"default"}} -->
+<div class="wp-block-group container"><!-- wp:eo/text {"tagName":"span","className":"eyebrow"} -->
+<span class="eyebrow">Legal Clinic</span>
+<!-- /wp:eo/text -->
+
+<!-- wp:heading {"level":1} -->
+<h1 class="wp-block-heading">Start your intake</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"hero__lede u-maxw-44"} -->
+<p class="hero__lede u-maxw-44">About 10 minutes. Everything you share stays confidential within the clinic team, and submitting this form does not create an attorney-client relationship. Prefer to talk? Call <a href="tel:+18555428529">855-LGBT-LAW</a>.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","className":"section u-pt-0","layout":{"type":"default"}} -->
+<section class="wp-block-group section u-pt-0"><!-- wp:group {"className":"container container--narrow","layout":{"type":"default"}} -->
+<div class="wp-block-group container container--narrow"><!-- wp:group {"className":"form-shell","layout":{"type":"default"}} -->
+<div class="wp-block-group form-shell"><!-- wp:paragraph {"className":"form-note eo-staging-note"} -->
+<p class="form-note eo-staging-note">Design preview — this form isn’t connected yet and nothing you type is saved or sent. If you aren’t able to complete this form, you can give us a call at <strong>855‑LGBT‑LAW</strong> and leave us a message. Please note that we return voicemails on Tuesday and Thursday each week.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<form data-mock="true" aria-label="Legal clinic intake" class="mt-2">
+        <p class="hint form-legend-note">“*” indicates required fields</p>
+        <div class="form-grid">
+          <div>
+            <label for="in-name">Name<span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="in-name" name="name" autocomplete="name" aria-describedby="in-name-hint" required>
+            <p class="hint" id="in-name-hint">The name you go by — it doesn’t need to match your documents.</p>
+          </div>
+          <div>
+            <label for="in-pronouns">Pronouns <span class="optional">(optional)</span></label>
+            <input type="text" id="in-pronouns" name="pronouns">
+          </div>
+          <div>
+            <label for="in-email">Email<span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="in-email" name="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label for="in-phone">Phone <span class="optional">(optional)</span></label>
+            <input type="tel" id="in-phone" name="phone" autocomplete="tel">
+          </div>
+          <div>
+            <label for="in-county">County<span class="req" aria-hidden="true">*</span></label>
+            <select id="in-county" name="county" aria-describedby="in-county-hint" required>
+              <option value="">Select your county…</option>
+              <option>Cuyahoga</option><option>Franklin</option><option>Hamilton</option>
+              <option>Summit</option><option>Montgomery</option><option>Lucas</option>
+              <option>Stark</option><option>Butler</option><option>Lorain</option>
+              <option>Mahoning</option><option>Other / not listed here</option>
+            </select>
+            <p class="hint eo-staging-note" id="in-county-hint">All 88 counties will be listed in the production build.</p>
+          </div>
+          <div>
+            <fieldset>
+              <legend>Safe ways to contact you</legend>
+              <div class="choice"><input type="checkbox" id="c-email" name="contact" value="email"><label for="c-email">Email is safe</label></div>
+              <div class="choice"><input type="checkbox" id="c-call" name="contact" value="call"><label for="c-call">Calls are safe</label></div>
+              <div class="choice"><input type="checkbox" id="c-vm" name="contact" value="voicemail"><label for="c-vm">OK to leave a voicemail</label></div>
+            </fieldset>
+          </div>
+          <div class="full">
+            <fieldset>
+              <legend>What kind of issue is this?</legend>
+              <div class="choice-grid">
+                <div class="choice"><input type="radio" id="t-name" name="issue" value="name-change"><label for="t-name">Name or gender marker change</label></div>
+                <div class="choice"><input type="radio" id="t-family" name="issue" value="family"><label for="t-family">Family law</label></div>
+                <div class="choice"><input type="radio" id="t-discrim" name="issue" value="discrimination"><label for="t-discrim">Discrimination — housing, work, or public places</label></div>
+                <div class="choice"><input type="radio" id="t-consumer" name="issue" value="consumer"><label for="t-consumer">Consumer issue — fraud, identity theft, debt</label></div>
+                <div class="choice"><input type="radio" id="t-benefits" name="issue" value="benefits"><label for="t-benefits">Public benefits — SSI, disability</label></div>
+                <div class="choice"><input type="radio" id="t-other" name="issue" value="other"><label for="t-other">Something else</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="full">
+            <label for="in-story">What’s going on?</label>
+            <textarea id="in-story" name="story" rows="6" placeholder="Share as much or as little as you're comfortable with."></textarea>
+          </div>
+          <div class="full">
+            <div class="choice">
+              <input type="checkbox" id="in-income" name="income-ack" data-error="Check the box to confirm you understand the income requirement" required>
+              <label for="in-income">I understand that representation by a clinic lawyer depends on income (within 300% of the federal poverty level), and clinic staff will review this with me.<span class="req" aria-hidden="true">*</span></label>
+            </div>
+          </div>
+          <div class="full">
+            <button class="btn btn--primary btn--lg" type="submit">Submit Intake</button>
+          </div>
+        </div>
+      </form>
+<!-- /wp:html -->
+
+<!-- wp:group {"className":"form-success","layout":{"type":"default"}} -->
+<div class="wp-block-group form-success"><!-- wp:heading {"className":"eo-staging-note"} -->
+<h2 class="wp-block-heading eo-staging-note">Intake received — in the real build.</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"eo-staging-note"} -->
+<p class="eo-staging-note">This preview didn’t save or send anything. In production, your intake would go securely to the clinic team and you’d get a confirmation email. If you aren’t able to complete this form, you can give us a call at <strong>855‑LGBT‑LAW</strong> and leave us a message. Please note that we return voicemails on Tuesday and Thursday each week.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></section>
+<!-- /wp:group -->
