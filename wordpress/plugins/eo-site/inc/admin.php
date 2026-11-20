@@ -43,6 +43,9 @@ function eo_site_admin_page(): void {
 	<div class="wrap">
 		<h1>Equality Ohio: site tools</h1>
 		<p>Staging flag is <strong><?php echo eo_site_is_staging() ? 'ON (preview ribbon, noindex)' : 'OFF (launch state)'; ?></strong>.</p>
+		<?php $last = get_option( 'eo_site_last_import' ); if ( is_array( $last ) && ! empty( $last['when'] ) ) : ?>
+			<p>Last automatic import: <?php echo esc_html( wp_date( 'Y-m-d H:i', (int) $last['when'] ) ); ?> (<?php echo esc_html( $last['how'] ); ?>), <?php echo count( (array) ( $last['log'] ?? array() ) ); ?> log lines.</p>
+		<?php endif; ?>
 		<?php if ( $log ) : ?>
 			<pre style="background:#fff;border:1px solid #ccd0d4;padding:1em;max-height:24em;overflow:auto"><?php echo esc_html( implode( "\n", $log ) ); ?></pre>
 		<?php endif; ?>

@@ -27,6 +27,7 @@ require_once EO_SITE_DIR . 'inc/redirects.php';
 require_once EO_SITE_DIR . 'inc/headers.php';
 require_once EO_SITE_DIR . 'inc/importer.php';
 require_once EO_SITE_DIR . 'inc/admin.php';
+require_once EO_SITE_DIR . 'inc/auto-import.php';
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	require_once EO_SITE_DIR . 'inc/cli.php';
 }
