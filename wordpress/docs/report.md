@@ -56,9 +56,33 @@ Checks: behavior spec 35/35 (JS-off Menu link to `#footer-nav`, focus trap, Esca
 - Timezone `America/New_York`, permalinks `/%postname%/`, tagline left empty, stock sample page and post trashed.
 - The three PDFs are in the Media Library (idempotent by source file name); the site icon is set from the brand folder.
 
-## Phase 4: WordPress.com
+## Phase 4: WordPress.com (done 2026-11-20, after the Personal plan)
 
-Stopped: the site is on the Free plan. The theme and plugin need **Personal** at minimum (theme and plugin upload, after activating hosting features). Take **Business** if EO reviewers need a preview link while the site is Coming Soon, or if news posts will be imported with root-level permalinks. The upload path once a plan is active: `sh tools/package.sh`, upload both zips, activate, run the importer (Tools → Equality Ohio or `wp eo import`), keep Coming Soon on, rerun `npm run test:site` and `npm run test:e2e` against the site with `EO_BASE` set.
+Zach bought the Personal plan and started the hosting-features transfer (the one step with no API). The site is now on WordPress.com's managed hosting at **https://zach364b94579cd.wpcomstaging.com** (the old `.wordpress.com` address redirects; site ID 258848468 unchanged; WordPress 7.1.5, PHP 8.4). Coming Soon is still on. Nothing was launched, no domain was connected.
+
+What was done through the WordPress.com API from this session:
+
+- Uploaded and activated the theme (`equality-ohio` 0.1.0) and uploaded and activated the plugin (`eo-site` 0.1.0, re-uploaded once to add the verify ability).
+- The plugin's activation hook ran the import. Its log, read back through the `eo-site/verify` ability: 3 PDFs and the site icon uploaded; stock "Hello world" post trashed; the stock About page (ID 1) **updated in place**, 28 pages created; timezone, permalinks, comments and `blog_public` set; the five menus built and assigned.
+
+Read back and compared:
+
+| Check (via API, signed in as the site owner) | Result |
+|---|---|
+| Stored content of each page equals its plugin file (placeholders resolved) | 29/29 identical |
+| Page tree: slugs, parents, menu order, templates (`page-legal-guide` on the three guide pages) | as the page map |
+| Front page = `home`, posts page none, `show_on_front` = page | yes |
+| Theme active, 9 theme templates listed, no user-customized copies | yes |
+| Menus: Primary (28 items), four footer columns (6, 6, 6, 7), assigned to the five locations | yes |
+| Media: three PDFs plus the site icon; redirect targets for the three `/wp-content/uploads/…pdf` rules point at them | yes |
+| Timezone `America/New_York`, permalinks `/%postname%/` | yes |
+| Abilities published: `eo-site/import`, `eo-site/staging`, `eo-site/verify` | listed by WordPress.com |
+
+What a signed-out visitor gets today (checked with curl): HTTP 200 with the Coming Soon screen as the body, but the theme and plugin head output still prints: title from the registry, `noindex, nofollow` meta, `X-Robots-Tag`, `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`. Theme CSS, JS, fonts, the uploaded PDFs and the plugin script answer 200. The legacy redirects run in front of Coming Soon (`/events` → `/get-involved/events/`, 301).
+
+**Not verified on WordPress.com**: the rendered pages (text parity, axe, behavior, screenshots, editor round trip). Coming Soon replaces the page body for every signed-out request, and the API's rendered-page tool refuses Coming Soon sites, so those checks need a signed-in browser. Zach can see the real site while signed in to WordPress.com. The same scripts run against the live site once it is reachable: `EO_BASE=https://zach364b94579cd.wpcomstaging.com npm run test:site` and `npm run test:e2e`. Two platform differences worth a look then: the Gutenberg plugin (24.4.2) is active there, so the editor is newer than core's, and Page Optimize concatenates CSS and JS.
+
+**WordPress.com settings API vs. the option**: the settings tool still reports the date-based permalink structure, while the stored option (and the plugin's verify) says `/%postname%/`. Permalink settings are a Business-plan screen, so WordPress.com may be forcing its own structure for posts on this plan; pages are unaffected (every page answers at its clean path). It matters only if posts are imported (D3).
 
 ## Departures from the brief
 
@@ -77,6 +101,5 @@ Stopped: the site is on the Free plan. The theme and plugin need **Personal** at
 
 ## Not verified
 
-- Behavior on WordPress.com itself (plan). The MCP tools for templates and global styles were not needed, since the theme ships its templates.
-- WordPress.com's kses rules for the Simple platform: the importer removes kses filters while writing content (needed for `inert`, `aria-*` and `data-mock` attributes). On an Atomic site the owner has `unfiltered_html`; confirm after upload with the editor round-trip script.
+- Rendered pages on WordPress.com (see Phase 4): parity, axe, behavior, screenshots and the editor round trip were run on the local WordPress only.
 - The Playwright suite in the source repository was not run; its contract was ported to `tests/e2e/behavior.mjs`.

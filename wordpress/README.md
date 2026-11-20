@@ -52,8 +52,12 @@ npm run screenshots every page at 390 and 1280 beside the source (serve source/n
 
 Run the site checks logged out (the admin bar changes the layout). The e2e scripts log in only for the editor checks.
 
+## Where it is
+
+Staging: https://zach364b94579cd.wpcomstaging.com (WordPress.com, Personal plan, Coming Soon on; site ID 258848468). The theme and plugin were uploaded through the WordPress.com API and the plugin imported the pages on activation. The plugin publishes three WordPress Abilities an agent connected through WordPress.com can run: `eo-site/import`, `eo-site/staging`, `eo-site/verify` (read-only).
+
 ## Install on a WordPress host
 
-`sh tools/package.sh` writes `dist/equality-ohio.zip` and `dist/eo-site.zip`. Upload and activate both, then run the importer (Tools → Equality Ohio, or `wp eo import`). The importer matches pages by path, so an existing `about` page is updated, not duplicated. On an install where the old posts still exist, switch off the `legacy-post`, `post-taxonomy` and `events-calendar` redirect families.
+`sh tools/package.sh` writes `dist/equality-ohio.zip` and `dist/eo-site.zip`. Upload and activate both; the importer runs once on activation when the site has no imported page yet, and can be rerun from Tools → Equality Ohio, `wp eo import`, the `eo-site/import` ability or `POST /wp-json/eo-site/v1/import`. The importer matches pages by path, so an existing `about` page is updated, not duplicated. On an install where the old posts still exist, switch off the `legacy-post`, `post-taxonomy` and `events-calendar` redirect families.
 
 Staging is on by default. `wp eo staging off` is the launch switch.
