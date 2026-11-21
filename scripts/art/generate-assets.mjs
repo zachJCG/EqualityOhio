@@ -17,7 +17,7 @@
  *   public/assets/brand/{icon-192,icon-512,icon-maskable-512}.png, mark.svg
  *   public/assets/og/<key>.png              share cards, 1200x630
  *   scripts/art/og-cards.json              card paths + alt text for the head generator
- *   public/assets/textures/{hero,band}-bars.svg
+ *   public/assets/textures/{hero,band}-bars.svg, media-mark.svg, footer-mark.svg
  *   public/assets/img/<slug>-<w>.{avif,webp,png}
  *
  * Deterministic and idempotent: the same inputs give the same bytes, and a
@@ -46,7 +46,7 @@ const summary = {};
 
 if (steps.includes("textures")) {
   const { buildTextures } = await import("./textures.mjs");
-  buildTextures();
+  await buildTextures(sharp);
 }
 
 if (steps.includes("icons")) {

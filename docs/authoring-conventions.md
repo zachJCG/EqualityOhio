@@ -85,13 +85,16 @@ cannot linger. Page-scoped `<style>` blocks stay where they are.
 `.mt-0/1/2/3` · `.sr-only`
 
 **Hero** `.hero`, `.hero--interior`, `.hero__lede`, `.hero__ctas`,
-`.hero__art`, `.hero__split`
+`.hero__art` (on the home page, the `.eq-art` SVG: the measured logomark
+across a pale equals sign, assembled on load), `.hero__split`
 
-**Cards** `.card` (`.card__kicker`, `.card__link`, `.card__phone`); a card
+**Cards** `.card` (`.card__icon` decorative 48px icon tile, `.card__kicker`,
+`.card__link`, `.card__phone`); a card
 with a `.card__link` lifts and is clickable as a whole unless it is
 `.card--flat` · `.card--path` with `is-blue` / `is-green` · `.news-card`
 (`__media` with `alt-a/b/c`, `__body`, `__date`, `__title`,
-`.news-card--feature`) · `.person-card` (`__avatar` initials, `__role`; no
+`.news-card--feature`; `.news-card--lead` spans a `.card-grid--2` with its art
+beside the text) · `.person-card` (`__avatar` initials, `__role`; no
 photography) · `.tier-card` (`--featured`, `__flag`, `__price`, `__cadence`,
 `__per`) with `.perk-list`
 
@@ -148,11 +151,20 @@ channel. The success block sits in the form's parent, or anywhere with
 - Focus is a solid outline (purple on light, gold on dark), never removed.
 - Targets: at least 24px everywhere (desktop dropdown toggles), 44px for
   the menu button, the phone dropdown toggles and the choice tiles.
-- Motion uses the `--eo-dur-*` and `--eo-ease-*` tokens and animates only
-  `transform` and `opacity`. Under `prefers-reduced-motion` the durations
-  and delays are 0 and smooth scrolling is off. Scroll reveal is automatic
-  (desktop, below the fold only); never add your own hidden-until-scrolled
-  styles.
+- Motion uses the `--eo-dur-*` and `--eo-ease-*` tokens (and `--eo-stagger`
+  between siblings) and animates only `transform` and `opacity`. Under
+  `prefers-reduced-motion` the durations, delays and stagger are 0 and
+  smooth scrolling is off. Scroll reveal is automatic (desktop, below the
+  fold only); never add your own hidden-until-scrolled styles.
+- The motion and graphics layer (eo-site.css, "MOTION & GRAPHICS LAYER")
+  is site-wide and needs no markup: page-to-page view transitions (CSS
+  only, off with reduced motion), the eyebrow's mini equality bar, the nav
+  underline, the button sheen, the link-card spotlight (eo-site-template.js
+  writes the pointer position), the news-card media art, the band texture
+  drift, the timeline drawing to mid-screen, and a reading-progress bar on
+  the long guides and policies (by `data-page`). Scroll-led effects run
+  only where scroll-driven animation is supported, on screen, with motion
+  allowed, and none of them ever hides content.
 - Short viewports (below 30em tall: 400% zoom, a phone in landscape): the
   sticky header and help bar scroll with the page instead.
 - Phone numbers never wrap: `a[href^="tel:"]` is `white-space: nowrap`, and

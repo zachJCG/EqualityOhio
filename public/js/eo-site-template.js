@@ -19,6 +19,8 @@
                      screen, except once it has come to rest above the
                      footer
      scroll reveal   below-the-fold blocks rise in (desktop, motion allowed)
+     card spotlight  a soft light follows a fine pointer inside link cards
+                     (motion allowed); CSS draws it from two properties
      new-tab links   announce that they open a new tab
      mock forms      validation (error summary, inline errors) and the
                      preview success state; nothing is transmitted
@@ -375,6 +377,33 @@
     }
   }
 
+  /* -- Card spotlight -----------------------------------------------------------------
+   * Link cards light up softly under a mouse pointer (eo-site.css draws the
+   * light on the card's ::before from --eo-mx/--eo-my). One listener for the
+   * whole page, and at most one layout read and two property writes per
+   * frame. Off for touch, coarse pointers and reduced motion, where the CSS
+   * draws nothing either. */
+  function initSpotlight() {
+    if (reducedMotion() || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var pending = null;
+    var frame = 0;
+    function paint() {
+      frame = 0;
+      if (!pending) return;
+      var rect = pending.card.getBoundingClientRect();
+      pending.card.style.setProperty('--eo-mx', Math.round(pending.x - rect.left) + 'px');
+      pending.card.style.setProperty('--eo-my', Math.round(pending.y - rect.top) + 'px');
+      pending = null;
+    }
+    document.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse' || !e.target.closest) return;
+      var card = e.target.closest('main .card');
+      if (!card) return;
+      pending = { card: card, x: e.clientX, y: e.clientY };
+      if (!frame) frame = window.requestAnimationFrame(paint);
+    }, { passive: true });
+  }
+
   /* -- New-tab links ------------------------------------------------------------------
    * Every link that opens a new tab says so to screen readers. The chrome's
    * own links get the same span at build time (lib/chrome.mjs NEW_TAB_NOTE). */
@@ -621,6 +650,7 @@
     initPhoneMenu(state, helpBar, closeSubmenus);
     initSkipTarget();
     initReveal();
+    initSpotlight();
     initNewTabLinks();
     initMockForms();
   }

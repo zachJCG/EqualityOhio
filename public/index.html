@@ -155,7 +155,22 @@
         <a class="btn btn--gold btn--lg" href="/give">Donate</a>
       </div>
     </div>
-    <div class="hero__art"><img src="/assets/logo/equality-ohio-logo.png" alt="Equality Ohio logo" width="400" height="174" /></div>
+    <div class="hero__art" aria-hidden="true">
+      <svg class="eq-art" viewBox="0 0 480 360" width="480" height="360" focusable="false">
+        <g class="eq-art__layer eq-art__layer--back">
+          <rect class="eq-art__ghost eq-art__ghost--top" x="0" y="45.33" width="480" height="94"/>
+          <rect class="eq-art__ghost eq-art__ghost--bottom" x="0" y="173.91" width="480" height="94"/>
+        </g>
+        <g class="eq-art__layer eq-art__layer--front">
+          <rect class="eq-art__bar eq-art__bar--green" style="--i:0" x="14" y="96" width="42.77" height="121.24"/>
+          <rect class="eq-art__bar eq-art__bar--green" style="--i:1" x="91" y="96" width="42.84" height="121.24"/>
+          <rect class="eq-art__bar eq-art__bar--purple eq-art__bar--x" style="--i:2" x="176.53" y="96" width="119.84" height="43.33"/>
+          <rect class="eq-art__bar eq-art__bar--purple eq-art__bar--x" style="--i:3" x="176.53" y="173.91" width="119.84" height="43.33"/>
+          <rect class="eq-art__bar eq-art__bar--blue" style="--i:4" x="339.08" y="96" width="42.84" height="121.24"/>
+          <rect class="eq-art__bar eq-art__bar--blue" style="--i:5" x="416.15" y="96" width="42.84" height="121.24"/>
+        </g>
+      </svg>
+    </div>
   </div>
 </section>
 
@@ -172,29 +187,6 @@
   </div>
 </section>
 
-<!-- ELECTION: 2026-11-03. Delete this whole section after Election Day (data-expires fails npm test from 2026-11-05).
-     The live home page (https://equalityohio.org/, 2026-10-06) leads with the scorecard banner linked to /votersguide;
-     the Election Day line is from https://equalityohio.org/gotv2026/ and the dek from the scorecard post
-     https://equalityohio.org/equality-ohios-2026-candidate-scorecard-is-here/ (Sept 4, 2026 update). -->
-<section class="section" style="padding-top:0;" data-expires="2026-11-04" aria-labelledby="election-2026">
-  <div class="container split split--center">
-    <a href="/votersguide">
-      <picture>
-        <source type="image/avif" srcset="/assets/img/candidate-scorecard-2026-banner-640.avif 640w, /assets/img/candidate-scorecard-2026-banner-960.avif 960w, /assets/img/candidate-scorecard-2026-banner-1250.avif 1250w" sizes="(min-width: 1160px) 532px, (min-width: 900px) calc(50vw - 48px), calc(100vw - 48px)" />
-        <source type="image/webp" srcset="/assets/img/candidate-scorecard-2026-banner-640.webp 640w, /assets/img/candidate-scorecard-2026-banner-960.webp 960w, /assets/img/candidate-scorecard-2026-banner-1250.webp 1250w" sizes="(min-width: 1160px) 532px, (min-width: 900px) calc(50vw - 48px), calc(100vw - 48px)" />
-        <img src="/assets/img/candidate-scorecard-2026-banner.png" alt="2026 Candidate Scorecard. See how candidates measure up on the issues that matter for LGBTQ+ Ohioans and their families. Equality Ohio." width="1250" height="625" style="width:100%;height:auto;border-radius:var(--eo-radius-lg);box-shadow:var(--eo-shadow-card);" loading="lazy" decoding="async" />
-      </picture>
-    </a>
-    <div>
-      <span class="eyebrow">2026 General Election</span>
-      <h2 id="election-2026">Make your plan to vote in 2026!</h2>
-      <p><strong><time datetime="2026-11-03">November 3</time>: Election Day in Ohio! Polls open 6:30am &ndash; 7:30pm.</strong></p>
-      <p>The 2026 Equality Ohio Candidate Scorecard examines multiple critical races, helping Ohioans make informed choices at the ballot box this November.</p>
-      <a class="btn btn--primary" href="/votersguide">See the 2026 Candidate Scorecard</a>
-    </div>
-  </div>
-</section>
-
 <section class="section" style="padding-top:0.5rem;">
   <div class="container">
     <div class="section__head">
@@ -203,18 +195,21 @@
     </div>
     <div class="card-grid card-grid--3">
       <div class="card card--path is-blue">
+        <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 3.5v17M5 7h14M8.5 20.5h7"/><path d="M7 7l-3 6.2a3 3 0 0 0 6 0L7 7zM17 7l-3 6.2a3 3 0 0 0 6 0L17 7z"/></svg></span>
         <span class="card__kicker">Legal Clinic</span>
         <h3>Get legal help</h3>
         <p>Free legal services for LGBTQ+ Ohioans — consumer law, family law, civil rights, and administrative help like SSI and disability.</p>
         <a class="card__link" href="/legal-clinic">Visit the Legal Clinic</a>
       </div>
       <div class="card card--path">
+        <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 20s-7.5-4.6-7.5-10A4 4 0 0 1 12 7.5 4 4 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg></span>
         <span class="card__kicker">Give</span>
         <h3>Support the work</h3>
         <p>From one-time gifts to Defenders of Equality monthly giving and the Jim Obergefell &amp; John Arthur Society — every gift fuels equality.</p>
         <a class="card__link" href="/give">See ways to give</a>
       </div>
       <div class="card card--path is-green">
+        <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M15.5 19.5v-1a4 4 0 0 0-4-4h-4a4 4 0 0 0-4 4v1"/><circle cx="9.5" cy="7.5" r="3"/><path d="M20.5 19.5v-1a4 4 0 0 0-3-3.87M15.5 4.6a3 3 0 0 1 0 5.8"/></svg></span>
         <span class="card__kicker">About</span>
         <h3>Learn who we are</h3>
         <p>Founded in 2005, Equality Ohio works at city halls, the Statehouse, and in courtrooms across all 88 counties.</p>
@@ -266,16 +261,6 @@
           <a class="card__link" href="/news">Read more<span class="sr-only">: $750,000 Legacy Gift Strengthens the Future of LGBTQIA+ Organizations in Central Ohio</span></a>
         </div>
       </article>
-      <!-- ELECTION: 2026-11-03. Delete this card after Election Day with the election section above (data-expires fails npm test from 2026-11-05). -->
-      <article class="card news-card" data-expires="2026-11-04">
-        <div class="news-card__media"><span class="pill pill--on-media">Election 2026</span></div>
-        <div class="news-card__body">
-          <div class="news-card__date">September 2026</div>
-          <h3>Make your plan to vote in 2026!</h3>
-          <p>Ohio&rsquo;s 2026 General Election is coming, and the plan starts now.</p>
-          <a class="card__link" href="/votersguide">Make your plan</a>
-        </div>
-      </article>
       <article class="card news-card">
         <div class="news-card__media alt-a"><span class="pill pill--on-media">Scorecard</span></div>
         <div class="news-card__body">
@@ -283,6 +268,15 @@
           <h3>Equality Ohio&rsquo;s 2026 Candidate Scorecard Is Here</h3>
           <p>Examining multiple critical races across the state, including statewide elections.</p>
           <a class="card__link" href="/votersguide">See the scorecard</a>
+        </div>
+      </article>
+      <article class="card news-card">
+        <div class="news-card__media alt-b"><span class="pill pill--on-media">Strategic Plan</span></div>
+        <div class="news-card__body">
+          <div class="news-card__date">February 2026</div>
+          <h3>Roadmap Back to Equality: The Equality Ohio Strategic Plan (2026&ndash;2028)</h3>
+          <p>Where we&rsquo;re headed over the next three years &mdash; and how the movement gets there together.</p>
+          <a class="card__link" href="/news">Read more<span class="sr-only">: Roadmap Back to Equality: The Equality Ohio Strategic Plan (2026&ndash;2028)</span></a>
         </div>
       </article>
     </div>

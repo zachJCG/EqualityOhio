@@ -62,7 +62,17 @@
   --eo-on-dark-faint:   rgba(255, 255, 255, 0.65);  /* footer legal line    */
   --eo-rule-on-dark:    rgba(255, 255, 255, 0.15);
   --eo-glass:           rgba(255, 255, 255, 0.96);  /* sticky header        */
+  --eo-glass-strong:    rgba(255, 255, 255, 0.86);  /* header once scrolled */
   --eo-pill-on-media:   rgba(255, 255, 255, 0.92);  /* pill on a news image */
+
+  /* -- Interaction light (2026-11 motion layer) ---------------------------
+     Decorative only, never behind text that relies on them for contrast:
+     the sheen sweeps across a filled button on hover, the spotlight follows
+     the pointer inside a link card, the watermark is the faint mark in the
+     footer art.                                                           */
+  --eo-sheen:           rgba(255, 255, 255, 0.30);
+  --eo-spotlight:       rgba(107, 75, 181, 0.11);   /* purple-bright at 11%  */
+  --eo-spotlight-edge:  rgba(107, 75, 181, 0.28);
 
   /* -- Feedback ----------------------------------------------------------- */
   --eo-error:         #B3261E;
@@ -121,19 +131,26 @@
   --eo-shadow-card:   0 2px 14px rgba(90, 63, 153, 0.08);
   --eo-shadow-lift:   0 10px 30px rgba(90, 63, 153, 0.16);
   --eo-shadow-bar:    0 -6px 20px rgba(27, 27, 47, 0.18);
+  --eo-shadow-header: 0 12px 32px -20px rgba(27, 27, 47, 0.30);
+  --eo-shadow-art:    0 30px 60px -30px rgba(62, 42, 112, 0.45);
   --eo-max-width:     1160px;
 
   /* -- Motion --------------------------------------------------------------
      Every transition and animation names its property, one of these
-     durations and an easing. Animate transform and opacity only. All four
-     durations collapse to 0ms under prefers-reduced-motion, so anything
-     timed with them lands on its end state immediately.                   */
+     durations and an easing. Animate transform and opacity only. Every
+     duration (and the stagger step) collapses to 0ms under
+     prefers-reduced-motion, so anything timed with them lands on its end
+     state immediately.                   */
   --eo-ease-out:      cubic-bezier(0.22, 1, 0.36, 1);
   --eo-ease-exit:     cubic-bezier(0.4, 0, 0.7, 1);
+  --eo-ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
   --eo-dur-fast:      160ms;     /* hover color, caret                      */
   --eo-dur-base:      240ms;     /* menus, sheet, help bar                  */
   --eo-dur-lift:      280ms;     /* card and button lift                    */
   --eo-dur-reveal:    560ms;     /* scroll reveal, hero rise                */
+  --eo-dur-page:      380ms;     /* page-to-page view transition            */
+  --eo-dur-draw:      900ms;     /* hero mark assembling                    */
+  --eo-stagger:       70ms;      /* step between staggered siblings         */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -142,5 +159,8 @@
     --eo-dur-base:   0ms;
     --eo-dur-lift:   0ms;
     --eo-dur-reveal: 0ms;
+    --eo-dur-page:   0ms;
+    --eo-dur-draw:   0ms;
+    --eo-stagger:    0ms;
   }
 }
