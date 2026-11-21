@@ -62,7 +62,6 @@
   --eo-on-dark-faint:   rgba(255, 255, 255, 0.65);  /* footer legal line    */
   --eo-rule-on-dark:    rgba(255, 255, 255, 0.15);
   --eo-glass:           rgba(255, 255, 255, 0.96);  /* sticky header        */
-  --eo-glass-strong:    rgba(255, 255, 255, 0.86);  /* header once scrolled */
   --eo-pill-on-media:   rgba(255, 255, 255, 0.92);  /* pill on a news image */
 
   /* -- Interaction light (2026-11 motion layer) ---------------------------
@@ -72,7 +71,6 @@
      footer art.                                                           */
   --eo-sheen:           rgba(255, 255, 255, 0.30);
   --eo-spotlight:       rgba(107, 75, 181, 0.11);   /* purple-bright at 11%  */
-  --eo-spotlight-edge:  rgba(107, 75, 181, 0.28);
 
   /* -- Feedback ----------------------------------------------------------- */
   --eo-error:         #B3261E;
@@ -132,7 +130,6 @@
   --eo-shadow-lift:   0 10px 30px rgba(90, 63, 153, 0.16);
   --eo-shadow-bar:    0 -6px 20px rgba(27, 27, 47, 0.18);
   --eo-shadow-header: 0 12px 32px -20px rgba(27, 27, 47, 0.30);
-  --eo-shadow-art:    0 30px 60px -30px rgba(62, 42, 112, 0.45);
   --eo-max-width:     1160px;
 
   /* -- Motion --------------------------------------------------------------
@@ -143,7 +140,6 @@
      state immediately.                   */
   --eo-ease-out:      cubic-bezier(0.22, 1, 0.36, 1);
   --eo-ease-exit:     cubic-bezier(0.4, 0, 0.7, 1);
-  --eo-ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
   --eo-dur-fast:      160ms;     /* hover color, caret                      */
   --eo-dur-base:      240ms;     /* menus, sheet, help bar                  */
   --eo-dur-lift:      280ms;     /* card and button lift                    */
