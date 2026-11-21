@@ -1181,8 +1181,11 @@ body:not(.nav-open) .site-header { view-transition-name: eo-header; }
 
 /* -- Purple band: the bar texture on its own layer ------------------------
    Moved off the band's background so it can drift against the scroll
-   (below) without repainting the gradient. */
-.band { position: relative; isolation: isolate; overflow: hidden; }
+   (below) without repainting the gradient. overflow: clip, not hidden: a
+   hidden box is a scroll container, which would pin the texture's view()
+   timeline to the band itself and stop the drift (hidden stays as the
+   fallback for browsers without clip, which have no scroll timelines). */
+.band { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
 .band::before {
   content: "";
   position: absolute; inset: -64px 0; z-index: -1;
