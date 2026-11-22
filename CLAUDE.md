@@ -272,4 +272,8 @@ read `wordpress/README.md` first, then `wordpress/docs/report.md`. Its own
 rules: generated files (`theme.json`, the page files, the patterns, the
 utilities stylesheet) are never hand-edited; `eo-site.css` stays identical
 to the source and every WordPress adjustment goes in `eo-wp.css`; copy
-comes from `wordpress/source/content/` only.
+comes from `wordpress/source/content/` only. After any change to a page, the
+tokens, `eo-site.css`, `eo-site-template.js` or a texture, run
+`npm run source:refresh` in `wordpress/` and redeploy as its README says.
+Its `npm test` fails on a drifted stylesheet, script or texture, but not on
+changed page copy, so a content edit needs the refresh by habit.

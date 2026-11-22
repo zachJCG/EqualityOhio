@@ -22,8 +22,17 @@ docs/                      report, conversion report, reference screenshots
 | `themes/equality-ohio/theme.json` | `assets/css/eo-brand-tokens.css` | `npm run theme:json` |
 | `plugins/eo-site/content/pages/*.html`, `data/pages.json`, `assets/css/eo-utilities.css`, `docs/conversion-report.md` | `source/content/` | `npm run pages:build` |
 | `themes/equality-ohio/patterns/*.php` | the page files | `npm run pages:build` |
+| `assets/css/eo-brand-tokens.css`, `assets/css/eo-site.css`, `assets/js/eo-site.js`, `assets/textures/*.svg` | the Next.js site's `public/` (texture paths made relative, the script's marked `WP:` edits applied) | `npm run theme:sync` |
 
 `npm test` fails if any of them is stale. Edit the tokens or the source content and rerun; do not edit the outputs.
+
+## When the Next.js site changes
+
+```
+npm run source:refresh    # handoff content from ../public, theme copies, theme.json, pages, patterns
+```
+
+Then review the diff, run the checks below on the local site, bump `Version` in `themes/equality-ohio/style.css` and `plugins/eo-site/eo-site.php` (the theme's version is its assets' cache-buster), package, upload both, and run the `eo-site/import` ability. `eo-site/verify` then reports every stored page against its plugin file.
 
 ## Run it locally
 
@@ -54,7 +63,7 @@ Run the site checks logged out (the admin bar changes the layout). The e2e scrip
 
 ## Where it is
 
-Staging: https://zach364b94579cd.wpcomstaging.com (WordPress.com, Personal plan, Coming Soon on; site ID 258848468). The theme and plugin were uploaded through the WordPress.com API and the plugin imported the pages on activation. The plugin publishes three WordPress Abilities an agent connected through WordPress.com can run: `eo-site/import`, `eo-site/staging`, `eo-site/verify` (read-only).
+Staging: https://zach364b94579cd.wpcomstaging.com (WordPress.com, Personal plan, Coming Soon on; site ID 258848468). The theme and plugin were uploaded through the WordPress.com API and the plugin imported the pages on activation; 0.2.0 (2026-11-22) was uploaded the same way and the pages re-imported with the `eo-site/import` ability. The plugin publishes three WordPress Abilities an agent connected through WordPress.com can run: `eo-site/import`, `eo-site/staging`, `eo-site/verify` (read-only).
 
 ## Install on a WordPress host
 

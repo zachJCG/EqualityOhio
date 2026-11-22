@@ -1,6 +1,7 @@
 /* Generated files are current: theme.json from the tokens, the 29 page files
-   and registry from source/content, the patterns from the page files. Runs
-   without a WordPress. */
+   and registry from source/content, the patterns from the page files, and
+   the theme's copies of the Next.js design files (tokens, eo-site.css, the
+   behaviors script, textures). Runs without a WordPress. */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
@@ -15,6 +16,7 @@ const run = (script) => execFileSync(process.execPath, [join(root, 'tools', scri
 test('theme.json is generated from the tokens', () => { assert.match(run('build-theme-json.mjs'), /current/); });
 test('page files and registry are generated from source/content', () => { assert.match(run('html-to-blocks.mjs'), /current/); });
 test('patterns are generated from the page files', () => { assert.match(run('build-patterns.mjs'), /patterns/); });
+test('theme copies of the source design files are current', () => { assert.match(run('sync-theme-assets.mjs'), /current|skipped/); });
 
 test('no color literal outside the tokens file', () => {
   const css = join(root, 'themes/equality-ohio/assets/css');

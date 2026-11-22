@@ -5,6 +5,8 @@
   "description": "WordPress block theme, companion plugin, page converter and test suite for equalityohio.org",
   "scripts": {
     "theme:json": "node tools/build-theme-json.mjs",
+    "theme:sync": "node tools/sync-theme-assets.mjs",
+    "source:refresh": "sh tools/refresh-from-source.sh",
     "pages:build": "node tools/html-to-blocks.mjs && node tools/build-patterns.mjs",
     "pages:check": "node tools/html-to-blocks.mjs --check && node tools/build-patterns.mjs --check",
     "patterns:build": "node tools/build-patterns.mjs",

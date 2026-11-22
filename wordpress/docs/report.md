@@ -84,6 +84,28 @@ What a signed-out visitor gets today (checked with curl): HTTP 200 with the Comi
 
 **WordPress.com settings API vs. the option**: the settings tool still reports the date-based permalink structure, while the stored option (and the plugin's verify) says `/%postname%/`. Permalink settings are a Business-plan screen, so WordPress.com may be forcing its own structure for posts on this plan; pages are unaffected (every page answers at its clean path). It matters only if posts are imported (D3).
 
+## Pass 2: the review pass and the motion layer (2026-11-22)
+
+Pass 1 was cut from `ee60763`. Since then the Next.js site had its review pass and the motion and graphics layer (`26d1293`, `b47a8b8`, `f888057`). This pass brings both across and redeploys. Theme and plugin are **0.2.0**.
+
+- **Content**: the handoff was regenerated from the current pages (`tools/build_package.sh`; the reference builder now reads the dated key `analyze.py` writes instead of a fixed 2026-11-20). Four pages changed: `/` (the hero mark replaces the logo image, icon tiles on the three path cards, the Roadmap card in "The latest"), `/news/` (the press release leads, "five recent posts"), `/votersguide/` and `/about/jobs-internships/` (no open positions). The four expired election blocks are gone from the source itself, so the converter drops none. Raw HTML blocks: 14 (the hero mark and the three card icons are inline SVG).
+- **Theme copies**: tokens, `eo-site.css`, the behaviors script (card spotlight added) and two new textures (`media-mark.svg`, `footer-mark.svg`). `eo-site.css` now differs from the source only in its four texture paths. `npm run theme:sync` makes the copies and `npm test` fails when they drift; `npm run source:refresh` runs the whole refresh.
+- **WordPress-only additions** (`eo-wp.css`, `inc/chrome.php`): the button sheen and press on the Button block's inner link; reading progress on the long guides keyed on the page-slug body class; one view-transition name for the top equality bar; `aria-current` on the primary nav by the same rule as `lib/chrome.mjs` (this page `page`, its section `true`), which pass 1 did not print, so the current section is underlined as in the source; card links `inline-block` so they keep their 0.8rem gap; on phones the footer no longer adds its 4rem margin under the help bar. With the last two, page heights match the source within 6px (home 4126 vs 4124 at 1280, 7329 vs 7323 at 390; legal clinic 5931 vs 5931 at 390, which was 64px over).
+
+| Check (local WordPress, logged out unless the check needs the editor) | Result |
+|---|---|
+| `npm test` (generated files and theme copies current, no color literal, no inline script, links) | 6/6 |
+| `npm run test:site`: text, outline, anchor and link parity for all 29 pages; all 553 legacy paths | 32/32 |
+| Editor validity and save round trip | 29/29 pages, 0 invalid, all unchanged after save |
+| axe WCAG 2.1 A/AA at 390 and 1280, incl. 404, open menu, open dropdown, intake after empty submit | 0 violations |
+| Behaviors | 35/35 |
+| Motion in the browser: hero bars animate, sheen sweeps, spotlight follows the pointer, reading progress on `/about/history/`, one element per view-transition name, all durations 0 under reduced motion | yes |
+| Root repository `npm test` with `wordpress/` merged in | 50/50 |
+
+**Deployed to WordPress.com** through the API: theme and plugin zips uploaded over 0.1.0 (both active), then `eo-site/import` with the owner's approval. Its log: the three PDFs already in the library, 29 pages updated in place (IDs unchanged), settings and the five menus as before. `eo-site/verify` afterwards: 29/29 stored pages identical to their plugin files, theme `equality-ohio`, front page `/`, menus 28 + 6/6/6/7, staging on. Signed out, the new `eo-wp.css`, textures and `style.css` (0.2.0) answer 200.
+
+**Not verified on WordPress.com**: the rendered pages, for the reason in Phase 4 (Coming Soon serves its own screen to signed-out requests, and the screenshot and rendered-page tools see that screen). They can be seen signed in to WordPress.com.
+
 ## Departures from the brief
 
 1. **D5, where the code lives**: this session's GitHub access is scoped to the three existing repositories, so a new private `equality-ohio-wp` repository could not be created. The work is the `wordpress/` folder on branch `claude/laughing-gates-cklwt2` of `zachJCG/EqualityOhio` (the brief's alternative). Moving it to its own repository is a copy.
