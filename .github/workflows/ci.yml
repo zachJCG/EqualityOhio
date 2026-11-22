@@ -1,0 +1,75 @@
+# CI for the Equality Ohio site: static checks, a production build, then the
+# Playwright suite (axe WCAG 2.1 AA, routes and redirects, behavior) against
+# `next start`. The same commands a developer runs locally.
+#
+# A red `npm test` still lets the build and the browser suite run, so one
+# push reports every failure; the job fails if any step failed.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # The preview gate password, shared by the server under test and the
+      # suite. Forks and unset secrets fall back to the documented soft
+      # default (lib/preview-gate.mjs).
+      STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD || 'EO2026' }}
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - id: install
+        run: npm ci
+
+      # Links, redirects + live-sitemap coverage, tokens, generated regions,
+      # site rules and content freshness. The freshness test is dated on
+      # purpose: an event that passes turns it red until the block is deleted.
+      - name: npm test
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm test
+
+      - id: build
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run build
+
+      - name: Install Chromium for Playwright
+        id: browsers
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: npx playwright install --with-deps chromium
+
+      # Playwright starts `npm run start -- -p 3100` itself (webServer) and
+      # signs in through the gate with STAGING_PASSWORD (global setup).
+      - name: Playwright (a11y, routes, behavior)
+        if: ${{ !cancelled() && steps.browsers.outcome == 'success' }}
+        run: npm run test:e2e
+
+      # Traces are off when CI is set (playwright.config.mjs), so the report
+      # holds no eo_preview cookie and no STAGING_PASSWORD: this repository
+      # is public, and GitHub masks secrets in logs but not in artifacts.
+      - name: Upload Playwright report
+        if: ${{ failure() && steps.browsers.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
