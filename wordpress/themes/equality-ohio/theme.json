@@ -1,0 +1,423 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": false,
+    "useRootPaddingAwareAlignments": false,
+    "layout": {
+      "contentSize": "1160px",
+      "wideSize": "1160px"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "eo-purple",
+          "name": "EO Purple",
+          "color": "#5A3F99"
+        },
+        {
+          "slug": "eo-blue",
+          "name": "EO Blue",
+          "color": "#0093D0"
+        },
+        {
+          "slug": "eo-green",
+          "name": "EO Green",
+          "color": "#9FCF67"
+        },
+        {
+          "slug": "eo-purple-deep",
+          "name": "EO Purple Deep",
+          "color": "#3E2A70"
+        },
+        {
+          "slug": "eo-purple-bright",
+          "name": "EO Purple Bright",
+          "color": "#6B4BB5"
+        },
+        {
+          "slug": "eo-purple-soft",
+          "name": "EO Purple Soft",
+          "color": "#F5F3FA"
+        },
+        {
+          "slug": "eo-purple-border",
+          "name": "EO Purple Border",
+          "color": "#E4DFF1"
+        },
+        {
+          "slug": "eo-blue-ink",
+          "name": "EO Blue Ink",
+          "color": "#006C99"
+        },
+        {
+          "slug": "eo-blue-soft",
+          "name": "EO Blue Soft",
+          "color": "#E8F3FA"
+        },
+        {
+          "slug": "eo-blue-wash",
+          "name": "EO Blue Wash",
+          "color": "rgba(0, 147, 208, 0.10)"
+        },
+        {
+          "slug": "eo-green-wash",
+          "name": "EO Green Wash",
+          "color": "rgba(159, 207, 103, 0.10)"
+        },
+        {
+          "slug": "eo-cornflower",
+          "name": "EO Cornflower",
+          "color": "#4677D0"
+        },
+        {
+          "slug": "eo-indigo",
+          "name": "EO Indigo",
+          "color": "#6E63E2"
+        },
+        {
+          "slug": "eo-gold",
+          "name": "EO Gold",
+          "color": "#EEBE05"
+        },
+        {
+          "slug": "eo-coral",
+          "name": "EO Coral",
+          "color": "#FF914D"
+        },
+        {
+          "slug": "eo-magenta",
+          "name": "EO Magenta",
+          "color": "#C84BC8"
+        },
+        {
+          "slug": "eo-violet",
+          "name": "EO Violet",
+          "color": "#5E17EB"
+        },
+        {
+          "slug": "eo-white",
+          "name": "EO White",
+          "color": "#FFFFFF"
+        },
+        {
+          "slug": "eo-ink",
+          "name": "EO Ink",
+          "color": "#1B1B2F"
+        },
+        {
+          "slug": "eo-body-text",
+          "name": "EO Body Text",
+          "color": "#33333F"
+        },
+        {
+          "slug": "eo-mute",
+          "name": "EO Mute",
+          "color": "#5E5E70"
+        },
+        {
+          "slug": "eo-bg-soft",
+          "name": "EO Bg Soft",
+          "color": "#F7F6FB"
+        },
+        {
+          "slug": "eo-border",
+          "name": "EO Border",
+          "color": "#E6E4EF"
+        },
+        {
+          "slug": "eo-input-line",
+          "name": "EO Input Line",
+          "color": "#7F7C9F"
+        },
+        {
+          "slug": "eo-on-dark-strong",
+          "name": "EO On Dark Strong",
+          "color": "rgba(255, 255, 255, 0.88)"
+        },
+        {
+          "slug": "eo-on-dark-muted",
+          "name": "EO On Dark Muted",
+          "color": "rgba(255, 255, 255, 0.85)"
+        },
+        {
+          "slug": "eo-on-dark-subtle",
+          "name": "EO On Dark Subtle",
+          "color": "rgba(255, 255, 255, 0.75)"
+        },
+        {
+          "slug": "eo-on-dark-faint",
+          "name": "EO On Dark Faint",
+          "color": "rgba(255, 255, 255, 0.65)"
+        },
+        {
+          "slug": "eo-rule-on-dark",
+          "name": "EO Rule On Dark",
+          "color": "rgba(255, 255, 255, 0.15)"
+        },
+        {
+          "slug": "eo-glass",
+          "name": "EO Glass",
+          "color": "rgba(255, 255, 255, 0.96)"
+        },
+        {
+          "slug": "eo-pill-on-media",
+          "name": "EO Pill On Media",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        {
+          "slug": "eo-error",
+          "name": "EO Error",
+          "color": "#B3261E"
+        },
+        {
+          "slug": "eo-error-soft",
+          "name": "EO Error Soft",
+          "color": "#FDECEA"
+        },
+        {
+          "slug": "eo-success-bg",
+          "name": "EO Success Bg",
+          "color": "#F0F9EB"
+        },
+        {
+          "slug": "eo-success-ink",
+          "name": "EO Success Ink",
+          "color": "#2F6B14"
+        }
+      ],
+      "gradients": [
+        {
+          "slug": "eo-equality-bar",
+          "name": "EO Equality Bar",
+          "gradient": "var(--eo-equality-bar)"
+        },
+        {
+          "slug": "eo-policy",
+          "name": "EO Policy Gradient",
+          "gradient": "var(--eo-policy-gradient)"
+        }
+      ],
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "defaultDuotone": false,
+      "custom": false,
+      "customGradient": false,
+      "customDuotone": false,
+      "background": true,
+      "text": true,
+      "link": false
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "slug": "eo-body",
+          "name": "Open Sans (body)",
+          "fontFamily": "'Open Sans', 'Helvetica Neue', Arial, sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Open Sans",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/open-sans-latin-400-normal.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Open Sans",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/open-sans-latin-400-italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Open Sans",
+              "fontWeight": "600",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/open-sans-latin-600-normal.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Open Sans",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/open-sans-latin-700-normal.woff2"
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "eo-display",
+          "name": "Montserrat (display)",
+          "fontFamily": "'Montserrat', 'Helvetica Neue', Arial, sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Montserrat",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/montserrat-latin-400-normal.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Montserrat",
+              "fontWeight": "600",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/montserrat-latin-600-normal.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Montserrat",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/montserrat-latin-700-normal.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Montserrat",
+              "fontWeight": "800",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/montserrat-latin-800-normal.woff2"
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "eo-emphasis",
+          "name": "League Spartan (emphasis)",
+          "fontFamily": "'League Spartan', 'Montserrat', Arial, sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "League Spartan",
+              "fontWeight": "600",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/league-spartan-latin-600-normal.woff2"
+              ]
+            },
+            {
+              "fontFamily": "League Spartan",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/league-spartan-latin-700-normal.woff2"
+              ]
+            }
+          ]
+        }
+      ],
+      "defaultFontSizes": false,
+      "customFontSize": false,
+      "fluid": false,
+      "fontSizes": [
+        {
+          "slug": "eo-small",
+          "name": "Small",
+          "size": "0.82rem"
+        },
+        {
+          "slug": "eo-body",
+          "name": "Body",
+          "size": "17px"
+        },
+        {
+          "slug": "eo-lede",
+          "name": "Lede",
+          "size": "1.15rem"
+        },
+        {
+          "slug": "eo-h3",
+          "name": "Heading 3",
+          "size": "1.25rem"
+        }
+      ],
+      "dropCap": false,
+      "fontStyle": false,
+      "fontWeight": false,
+      "letterSpacing": false,
+      "lineHeight": false,
+      "textDecoration": false,
+      "textTransform": false
+    },
+    "spacing": {
+      "padding": false,
+      "margin": false,
+      "units": [
+        "rem",
+        "em",
+        "px",
+        "%"
+      ]
+    },
+    "border": {
+      "color": false,
+      "radius": false,
+      "style": false,
+      "width": false
+    },
+    "shadow": {
+      "defaultPresets": false
+    },
+    "custom": {
+      "navHeight": "76px",
+      "maxWidth": "1160px",
+      "radius": {
+        "sm": "6px",
+        "md": "10px",
+        "lg": "16px"
+      }
+    },
+    "blocks": {
+      "core/button": {
+        "color": {
+          "background": false,
+          "text": false
+        }
+      }
+    }
+  },
+  "styles": {},
+  "templateParts": [
+    {
+      "name": "header",
+      "title": "Header",
+      "area": "header"
+    },
+    {
+      "name": "footer",
+      "title": "Footer",
+      "area": "footer"
+    },
+    {
+      "name": "help-bar",
+      "title": "Legal Clinic help bar",
+      "area": "uncategorized"
+    }
+  ],
+  "customTemplates": [
+    {
+      "name": "page-legal-guide",
+      "title": "Legal Clinic guide (with help bar)",
+      "postTypes": [
+        "page"
+      ]
+    }
+  ],
+  "patterns": []
+}

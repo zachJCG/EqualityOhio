@@ -1,0 +1,6 @@
+node_modules/
+docs/screenshots/*
+!docs/screenshots/README.md
+!docs/screenshots/keep/
+.local-wp/
+dist/

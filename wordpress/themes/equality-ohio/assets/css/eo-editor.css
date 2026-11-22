@@ -1,0 +1,9 @@
+/* Editor-only adjustments: the block canvas is not the page, so give the
+   sections their width and keep the inserter usable. */
+.editor-styles-wrapper { font-family: var(--eo-font-body); color: var(--eo-body-text); background: var(--eo-bg); }
+.editor-styles-wrapper .wp-block-group.section,
+.editor-styles-wrapper .wp-block-group.band,
+.editor-styles-wrapper .wp-block-group.hero { max-width: none; }
+.editor-styles-wrapper .eo-ssr { pointer-events: none; }
+.editor-styles-wrapper .form-success { display: block; }
+.editor-styles-wrapper .help-bar { display: flex; position: static; }

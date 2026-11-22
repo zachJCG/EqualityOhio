@@ -1,0 +1,47 @@
+Our Work · Local Progress
+Municipal Equality Map
+Use this map to identify what nondiscrimination protections exist for the LGBTQ+ community in various localities across Ohio.
+In 35 municipalities and 1 county in Ohio, discrimination in employment, housing, and public accommodations against LGBTQ+ people is illegal.
+Here’s the list of 36 localities: Akron, Athens, Beachwood, Bexley, Bowling Green, Cincinnati, Cleveland, Cleveland Heights, Columbus, Coshocton, Cuyahoga County, Dayton, Dublin, East Cleveland, Galion, Gambier, Golf Manor, Kent, Lakewood, Medina, Newark, Norwood, Oberlin, Olmsted Falls, Oxford, Portsmouth, Reynoldsburg, Sandusky, Shaker Heights, South Euclid, Toledo, University Heights, Westerville, Worthington, Yellow Springs, and Youngstown.
+The Map
+Mapping Equality
+Interactive map coming to this preview. The live site’s municipal equality map is an interactive tool — a statewide map embed plus individual detail pages for the more than 250 Ohio cities whose codes Equality Ohio analyzed. It isn’t recreated in this design preview yet; per‑city protection data returns here as a Supabase‑driven feature, so each city’s page can be updated without a redeploy. In the meantime, explore the current map on the live site:
+equalityohio.org/our-work/local/municipal-map.
+Ohio doesn’t have statewide, comprehensive laws prohibiting discrimination against LGBTQ+ people yet. There are also no laws banning conversion “therapy” on minors throughout the state. However, the local municipalities listed above have done the work themselves, and passed these or other laws protecting LGBTQ+ people from discrimination.
+Ohio is one of 29 states that leaves LGBTQ people out of laws that make discrimination illegal. However, some individual communities have enacted these protections themselves.
+Equality Ohio performed an analysis on the city codes of over 250 Ohio cities for this map.
+35
+Ohio municipalities where anti‑LGBTQ+ discrimination is illegal
+1
+Ohio county with the same protections
+250+
+Ohio city codes analyzed for this map
+29
+States, including Ohio, that leave LGBTQ people out of nondiscrimination laws
+What the Map Tracks
+Three areas of protection
+Employment Discrimination
+Discrimination in the workplace can take many forms, such as not being hired because you are gay, jokes or harassment because you are bisexual, or even being “deadnamed.” If your city has local protections, there may be an agency or commission you can contact locally. If not, you can file a report with the Ohio Civil Rights Commission.
+Housing Discrimination
+If a landlord refuses to rent, show you an apartment, or suddenly raises your rent, it is possible you are a victim of discrimination. Reporting discrimination varies depending on where you live and whether LGBTQ+ people are protected under your community’s laws.
+Public Accommodations Discrimination
+Public accommodations are things like stores, restaurants, parks and movie theaters. If your community protects LGBTQ+ people from this type of discrimination, a business establishment may not refuse you service on the grounds that you are LGBTQ+.
+Share Your Story
+Do you have a story to share?
+Personal stories about discrimination are very powerful. If you have experienced discrimination and want to speak out about it, please tell us your story of discrimination!
+While Ohio’s discrimination laws do not include LGBTQ+ people, the Ohio Civil Rights Commission may be able to help you.
+Tell Us Your Story
+How to File a Complaint civ.ohio.gov ↗
+Take Action Locally
+I want my community to protect LGBTQ people from discrimination!
+Write a Letter to the Editor
+Don’t underestimate the power of a good, old fashioned letter to the editor to get a conversation started.
+If you can tie it to a recent story the newspaper has published, it may have a better chance at making the cut.
+Over 200 cities in the country protect lesbian, gay, bisexual, transgender and queer people from discrimination. But [MUNICIPALITY] doesn’t. Why? All of those cities send a message that their city is welcoming and affirming of everybody. I think it’s time that [MUNICIPALITY] join the other cities in Ohio that have already modernized their laws.
+Reach out to Equality Ohio for help
+Our team can help you organize for nondiscrimination protections where you live.
+Contact Us
+The organizing‑help form returns with the production build. Until then, email info@equalityohio.org.
+Where you live shouldn’t decide your rights.
+Some individual communities have enacted these protections themselves — help bring them to yours.
+Get Involved

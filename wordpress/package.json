@@ -1,0 +1,21 @@
+{
+  "name": "equality-ohio-wordpress",
+  "private": true,
+  "type": "module",
+  "description": "WordPress block theme, companion plugin, page converter and test suite for equalityohio.org",
+  "scripts": {
+    "theme:json": "node tools/build-theme-json.mjs",
+    "pages:build": "node tools/html-to-blocks.mjs && node tools/build-patterns.mjs",
+    "pages:check": "node tools/html-to-blocks.mjs --check && node tools/build-patterns.mjs --check",
+    "patterns:build": "node tools/build-patterns.mjs",
+    "test": "node --test tests/generated.test.mjs",
+    "test:site": "node --test tests/parity.test.mjs tests/redirects.test.mjs",
+    "test:e2e": "node tests/e2e/validate-blocks.mjs && node tests/e2e/editor-roundtrip.mjs && node tests/e2e/axe.mjs && node tests/e2e/behavior.mjs",
+    "screenshots": "node tests/e2e/screenshots.mjs",
+    "local:setup": "sh tools/local-wp.sh"
+  },
+  "devDependencies": {
+    "linkedom": "^0.18.5",
+    "axe-core": "^4.10.2"
+  }
+}

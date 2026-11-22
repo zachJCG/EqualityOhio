@@ -1,0 +1,4160 @@
+[
+  {
+    "url": "/about",
+    "wp_path": "/about/",
+    "slug": "about",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/about.html",
+    "content_file": "content/main/about.html",
+    "page_id": "about",
+    "nav_label": "Mission & Values",
+    "h1": "Who we are",
+    "seo_title": "About Us — Equality Ohio",
+    "seo_description": "Founded in 2005, Equality Ohio is Ohio's statewide LGBTQ+ advocacy and legal aid organization.",
+    "share_card": "/assets/og/about.png",
+    "noindex": false,
+    "sitemap_priority": 0.8,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Who we are",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Vision",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Mission",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Our Core Values",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "People first, community forward",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Liberation",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Trust & collaboration",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Data-driven",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Safety",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Rooted in advocacy since 2005",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Founded after the marriage ban",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Equal Housing & Employment Act",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Why Marriage Matters Ohio",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "The Gay Games",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Ohio Business Competes",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Ohio Fairness Act",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Roadmap Back to Equality",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "More about the organization",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Our boards",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Staff & interns",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Careers & internships",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "News & policy",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/about/history",
+      "/about/jobs-internships",
+      "/about/leadership",
+      "/about/staff-interns",
+      "/news"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 2,
+    "iframes": [],
+    "bytes_main": 4833,
+    "text_file": "content/text/about.txt",
+    "text_words": 372,
+    "text_sha256": "c1a12a67ac1c4317bb5f16c80fe15e42687abf51f5c5f8da223b85a5f2322279"
+  },
+  {
+    "url": "/about/history",
+    "wp_path": "/about/history/",
+    "slug": "history",
+    "parent_url": "/about",
+    "depth": 2,
+    "source_file": "public/about/history.html",
+    "content_file": "content/main/about/history.html",
+    "page_id": "history",
+    "nav_label": "Our History",
+    "h1": "Our History",
+    "seo_title": "Our History — Equality Ohio",
+    "seo_description": "Founded in 2005 by 65 activists and allies, Equality Ohio has spent two decades advancing lived and legal equality for LGBTQ+ Ohioans.",
+    "share_card": "/assets/og/about.png",
+    "noindex": false,
+    "sitemap_priority": 0.5,
+    "sitemap_changefreq": "yearly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Our History",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Rooted in advocacy",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "65 founders, one mission",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "A bipartisan first",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Why Marriage Matters Ohio launches",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Cleveland+Akron host the Gay Games",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Obergefell — and Ohio Business Competes",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "The Ohio Fairness Act gets a hearing",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Twenty years of Equality Ohio",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Winning hearts and minds",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Why Marriage Matters Ohio",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "The Gay Games",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Building the modern fight",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Ohio Business Competes",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "The Ohio Fairness Act",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Two decades later",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "20th anniversary honorees",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Mission & values",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "What we do today",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Help write the next chapter.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "rooted-in-advocacy",
+      "hearts-and-minds",
+      "modern-fight",
+      "two-decades"
+    ],
+    "forms": [],
+    "internal_links": [
+      "/about",
+      "/get-involved",
+      "/our-work",
+      "/our-work/business",
+      "/our-work/legacy-of-equality"
+    ],
+    "external_links": [
+      {
+        "href": "https://www.youtube.com/watch?v=_8XbCdhug3M",
+        "text": "YouTube"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 170,
+        "text": "Pending embed: the live history page embeds a video of the 2014 Gay Games Opening Ceremony that isn’t recreated in this preview. Watch it on YouTube ."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 4,
+    "iframes": [],
+    "bytes_main": 8285,
+    "text_file": "content/text/about/history.txt",
+    "text_words": 798,
+    "text_sha256": "979f330964c4ac6a482cdfb6baa933860b2627f55fd15bce5a87b2710eb52627"
+  },
+  {
+    "url": "/about/jobs-internships",
+    "wp_path": "/about/jobs-internships/",
+    "slug": "jobs-internships",
+    "parent_url": "/about",
+    "depth": 2,
+    "source_file": "public/about/jobs-internships.html",
+    "content_file": "content/main/about/jobs-internships.html",
+    "page_id": "jobs",
+    "nav_label": "Jobs & Internships",
+    "h1": "Jobs & Internships",
+    "seo_title": "Jobs & Internships — Equality Ohio",
+    "seo_description": "Careers, fellowships, and internships with Equality Ohio — current openings and how to apply.",
+    "share_card": "/assets/og/about.png",
+    "noindex": false,
+    "sitemap_priority": 0.6,
+    "sitemap_changefreq": "weekly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Jobs & Internships",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Current Openings",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Fall Law Student Externship",
+        "id": null
+      },
+      {
+        "level": 4,
+        "text": "Position details",
+        "id": null
+      },
+      {
+        "level": 4,
+        "text": "Duties",
+        "id": null
+      },
+      {
+        "level": 4,
+        "text": "Shared organization responsibilities",
+        "id": null
+      },
+      {
+        "level": 4,
+        "text": "Qualifications",
+        "id": null
+      },
+      {
+        "level": 4,
+        "text": "Work environment",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Equal Employment Opportunity",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Not seeing the right role?",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "fall-legal-extern"
+    ],
+    "forms": [],
+    "internal_links": [
+      "/about",
+      "/get-involved/volunteer"
+    ],
+    "external_links": [
+      {
+        "href": "https://equalityohio.bamboohr.com/careers/30",
+        "text": "Apply Here"
+      },
+      {
+        "href": "https://equalityohio.bamboohr.com/careers/30",
+        "text": "Fall Law Student Externship"
+      },
+      {
+        "href": "https://equalityohio.bamboohr.com/careers",
+        "text": "Equality Ohio’s BambooHR careers page"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 5,
+    "iframes": [],
+    "bytes_main": 9489,
+    "text_file": "content/text/about/jobs-internships.txt",
+    "text_words": 880,
+    "text_sha256": "634b52f4fb3f1540f7f0198b99e0ab3d3c698ddf4bb8a4727b0e62a877c6fefc"
+  },
+  {
+    "url": "/about/leadership",
+    "wp_path": "/about/leadership/",
+    "slug": "leadership",
+    "parent_url": "/about",
+    "depth": 2,
+    "source_file": "public/about/leadership.html",
+    "content_file": "content/main/about/leadership.html",
+    "page_id": "leadership",
+    "nav_label": "Board of Directors",
+    "h1": "Board of Directors",
+    "seo_title": "Board of Directors — Equality Ohio",
+    "seo_description": "Meet the boards of the Equality Ohio Education Fund (501c3) and Equality Ohio (501c4).",
+    "share_card": "/assets/og/about.png",
+    "noindex": false,
+    "sitemap_priority": 0.6,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Board of Directors",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Equality Ohio Education Fund Board",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Mary “Lynn” Readey",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Levent Talgar",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Heidi Bostelman",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Zach McCune",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Randle Moore",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "LaRaun Clayton, MBA, LSW",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Tamara Lunan",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Kathy Bowman",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Tayo Clyburn, Ph.D.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Equality Ohio Board",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Eileen Galvin",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Tim Johnson",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Rini Das",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Dominiece Hoelyfield, MS and SHRM-CP",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Brandon West",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Julie Posey",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Kevin McGruder",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Patrick McKelvey, MSCP, LPCC-S, NCC, ECMHC, OIMHP-III",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Shelly Riggs",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Board governance",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "governance"
+    ],
+    "forms": [],
+    "internal_links": [
+      "/assets/docs/EOEF-Organizational-Financial-Conflict-of-Interest-combined.pdf"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 155,
+        "text": "Mockup note: headshots and full bios load in during content migration — initials are placeholders."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 2,
+    "iframes": [],
+    "bytes_main": 6102,
+    "text_file": "content/text/about/leadership.txt",
+    "text_words": 286,
+    "text_sha256": "c7aca46e2894a148488d5a5f49a6ce559582f30a0e64a76f5bc40a33bb6d8dfa"
+  },
+  {
+    "url": "/about/staff-interns",
+    "wp_path": "/about/staff-interns/",
+    "slug": "staff-interns",
+    "parent_url": "/about",
+    "depth": 2,
+    "source_file": "public/about/staff-interns.html",
+    "content_file": "content/main/about/staff-interns.html",
+    "page_id": "staff",
+    "nav_label": "Staff & Interns",
+    "h1": "Staff & Interns",
+    "seo_title": "Staff & Interns — Equality Ohio",
+    "seo_description": "Meet the staff of Equality Ohio — the team working for lived and legal equality for LGBTQ+ Ohioans.",
+    "share_card": "/assets/og/about.png",
+    "noindex": false,
+    "sitemap_priority": 0.6,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Staff & Interns",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Josh Meek",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Paul Peters, ESQ.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Jen Kuhn",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Becca Alexander, ESQ.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Dwayne Steward, MPA",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Sheena Barnes",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Sérah Munroe",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Joseph Soza",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Leandrah Alexis",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Jessi Sadaka",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Justin Joseph, ESQ.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Kate Mozynski, Esq.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Sol A. Kersey, ESQ.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Kim Welter",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Mary Zaller",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Board of Directors",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Join the team",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "josh-meeks",
+      "paul-peters",
+      "jen-kuhn",
+      "becca-alexander",
+      "dwayne-steward",
+      "sheena-barnes",
+      "serah-munroe",
+      "joseph-soza",
+      "leandrah-alexis",
+      "jessi-sadaka",
+      "justin-joseph",
+      "kate-mozynski",
+      "sol-a-kersey",
+      "kim-welter-2",
+      "mary-zaller-2"
+    ],
+    "forms": [],
+    "internal_links": [
+      "/about/jobs-internships",
+      "/about/leadership"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 154,
+        "text": "Mockup note: headshots and full bios load in during content migration — initials are placeholders."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 2,
+    "iframes": [],
+    "bytes_main": 6325,
+    "text_file": "content/text/about/staff-interns.txt",
+    "text_words": 398,
+    "text_sha256": "a35a425dc9eeb21946a74f8a55b289d667ea7f22cc57de8cb4509c672fb79452"
+  },
+  {
+    "url": "/contact",
+    "wp_path": "/contact/",
+    "slug": "contact",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/contact.html",
+    "content_file": "content/main/contact.html",
+    "page_id": "contact",
+    "nav_label": "Contact",
+    "h1": "Talk to us",
+    "seo_title": "Contact — Equality Ohio",
+    "seo_description": "Get in touch with Equality Ohio — general inquiries, the Legal Clinic, giving, and press.",
+    "share_card": "/assets/og/about.png",
+    "noindex": false,
+    "sitemap_priority": 0.7,
+    "sitemap_changefreq": "yearly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Talk to us",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "(614) 224-0400",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "855‑LGBT‑LAW",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Development team",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Social media & store",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Send a message",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Message sent — in the real build.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "ct-name",
+      "ct-email",
+      "ct-topic",
+      "ct-msg"
+    ],
+    "forms": [
+      {
+        "mock": true,
+        "aria_label": "Contact form",
+        "submit": "Send Message",
+        "fieldsets": [],
+        "fields": [
+          {
+            "label": "Name*",
+            "type": "text",
+            "id": "ct-name",
+            "name": "name",
+            "required": true,
+            "autocomplete": "name"
+          },
+          {
+            "label": "Email*",
+            "type": "email",
+            "id": "ct-email",
+            "name": "email",
+            "required": true,
+            "autocomplete": "email"
+          },
+          {
+            "label": "What’s this about?",
+            "type": "select",
+            "id": "ct-topic",
+            "name": "topic",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Message*",
+            "type": "textarea",
+            "id": "ct-msg",
+            "name": "message",
+            "required": true,
+            "autocomplete": null
+          }
+        ]
+      }
+    ],
+    "internal_links": [
+      "/legal-clinic/intake"
+    ],
+    "external_links": [
+      {
+        "href": "https://x.com/equalityohio",
+        "text": "X"
+      },
+      {
+        "href": "https://www.facebook.com/equalityohio",
+        "text": "Facebook"
+      },
+      {
+        "href": "https://www.instagram.com/equality.ohio/",
+        "text": "Instagram"
+      },
+      {
+        "href": "https://www.youtube.com/channel/UCxKjvM_REomRkFAacq7dcwQ",
+        "text": "YouTube"
+      },
+      {
+        "href": "https://www.linkedin.com/company/equalityohio/",
+        "text": "LinkedIn"
+      },
+      {
+        "href": "https://www.threads.com/@equality.ohio",
+        "text": "Threads"
+      },
+      {
+        "href": "https://shop.equalityohio.org/",
+        "text": "Store"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 162,
+        "text": "Message sent — in the real build."
+      },
+      {
+        "line": 163,
+        "text": "This preview didn’t send anything. In production this routes to the right inbox automatically."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 2,
+    "iframes": [],
+    "bytes_main": 3860,
+    "text_file": "content/text/contact.txt",
+    "text_words": 107,
+    "text_sha256": "b8da811a14b8eba24f7026c89ca404b9c8356d9d8cba1236670bb8bf8ef41537"
+  },
+  {
+    "url": "/gate",
+    "wp_path": "/gate/",
+    "slug": "gate",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/gate.html",
+    "content_file": "content/main/gate.html",
+    "page_id": "gate",
+    "nav_label": null,
+    "h1": null,
+    "seo_title": "Preview Access — Equality Ohio",
+    "seo_description": "Password-protected design preview.",
+    "share_card": "/assets/og/default.png",
+    "noindex": true,
+    "sitemap_priority": null,
+    "sitemap_changefreq": null,
+    "json_ld": [],
+    "help_bar": false,
+    "staging_only": true,
+    "headings": [],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 42,
+        "text": "Design Preview"
+      },
+      {
+        "line": 44,
+        "text": "This staging site is private. Enter the preview password to continue."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 0,
+    "iframes": [],
+    "bytes_main": 1,
+    "text_file": "content/text/gate.txt",
+    "text_words": 0,
+    "text_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+    "url": "/get-involved",
+    "wp_path": "/get-involved/",
+    "slug": "get-involved",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/get-involved.html",
+    "content_file": "content/main/get-involved.html",
+    "page_id": "get-involved",
+    "nav_label": "Ways to Get Involved",
+    "h1": "Join us",
+    "seo_title": "Get Involved — Equality Ohio",
+    "seo_description": "Join Equality Ohio — volunteer near you, come to an event, give, share your story, and stay close to the fight for lived and legal equality for LGBTQ+ Ohioans.",
+    "share_card": "/assets/og/get-involved.png",
+    "noindex": false,
+    "sitemap_priority": 0.8,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Join us",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Pick how you show up",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Volunteer near you",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Come to an event",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Ways to give",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Get the latest",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Tell us your story",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Get free legal help",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "More ways to give",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Defenders of Equality",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Give through your DAF",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Donate goods & gear",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Come and help us make Ohio a state we can all call home.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/get-involved/events",
+      "/get-involved/volunteer",
+      "/give",
+      "/give#daf",
+      "/give#defenders",
+      "/give#in-kind",
+      "/legal-clinic",
+      "/newsletter",
+      "/stories"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 4,
+    "iframes": [],
+    "bytes_main": 5146,
+    "text_file": "content/text/get-involved.txt",
+    "text_words": 424,
+    "text_sha256": "b6598cd78d89190c38d17b5b57ac01ef27879a9c905b822b7276b378974a4d7d"
+  },
+  {
+    "url": "/get-involved/events",
+    "wp_path": "/get-involved/events/",
+    "slug": "events",
+    "parent_url": "/get-involved",
+    "depth": 2,
+    "source_file": "public/get-involved/events.html",
+    "content_file": "content/main/get-involved/events.html",
+    "page_id": "events",
+    "nav_label": "Events",
+    "h1": "Events",
+    "seo_title": "Events — Equality Ohio",
+    "seo_description": "If you support LGBTQ equality, you're a part of the Equality Ohio family. Come see us at an event near you to learn more or take action.",
+    "share_card": "/assets/og/get-involved.png",
+    "noindex": false,
+    "sitemap_priority": 0.7,
+    "sitemap_changefreq": "weekly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Events",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Upcoming events",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "There are no upcoming events.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Every event, statewide",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Volunteer at an event",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Never miss an event.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/get-involved/volunteer",
+      "/newsletter"
+    ],
+    "external_links": [
+      {
+        "href": "https://secure.everyaction.com/p/p8xo4ZmRSUmLA57z1RaA7w2",
+        "text": "Equality Ohio events calendar"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 162,
+        "text": "Pending embed: the live site’s events calendar is an EveryAction embed that isn’t recreated in this preview. Browse the current calendar on EveryAction: Equality Ohio events calendar ."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 4,
+    "iframes": [],
+    "bytes_main": 2991,
+    "text_file": "content/text/get-involved/events.txt",
+    "text_words": 177,
+    "text_sha256": "dc682becc82cd334f191b666dc5137d4c8f0ec8c0c9b8c3c67f4bf30239893d7"
+  },
+  {
+    "url": "/get-involved/volunteer",
+    "wp_path": "/get-involved/volunteer/",
+    "slug": "volunteer",
+    "parent_url": "/get-involved",
+    "depth": 2,
+    "source_file": "public/get-involved/volunteer.html",
+    "content_file": "content/main/get-involved/volunteer.html",
+    "page_id": "volunteer",
+    "nav_label": "Volunteer",
+    "h1": "Volunteer",
+    "seo_title": "Volunteer — Equality Ohio",
+    "seo_description": "Volunteer with Equality Ohio — sign up for opportunities in Northeast, Central, and Southwest Ohio, or virtual opportunities from anywhere in the state.",
+    "share_card": "/assets/og/get-involved.png",
+    "noindex": false,
+    "sitemap_priority": 0.7,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Volunteer",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "You’re signed up — in the real build.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Keep going",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Come to an event",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Join the Legal Network",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Stay in the loop",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "v-first",
+      "v-last",
+      "v-pronouns",
+      "v-address",
+      "v-city",
+      "v-state",
+      "v-state-hint",
+      "v-zip",
+      "v-phone",
+      "v-email",
+      "i-ne",
+      "i-ce",
+      "i-sw",
+      "i-virtual"
+    ],
+    "forms": [
+      {
+        "mock": true,
+        "aria_label": "Volunteer sign-up",
+        "submit": "Sign Up to Volunteer",
+        "fieldsets": [
+          "Interests"
+        ],
+        "fields": [
+          {
+            "label": "First name*",
+            "type": "text",
+            "id": "v-first",
+            "name": "first-name",
+            "required": true,
+            "autocomplete": "given-name"
+          },
+          {
+            "label": "Last name*",
+            "type": "text",
+            "id": "v-last",
+            "name": "last-name",
+            "required": true,
+            "autocomplete": "family-name"
+          },
+          {
+            "label": "Pronouns (optional)",
+            "type": "select",
+            "id": "v-pronouns",
+            "name": "pronouns",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Street address (optional)",
+            "type": "text",
+            "id": "v-address",
+            "name": "address",
+            "required": false,
+            "autocomplete": "street-address"
+          },
+          {
+            "label": "City*",
+            "type": "text",
+            "id": "v-city",
+            "name": "city",
+            "required": true,
+            "autocomplete": "address-level2"
+          },
+          {
+            "label": "State*",
+            "type": "select",
+            "id": "v-state",
+            "name": "state",
+            "required": true,
+            "autocomplete": null
+          },
+          {
+            "label": "Postal code*",
+            "type": "text",
+            "id": "v-zip",
+            "name": "zip",
+            "required": true,
+            "autocomplete": "postal-code"
+          },
+          {
+            "label": "Mobile phone*",
+            "type": "tel",
+            "id": "v-phone",
+            "name": "phone",
+            "required": true,
+            "autocomplete": "tel"
+          },
+          {
+            "label": "Email*",
+            "type": "email",
+            "id": "v-email",
+            "name": "email",
+            "required": true,
+            "autocomplete": "email"
+          },
+          {
+            "label": "I’m interested in volunteer opportunities in Northeast Ohio",
+            "type": "checkbox",
+            "id": "i-ne",
+            "name": "interests",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "I’m interested in volunteer opportunities in Central Ohio",
+            "type": "checkbox",
+            "id": "i-ce",
+            "name": "interests",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "I’m interested in volunteer opportunities in Southwest Ohio",
+            "type": "checkbox",
+            "id": "i-sw",
+            "name": "interests",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "I’m interested in virtual/online volunteer opportunities, or opportunities in a region that is not listed above",
+            "type": "checkbox",
+            "id": "i-virtual",
+            "name": "interests",
+            "required": false,
+            "autocomplete": null
+          }
+        ]
+      }
+    ],
+    "internal_links": [
+      "/get-involved/events",
+      "/legal-clinic/legal-network",
+      "/newsletter"
+    ],
+    "external_links": [
+      {
+        "href": "https://secure.everyaction.com/wmSqb0UnU0-23sWMyhoAQg2",
+        "text": "volunteer sign‑up form on EveryAction"
+      },
+      {
+        "href": "https://secure.everyaction.com/wmSqb0UnU0-23sWMyhoAQg2",
+        "text": "volunteer sign‑up form on EveryAction"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 137,
+        "text": "Design preview — this recreates Equality Ohio’s volunteer sign‑up form, but it isn’t connected yet and nothing you type is saved or sent. To volunteer today, use Equality Ohio’s volunteer sign‑up form on EveryAction or email info@equalityohio.org ."
+      },
+      {
+        "line": 188,
+        "text": "All states will be listed in the production build."
+      },
+      {
+        "line": 217,
+        "text": "You’re signed up — in the real build."
+      },
+      {
+        "line": 218,
+        "text": "This preview didn’t save or send anything. In production, your sign‑up would go to Equality Ohio’s organizing team through EveryAction. Want to volunteer right now? Use Equality Ohio’s volunteer sign‑up form on EveryAction or email info@equalityohio.org ."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 2,
+    "iframes": [],
+    "bytes_main": 7526,
+    "text_file": "content/text/get-involved/volunteer.txt",
+    "text_words": 324,
+    "text_sha256": "01c05e40d43bf243a1e45cfaa46347db88b540a52e272ddf9c7511343b68a9e9"
+  },
+  {
+    "url": "/give",
+    "wp_path": "/give/",
+    "slug": "give",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/give.html",
+    "content_file": "content/main/give.html",
+    "page_id": "give",
+    "nav_label": null,
+    "h1": "Fuel the fight for equality",
+    "seo_title": "Ways to Give — Equality Ohio",
+    "seo_description": "Support lived and legal equality for LGBTQ+ Ohioans — one-time gifts, Defenders of Equality monthly giving, and the Jim Obergefell & John Arthur Society.",
+    "share_card": "/assets/og/give.png",
+    "noindex": false,
+    "sitemap_priority": 0.9,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Fuel the fight for equality",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Make a gift today",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Become a Defender",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Jim Obergefell & John Arthur Society",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Choose what works for you",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Donor advised funds",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Gifts of stock",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Legacy giving",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "In-kind donations",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Your gift fuels life-changing connections.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "one-time",
+      "defenders",
+      "society",
+      "daf",
+      "stock",
+      "legacy",
+      "in-kind"
+    ],
+    "forms": [],
+    "internal_links": [
+      "/contact",
+      "/jim-obergefell-john-arthur-society"
+    ],
+    "external_links": [
+      {
+        "href": "https://secure.everyaction.com/EdZ6NpoEMUWWZvFdaAdqJQ2",
+        "text": "Make Your Gift"
+      },
+      {
+        "href": "https://secure.everyaction.com/L25k7K9WokSU_MLMSR4W3Q2",
+        "text": "Select Your Defender Level"
+      },
+      {
+        "href": "https://app.freewill.com/equalityohio",
+        "text": "Start with FreeWill"
+      },
+      {
+        "href": "https://secure.everyaction.com/EdZ6NpoEMUWWZvFdaAdqJQ2",
+        "text": "Donate Now"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 162,
+        "text": "Buttons link to Equality Ohio’s current live giving pages. In the production build, giving flows are embedded on-site. Tax-deductibility language (Education Fund 501(c)(3) vs. Equality Ohio 501(c)(4)) will be finalized with EO’s development team."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 3,
+    "iframes": [],
+    "bytes_main": 4617,
+    "text_file": "content/text/give.txt",
+    "text_words": 293,
+    "text_sha256": "c5e07e4a9a54d00adbf276ef7e97511e13c9dc2c935de6452042182f4aa9856b"
+  },
+  {
+    "url": "/",
+    "wp_path": "/",
+    "slug": "home",
+    "parent_url": null,
+    "depth": 0,
+    "source_file": "public/index.html",
+    "content_file": "content/main/home.html",
+    "page_id": "home",
+    "nav_label": null,
+    "h1": "An Ohio where justice, dignity, and self‑determination belong to everyone.",
+    "seo_title": "Equality Ohio | Lived and Legal Equality for LGBTQ+ Ohioans",
+    "seo_description": "Equality Ohio is Ohio's statewide LGBTQ+ advocacy and legal aid organization — driving policy change and delivering free, accessible legal support.",
+    "share_card": "/assets/og/default.png",
+    "noindex": false,
+    "sitemap_priority": 1,
+    "sitemap_changefreq": "weekly",
+    "json_ld": [
+      "NGO",
+      "WebSite"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "An Ohio where justice, dignity, and self‑determination belong to everyone.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Facing discrimination or a legal problem?",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Make your plan to vote in 2026!",
+        "id": "election-2026"
+      },
+      {
+        "level": 2,
+        "text": "Three ways in",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Get legal help",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Support the work",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Learn who we are",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "One organization. Five departments.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "The latest",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "$750,000 Legacy Gift Strengthens the Future of LGBTQIA+ Organizations in Central Ohio",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Make your plan to vote in 2026!",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Equality Ohio’s 2026 Candidate Scorecard Is Here",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Get the latest from Equality Ohio to your inbox.",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "You’re on the list — almost.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "election-2026",
+      "nl-email"
+    ],
+    "forms": [
+      {
+        "mock": true,
+        "aria_label": "Newsletter signup",
+        "submit": "Sign Up",
+        "fieldsets": [],
+        "fields": [
+          {
+            "label": "Email address",
+            "type": "email",
+            "id": "nl-email",
+            "name": "email",
+            "required": true,
+            "autocomplete": "email"
+          }
+        ]
+      }
+    ],
+    "internal_links": [
+      "/about",
+      "/give",
+      "/legal-clinic",
+      "/legal-clinic/intake",
+      "/news",
+      "/votersguide"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [
+      {
+        "src": "/assets/logo/equality-ohio-logo.png",
+        "alt": "Equality Ohio logo",
+        "width": "400",
+        "height": "174",
+        "loading": null,
+        "srcset": null,
+        "sizes": null
+      },
+      {
+        "src": "/assets/img/candidate-scorecard-2026-banner.png",
+        "alt": "2026 Candidate Scorecard. See how candidates measure up on the issues that matter for LGBTQ+ Ohioans and their families. Equality Ohio.",
+        "width": "1250",
+        "height": "625",
+        "loading": "lazy",
+        "srcset": null,
+        "sizes": null
+      }
+    ],
+    "data_expires": [
+      {
+        "tag": "section",
+        "date": "2026-11-04",
+        "id": null,
+        "class": "section"
+      },
+      {
+        "tag": "article",
+        "date": "2026-11-04",
+        "id": null,
+        "class": "card news-card"
+      }
+    ],
+    "expired_as_of_2026-11-20": [
+      {
+        "tag": "section",
+        "date": "2026-11-04",
+        "id": null,
+        "class": "section"
+      },
+      {
+        "tag": "article",
+        "date": "2026-11-04",
+        "id": null,
+        "class": "card news-card"
+      }
+    ],
+    "event_blocks": [],
+    "election_blocks": 2,
+    "staging_copy_lines": [
+      {
+        "line": 306,
+        "text": "This is a design preview: nothing was submitted. The production build will connect to Equality Ohio’s email platform."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 5,
+    "iframes": [],
+    "bytes_main": 9623,
+    "text_file": "content/text/home.txt",
+    "text_words": 479,
+    "text_sha256": "6498c8f311a0dc28f77921eec78d2642dfa359173842aa229fdff83b9b49f852"
+  },
+  {
+    "url": "/jim-obergefell-john-arthur-society",
+    "wp_path": "/jim-obergefell-john-arthur-society/",
+    "slug": "jim-obergefell-john-arthur-society",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/jim-obergefell-john-arthur-society.html",
+    "content_file": "content/main/jim-obergefell-john-arthur-society.html",
+    "page_id": "give",
+    "nav_label": null,
+    "h1": "Jim Obergefell & John Arthur Society",
+    "seo_title": "Jim Obergefell & John Arthur Society — Equality Ohio",
+    "seo_description": "The Jim Obergefell & John Arthur Society is an Equality Ohio Education Fund donor group delivering strategic, smart giving.",
+    "share_card": "/assets/og/give.png",
+    "noindex": false,
+    "sitemap_priority": 0.6,
+    "sitemap_changefreq": "yearly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Jim Obergefell & John Arthur Society",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Strategic, smart giving for a just and fair Ohio",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Where Society giving goes to work",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Support transgender youth",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Statewide legal protections for LGBTQ people who experience discrimination",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Keeping our elders resourced and free from discrimination",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Curb bullying",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Become a member of the Society",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Join O&A today",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Invest in the long‑term fight for equality.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/give"
+    ],
+    "external_links": [
+      {
+        "href": "https://secure.everyaction.com/_TJkVuSp-Eu7d7x0ZmtzgA2",
+        "text": "Join O&A Today"
+      },
+      {
+        "href": "https://secure.everyaction.com/_TJkVuSp-Eu7d7x0ZmtzgA2",
+        "text": "Join O&A Today"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 194,
+        "text": "The join button opens Equality Ohio’s live EveryAction giving form in a new tab. In the production build, this flow may be embedded on‑site."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 3,
+    "iframes": [],
+    "bytes_main": 4888,
+    "text_file": "content/text/jim-obergefell-john-arthur-society.txt",
+    "text_words": 414,
+    "text_sha256": "dce23b92e41f9a7308bd4e683ceb0638e729f3c0599947f05aba97713c544cb6"
+  },
+  {
+    "url": "/legal-clinic",
+    "wp_path": "/legal-clinic/",
+    "slug": "legal-clinic",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/legal-clinic.html",
+    "content_file": "content/main/legal-clinic.html",
+    "page_id": "legal-clinic",
+    "nav_label": "About the Clinic",
+    "h1": "The Equality Ohio Legal Clinic",
+    "seo_title": "Legal Clinic — Equality Ohio",
+    "seo_description": "The Equality Ohio Legal Clinic offers free legal services for LGBTQ+ Ohioans — consumer law, family law, civil rights, and administrative help.",
+    "share_card": "/assets/og/legal-clinic.png",
+    "noindex": false,
+    "sitemap_priority": 0.9,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": true,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "The Equality Ohio Legal Clinic",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Two ways to reach the clinic",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Free legal services, built for our community",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Consumer law",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Family law",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Civil rights",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Administrative help",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Who can be represented",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Three steps",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Tell us what’s happening",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "The clinic team reviews",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Get connected",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Guides & resources",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Join the referral network",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "You don’t have to navigate it alone.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/contact",
+      "/legal-clinic/intake",
+      "/legal-clinic/trans-know-your-rights"
+    ],
+    "external_links": [
+      {
+        "href": "https://bit.ly/FamilyLawGuide_2025",
+        "text": "Ohio LGBTQ Family Law Guide Guide"
+      },
+      {
+        "href": "https://app.freewill.com/equalityohio",
+        "text": "Make a will for free FreeWill ↗"
+      },
+      {
+        "href": "https://opportunityport.org",
+        "text": "Seal or expunge a record OpportunityPort ↗"
+      },
+      {
+        "href": "https://ohmodernizenow.org",
+        "text": "HIV+ law and protections Ohio Modernize Now ↗"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [
+      {
+        "src": "/assets/img/legal-clinic-mark-340.png",
+        "alt": "Equality Ohio Legal Clinic",
+        "width": "170",
+        "height": "170",
+        "loading": "lazy",
+        "srcset": null,
+        "sizes": null
+      }
+    ],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 7,
+    "iframes": [],
+    "bytes_main": 5683,
+    "text_file": "content/text/legal-clinic.txt",
+    "text_words": 359,
+    "text_sha256": "aceccd1a58484c6704dd2fce3432ab8becdc67470402605e3339a5b3a3e4e1c1"
+  },
+  {
+    "url": "/legal-clinic/intake",
+    "wp_path": "/legal-clinic/intake/",
+    "slug": "intake",
+    "parent_url": "/legal-clinic",
+    "depth": 2,
+    "source_file": "public/legal-clinic/intake.html",
+    "content_file": "content/main/legal-clinic/intake.html",
+    "page_id": "legal-clinic-intake",
+    "nav_label": "Start an Intake",
+    "h1": "Start your intake",
+    "seo_title": "Legal Clinic Intake — Equality Ohio",
+    "seo_description": "Start a confidential intake with the Equality Ohio Legal Clinic. Free legal help for LGBTQ+ Ohioans.",
+    "share_card": "/assets/og/legal-clinic.png",
+    "noindex": false,
+    "sitemap_priority": 0.8,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Start your intake",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Intake received — in the real build.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "in-name",
+      "in-name-hint",
+      "in-pronouns",
+      "in-email",
+      "in-phone",
+      "in-county",
+      "in-county-hint",
+      "c-email",
+      "c-call",
+      "c-vm",
+      "t-name",
+      "t-family",
+      "t-discrim",
+      "t-consumer",
+      "t-benefits",
+      "t-other",
+      "in-story",
+      "in-income"
+    ],
+    "forms": [
+      {
+        "mock": true,
+        "aria_label": "Legal clinic intake",
+        "submit": "Submit Intake",
+        "fieldsets": [
+          "Safe ways to contact you",
+          "What kind of issue is this?"
+        ],
+        "fields": [
+          {
+            "label": "Name*",
+            "type": "text",
+            "id": "in-name",
+            "name": "name",
+            "required": true,
+            "autocomplete": "name"
+          },
+          {
+            "label": "Pronouns (optional)",
+            "type": "text",
+            "id": "in-pronouns",
+            "name": "pronouns",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Email*",
+            "type": "email",
+            "id": "in-email",
+            "name": "email",
+            "required": true,
+            "autocomplete": "email"
+          },
+          {
+            "label": "Phone (optional)",
+            "type": "tel",
+            "id": "in-phone",
+            "name": "phone",
+            "required": false,
+            "autocomplete": "tel"
+          },
+          {
+            "label": "County*",
+            "type": "select",
+            "id": "in-county",
+            "name": "county",
+            "required": true,
+            "autocomplete": null
+          },
+          {
+            "label": "Email is safe",
+            "type": "checkbox",
+            "id": "c-email",
+            "name": "contact",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Calls are safe",
+            "type": "checkbox",
+            "id": "c-call",
+            "name": "contact",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "OK to leave a voicemail",
+            "type": "checkbox",
+            "id": "c-vm",
+            "name": "contact",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Name or gender marker change",
+            "type": "radio",
+            "id": "t-name",
+            "name": "issue",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Family law",
+            "type": "radio",
+            "id": "t-family",
+            "name": "issue",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Discrimination — housing, work, or public places",
+            "type": "radio",
+            "id": "t-discrim",
+            "name": "issue",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Consumer issue — fraud, identity theft, debt",
+            "type": "radio",
+            "id": "t-consumer",
+            "name": "issue",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Public benefits — SSI, disability",
+            "type": "radio",
+            "id": "t-benefits",
+            "name": "issue",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Something else",
+            "type": "radio",
+            "id": "t-other",
+            "name": "issue",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "What’s going on?",
+            "type": "textarea",
+            "id": "in-story",
+            "name": "story",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "I understand that representation by a clinic lawyer depends on income (within 300% of the federal poverty level), and clinic staff will review this with me.*",
+            "type": "checkbox",
+            "id": "in-income",
+            "name": "income-ack",
+            "required": true,
+            "autocomplete": null
+          }
+        ]
+      }
+    ],
+    "internal_links": [],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 137,
+        "text": "Design preview — this form isn’t connected yet and nothing you type is saved or sent. If you need legal help today, call 855‑LGBT‑LAW ."
+      },
+      {
+        "line": 167,
+        "text": "All 88 counties will be listed in the production build."
+      },
+      {
+        "line": 206,
+        "text": "Intake received — in the real build."
+      },
+      {
+        "line": 207,
+        "text": "This preview didn’t save or send anything. In production, your intake would go securely to the clinic team and you’d get a confirmation email. Need help right now? Call 855‑LGBT‑LAW ."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 2,
+    "iframes": [],
+    "bytes_main": 5818,
+    "text_file": "content/text/legal-clinic/intake.txt",
+    "text_words": 226,
+    "text_sha256": "921adaba05c56688606b0f87f992e0e3db4a432918b1fb575165e34e8bbb71c2"
+  },
+  {
+    "url": "/legal-clinic/intake/thank-you",
+    "wp_path": "/legal-clinic/intake/thank-you/",
+    "slug": "thank-you",
+    "parent_url": "/legal-clinic/intake",
+    "depth": 3,
+    "source_file": "public/legal-clinic/intake/thank-you.html",
+    "content_file": "content/main/legal-clinic/intake/thank-you.html",
+    "page_id": "legal-clinic-intake",
+    "nav_label": "Start an Intake",
+    "h1": "Thank you for submitting your intake request",
+    "seo_title": "Intake Received — Equality Ohio",
+    "seo_description": "Thank you for submitting your intake request to the Equality Ohio Legal Clinic. A member of our intake staff will reach out to you via email.",
+    "share_card": "/assets/og/legal-clinic.png",
+    "noindex": true,
+    "sitemap_priority": null,
+    "sitemap_changefreq": null,
+    "json_ld": [],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Thank you for submitting your intake request",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "A member of our intake staff will reach out to you via email",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Guides & resources",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/legal-clinic",
+      "/legal-clinic/ohio-lgbtq-family-law-guide",
+      "/legal-clinic/trans-know-your-rights"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 110,
+        "text": "Design preview — this is the confirmation screen shown after a real intake submission. In this preview, no intake has been transmitted."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 2,
+    "iframes": [],
+    "bytes_main": 1585,
+    "text_file": "content/text/legal-clinic/intake/thank-you.txt",
+    "text_words": 109,
+    "text_sha256": "55024f08ab15f6ec8026ce357fceba4b0c0af8d10f85125e578426b0beece103"
+  },
+  {
+    "url": "/legal-clinic/legal-network",
+    "wp_path": "/legal-clinic/legal-network/",
+    "slug": "legal-network",
+    "parent_url": "/legal-clinic",
+    "depth": 2,
+    "source_file": "public/legal-clinic/legal-network.html",
+    "content_file": "content/main/legal-clinic/legal-network.html",
+    "page_id": "legal-network",
+    "nav_label": "Legal Network for Attorneys",
+    "h1": "Join the Equality Ohio Attorney Referral Network",
+    "seo_title": "Legal Network — Equality Ohio",
+    "seo_description": "Join the Equality Ohio Attorney Referral Network. Connect with regional attorneys, access CLE opportunities, and champion equal access to the law.",
+    "share_card": "/assets/og/legal-clinic.png",
+    "noindex": false,
+    "sitemap_priority": 0.6,
+    "sitemap_changefreq": "yearly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Join the Equality Ohio Attorney Referral Network",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "What network membership offers",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Connect with regional attorneys",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Enhance your LGBTQ+ knowledge",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Take vetted referrals",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Interest form",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Interest noted — in the real build.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Need legal help, rather than offering it?",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "net-name",
+      "net-email",
+      "net-phone",
+      "net-firm",
+      "net-practice",
+      "net-practice-hint",
+      "net-county",
+      "net-county-hint",
+      "net-message"
+    ],
+    "forms": [
+      {
+        "mock": true,
+        "aria_label": "Attorney Referral Network interest form",
+        "submit": "Express Interest",
+        "fieldsets": [],
+        "fields": [
+          {
+            "label": "Name*",
+            "type": "text",
+            "id": "net-name",
+            "name": "name",
+            "required": true,
+            "autocomplete": "name"
+          },
+          {
+            "label": "Email*",
+            "type": "email",
+            "id": "net-email",
+            "name": "email",
+            "required": true,
+            "autocomplete": "email"
+          },
+          {
+            "label": "Phone (optional)",
+            "type": "tel",
+            "id": "net-phone",
+            "name": "phone",
+            "required": false,
+            "autocomplete": "tel"
+          },
+          {
+            "label": "Firm or organization (optional)",
+            "type": "text",
+            "id": "net-firm",
+            "name": "firm",
+            "required": false,
+            "autocomplete": "organization"
+          },
+          {
+            "label": "Practice area(s)",
+            "type": "text",
+            "id": "net-practice",
+            "name": "practice-areas",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "County or counties you serve",
+            "type": "text",
+            "id": "net-county",
+            "name": "counties",
+            "required": false,
+            "autocomplete": null
+          },
+          {
+            "label": "Anything you’d like us to know (optional)",
+            "type": "textarea",
+            "id": "net-message",
+            "name": "message",
+            "required": false,
+            "autocomplete": null
+          }
+        ]
+      }
+    ],
+    "internal_links": [
+      "/legal-clinic"
+    ],
+    "external_links": [
+      {
+        "href": "https://app.lawmatics.com/forms/share/2563c615-2333-4e9e-8864-590e41d538b5",
+        "text": "attorney referral network sign‑up form on Lawmatics"
+      },
+      {
+        "href": "https://app.lawmatics.com/forms/share/2563c615-2333-4e9e-8864-590e41d538b5",
+        "text": "sign‑up form on Lawmatics"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 165,
+        "text": "Design preview — the live interest form is a Lawmatics embed that isn’t recreated here yet, and nothing you type on this page is saved or sent. Until this form is connected, use the attorney referral network sign‑up form on Lawmatics ."
+      },
+      {
+        "line": 205,
+        "text": "Interest noted — in the real build."
+      },
+      {
+        "line": 206,
+        "text": "This preview didn’t save or send anything. In production, your interest form would start the application process with the clinic team. In the meantime, use the sign‑up form on Lawmatics or email info@equalityohio.org ."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 3,
+    "iframes": [],
+    "bytes_main": 5219,
+    "text_file": "content/text/legal-clinic/legal-network.txt",
+    "text_words": 286,
+    "text_sha256": "cf2157696eb17b4f90daf061918d8b2e5d0bcfd43e28595e6228af1cb1441cdc"
+  },
+  {
+    "url": "/legal-clinic/ohio-lgbtq-family-law-guide",
+    "wp_path": "/legal-clinic/ohio-lgbtq-family-law-guide/",
+    "slug": "ohio-lgbtq-family-law-guide",
+    "parent_url": "/legal-clinic",
+    "depth": 2,
+    "source_file": "public/legal-clinic/ohio-lgbtq-family-law-guide.html",
+    "content_file": "content/main/legal-clinic/ohio-lgbtq-family-law-guide.html",
+    "page_id": "family-law-guide",
+    "nav_label": "Ohio LGBTQ+ Family Law Guide",
+    "h1": "Ohio LGBTQ+ Family Law Guide",
+    "seo_title": "Ohio LGBTQ+ Family Law Guide — Equality Ohio",
+    "seo_description": "The Ohio LGBTQ Family Law Guide gives LGBTQ+-headed families detailed, accessible explanations of federal and state law — marriage, parentage, and adoption.",
+    "share_card": "/assets/og/legal-clinic.png",
+    "noindex": false,
+    "sitemap_priority": 0.7,
+    "sitemap_changefreq": "yearly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": true,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Ohio LGBTQ+ Family Law Guide",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Topics covered",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Relationships & parentage",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Documents for children",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Non-discrimination protections",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "School, health & leave",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Name, gender & safety",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Recommended documents",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "More from the Legal Clinic",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Questions about your family’s situation?",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/legal-clinic",
+      "/legal-clinic/intake",
+      "/legal-clinic/trans-know-your-rights"
+    ],
+    "external_links": [
+      {
+        "href": "https://bit.ly/FamilyLawGuide_2025",
+        "text": "Download the Guide (PDF)"
+      },
+      {
+        "href": "https://app.freewill.com/equalityohio",
+        "text": "Make a will for free FreeWill ↗"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 139,
+        "text": "Pending asset: the guide itself is a downloadable PDF (2025 edition) hosted by Equality Ohio — the cover art and an inline reader aren’t recreated in this preview yet. Until then, use the download link below."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 6,
+    "iframes": [],
+    "bytes_main": 5613,
+    "text_file": "content/text/legal-clinic/ohio-lgbtq-family-law-guide.txt",
+    "text_words": 343,
+    "text_sha256": "16edf56a757bb83f582a600485c9352e2188a2419465f85cd56dbb21e6792c8b"
+  },
+  {
+    "url": "/legal-clinic/trans-know-your-rights",
+    "wp_path": "/legal-clinic/trans-know-your-rights/",
+    "slug": "trans-know-your-rights",
+    "parent_url": "/legal-clinic",
+    "depth": 2,
+    "source_file": "public/legal-clinic/trans-know-your-rights.html",
+    "content_file": "content/main/legal-clinic/trans-know-your-rights.html",
+    "page_id": "trans-know-your-rights",
+    "nav_label": "Trans Know Your Rights",
+    "h1": "Trans Know Your Rights",
+    "seo_title": "Trans Know Your Rights — Equality Ohio",
+    "seo_description": "Know your rights as a transgender Ohioan — legal name changes, birth certificates, driver's licenses and state IDs, passports, and remedies for discrimination.",
+    "share_card": "/assets/og/legal-clinic.png",
+    "noindex": false,
+    "sitemap_priority": 0.7,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": true,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Trans Know Your Rights",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Legal Name Change",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "1. Application",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "2. Publication",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "3. Hearing",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Birth Certificate Changes",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Ohio",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Non-Ohio",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Name Change on Ohio Driver’s License or State ID",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Name Change on Ohio Driver’s License or Ohio State ID",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Social Security Records Gender Change",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Gender Marker on an Existing or New Passport",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "State and Federal Remedies for Discrimination in Employment, Housing, and Public Accommodation",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Employment",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Housing",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Public Accommodation",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Emergency & community resources",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Municipal Map",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "TransOhio emergency resources",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Southern Youth Equality Project",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "In crisis? Call or text the Trans Care Warmline.",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Questions about any of this?",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "legal-name-change",
+      "birth-certificate-changes",
+      "drivers-license-state-id",
+      "social-security",
+      "passport",
+      "discrimination",
+      "emergency-resources"
+    ],
+    "forms": [],
+    "internal_links": [
+      "/legal-clinic/intake",
+      "/legal-clinic/legal-network",
+      "/legal-clinic/trans-know-your-rights#birth-certificate-changes",
+      "/legal-clinic/trans-know-your-rights#discrimination",
+      "/legal-clinic/trans-know-your-rights#drivers-license-state-id",
+      "/legal-clinic/trans-know-your-rights#emergency-resources",
+      "/legal-clinic/trans-know-your-rights#legal-name-change",
+      "/legal-clinic/trans-know-your-rights#passport",
+      "/legal-clinic/trans-know-your-rights#social-security",
+      "/our-work/local/municipal-map"
+    ],
+    "external_links": [
+      {
+        "href": "https://transequality.org/documents",
+        "text": "www.transequality.org/documents"
+      },
+      {
+        "href": "https://www.ssa.gov/online/ss-5.pdf",
+        "text": "www.ssa.gov/online/ss-5.pdf"
+      },
+      {
+        "href": "https://travel.state.gov",
+        "text": "www.travel.state.gov"
+      },
+      {
+        "href": "https://passportstatus.state.gov",
+        "text": "Passportstatus.state.gov"
+      },
+      {
+        "href": "https://www.transohio.org/emergency-resources",
+        "text": "Access emergency resources"
+      },
+      {
+        "href": "https://southernequality.org/oh/",
+        "text": "Access emergency funds"
+      },
+      {
+        "href": "https://secure.everyaction.com/l1rpSxaDi0qspDeM90FgxA2",
+        "text": "Write a quick note for #TransJoy, Equality Ohio’s longest running campaign TransJoy ↗"
+      },
+      {
+        "href": "https://secure.actblue.com/donate/transformation_cashassistance",
+        "text": "Donate any amount to the emergency fund hosted by our friends at TransOhio TransOhio ↗"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 4,
+    "iframes": [],
+    "bytes_main": 20423,
+    "text_file": "content/text/legal-clinic/trans-know-your-rights.txt",
+    "text_words": 2408,
+    "text_sha256": "77975efc042d996957911924f42c949eb04d39635052355095fd21ffeed03e9e"
+  },
+  {
+    "url": "/news",
+    "wp_path": "/news/",
+    "slug": "news",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/news.html",
+    "content_file": "content/main/news.html",
+    "page_id": "news",
+    "nav_label": "News & Policy",
+    "h1": "Stay informed",
+    "seo_title": "News & Policy — Equality Ohio",
+    "seo_description": "News, statements, and policy updates from Equality Ohio.",
+    "share_card": "/assets/og/news.png",
+    "noindex": false,
+    "sitemap_priority": 0.8,
+    "sitemap_changefreq": "weekly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Stay informed",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Make your plan to vote in 2026!",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Press Release: $750,000 Legacy Gift Strengthens the Future of LGBTQIA+ Organizations in Central Ohio",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Make your plan to vote in 2026!",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Equality Ohio’s 2026 Candidate Scorecard Is Here",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Roadmap Back to Equality: The Equality Ohio Strategic Plan (2026–2028)",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "State of Equality in Ohio 2026 Address",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Ohio House Passes “My Child, My Chart,” Undermining Youth Privacy",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Policy moves fast. So do we.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/newsletter",
+      "/votersguide"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [
+      {
+        "href": "https://equalityohio.org/dannystoutlegacygift/",
+        "text": "Read more: Press Release: $750,000 Legacy Gift Strengthens the Future of LGBTQIA+ Organizations in Central Ohio"
+      },
+      {
+        "href": "https://equalityohio.org/gotv2026/",
+        "text": "Read more: Make your plan to vote in 2026!"
+      },
+      {
+        "href": "https://equalityohio.org/equality-ohios-2026-candidate-scorecard-is-here/",
+        "text": "Read more: Equality Ohio’s 2026 Candidate Scorecard Is Here"
+      },
+      {
+        "href": "https://equalityohio.org/roadmap-back-to-equality-the-equality-ohio-strategic-plan-2026-2028/",
+        "text": "Read more: Roadmap Back to Equality: The Equality Ohio Strategic Plan (2026–2028)"
+      },
+      {
+        "href": "https://equalityohio.org/state-of-equality-in-ohio-2026-address/",
+        "text": "Read more: State of Equality in Ohio 2026 Address"
+      },
+      {
+        "href": "https://equalityohio.org/press-release-from-equality-ohio-ohio-house-passes-my-child-my-chart-undermining-youth-privacy/",
+        "text": "Read more: Ohio House Passes “My Child, My Chart,” Undermining Youth Privacy"
+      }
+    ],
+    "images": [],
+    "data_expires": [
+      {
+        "tag": "div",
+        "date": "2026-11-04",
+        "id": null,
+        "class": "card news-card news-card--feature card--flat"
+      }
+    ],
+    "expired_as_of_2026-11-20": [
+      {
+        "tag": "div",
+        "date": "2026-11-04",
+        "id": null,
+        "class": "card news-card news-card--feature card--flat"
+      }
+    ],
+    "event_blocks": [],
+    "election_blocks": 1,
+    "staging_copy_lines": [
+      {
+        "line": 205,
+        "text": "Mockup shows six recent posts from equalityohio.org. Production build includes the full archive with categories, search, and pagination."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 4,
+    "iframes": [],
+    "bytes_main": 6564,
+    "text_file": "content/text/news.txt",
+    "text_words": 357,
+    "text_sha256": "feb2b386b6ed80a22fd11a6f12d20e89cdbc222a7101450c6a6b601dd9982fe5"
+  },
+  {
+    "url": "/newsletter",
+    "wp_path": "/newsletter/",
+    "slug": "newsletter",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/newsletter.html",
+    "content_file": "content/main/newsletter.html",
+    "page_id": "newsletter",
+    "nav_label": "Newsletter",
+    "h1": "Sign up for the latest news from Equality Ohio",
+    "seo_title": "Newsletter — Equality Ohio",
+    "seo_description": "Sign up for the latest news from Equality Ohio — join our list and get the latest LGBTQ+ Ohio updates.",
+    "share_card": "/assets/og/get-involved.png",
+    "noindex": false,
+    "sitemap_priority": 0.5,
+    "sitemap_changefreq": "yearly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Sign up for the latest news from Equality Ohio",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "E-news Signup",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "You’re on the list — in the real build.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Other ways to stay in the loop",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Get updates from the Legal Clinic",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Press releases and other news",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "nl-first",
+      "nl-last",
+      "nl-email",
+      "nl-zip",
+      "nl-zip-hint",
+      "nl-phone",
+      "nl-phone-consent"
+    ],
+    "forms": [
+      {
+        "mock": true,
+        "aria_label": "E-news signup",
+        "submit": "Sign Up",
+        "fieldsets": [],
+        "fields": [
+          {
+            "label": "First Name*",
+            "type": "text",
+            "id": "nl-first",
+            "name": "first_name",
+            "required": true,
+            "autocomplete": "given-name"
+          },
+          {
+            "label": "Last Name*",
+            "type": "text",
+            "id": "nl-last",
+            "name": "last_name",
+            "required": true,
+            "autocomplete": "family-name"
+          },
+          {
+            "label": "Email*",
+            "type": "email",
+            "id": "nl-email",
+            "name": "email",
+            "required": true,
+            "autocomplete": "email"
+          },
+          {
+            "label": "Zip Code (Optional)",
+            "type": "text",
+            "id": "nl-zip",
+            "name": "zip",
+            "required": false,
+            "autocomplete": "postal-code"
+          },
+          {
+            "label": "Phone (Optional)",
+            "type": "tel",
+            "id": "nl-phone",
+            "name": "phone",
+            "required": false,
+            "autocomplete": "tel"
+          }
+        ]
+      }
+    ],
+    "internal_links": [
+      "/news",
+      "/privacy-policy",
+      "/terms-conditions"
+    ],
+    "external_links": [
+      {
+        "href": "https://app.lawmatics.com/forms/share/41133a09-f56c-4b3e-96ca-270d791baf53",
+        "text": "Sign up for clinic updates"
+      }
+    ],
+    "self_links_to_wordpress": [
+      {
+        "href": "https://equalityohio.org/sign-up-for-the-latest-news-from-equality-ohio/",
+        "text": "equalityohio.org"
+      },
+      {
+        "href": "https://equalityohio.org/sign-up-for-the-latest-news-from-equality-ohio/",
+        "text": "live signup page"
+      }
+    ],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 132,
+        "text": "Design preview — this form isn’t connected yet and nothing you type is saved or sent. To get updates today, sign up on the live page: equalityohio.org . In production this form connects to EO’s email platform (the live form runs on Gravity Forms in WordPress) "
+      },
+      {
+        "line": 165,
+        "text": "You’re on the list — in the real build."
+      },
+      {
+        "line": 166,
+        "text": "This preview didn’t transmit anything. To actually subscribe, use the live signup page or email info@equalityohio.org ."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 2,
+    "iframes": [],
+    "bytes_main": 5035,
+    "text_file": "content/text/newsletter.txt",
+    "text_words": 268,
+    "text_sha256": "f21da9d65fc6d70a3f012b75c321bcd8b19c9d8c3793789e7343781574c486a2"
+  },
+  {
+    "url": "/our-work",
+    "wp_path": "/our-work/",
+    "slug": "our-work",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/our-work.html",
+    "content_file": "content/main/our-work.html",
+    "page_id": "our-work",
+    "nav_label": "What We Do",
+    "h1": "Advocating equality for all Ohioans",
+    "seo_title": "Our Work — Equality Ohio",
+    "seo_description": "Equality Ohio defends the rights of LGBTQ Ohioans — in communities across the state, at the Ohio Statehouse, and at the federal level.",
+    "share_card": "/assets/og/our-work.png",
+    "noindex": false,
+    "sitemap_priority": 0.8,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Advocating equality for all Ohioans",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "In your community",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "At the Ohio Statehouse",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "At the federal level",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Explore our programs",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Local progress",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Municipal Equality Map",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Legal Clinic",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Business engagement",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "2026 Candidate Scorecard",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Legacy of Equality",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Welcoming & affirming congregations",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Real change starts with you.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "faith"
+    ],
+    "forms": [],
+    "internal_links": [
+      "/get-involved",
+      "/legal-clinic",
+      "/our-work/business",
+      "/our-work/legacy-of-equality",
+      "/our-work/local",
+      "/our-work/local/municipal-map",
+      "/votersguide"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [
+      {
+        "href": "https://equalityohio.org/worship-database/",
+        "text": "Browse the Live Worship Database"
+      }
+    ],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 220,
+        "text": "The searchable congregation directory is a pending data migration — the 100+ listings have not been moved into this preview yet. Until then, browse the directory on the current site. Browse the Live Worship Database"
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 3,
+    "iframes": [],
+    "bytes_main": 6438,
+    "text_file": "content/text/our-work.txt",
+    "text_words": 514,
+    "text_sha256": "a0c035a252b041ed227305a402db698a686e20b1abbadacf21186f9f9bed6879"
+  },
+  {
+    "url": "/our-work/business",
+    "wp_path": "/our-work/business/",
+    "slug": "business",
+    "parent_url": "/our-work",
+    "depth": 2,
+    "source_file": "public/our-work/business.html",
+    "content_file": "content/main/our-work/business.html",
+    "page_id": "business",
+    "nav_label": "Business Engagement",
+    "h1": "Business Engagement",
+    "seo_title": "Business Engagement — Equality Ohio",
+    "seo_description": "Ohio Business Competes — a nonpartisan coalition of Ohio corporations, universities and law firms in support of LGBTQ-inclusive nondiscrimination protections.",
+    "share_card": "/assets/og/our-work.png",
+    "noindex": false,
+    "sitemap_priority": 0.6,
+    "sitemap_changefreq": "yearly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Business Engagement",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Ohio Business Competes",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Attract the best talent",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Grow business relationships",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Grow Ohio’s economy",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Explore the coalition",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Statewide protections are still missing",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Is your business in?",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "ohio-business-competes"
+    ],
+    "forms": [],
+    "internal_links": [
+      "/our-work/local/municipal-map"
+    ],
+    "external_links": [
+      {
+        "href": "https://ohiobusinesscompetes.org/members/",
+        "text": "See Members ohiobusinesscompetes.org ↗"
+      },
+      {
+        "href": "https://ohiobusinesscompetes.org/join/",
+        "text": "Become a Member ohiobusinesscompetes.org ↗"
+      },
+      {
+        "href": "https://ohiobusinesscompetes.org/about/",
+        "text": "Learn More ohiobusinesscompetes.org ↗"
+      },
+      {
+        "href": "https://ohiobusinesscompetes.org/join/",
+        "text": "Become a Member"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 7,
+    "iframes": [],
+    "bytes_main": 4176,
+    "text_file": "content/text/our-work/business.txt",
+    "text_words": 257,
+    "text_sha256": "95290babae6d2b0e210f24e25d6cc477f1886d86abb0be1cfdb00787feea257f"
+  },
+  {
+    "url": "/our-work/legacy-of-equality",
+    "wp_path": "/our-work/legacy-of-equality/",
+    "slug": "legacy-of-equality",
+    "parent_url": "/our-work",
+    "depth": 2,
+    "source_file": "public/our-work/legacy-of-equality.html",
+    "content_file": "content/main/our-work/legacy-of-equality.html",
+    "page_id": "legacy",
+    "nav_label": "Legacy of Equality",
+    "h1": "Legacy of Equality",
+    "seo_title": "Legacy of Equality — Equality Ohio",
+    "seo_description": "Equality Ohio's Legacy of Equality — the 2026 and 20th anniversary Advocates & Allies honorees, and the Legacy of Equality Society of supporters.",
+    "share_card": "/assets/og/our-work.png",
+    "noindex": false,
+    "sitemap_priority": 0.5,
+    "sitemap_changefreq": "yearly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Legacy of Equality",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Advocates & Allies: Turning Protest into Policy",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Sen. Nickie Antonio",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Tom Grote",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Trans Allies of Ohio",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Heather Rocco (One Small Act Miami County)",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Kaleidoscope Youth Center Youth Advisory Board",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Joy B. Savren, Esq.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Celebrating our past, reclaiming our future",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Erin Upchurch",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Chad Eggspuehler",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "The Brown/Schultz Family",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Arienne Childrey",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Monika Veliz",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Dr. Scott Leibowitz",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Leave a legacy of equality",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Society members receive",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Start with a free will",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Two decades of progress — and counting.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "honorees",
+      "society"
+    ],
+    "forms": [],
+    "internal_links": [
+      "/about/history",
+      "/give#legacy"
+    ],
+    "external_links": [
+      {
+        "href": "https://app.freewill.com/equalityohio",
+        "text": "Start with FreeWill"
+      }
+    ],
+    "self_links_to_wordpress": [
+      {
+        "href": "https://equalityohio.org/press-release-equality-ohio-completes-20th-anniversary-list-of-awardees-with-tribute-to-community-activism/",
+        "text": "20th anniversary awardees press release"
+      }
+    ],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 228,
+        "text": "Mockup note: honoree headshots and the 2026 event photos load in during content migration — initials are placeholders. Read the full announcement in the 20th anniversary awardees press release ."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 6,
+    "iframes": [],
+    "bytes_main": 10491,
+    "text_file": "content/text/our-work/legacy-of-equality.txt",
+    "text_words": 841,
+    "text_sha256": "717cab2c2f234946ff4ec4df188f6e304a6848266b45f223cdd32f68e6b9beef"
+  },
+  {
+    "url": "/our-work/local",
+    "wp_path": "/our-work/local/",
+    "slug": "local",
+    "parent_url": "/our-work",
+    "depth": 2,
+    "source_file": "public/our-work/local.html",
+    "content_file": "content/main/our-work/local.html",
+    "page_id": "our-work-local",
+    "nav_label": "Local Progress",
+    "h1": "Statewide community organizing",
+    "seo_title": "Local Progress — Equality Ohio",
+    "seo_description": "Equality Ohio organizes in communities across the state — passing local nondiscrimination ordinances and banning conversion therapy on minors.",
+    "share_card": "/assets/og/our-work.png",
+    "noindex": false,
+    "sitemap_priority": 0.6,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Statewide community organizing",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "LGBTQ‑inclusive nondiscrimination laws",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Municipal Equality Map",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Work with your city council",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Does your community protect you?",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/our-work/local/municipal-map"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 4,
+    "iframes": [],
+    "bytes_main": 2513,
+    "text_file": "content/text/our-work/local.txt",
+    "text_words": 181,
+    "text_sha256": "ff25f13f7ea1484567c872732dd7a267e8bc0b298a7408d76ae0f9057fe1902f"
+  },
+  {
+    "url": "/our-work/local/municipal-map",
+    "wp_path": "/our-work/local/municipal-map/",
+    "slug": "municipal-map",
+    "parent_url": "/our-work/local",
+    "depth": 3,
+    "source_file": "public/our-work/local/municipal-map.html",
+    "content_file": "content/main/our-work/local/municipal-map.html",
+    "page_id": "municipal-map",
+    "nav_label": "Municipal Equality Map",
+    "h1": "Municipal Equality Map",
+    "seo_title": "Municipal Equality Map — Equality Ohio",
+    "seo_description": "Use this map to identify what nondiscrimination protections exist for the LGBTQ+ community in various localities across Ohio.",
+    "share_card": "/assets/og/our-work.png",
+    "noindex": false,
+    "sitemap_priority": 0.6,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Municipal Equality Map",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "In 35 municipalities and 1 county in Ohio, discrimination in employment, housing, and public accommodations against LGBTQ+ people is illegal.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Mapping Equality",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Three areas of protection",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Employment Discrimination",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Housing Discrimination",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Public Accommodations Discrimination",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Do you have a story to share?",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "I want my community to protect LGBTQ people from discrimination!",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Write a Letter to the Editor",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Reach out to Equality Ohio for help",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Where you live shouldn’t decide your rights.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/contact",
+      "/get-involved",
+      "/stories"
+    ],
+    "external_links": [
+      {
+        "href": "https://civ.ohio.gov/how-to-file-a-charge",
+        "text": "How to File a Complaint civ.ohio.gov ↗"
+      }
+    ],
+    "self_links_to_wordpress": [
+      {
+        "href": "https://equalityohio.org/our-work/local/municipal-map/",
+        "text": "equalityohio.org/our-work/local/municipal-map"
+      }
+    ],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 154,
+        "text": "Interactive map coming to this preview. The live site’s municipal equality map is an interactive tool — a statewide map embed plus individual detail pages for the more than 250 Ohio cities whose codes Equality Ohio analyzed. It isn’t recreated in this design p"
+      },
+      {
+        "line": 222,
+        "text": "The organizing‑help form returns with the production build. Until then, email info@equalityohio.org ."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 10,
+    "iframes": [],
+    "bytes_main": 7670,
+    "text_file": "content/text/our-work/local/municipal-map.txt",
+    "text_words": 693,
+    "text_sha256": "6b47a22bcde1decefd978bd07a5ab1f28aaf3ede818fd453823de3b340655b21"
+  },
+  {
+    "url": "/privacy-policy",
+    "wp_path": "/privacy-policy/",
+    "slug": "privacy-policy",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/privacy-policy.html",
+    "content_file": "content/main/privacy-policy.html",
+    "page_id": "privacy",
+    "nav_label": null,
+    "h1": "Privacy Policy",
+    "seo_title": "Privacy Policy — Equality Ohio",
+    "seo_description": "How Equality Ohio Education Fund and Equality Ohio collect, use, protect, and disclose information from users of the Equality Ohio website.",
+    "share_card": "/assets/og/about.png",
+    "noindex": false,
+    "sitemap_priority": 0.2,
+    "sitemap_changefreq": "yearly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Privacy Policy",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Information Collection",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Methods of Collection",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Use of Information",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Information Sharing and Disclosure",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Information Protection",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "User Rights",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Opt-Out",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Cookies and Tracking Technologies",
+        "id": null
+      },
+      {
+        "level": 4,
+        "text": "What Are Cookies?",
+        "id": null
+      },
+      {
+        "level": 4,
+        "text": "How We Use Cookies and Tracking Technologies",
+        "id": null
+      },
+      {
+        "level": 4,
+        "text": "Contact Information",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Changes to the Privacy Policy",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/assets/docs/Privacy-Policy-November-2024.pdf"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 1,
+    "iframes": [],
+    "bytes_main": 11248,
+    "text_file": "content/text/privacy-policy.txt",
+    "text_words": 1193,
+    "text_sha256": "291ed7c27168601cfa4fbbe91182871d12e5837ec1e488ed5549fb6a0883a0d1"
+  },
+  {
+    "url": "/stories",
+    "wp_path": "/stories/",
+    "slug": "stories",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/stories.html",
+    "content_file": "content/main/stories.html",
+    "page_id": "stories",
+    "nav_label": "Share Your Story",
+    "h1": "Stories of Discrimination",
+    "seo_title": "Share Your Story — Equality Ohio",
+    "seo_description": "Stories of Discrimination — this is why we fight. Read stories from LGBTQ+ Ohioans and share your own with Equality Ohio.",
+    "share_card": "/assets/og/get-involved.png",
+    "noindex": false,
+    "sitemap_priority": 0.5,
+    "sitemap_changefreq": "monthly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Stories of Discrimination",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Stories from LGBTQ+ Ohioans",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Share your story",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Email your story",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Report discrimination",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Experienced discrimination? Talk to the Legal Clinic.",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "This is why we fight.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/legal-clinic/intake"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [
+      {
+        "href": "https://equalityohio.org/stories/",
+        "text": "equalityohio.org/stories"
+      }
+    ],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [
+      {
+        "line": 134,
+        "text": "Pending embed — the story archive on the live site loads dynamically from Equality Ohio’s WordPress (a “Load More” feed of story posts), and those stories haven’t been migrated into this preview. Read them on the live page in the meantime: equalityohio.org/sto"
+      },
+      {
+        "line": 158,
+        "text": "Pending — the live site’s “Share Your Story” submission page currently returns a 404 (it points at a retired staging URL), so there is no live form to mirror here yet. When EO provides the story-submission form and its fields, a visual-only mock of it replaces"
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 3,
+    "iframes": [],
+    "bytes_main": 3155,
+    "text_file": "content/text/stories.txt",
+    "text_words": 224,
+    "text_sha256": "f763c2af268789a0ed47cd38340a174489b8462dbf2766b4ea42916accb2a02f"
+  },
+  {
+    "url": "/terms-conditions",
+    "wp_path": "/terms-conditions/",
+    "slug": "terms-conditions",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/terms-conditions.html",
+    "content_file": "content/main/terms-conditions.html",
+    "page_id": "terms",
+    "nav_label": null,
+    "h1": "Terms & Conditions",
+    "seo_title": "Terms & Conditions — Equality Ohio",
+    "seo_description": "Text Messaging Terms: survey, polling, or voting-related (non-partisan) text messages from Equality Ohio Education Fund.",
+    "share_card": "/assets/og/about.png",
+    "noindex": false,
+    "sitemap_priority": 0.2,
+    "sitemap_changefreq": "yearly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "Terms & Conditions",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Text Messaging Terms",
+        "id": null
+      }
+    ],
+    "anchor_ids": [],
+    "forms": [],
+    "internal_links": [
+      "/privacy-policy"
+    ],
+    "external_links": [],
+    "self_links_to_wordpress": [],
+    "images": [],
+    "data_expires": [],
+    "expired_as_of_2026-11-20": [],
+    "event_blocks": [],
+    "election_blocks": 0,
+    "staging_copy_lines": [],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 1,
+    "iframes": [],
+    "bytes_main": 1782,
+    "text_file": "content/text/terms-conditions.txt",
+    "text_words": 146,
+    "text_sha256": "f939ec18cc11382ebc9730417cd492ff72cb2a693b4dc467fc075a20cb17bd46"
+  },
+  {
+    "url": "/votersguide",
+    "wp_path": "/votersguide/",
+    "slug": "votersguide",
+    "parent_url": null,
+    "depth": 1,
+    "source_file": "public/votersguide.html",
+    "content_file": "content/main/votersguide.html",
+    "page_id": "votersguide",
+    "nav_label": "Voters Guide",
+    "h1": "2026 Candidate Scorecard",
+    "seo_title": "Voters Guide — Equality Ohio",
+    "seo_description": "Equality Ohio's 2026 Candidate Scorecard examines multiple critical races — statewide, congressional, and Statehouse — helping Ohioans make informed choices.",
+    "share_card": "/assets/img/candidate-scorecard-2026-banner.png",
+    "noindex": false,
+    "sitemap_priority": 0.8,
+    "sitemap_changefreq": "weekly",
+    "json_ld": [
+      "BreadcrumbList"
+    ],
+    "help_bar": false,
+    "staging_only": false,
+    "headings": [
+      {
+        "level": 1,
+        "text": "2026 Candidate Scorecard",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "What do candidate grades mean?",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "How to interpret letter grades",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "U.S. Senator",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Sherrod Brown",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Jon Husted",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Ohio Governor",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Amy Acton",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Vivek Ramaswamy",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Ohio Secretary of State",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Allison Russo",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Robert Sprague",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Ohio Attorney General",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "John Kulewicz",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Keith Faber",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Ohio Supreme Court",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Jennifer Brunner",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Colleen O’Donnell",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Marilyn Zayas",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Dan Hawkins",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Eight candidates earned the top designation",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Key congressional and Statehouse contests",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Additional nonpartisan voter resources",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Three dates to write down",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Check your registration and know before you vote!",
+        "id": null
+      },
+      {
+        "level": 3,
+        "text": "Voter ID Guides",
+        "id": null
+      },
+      {
+        "level": 2,
+        "text": "Every vote is a statement about the kind of Ohio we want to build.",
+        "id": null
+      }
+    ],
+    "anchor_ids": [
+      "full-scorecard"
+    ],
+    "forms": [],
+    "internal_links": [
+      "/assets/docs/EQ_Candidate-Scorecard_September-Edits_9-18-v2.pdf",
+      "/legal-clinic/trans-know-your-rights",
+      "/votersguide#full-scorecard"
+    ],
+    "external_links": [
+      {
+        "href": "https://www.ohiosos.gov/elections",
+        "text": "Check your Ohio voter registration ↗"
+      },
+      {
+        "href": "https://www.ohiosos.gov/directories/find-my-polling-location",
+        "text": "Verify your polling location ↗"
+      },
+      {
+        "href": "https://www.transohio.org/votingwhiletrans2026",
+        "text": "Voting While Trans Guide TransOhio ↗"
+      },
+      {
+        "href": "https://transequality.org/resources/voting-while-trans-preparing-voter-id-laws",
+        "text": "Voting While Trans A4TE ↗"
+      },
+      {
+        "href": "https://voterlookup.ohiosos.gov/voterlookup.aspx",
+        "text": "Check your voter status Ohio Secretary of State ↗"
+      },
+      {
+        "href": "https://www.vote411.org/",
+        "text": "Get a full list of the races and issues on your ballot this year Vote411.org ↗"
+      },
+      {
+        "href": "https://866ourvote.org/",
+        "text": "Questions about voting rights, or difficulty casting your ballot? Call the nonpartisan Election Protection Hotline 1‑866‑OUR‑VOTE ↗"
+      },
+      {
+        "href": "https://voterlookup.ohiosos.gov/voterlookup.aspx",
+        "text": "Check Your Voter Status"
+      }
+    ],
+    "self_links_to_wordpress": [],
+    "images": [
+      {
+        "src": "/assets/img/candidate-scorecard-2026-banner.png",
+        "alt": "2026 Candidate Scorecard — Equality Ohio",
+        "width": "1250",
+        "height": "625",
+        "loading": null,
+        "srcset": null,
+        "sizes": null
+      }
+    ],
+    "data_expires": [
+      {
+        "tag": "div",
+        "date": "2026-11-04",
+        "id": null,
+        "class": "card-grid card-grid--3"
+      }
+    ],
+    "expired_as_of_2026-11-20": [
+      {
+        "tag": "div",
+        "date": "2026-11-04",
+        "id": null,
+        "class": "card-grid card-grid--3"
+      }
+    ],
+    "event_blocks": [],
+    "election_blocks": 1,
+    "staging_copy_lines": [
+      {
+        "line": 142,
+        "text": "Design preview — candidate portraits and the letter-grade badge graphics from the live scorecard are pending assets, so grades are not shown on the write-ups below. See every grade in the downloadable scorecard PDF ."
+      }
+    ],
+    "page_style_blocks": 0,
+    "inline_style_attrs": 8,
+    "iframes": [],
+    "bytes_main": 19463,
+    "text_file": "content/text/votersguide.txt",
+    "text_words": 1343,
+    "text_sha256": "25f581c80150a27432f3196bea067602b2bf297823608d97b7ecd96a1142caac"
+  }
+]

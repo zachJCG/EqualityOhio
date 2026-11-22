@@ -1,0 +1,15 @@
+/*
+Theme Name: Equality Ohio
+Theme URI: https://github.com/zachJCG/EqualityOhio
+Author: Joseph Carter Group
+Author URI: https://josephcartergroup.com
+Description: Block theme for equalityohio.org, ported from the Next.js staging build. Brand tokens, components and behaviors live in assets/; WordPress-specific adjustments in assets/css/eo-wp.css.
+Requires at least: 6.6
+Tested up to: 7.1
+Requires PHP: 8.0
+Version: 0.1.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: equality-ohio
+*/
+/* No styles here on purpose: see assets/css/ (tokens, site, wp). */

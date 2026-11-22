@@ -1,0 +1,119 @@
+/* ==========================================================================
+   EQUALITY OHIO: WordPress compatibility layer.
+   eo-site.css is the Next.js stylesheet, byte for byte apart from two
+   texture paths. Everything WordPress needs on top is here, so the two
+   files can be compared: block wrappers, the Button block's inner <a>, the
+   paragraph wraps around block-level links, core layout classes and the
+   editor chrome. Colors are tokens only (see eo-brand-tokens.css).
+   ========================================================================== */
+
+/* -- Block wrappers ------------------------------------------------------ */
+/* Template parts render inside a wrapper; display: contents removes its box
+   so the skip link, ribbon and sticky header lay out as on the static pages. */
+.eo-chrome { display: contents; }
+.wp-site-blocks { display: block; }
+.wp-block-post-content { margin: 0; padding: 0; }
+/* Core's flow-layout base rules use :where() (zero specificity) and no gap
+   rules are emitted (theme.json sets no blockGap), so eo-site.css margins win.
+   The alignment helpers are the only remaining layout rules; keep them off. */
+.wp-block-group.is-layout-flow > .alignleft,
+.wp-block-group.is-layout-flow > .alignright { float: none; margin: 0; }
+
+/* -- Headings ------------------------------------------------------------ */
+/* .wp-block-heading carries no core styles; nothing to undo. */
+
+/* -- Buttons ------------------------------------------------------------- */
+/* The Button block is <div class="wp-block-button is-style-eo-primary"><a
+   class="wp-block-button__link wp-element-button">. The source styled the <a>
+   itself as .btn.btn--primary; the same rules are repeated here against the
+   inner link, keyed on the wrapper's block style (registered in functions.php).
+   The wrapper never carries .btn, so eo-site.css leaves it alone. Core's
+   button defaults use :root :where(), so these win on specificity alone. */
+.wp-block-button[class*="is-style-eo-"] > .wp-block-button__link {
+  display: inline-block;
+  font-family: var(--eo-font-display);
+  font-weight: 700; font-size: 1rem; line-height: 1.65;
+  text-decoration: none; text-align: center;
+  border-radius: 999px;
+  padding: 0.85rem 1.9rem;
+  border: 2px solid transparent;
+  cursor: pointer; height: auto;
+  background: transparent; color: inherit;
+  transition:
+    background-color var(--eo-dur-fast) var(--eo-ease-out),
+    color var(--eo-dur-fast) var(--eo-ease-out),
+    border-color var(--eo-dur-fast) var(--eo-ease-out),
+    transform var(--eo-dur-lift) var(--eo-ease-out);
+}
+.wp-block-button.is-style-eo-primary > .wp-block-button__link { background: var(--eo-purple); color: var(--eo-on-dark); }
+.wp-block-button.is-style-eo-primary > .wp-block-button__link:hover { background: var(--eo-purple-deep); color: var(--eo-on-dark); }
+.wp-block-button.is-style-eo-outline > .wp-block-button__link { border-color: var(--eo-purple); color: var(--eo-purple); background: transparent; }
+.wp-block-button.is-style-eo-outline > .wp-block-button__link:hover { background: var(--eo-purple-soft); color: var(--eo-purple); }
+.wp-block-button.is-style-eo-gold > .wp-block-button__link { background: var(--eo-gold); color: var(--eo-ink); }
+.wp-block-button.is-style-eo-gold > .wp-block-button__link:hover { filter: brightness(1.05); color: var(--eo-ink); }
+.wp-block-button.is-style-eo-on-dark > .wp-block-button__link { background: var(--eo-white); color: var(--eo-purple); }
+.wp-block-button.is-style-eo-on-dark > .wp-block-button__link:hover { background: var(--eo-gold); color: var(--eo-ink); }
+.wp-block-button.eo-btn-lg > .wp-block-button__link { padding: 1rem 2.3rem; font-size: 1.08rem; }
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .wp-block-button.is-style-eo-primary > .wp-block-button__link:hover,
+  .wp-block-button.is-style-eo-gold > .wp-block-button__link:hover { transform: translateY(-1px); }
+}
+/* Focus on the dark surfaces: the link, not the wrapper, takes focus. */
+.band .wp-block-button__link:focus-visible,
+.help-bar .wp-block-button__link:focus-visible { outline-color: var(--eo-focus-on-dark); }
+
+/* The Buttons wrapper. Core gives it display:flex and a 0.5em gap through
+   :where(); the source classes it carries (.hero__ctas) set their own. */
+.wp-block-buttons { display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center; }
+.wp-block-buttons > .wp-block-button { margin: 0; }
+/* Contexts where the source selected the .btn as a flex child or set its width.
+   A .btn that was a direct child of a column-flex .card stretched to the card. */
+.tier-card > .wp-block-buttons { margin-top: auto; }
+.card > .wp-block-buttons > .wp-block-button { flex: 1 1 100%; }
+.card > .wp-block-buttons .wp-block-button__link { width: 100%; }
+.news-card--feature .wp-block-buttons { align-self: flex-start; }
+.callout--clinic > .wp-block-buttons { flex: 0 0 auto; }
+.center > .wp-block-buttons, .band .container.center > .wp-block-buttons { justify-content: center; }
+@media (max-width: 640px) {
+  .hero__ctas.wp-block-buttons { display: grid; }
+  .hero__ctas .wp-block-button, .hero__ctas .wp-block-button__link { width: 100%; }
+}
+@media print {
+  main .wp-block-button__link { color: var(--eo-ink); background: none; border-color: var(--eo-ink); box-shadow: none; }
+}
+
+/* -- Paragraph wraps around block-level links ---------------------------- */
+/* <a class="card__link"> and <a class="callout__phone"> stood alone in the
+   source. A block needs a container, so each sits in a <p class="…-wrap">. */
+.card__link-wrap { margin: auto 0 0; }
+.card .card__link-wrap { font-size: inherit; color: inherit; }
+.card .card__link-wrap .card__link { margin-top: 0; }
+.callout__phone-wrap { margin: 0; }
+/* The whole-card tap target (eo-site.css keys it on "no other p a"): the
+   wrap is itself a p a, so the same three rules are restated to allow it. */
+.card:has(.card__link):not(:has(p:not(.card__link-wrap) a, h2 a, h3 a, li a)) .card__link::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+}
+.card:has(.card__link):not(:has(p:not(.card__link-wrap) a, h2 a, h3 a, li a)):has(.card__link:focus-visible) {
+  outline: 3px solid var(--eo-focus); outline-offset: 3px;
+}
+.card:has(.card__link):not(:has(p:not(.card__link-wrap) a, h2 a, h3 a, li a)) .card__link:focus-visible { outline: none; }
+
+/* -- Lists --------------------------------------------------------------- */
+/* .wp-block-list has no core styles beyond the user agent's. */
+
+/* -- Images -------------------------------------------------------------- */
+.wp-block-image { margin: 0; }
+.wp-block-image img { width: auto; max-width: 100%; height: auto; }
+.hero__art .wp-block-image img { width: min(400px, 100%); }
+
+/* -- Staging notes ------------------------------------------------------- */
+/* Every staging-only line carries .eo-staging-note (one search finds them at
+   launch). No visual change: the source classes (.form-note, .hint) style them. */
+body.eo-launched .eo-staging-note { outline: 3px dashed var(--eo-error); outline-offset: 2px; }
+
+/* -- Admin bar ----------------------------------------------------------- */
+/* Logged-in checks are not the release gate (HANDOFF §7), but the sticky
+   header should still sit below the admin bar when it is there. */
+body.admin-bar .site-header { top: var(--wp-admin--admin-bar--height, 32px); }
+body.admin-bar .site-nav.open { --eo-nav-top: calc(var(--eo-nav-top, 76px)); }

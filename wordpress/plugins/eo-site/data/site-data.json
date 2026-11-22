@@ -1,0 +1,258 @@
+{
+  "nav": [
+    {
+      "label": "Legal Clinic",
+      "href": "/legal-clinic",
+      "page": "legal-clinic",
+      "children": [
+        {
+          "href": "/legal-clinic",
+          "page": "legal-clinic",
+          "label": "About the Clinic"
+        },
+        {
+          "href": "/legal-clinic/intake",
+          "page": "legal-clinic-intake",
+          "label": "Start an Intake"
+        },
+        {
+          "href": "/legal-clinic/ohio-lgbtq-family-law-guide",
+          "page": "family-law-guide",
+          "label": "Ohio LGBTQ+ Family Law Guide"
+        },
+        {
+          "href": "/legal-clinic/trans-know-your-rights",
+          "page": "trans-know-your-rights",
+          "label": "Trans Know Your Rights"
+        },
+        {
+          "href": "/legal-clinic/legal-network",
+          "page": "legal-network",
+          "label": "Legal Network for Attorneys"
+        }
+      ]
+    },
+    {
+      "label": "Our Work",
+      "href": "/our-work",
+      "page": "our-work",
+      "children": [
+        {
+          "href": "/our-work",
+          "page": "our-work",
+          "label": "What We Do"
+        },
+        {
+          "href": "/our-work/local",
+          "page": "our-work-local",
+          "label": "Local Progress"
+        },
+        {
+          "href": "/our-work/local/municipal-map",
+          "page": "municipal-map",
+          "label": "Municipal Equality Map"
+        },
+        {
+          "href": "/our-work/business",
+          "page": "business",
+          "label": "Business Engagement"
+        },
+        {
+          "href": "/our-work/legacy-of-equality",
+          "page": "legacy",
+          "label": "Legacy of Equality"
+        },
+        {
+          "href": "/votersguide",
+          "page": "votersguide",
+          "label": "Voters Guide"
+        }
+      ]
+    },
+    {
+      "label": "Get Involved",
+      "href": "/get-involved",
+      "page": "get-involved",
+      "children": [
+        {
+          "href": "/get-involved",
+          "page": "get-involved",
+          "label": "Ways to Get Involved"
+        },
+        {
+          "href": "/get-involved/volunteer",
+          "page": "volunteer",
+          "label": "Volunteer"
+        },
+        {
+          "href": "/get-involved/events",
+          "page": "events",
+          "label": "Events"
+        },
+        {
+          "href": "/stories",
+          "page": "stories",
+          "label": "Share Your Story"
+        },
+        {
+          "href": "/newsletter",
+          "page": "newsletter",
+          "label": "Newsletter"
+        }
+      ]
+    },
+    {
+      "label": "About",
+      "href": "/about",
+      "page": "about",
+      "children": [
+        {
+          "href": "/about",
+          "page": "about",
+          "label": "Mission & Values"
+        },
+        {
+          "href": "/about/history",
+          "page": "history",
+          "label": "Our History"
+        },
+        {
+          "href": "/about/leadership",
+          "page": "leadership",
+          "label": "Board of Directors"
+        },
+        {
+          "href": "/about/staff-interns",
+          "page": "staff",
+          "label": "Staff & Interns"
+        },
+        {
+          "href": "/about/jobs-internships",
+          "page": "jobs",
+          "label": "Jobs & Internships"
+        },
+        {
+          "href": "/contact",
+          "page": "contact",
+          "label": "Contact"
+        }
+      ]
+    },
+    {
+      "label": "News & Policy",
+      "href": "/news",
+      "page": "news"
+    }
+  ],
+  "help_bar_pages": [
+    "legal-clinic",
+    "trans-know-your-rights",
+    "family-law-guide"
+  ],
+  "org": {
+    "phone": {
+      "display": "(614) 224-0400",
+      "tel": "+16142240400"
+    },
+    "clinicPhone": {
+      "display": "855-LGBT-LAW",
+      "tel": "+18555428529"
+    },
+    "email": "info@equalityohio.org",
+    "handle": "@equalityohio",
+    "socials": [
+      {
+        "label": "X",
+        "handle": "@equalityohio",
+        "url": "https://x.com/equalityohio"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/equalityohio"
+      },
+      {
+        "label": "Instagram",
+        "handle": "@equality.ohio",
+        "url": "https://www.instagram.com/equality.ohio/"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/channel/UCxKjvM_REomRkFAacq7dcwQ"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/equalityohio/"
+      },
+      {
+        "label": "Threads",
+        "handle": "@equality.ohio",
+        "url": "https://www.threads.com/@equality.ohio"
+      }
+    ],
+    "c3": {
+      "name": "Equality Ohio Education Fund",
+      "ein": "02-0743268"
+    },
+    "c4": {
+      "name": "Equality Ohio",
+      "ein": "02-0743270"
+    }
+  },
+  "site": {
+    "LAUNCHED": false,
+    "SITE_URL": "https://equalityohio.org",
+    "SITE_NAME": "Equality Ohio",
+    "THEME_COLOR": "#5A3F99"
+  },
+  "not_found": {
+    "url": "/404",
+    "title": "Page Not Found — Equality Ohio",
+    "description": "That page isn't part of this preview.",
+    "section": "default",
+    "noindex": true
+  },
+  "share_cards": {
+    "default": {
+      "path": "/assets/og/default.png",
+      "width": 1200,
+      "height": 630,
+      "alt": "Equality Ohio. Ohio’s Statewide LGBTQ+ Advocacy & Legal Aid Organization. An Ohio where justice, dignity, and self-determination belong to everyone. Lived and legal equality for LGBTQ+ Ohioans."
+    },
+    "legal-clinic": {
+      "path": "/assets/og/legal-clinic.png",
+      "width": 1200,
+      "height": 630,
+      "alt": "Equality Ohio. Free Legal Help for LGBTQ+ Ohioans. The Equality Ohio Legal Clinic. Our services are always free."
+    },
+    "our-work": {
+      "path": "/assets/og/our-work.png",
+      "width": 1200,
+      "height": 630,
+      "alt": "Equality Ohio. Our Work. Advocating equality for all Ohioans. Equality Ohio defends the rights of LGBTQ Ohioans."
+    },
+    "get-involved": {
+      "path": "/assets/og/get-involved.png",
+      "width": 1200,
+      "height": 630,
+      "alt": "Equality Ohio. Get Involved. Join us. If you support LGBTQ equality, you’re a part of the Equality Ohio family."
+    },
+    "about": {
+      "path": "/assets/og/about.png",
+      "width": 1200,
+      "height": 630,
+      "alt": "Equality Ohio. About Us. Who we are. Ohio’s statewide LGBTQ+ advocacy and legal aid organization."
+    },
+    "give": {
+      "path": "/assets/og/give.png",
+      "width": 1200,
+      "height": 630,
+      "alt": "Equality Ohio. Give. Fuel the fight for equality. Every dollar supports free legal services, policy advocacy, and organizing across Ohio."
+    },
+    "news": {
+      "path": "/assets/og/news.png",
+      "width": 1200,
+      "height": 630,
+      "alt": "Equality Ohio. News & Policy. Stay informed. Statements, policy alerts, and the stories behind the work."
+    }
+  }
+}
