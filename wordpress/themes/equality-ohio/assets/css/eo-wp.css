@@ -1,6 +1,6 @@
 /* ==========================================================================
    EQUALITY OHIO: WordPress compatibility layer.
-   eo-site.css is the Next.js stylesheet, byte for byte apart from two
+   eo-site.css is the Next.js stylesheet, byte for byte apart from its four
    texture paths. Everything WordPress needs on top is here, so the two
    files can be compared: block wrappers, the Button block's inner <a>, the
    paragraph wraps around block-level links, core layout classes and the
@@ -82,12 +82,24 @@
   main .wp-block-button__link { color: var(--eo-ink); background: none; border-color: var(--eo-ink); box-shadow: none; }
 }
 
+/* -- Help bar ------------------------------------------------------------ */
+/* On phones the bar carries the 4rem gap above the footer and eo-site.css
+   zeroes the footer's own margin with .help-bar + .site-footer. Here the two
+   render in separate template-part wrappers, so the pairing is restated on
+   the wrappers (otherwise the gap doubles on every help-bar page). */
+@media (max-width: 767.98px) {
+  .eo-chrome--help-bar + .eo-chrome > .site-footer { margin-top: 0; }
+}
+
 /* -- Paragraph wraps around block-level links ---------------------------- */
 /* <a class="card__link"> and <a class="callout__phone"> stood alone in the
    source. A block needs a container, so each sits in a <p class="…-wrap">. */
 .card__link-wrap { margin: auto 0 0; }
 .card .card__link-wrap { font-size: inherit; color: inherit; }
-.card .card__link-wrap .card__link { margin-top: 0; }
+/* In the source the link is itself the card's flex item, so its 0.8rem
+   padding-top spaces it from the text; inline, that padding would take no
+   room. inline-block restores the gap without stretching the link. */
+.card .card__link-wrap .card__link { display: inline-block; margin-top: 0; }
 .callout__phone-wrap { margin: 0; }
 /* The whole-card tap target (eo-site.css keys it on "no other p a"): the
    wrap is itself a p a, so the same three rules are restated to allow it. */
@@ -111,6 +123,67 @@
 /* Every staging-only line carries .eo-staging-note (one search finds them at
    launch). No visual change: the source classes (.form-note, .hint) style them. */
 body.eo-launched .eo-staging-note { outline: 3px dashed var(--eo-error); outline-offset: 2px; }
+
+/* -- Motion layer, restated for WordPress markup (2026-11) ----------------
+   eo-site.css keys four of its motion rules on markup that WordPress
+   renders differently. Each is repeated here against the WordPress markup;
+   timing, easing and the reduced-motion behavior come from the same tokens. */
+
+/* Page transitions keep the top equality bar still. The source names it as
+   a direct child of <body>; here it sits in the header part's display:
+   contents wrapper. The footer's bar is inside .site-footer, so exactly one
+   element carries the name (two would cancel the transition). */
+.eo-chrome > .equality-bar { view-transition-name: eo-bar; }
+
+/* Button sheen and press: the source draws them on .btn, the Button block
+   on its inner link. overflow: clip keeps the link on its text baseline and
+   never clips the focus outline. */
+.wp-block-button[class*="is-style-eo-"] > .wp-block-button__link { position: relative; isolation: isolate; overflow: clip; }
+.wp-block-button.is-style-eo-primary > .wp-block-button__link::after,
+.wp-block-button.is-style-eo-gold > .wp-block-button__link::after,
+.wp-block-button.is-style-eo-on-dark > .wp-block-button__link::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(105deg, transparent 32%, var(--eo-sheen) 50%, transparent 68%);
+  transform: translateX(-101%);
+  pointer-events: none;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .wp-block-button.is-style-eo-primary > .wp-block-button__link:hover::after,
+  .wp-block-button.is-style-eo-gold > .wp-block-button__link:hover::after,
+  .wp-block-button.is-style-eo-on-dark > .wp-block-button__link:hover::after {
+    transform: translateX(101%);
+    transition: transform var(--eo-dur-draw) var(--eo-ease-out);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .wp-block-button[class*="is-style-eo-"] > .wp-block-button__link:active { transform: scale(0.98); }
+}
+
+/* Reading progress on the long guides and policies. The source keys it on
+   <body data-page>; WordPress prints the page slug as a body class. */
+@supports (animation-timeline: scroll()) {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    body:is(.eo-page-ohio-lgbtq-family-law-guide, .eo-page-trans-know-your-rights, .eo-page-history,
+            .eo-page-legacy-of-equality, .eo-page-votersguide, .eo-page-privacy-policy, .eo-page-terms-conditions)::before {
+      content: "";
+      position: fixed; top: 0; left: 0; right: 0; z-index: 150;
+      height: 4px;
+      background: var(--eo-equality-bar);
+      transform-origin: 0 50%;
+      animation: eo-progress linear both;
+      animation-timeline: scroll(root);
+      pointer-events: none;
+    }
+    body.admin-bar:is(.eo-page-ohio-lgbtq-family-law-guide, .eo-page-trans-know-your-rights, .eo-page-history,
+            .eo-page-legacy-of-equality, .eo-page-votersguide, .eo-page-privacy-policy, .eo-page-terms-conditions)::before {
+      top: var(--wp-admin--admin-bar--height, 32px);
+    }
+  }
+}
+@media print {
+  .wp-block-button__link::after { display: none; }
+}
 
 /* -- Admin bar ----------------------------------------------------------- */
 /* Logged-in checks are not the release gate (HANDOFF §7), but the sticky

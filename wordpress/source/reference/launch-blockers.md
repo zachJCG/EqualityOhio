@@ -1,17 +1,10 @@
 # Staging-Only Content, Expired Content and Links Back to WordPress
 
-Generated from the source pages on 2026-11-20 with the same patterns the source repo's own tests use (`tests/site-rules.test.mjs`, `tests/freshness.test.mjs`). Line numbers refer to the file under `source/nextjs/`.
+Generated from the source pages on 2026-11-22 with the same patterns the source repo's own tests use (`tests/site-rules.test.mjs`, `tests/freshness.test.mjs`). Line numbers refer to the file under `source/nextjs/`.
 
 ## 1. Expired Blocks: Do Not Port
 
-Each carries `data-expires="2026-11-04"` and an `<!-- ELECTION: … -->` comment telling the next editor to delete it after Election Day.
-
-| Page | Element | What it is |
-|---|---|---|
-| `/` | `<section class="section">` | The "Make your plan to vote in 2026!" section with the scorecard banner |
-| `/` | `<article class="card news-card">` | The "Make your plan to vote" card in "The latest" |
-| `/news` | `<div class="card news-card news-card--feature card--flat">` | The election alert card at the top of News & Policy |
-| `/votersguide` | `<div class="card-grid card-grid--3">` | The get-out-the-vote block (three cards) |
+None as of 2026-11-22. The four 2026 election blocks (`data-expires="2026-11-04"`) were deleted from the source after Election Day.
 
 Everything else about the 2026 election (the `/votersguide/` page itself, the scorecard cards and the news items) is still in the source and is EO's call. Flag it; do not cut it yourself.
 
@@ -21,7 +14,7 @@ True only of a preview. Carry each one into WordPress as a marked staging note (
 
 | Page | Source line | Text |
 |---|---|---|
-| `/` | 306 | This is a design preview: nothing was submitted. The production build will connect to Equality Ohio’s email platform. |
+| `/` | 300 | This is a design preview: nothing was submitted. The production build will connect to Equality Ohio’s email platform. |
 | `/about/history` | 170 | Pending embed: the live history page embeds a video of the 2014 Gay Games Opening Ceremony that isn’t recreated in this preview. Watch it on YouTube . |
 | `/about/leadership` | 155 | Mockup note: headshots and full bios load in during content migration — initials are placeholders. |
 | `/about/staff-interns` | 154 | Mockup note: headshots and full bios load in during content migration — initials are placeholders. |
@@ -43,7 +36,7 @@ True only of a preview. Carry each one into WordPress as a marked staging note (
 | `/legal-clinic/legal-network` | 205 | Interest noted — in the real build. |
 | `/legal-clinic/legal-network` | 206 | This preview didn’t save or send anything. In production, your interest form would start the application process with the clinic team. In the meantime, use the sign‑up form on Lawmatics or email info@equalityohio.org . |
 | `/legal-clinic/ohio-lgbtq-family-law-guide` | 139 | Pending asset: the guide itself is a downloadable PDF (2025 edition) hosted by Equality Ohio — the cover art and an inline reader aren’t recreated in this preview yet. Until then, use the download link below. |
-| `/news` | 205 | Mockup shows six recent posts from equalityohio.org. Production build includes the full archive with categories, search, and pagination. |
+| `/news` | 177 | Mockup shows five recent posts from equalityohio.org. Production build includes the full archive with categories, search, and pagination. |
 | `/newsletter` | 132 | Design preview — this form isn’t connected yet and nothing you type is saved or sent. To get updates today, sign up on the live page: equalityohio.org . In production this form connects to EO’s email platform (the live form runs on Gravity Forms in WordPress)  |
 | `/newsletter` | 165 | You’re on the list — in the real build. |
 | `/newsletter` | 166 | This preview didn’t transmit anything. To actually subscribe, use the live signup page or email info@equalityohio.org . |
@@ -55,14 +48,13 @@ True only of a preview. Carry each one into WordPress as a marked staging note (
 | `/stories` | 158 | Pending — the live site’s “Share Your Story” submission page currently returns a 404 (it points at a retired staging URL), so there is no live form to mirror here yet. When EO provides the story-submission form and its fields, a visual-only mock of it replaces |
 | `/votersguide` | 142 | Design preview — candidate portraits and the letter-grade badge graphics from the live scorecard are pending assets, so grades are not shown on the write-ups below. See every grade in the downloadable scorecard PDF . |
 
-## 3. Links Back to equalityohio.org (12)
+## 3. Links Back to equalityohio.org (11)
 
 On a fresh install these still point at the live site, which is fine while staging. They become loops or 404s the day this build serves equalityohio.org.
 
 | Page | Link text | Target |
 |---|---|---|
 | `/news` | Read more: Press Release: $750,000 Legacy Gift Strengthens the Future of LGBTQIA+ Organizations in Central Ohio | https://equalityohio.org/dannystoutlegacygift/ |
-| `/news` | Read more: Make your plan to vote in 2026! | https://equalityohio.org/gotv2026/ |
 | `/news` | Read more: Equality Ohio’s 2026 Candidate Scorecard Is Here | https://equalityohio.org/equality-ohios-2026-candidate-scorecard-is-here/ |
 | `/news` | Read more: Roadmap Back to Equality: The Equality Ohio Strategic Plan (2026–2028) | https://equalityohio.org/roadmap-back-to-equality-the-equality-ohio-strategic-plan-2026-2028/ |
 | `/news` | Read more: State of Equality in Ohio 2026 Address | https://equalityohio.org/state-of-equality-in-ohio-2026-address/ |

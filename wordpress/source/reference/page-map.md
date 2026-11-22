@@ -4,10 +4,10 @@ Generated from `content/pages.json` (source commit `ee60763`). One row per WordP
 
 | # | WordPress path | Slug | Parent | H1 | Words | On this page |
 |---|---|---|---|---|---|---|
-| 1 | `/` | `home` | — | An Ohio where justice, dignity, and self‑determination belong to everyone. | 479 | Static front page; Form: Newsletter signup; 1 staging-only line; 2 expired election blocks (do not port); 2 images |
+| 1 | `/` | `home` | — | An Ohio where justice, dignity, and self‑determination belong to everyone. | 448 | Static front page; Form: Newsletter signup; 1 staging-only line |
 | 2 | `/about/` | `about` | — | Who we are | 372 | — |
 | 3 | `/about/history/` | `history` | `/about/` | Our History | 798 | 1 staging-only line |
-| 4 | `/about/jobs-internships/` | `jobs-internships` | `/about/` | Jobs & Internships | 880 | — |
+| 4 | `/about/jobs-internships/` | `jobs-internships` | `/about/` | Jobs & Internships | 257 | — |
 | 5 | `/about/leadership/` | `leadership` | `/about/` | Board of Directors | 286 | 1 staging-only line |
 | 6 | `/about/staff-interns/` | `staff-interns` | `/about/` | Staff & Interns | 398 | 1 staging-only line |
 | 7 | `/contact/` | `contact` | — | Talk to us | 107 | Form: Contact form; 2 staging-only lines |
@@ -22,7 +22,7 @@ Generated from `content/pages.json` (source commit `ee60763`). One row per WordP
 | 16 | `/legal-clinic/legal-network/` | `legal-network` | `/legal-clinic/` | Join the Equality Ohio Attorney Referral Network | 286 | Form: Attorney Referral Network interest form; 3 staging-only lines |
 | 17 | `/legal-clinic/ohio-lgbtq-family-law-guide/` | `ohio-lgbtq-family-law-guide` | `/legal-clinic/` | Ohio LGBTQ+ Family Law Guide | 343 | Phone help bar; 1 staging-only line |
 | 18 | `/legal-clinic/trans-know-your-rights/` | `trans-know-your-rights` | `/legal-clinic/` | Trans Know Your Rights | 2408 | Phone help bar |
-| 19 | `/news/` | `news` | — | Stay informed | 357 | 1 staging-only line; 1 expired election block (do not port); 6 links back to equalityohio.org |
+| 19 | `/news/` | `news` | — | Stay informed | 289 | 1 staging-only line; 5 links back to equalityohio.org |
 | 20 | `/newsletter/` | `newsletter` | — | Sign up for the latest news from Equality Ohio | 268 | Form: E-news signup; 3 staging-only lines; 2 links back to equalityohio.org |
 | 21 | `/our-work/` | `our-work` | — | Advocating equality for all Ohioans | 514 | 1 staging-only line; 1 link back to equalityohio.org |
 | 22 | `/our-work/business/` | `business` | `/our-work/` | Business Engagement | 257 | — |
@@ -32,9 +32,9 @@ Generated from `content/pages.json` (source commit `ee60763`). One row per WordP
 | 26 | `/privacy-policy/` | `privacy-policy` | — | Privacy Policy | 1193 | — |
 | 27 | `/stories/` | `stories` | — | Stories of Discrimination | 224 | 2 staging-only lines; 1 link back to equalityohio.org |
 | 28 | `/terms-conditions/` | `terms-conditions` | — | Terms & Conditions | 146 | — |
-| 29 | `/votersguide/` | `votersguide` | — | 2026 Candidate Scorecard | 1343 | 1 staging-only line; 1 expired election block (do not port); 1 image |
+| 29 | `/votersguide/` | `votersguide` | — | 2026 Candidate Scorecard | 1268 | 1 staging-only line; 1 image |
 
-Totals: 29 pages, 14700 words, 6 forms, 33 staging-only lines, 4 expired blocks, 12 links back to equalityohio.org.
+Totals: 29 pages, 13903 words, 6 forms, 33 staging-only lines, 0 expired blocks, 11 links back to equalityohio.org.
 
 Not ported: `/gate` (the Vercel staging gate). The branded 404 becomes `templates/404.html`.
 

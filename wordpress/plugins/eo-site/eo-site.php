@@ -3,7 +3,7 @@
  * Plugin Name: Equality Ohio Site
  * Plugin URI: https://github.com/zachJCG/EqualityOhio
  * Description: Behavior that must survive a theme change for equalityohio.org: the legacy redirect map, page titles, descriptions, share cards and structured data, the staging flag, safe response headers, the eo/text block, and the importer that creates the 29 pages, menus and settings from files.
- * Version: 0.1.0
+ * Version: 0.2.0
  * Requires at least: 6.6
  * Requires PHP: 8.0
  * Author: Joseph Carter Group
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'EO_SITE_VERSION', '0.1.0' );
+define( 'EO_SITE_VERSION', '0.2.0' );
 define( 'EO_SITE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'EO_SITE_URL', plugin_dir_url( __FILE__ ) );
 

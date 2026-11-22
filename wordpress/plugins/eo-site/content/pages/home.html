@@ -24,11 +24,24 @@
 <!-- /wp:buttons --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"hero__art","layout":{"type":"default"}} -->
-<div class="wp-block-group hero__art"><!-- wp:image {"url":"{{THEME_URI}}/assets/logo/equality-ohio-logo.png","alt":"Equality Ohio logo","width":"400px","height":"174px"} -->
-<figure class="wp-block-image is-resized"><img src="{{THEME_URI}}/assets/logo/equality-ohio-logo.png" alt="Equality Ohio logo" style="width:400px;height:174px"/></figure>
-<!-- /wp:image --></div>
-<!-- /wp:group --></div>
+<!-- wp:html -->
+<div class="hero__art" aria-hidden="true">
+      <svg class="eq-art" viewBox="0 0 480 360" width="480" height="360" focusable="false">
+        <g class="eq-art__layer eq-art__layer--back">
+          <rect class="eq-art__ghost eq-art__ghost--top" x="0" y="45.33" width="480" height="94" />
+          <rect class="eq-art__ghost eq-art__ghost--bottom" x="0" y="173.91" width="480" height="94" />
+        </g>
+        <g class="eq-art__layer eq-art__layer--front">
+          <rect class="eq-art__bar eq-art__bar--green" style="--i:0" x="14" y="96" width="42.77" height="121.24" />
+          <rect class="eq-art__bar eq-art__bar--green" style="--i:1" x="91" y="96" width="42.84" height="121.24" />
+          <rect class="eq-art__bar eq-art__bar--purple eq-art__bar--x" style="--i:2" x="176.53" y="96" width="119.84" height="43.33" />
+          <rect class="eq-art__bar eq-art__bar--purple eq-art__bar--x" style="--i:3" x="176.53" y="173.91" width="119.84" height="43.33" />
+          <rect class="eq-art__bar eq-art__bar--blue" style="--i:4" x="339.08" y="96" width="42.84" height="121.24" />
+          <rect class="eq-art__bar eq-art__bar--blue" style="--i:5" x="416.15" y="96" width="42.84" height="121.24" />
+        </g>
+      </svg>
+    </div>
+<!-- /wp:html --></div>
 <!-- /wp:group --></section>
 <!-- /wp:group -->
 
@@ -72,7 +85,11 @@
 
 <!-- wp:group {"className":"card-grid card-grid--3","layout":{"type":"default"}} -->
 <div class="wp-block-group card-grid card-grid--3"><!-- wp:group {"className":"card card--path is-blue","layout":{"type":"default"}} -->
-<div class="wp-block-group card card--path is-blue"><!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
+<div class="wp-block-group card card--path is-blue"><!-- wp:html -->
+<span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 3.5v17M5 7h14M8.5 20.5h7" /><path d="M7 7l-3 6.2a3 3 0 0 0 6 0L7 7zM17 7l-3 6.2a3 3 0 0 0 6 0L17 7z" /></svg></span>
+<!-- /wp:html -->
+
+<!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
 <span class="card__kicker">Legal Clinic</span>
 <!-- /wp:eo/text -->
 
@@ -90,7 +107,11 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"card card--path","layout":{"type":"default"}} -->
-<div class="wp-block-group card card--path"><!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
+<div class="wp-block-group card card--path"><!-- wp:html -->
+<span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 20s-7.5-4.6-7.5-10A4 4 0 0 1 12 7.5 4 4 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z" /></svg></span>
+<!-- /wp:html -->
+
+<!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
 <span class="card__kicker">Give</span>
 <!-- /wp:eo/text -->
 
@@ -108,7 +129,11 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"card card--path is-green","layout":{"type":"default"}} -->
-<div class="wp-block-group card card--path is-green"><!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
+<div class="wp-block-group card card--path is-green"><!-- wp:html -->
+<span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M15.5 19.5v-1a4 4 0 0 0-4-4h-4a4 4 0 0 0-4 4v1" /><circle cx="9.5" cy="7.5" r="3" /><path d="M20.5 19.5v-1a4 4 0 0 0-3-3.87M15.5 4.6a3 3 0 0 1 0 5.8" /></svg></span>
+<!-- /wp:html -->
+
+<!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
 <span class="card__kicker">About</span>
 <!-- /wp:eo/text -->
 
@@ -265,6 +290,30 @@
 
 <!-- wp:paragraph {"className":"card__link-wrap"} -->
 <p class="card__link-wrap"><a class="card__link" href="/votersguide/">See the scorecard</a></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></article>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"article","className":"card news-card","layout":{"type":"default"}} -->
+<article class="wp-block-group card news-card"><!-- wp:eo/text {"className":"news-card__media alt-b"} -->
+<div class="news-card__media alt-b"><span class="pill pill--on-media">Strategic Plan</span></div>
+<!-- /wp:eo/text -->
+
+<!-- wp:group {"className":"news-card__body","layout":{"type":"default"}} -->
+<div class="wp-block-group news-card__body"><!-- wp:eo/text {"className":"news-card__date"} -->
+<div class="news-card__date">February 2026</div>
+<!-- /wp:eo/text -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Roadmap Back to Equality: The Equality Ohio Strategic Plan (2026–2028)</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Where we’re headed over the next three years — and how the movement gets there together.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"card__link-wrap"} -->
+<p class="card__link-wrap"><a class="card__link" href="/news/">Read more<span class="sr-only">: Roadmap Back to Equality: The Equality Ohio Strategic Plan (2026–2028)</span></a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></article>
 <!-- /wp:group --></div>

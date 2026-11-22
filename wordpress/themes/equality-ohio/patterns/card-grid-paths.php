@@ -9,7 +9,11 @@
 ?>
 <!-- wp:group {"className":"card-grid card-grid--3","layout":{"type":"default"}} -->
 <div class="wp-block-group card-grid card-grid--3"><!-- wp:group {"className":"card card--path is-blue","layout":{"type":"default"}} -->
-<div class="wp-block-group card card--path is-blue"><!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
+<div class="wp-block-group card card--path is-blue"><!-- wp:html -->
+<span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 3.5v17M5 7h14M8.5 20.5h7" /><path d="M7 7l-3 6.2a3 3 0 0 0 6 0L7 7zM17 7l-3 6.2a3 3 0 0 0 6 0L17 7z" /></svg></span>
+<!-- /wp:html -->
+
+<!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
 <span class="card__kicker">Legal Clinic</span>
 <!-- /wp:eo/text -->
 
@@ -27,7 +31,11 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"card card--path","layout":{"type":"default"}} -->
-<div class="wp-block-group card card--path"><!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
+<div class="wp-block-group card card--path"><!-- wp:html -->
+<span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 20s-7.5-4.6-7.5-10A4 4 0 0 1 12 7.5 4 4 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z" /></svg></span>
+<!-- /wp:html -->
+
+<!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
 <span class="card__kicker">Give</span>
 <!-- /wp:eo/text -->
 
@@ -45,7 +53,11 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"card card--path is-green","layout":{"type":"default"}} -->
-<div class="wp-block-group card card--path is-green"><!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
+<div class="wp-block-group card card--path is-green"><!-- wp:html -->
+<span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M15.5 19.5v-1a4 4 0 0 0-4-4h-4a4 4 0 0 0-4 4v1" /><circle cx="9.5" cy="7.5" r="3" /><path d="M20.5 19.5v-1a4 4 0 0 0-3-3.87M15.5 4.6a3 3 0 0 1 0 5.8" /></svg></span>
+<!-- /wp:html -->
+
+<!-- wp:eo/text {"tagName":"span","className":"card__kicker"} -->
 <span class="card__kicker">About</span>
 <!-- /wp:eo/text -->
 

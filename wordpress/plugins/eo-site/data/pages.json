@@ -1,6 +1,6 @@
 {
   "generated_from": "eo-wordpress-handoff content/pages.json (source ee60763)",
-  "today": "2026-11-20",
+  "today": "2026-11-22",
   "pages": [
     {
       "path": "/about/",
@@ -66,7 +66,7 @@
       "template": "",
       "help_bar": false,
       "front_page": false,
-      "source_text_sha256": "634b52f4fb3f1540f7f0198b99e0ab3d3c698ddf4bb8a4727b0e62a877c6fefc"
+      "source_text_sha256": "479199d9d044428ba88a9f8985a0f00180b871978f404d26ed4592d8705fa6da"
     },
     {
       "path": "/about/leadership/",
@@ -243,7 +243,7 @@
       "template": "",
       "help_bar": false,
       "front_page": true,
-      "source_text_sha256": "6498c8f311a0dc28f77921eec78d2642dfa359173842aa229fdff83b9b49f852"
+      "source_text_sha256": "1bd3a52ff77e54a80c3fb3738e9fb75114456e1d2885198d7f450f36b66f0a7e"
     },
     {
       "path": "/jim-obergefell-john-arthur-society/",
@@ -417,7 +417,7 @@
       "template": "",
       "help_bar": false,
       "front_page": false,
-      "source_text_sha256": "feb2b386b6ed80a22fd11a6f12d20e89cdbc222a7101450c6a6b601dd9982fe5"
+      "source_text_sha256": "250224ce2f6a792b811de3b27f24a07b9576919fea835645069eaed96ab0a7dd"
     },
     {
       "path": "/newsletter/",
@@ -637,7 +637,7 @@
       "template": "",
       "help_bar": false,
       "front_page": false,
-      "source_text_sha256": "25f581c80150a27432f3196bea067602b2bf297823608d97b7ecd96a1142caac"
+      "source_text_sha256": "3869547578086bdd021c5f1f0b9f820041aeae115f7aa8e362cc4766c819661a"
     }
   ]
 }

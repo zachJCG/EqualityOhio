@@ -166,6 +166,16 @@
           "color": "rgba(255, 255, 255, 0.92)"
         },
         {
+          "slug": "eo-sheen",
+          "name": "EO Sheen",
+          "color": "rgba(255, 255, 255, 0.30)"
+        },
+        {
+          "slug": "eo-spotlight",
+          "name": "EO Spotlight",
+          "color": "rgba(107, 75, 181, 0.11)"
+        },
+        {
           "slug": "eo-error",
           "name": "EO Error",
           "color": "#B3261E"

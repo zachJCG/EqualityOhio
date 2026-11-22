@@ -238,6 +238,7 @@ p  { margin: 0 0 1em; text-wrap: pretty; }
     box-shadow: var(--eo-shadow-lift);
     padding: 0.5rem 0;
     z-index: 120;
+    transform-origin: 1.5rem 0;
   }
   /* Open only on purpose: the toggle button (keyboard, tap) or a mouse
      hover, both driven by the script so aria-expanded stays true to what is
@@ -271,7 +272,7 @@ p  { margin: 0 0 1em; text-wrap: pretty; }
   .brand-lockup__img { height: 40px; }
 }
 @keyframes eo-drop {
-  from { opacity: 0; transform: translateY(-6px); }
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
   to   { opacity: 1; transform: none; }
 }
 
@@ -413,9 +414,7 @@ p  { margin: 0 0 1em; text-wrap: pretty; }
 
 /* -- Purple band (stats / big CTA) --------------------------------------- */
 .band {
-  background:
-    url('../textures/band-bars.svg') 0 0/260px 260px repeat,
-    linear-gradient(120deg, var(--eo-purple-deep) 0%, var(--eo-purple) 55%, var(--eo-purple-bright) 100%);
+  background: linear-gradient(120deg, var(--eo-purple-deep) 0%, var(--eo-purple) 55%, var(--eo-purple-bright) 100%);
   color: var(--eo-on-dark);
   padding: 3.6rem 0;
 }
@@ -959,6 +958,341 @@ html.eo-reveal .card-grid > .reveal:nth-child(4) { transition-delay: 210ms; }
 .not-found__lede { max-width: 34em; margin: 0 auto; }
 .not-found .hero__ctas { justify-content: center; }
 
+/* ==========================================================================
+   MOTION & GRAPHICS LAYER (2026-11)
+   One motion language across the site, built on the tokens:
+     entrances    --eo-ease-out over --eo-dur-reveal, a 12-18px rise,
+                  siblings stepped by --eo-stagger
+     exits        --eo-ease-exit over --eo-dur-fast
+     hover/press  --eo-dur-fast or --eo-dur-lift; lift 1-3px, press 0.98
+     scroll-led   effects that follow the scroll position run only where the
+                  browser supports scroll-driven animation, only on screen and
+                  only with motion allowed; everywhere else the page is static
+   Only transform and opacity animate. Under prefers-reduced-motion every
+   duration and the stagger step are 0ms (eo-brand-tokens.css), and the page
+   transition, the scroll-led effects and the card spotlight are off.
+   ========================================================================== */
+
+/* -- Page transitions ----------------------------------------------------
+   Cross-document view transitions: moving between pages crossfades the
+   content while the ribbon, equality bar and header stay where they are.
+   CSS only, so the strict script-src 'self' policy is untouched; browsers
+   without support, and reduced motion, navigate instantly as before. The
+   header is not captured while the phone menu is open, so its fixed sheet
+   always positions against the viewport. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+.preview-ribbon { view-transition-name: eo-ribbon; }
+body > .equality-bar { view-transition-name: eo-bar; }
+body:not(.nav-open) .site-header { view-transition-name: eo-header; }
+::view-transition-group(*) {
+  animation-duration: var(--eo-dur-page);
+  animation-timing-function: var(--eo-ease-out);
+}
+::view-transition-old(root) { animation: eo-page-out var(--eo-dur-fast) var(--eo-ease-exit) both; }
+::view-transition-new(root) { animation: eo-page-in var(--eo-dur-page) var(--eo-ease-out) both; }
+@keyframes eo-page-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes eo-page-in { from { opacity: 0; transform: translateY(10px); } }
+
+/* -- Small brand details -------------------------------------------------- */
+::selection { background: var(--eo-purple); color: var(--eo-on-dark); }
+/* Every eyebrow label leads with a miniature equality bar (green, purple,
+   blue), the logomark read left to right. */
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 1.5em; height: 3px;
+  margin-right: 0.7em;
+  vertical-align: 0.3em;
+  border-radius: 2px;
+  background: var(--eo-equality-bar);
+}
+.eyebrow--on-dark::before { background: var(--eo-on-dark); opacity: 0.7; }
+
+/* -- Header: a shadow that arrives with the scroll ----------------------- */
+.site-header::after {
+  content: "";
+  position: absolute; inset: 0;
+  box-shadow: var(--eo-shadow-header);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (min-width: 901px) {
+  /* Top-level links draw their underline from the left instead of swapping
+     a border color: green on hover, purple for the current section. */
+  .site-nav > ul > li:not(.nav-cta) > a,
+  .site-nav .nav-item-row > a { position: relative; }
+  .site-nav > ul > li:not(.nav-cta) > a::after,
+  .site-nav .nav-item-row > a::after {
+    content: "";
+    position: absolute; left: 0.1rem; right: 0.1rem; bottom: -2px;
+    height: 2px; border-radius: 2px;
+    background: var(--eo-green);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform var(--eo-dur-base) var(--eo-ease-out);
+  }
+  .site-nav > ul > li:not(.nav-cta) > a:hover::after,
+  .site-nav .nav-item-row > a:hover::after { transform: scaleX(1); }
+  .site-nav > ul > li:not(.nav-cta) > a[aria-current]::after,
+  .site-nav .nav-item-row > a[aria-current]::after { background: var(--eo-purple); transform: scaleX(1); }
+  .site-nav > ul > li:not(.nav-cta) > a:hover,
+  .site-nav .nav-item-row > a:hover,
+  .site-nav > ul > li:not(.nav-cta) > a[aria-current],
+  .site-nav .nav-item-row > a[aria-current] { border-bottom-color: transparent; }
+  /* Dropdown items follow their panel in, a beat apart. */
+  .site-nav .has-sub.open .sub-menu li { animation: eo-item-in var(--eo-dur-base) var(--eo-ease-out) both; }
+  .site-nav .has-sub.open .sub-menu li:nth-child(2) { animation-delay: calc(var(--eo-stagger) * 0.4); }
+  .site-nav .has-sub.open .sub-menu li:nth-child(3) { animation-delay: calc(var(--eo-stagger) * 0.8); }
+  .site-nav .has-sub.open .sub-menu li:nth-child(4) { animation-delay: calc(var(--eo-stagger) * 1.2); }
+  .site-nav .has-sub.open .sub-menu li:nth-child(5) { animation-delay: calc(var(--eo-stagger) * 1.6); }
+  .site-nav .has-sub.open .sub-menu li:nth-child(n+6) { animation-delay: calc(var(--eo-stagger) * 2); }
+}
+@keyframes eo-item-in {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* -- Buttons: a sheen sweeps across filled buttons on hover --------------
+   The sweep runs once, left to right, and resets out of sight. overflow:
+   clip (not hidden) keeps an inline button on its text baseline; it never
+   clips the focus outline, which is drawn outside the box. */
+.btn { position: relative; isolation: isolate; overflow: clip; }
+.btn--primary::after,
+.btn--gold::after,
+.btn--on-dark::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(105deg, transparent 32%, var(--eo-sheen) 50%, transparent 68%);
+  transform: translateX(-101%);
+  pointer-events: none;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .btn--primary:not(:disabled):hover::after,
+  .btn--gold:not(:disabled):hover::after,
+  .btn--on-dark:not(:disabled):hover::after {
+    transform: translateX(101%);
+    transition: transform var(--eo-dur-draw) var(--eo-ease-out);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn:not(:disabled):active { transform: scale(0.98); }
+}
+
+/* -- Home hero: the equality mark, assembled -----------------------------
+   The logomark at its measured proportions (scripts/art/mark.mjs) across a
+   pale, full-width equals sign that shares the gap of the logo's own equals.
+   On load the pale bars slide in from opposite sides while each bar of the
+   mark grows from its base (the equals bars from the left), one
+   --eo-stagger apart. As the hero scrolls away the two layers
+   drift at different rates. Decorative (aria-hidden); hidden on one-column
+   layouts and in print. */
+.hero__art .eq-art { display: block; width: min(480px, 100%); height: auto; overflow: visible; }
+.eq-art__ghost { fill: var(--eo-purple-border); animation: eo-ghost-in var(--eo-dur-draw) var(--eo-ease-out) both; }
+.eq-art__ghost--bottom { animation-name: eo-ghost-in-r; }
+.eq-art__bar--green { fill: var(--eo-green); }
+.eq-art__bar--purple { fill: var(--eo-purple); }
+.eq-art__bar--blue { fill: var(--eo-blue); }
+.eq-art__bar {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: eo-bar-y var(--eo-dur-draw) var(--eo-ease-out) both;
+  animation-delay: calc(var(--eo-stagger) * (var(--i, 0) + 2));
+}
+.eq-art__bar--x { transform-origin: 0 50%; animation-name: eo-bar-x; }
+@keyframes eo-bar-y { from { transform: scaleY(0); } }
+@keyframes eo-bar-x { from { transform: scaleX(0); } }
+@keyframes eo-ghost-in { from { transform: translateX(-36px); } }
+@keyframes eo-ghost-in-r { from { transform: translateX(36px); } }
+
+/* -- Path cards: an icon tile above the kicker ---------------------------- */
+.card__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  margin-bottom: 1.1rem;
+  border-radius: 14px;
+  color: var(--eo-purple);
+  background: var(--eo-purple-soft);
+  transition: transform var(--eo-dur-lift) var(--eo-ease-out);
+}
+.card--path.is-blue .card__icon { color: var(--eo-blue-ink); background: var(--eo-blue-soft); }
+.card--path.is-green .card__icon { color: var(--eo-success-ink); background: var(--eo-success-bg); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover .card__icon { transform: translateY(-2px) rotate(-6deg); }
+}
+
+/* -- Link cards: a spotlight that follows the pointer ---------------------
+   eo-site-template.js writes the pointer position into --eo-mx/--eo-my; the
+   light sits behind the card's content (z-index -1 inside the card's own
+   stacking context) and fades in and out with opacity. Fine pointers with
+   motion allowed only. */
+.card:has(.card__link):not(.card--flat) { isolation: isolate; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .card:has(.card__link):not(.card--flat)::before {
+    content: "";
+    position: absolute; inset: 0; z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(420px circle at var(--eo-mx, 50%) var(--eo-my, -30%), var(--eo-spotlight), transparent 70%);
+    opacity: 0;
+    transition: opacity var(--eo-dur-lift) var(--eo-ease-out);
+    pointer-events: none;
+  }
+  .card:has(.card__link):not(.card--flat):hover::before { opacity: 1; }
+}
+
+/* -- News cards: brand art in the media panel ------------------------------
+   The generated logomark art (scripts/art/textures.mjs) sits over each
+   card's color, cut off by the right edge; each variant frames it
+   differently, and a hovered card eases it in a little. */
+.news-card__media { position: relative; isolation: isolate; overflow: hidden; }
+.news-card__media::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: url('../textures/media-mark.svg') 100% 50% / auto 118% no-repeat;
+  transform-origin: 70% 50%;
+  transition: transform var(--eo-dur-reveal) var(--eo-ease-out);
+  pointer-events: none;
+}
+.news-card__media.alt-a::before { background-position: 100% 0%; background-size: auto 140%; }
+.news-card__media.alt-b::before { background-position: 0% 100%; background-size: auto 128%; }
+.news-card__media.alt-c::before { background-position: 60% 30%; background-size: auto 150%; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover .news-card__media::before { transform: scale(1.06); }
+}
+/* The lead story on /news spans the grid, its art beside the text. */
+.card-grid > .news-card--lead { grid-column: 1 / -1; flex-direction: row; }
+.news-card--lead .news-card__media {
+  flex: 1 1 44%;
+  height: auto; min-height: 240px;
+  border-radius: calc(var(--eo-radius-lg) - 1px) 0 0 calc(var(--eo-radius-lg) - 1px);
+}
+.news-card--lead .news-card__body { flex: 1 1 56%; padding: 2rem 2.2rem; justify-content: center; }
+.news-card--lead h2 { font-size: clamp(1.3rem, 2vw, 1.6rem); }
+.news-card--lead .news-card__media::before { background-position: 100% 46%; background-size: auto 64%; }
+@media (max-width: 760px) {
+  .card-grid > .news-card--lead { flex-direction: column; }
+  .news-card--lead .news-card__media {
+    flex: none; min-height: 150px;
+    border-radius: calc(var(--eo-radius-lg) - 1px) calc(var(--eo-radius-lg) - 1px) 0 0;
+  }
+  .news-card--lead .news-card__body { padding: 1.4rem; }
+}
+
+/* -- Purple band: the bar texture on its own layer ------------------------
+   Moved off the band's background so it can drift against the scroll
+   (below) without repainting the gradient. overflow: clip, not hidden: a
+   hidden box is a scroll container, which would pin the texture's view()
+   timeline to the band itself and stop the drift (hidden stays as the
+   fallback for browsers without clip, which have no scroll timelines). */
+.band { position: relative; isolation: isolate; overflow: hidden; overflow: clip; }
+.band::before {
+  content: "";
+  position: absolute; inset: -64px 0; z-index: -1;
+  background: url('../textures/band-bars.svg') 0 0 / 260px 260px repeat;
+  pointer-events: none;
+}
+.stat__num { font-variant-numeric: lining-nums tabular-nums; }
+@media (min-width: 901px) {
+  .stat__num { font-size: 3.1rem; }
+}
+
+/* -- Footer: the logomark as a faint watermark ----------------------------- */
+.site-footer {
+  background:
+    url('../textures/footer-mark.svg') right -2.5rem bottom -1.6rem / min(440px, 70vw) auto no-repeat,
+    var(--eo-purple-deep);
+}
+
+/* -- Scroll reveal choreography (extends the reveal above) -----------------
+   Inside a block that is revealing, its parts rise one --eo-stagger apart:
+   the section head, the band's figures, the values list. Transform only;
+   the block's own fade carries the opacity. */
+html.eo-reveal .reveal .section__head > *,
+html.eo-reveal .band.reveal .stat-grid > *,
+html.eo-reveal .reveal .value-row {
+  transition: transform var(--eo-dur-reveal) var(--eo-ease-out);
+}
+html.eo-reveal .reveal:not(.in-view) .section__head > * { transform: translateY(14px); }
+html.eo-reveal .band.reveal:not(.in-view) .stat-grid > * { transform: translateY(18px); }
+html.eo-reveal .reveal:not(.in-view) .value-row { transform: translateY(16px); }
+html.eo-reveal .reveal .section__head > :nth-child(2),
+html.eo-reveal .band.reveal .stat-grid > :nth-child(2),
+html.eo-reveal .reveal .value-row:nth-child(2) { transition-delay: var(--eo-stagger); }
+html.eo-reveal .reveal .section__head > :nth-child(3),
+html.eo-reveal .band.reveal .stat-grid > :nth-child(3),
+html.eo-reveal .reveal .value-row:nth-child(3) { transition-delay: calc(var(--eo-stagger) * 2); }
+html.eo-reveal .band.reveal .stat-grid > :nth-child(4),
+html.eo-reveal .reveal .value-row:nth-child(4) { transition-delay: calc(var(--eo-stagger) * 3); }
+html.eo-reveal .reveal .value-row:nth-child(n+5) { transition-delay: calc(var(--eo-stagger) * 4); }
+
+/* -- Scroll-led effects ----------------------------------------------------
+   Scroll-driven animations follow the scroll position itself, so nothing
+   plays on its own. Without support (or with reduced motion, or in print)
+   every one of these simply rests in its natural, fully drawn state. */
+@supports (animation-timeline: scroll()) {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    /* Header shadow over the first 120px of scroll. */
+    .site-header::after {
+      animation: eo-fade-in linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 120px;
+    }
+    /* Hero art: the two layers drift apart as the hero leaves. */
+    .eq-art__layer {
+      animation: eo-drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80vh;
+    }
+    .eq-art__layer--back { --eo-drift: -16px; }
+    .eq-art__layer--front { --eo-drift: -44px; }
+    /* Band texture moves against the page while the band crosses. */
+    .band::before {
+      animation: eo-band-drift linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+    /* Timelines draw their line down to the middle of the screen, and each
+       year's dot grows to full size as it reaches it. */
+    .timeline::before {
+      transform-origin: 50% 0;
+      animation: eo-draw-y linear both;
+      animation-timeline: view();
+      animation-range: cover 50vh cover calc(100% - 50vh);
+    }
+    .timeline li::before {
+      animation: eo-dot linear both;
+      animation-timeline: view();
+      animation-range: cover calc(50vh - 80px) cover 50vh;
+    }
+    /* Reading progress along the top edge of the long guides and policies. */
+    body:is([data-page="family-law-guide"], [data-page="trans-know-your-rights"], [data-page="history"],
+            [data-page="legacy"], [data-page="votersguide"], [data-page="privacy"], [data-page="terms"])::before {
+      content: "";
+      position: fixed; top: 0; left: 0; right: 0; z-index: 150;
+      height: 4px;
+      background: var(--eo-equality-bar);
+      transform-origin: 0 50%;
+      animation: eo-progress linear both;
+      animation-timeline: scroll(root);
+      pointer-events: none;
+    }
+  }
+}
+@keyframes eo-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes eo-drift { to { transform: translateY(var(--eo-drift, -24px)); } }
+@keyframes eo-band-drift { from { transform: translateY(-48px); } to { transform: translateY(48px); } }
+@keyframes eo-draw-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes eo-dot { from { transform: scale(0.45); } to { transform: scale(1); } }
+@keyframes eo-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* -- Rhythm on wide screens ------------------------------------------------ */
+@media (min-width: 1100px) {
+  .section { padding: 5rem 0; }
+  .band { padding: 4.2rem 0; }
+  .section__head { margin-bottom: 2.8rem; }
+}
+
 /* -- Phone rhythm ---------------------------------------------------------
    Tighter sections and full-width hero buttons, so the clinic number and
    the main actions sit higher on the first screens. */
@@ -1011,7 +1345,9 @@ html.eo-reveal .card-grid > .reveal:nth-child(4) { transition-delay: 210ms; }
    address printed after it. */
 @media print {
   .skip-link, .preview-ribbon, .equality-bar, .nav-toggle, .site-nav,
-  .help-bar, .footer-main, .hero__art, .clinic-hero-mark, .error-summary { display: none !important; }
+  .help-bar, .footer-main, .hero__art, .clinic-hero-mark, .error-summary,
+  .card__icon, .band::before, .site-header::after, .eyebrow::before { display: none !important; }
+  .news-card__media::before { display: none; }
   body { font-size: 11pt; line-height: 1.5; color: var(--eo-ink); background: none; }
   .site-header { position: static; backdrop-filter: none; background: none; border-bottom: 1px solid var(--eo-border); }
   .nav-inner { height: auto; padding: 0 0 0.5rem; }

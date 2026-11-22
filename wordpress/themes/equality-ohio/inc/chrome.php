@@ -37,10 +37,17 @@ function eo_menu_tree( string $location, array $fallback = array() ): array {
 	$build = function ( int $parent ) use ( &$build, $by_parent ): array {
 		$out = array();
 		foreach ( $by_parent[ $parent ] ?? array() as $item ) {
+			$classes = (array) $item->classes;
+			// Same rule as lib/chrome.mjs: the item for this page is "page"; a
+			// section whose child is this page is "true". Pages outside the menu
+			// mark nothing (WordPress's page-ancestor classes are not used).
+			$current = in_array( 'current-menu-item', $classes, true ) ? 'page'
+				: ( array_intersect( array( 'current-menu-ancestor', 'current-menu-parent' ), $classes ) ? 'true' : '' );
 			$out[] = array(
 				'label'    => $item->title,
 				'url'      => $item->url,
-				'classes'  => array_values( array_filter( (array) $item->classes, fn( $c ) => $c && 0 !== strpos( $c, 'menu-item' ) && 0 !== strpos( $c, 'current' ) ) ),
+				'classes'  => array_values( array_filter( $classes, fn( $c ) => $c && 0 !== strpos( $c, 'menu-item' ) && 0 !== strpos( $c, 'current' ) ) ),
+				'current'  => $current,
 				'children' => $build( (int) $item->ID ),
 			);
 		}
@@ -52,14 +59,29 @@ function eo_menu_tree( string $location, array $fallback = array() ): array {
 function eo_default_tree( array $items ): array {
 	$out = array();
 	foreach ( $items as $item ) {
+		$url      = eo_internal_url( $item['href'] );
+		$children = eo_default_tree( $item['children'] ?? array() );
+		$current  = eo_is_current_url( $url ) ? 'page'
+			: ( array_filter( $children, fn( $c ) => 'page' === $c['current'] ) ? 'true' : '' );
 		$out[] = array(
 			'label'    => $item['label'],
-			'url'      => eo_internal_url( $item['href'] ),
+			'url'      => $url,
 			'classes'  => $item['classes'] ?? array(),
-			'children' => eo_default_tree( $item['children'] ?? array() ),
+			'current'  => $current,
+			'children' => $children,
 		);
 	}
 	return $out;
+}
+
+/** Whether a link points at the page being served (path only, no fragment). */
+function eo_is_current_url( string $url ): bool {
+	if ( ! preg_match( '#^(/|https?://)#', $url ) || false !== strpos( $url, '#' ) ) {
+		return false;
+	}
+	$path    = untrailingslashit( (string) wp_parse_url( $url, PHP_URL_PATH ) );
+	$request = untrailingslashit( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH ) );
+	return $path === $request;
 }
 
 /** The default primary nav: the five sections plus the Donate button. */
@@ -146,11 +168,14 @@ function eo_caret_svg(): string {
 	return '<svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
 }
 
-function eo_link( array $item, string $class = '' ): string {
+function eo_link( array $item, string $class = '', bool $mark_current = false ): string {
 	$external = preg_match( '#^https?://#', $item['url'] ) && 0 !== strpos( $item['url'], home_url() );
 	$attrs    = ' href="' . esc_url( $item['url'] ) . '"';
 	if ( $class ) {
 		$attrs .= ' class="' . esc_attr( $class ) . '"';
+	}
+	if ( $mark_current && ! empty( $item['current'] ) ) {
+		$attrs .= ' aria-current="' . esc_attr( $item['current'] ) . '"';
 	}
 	if ( $external ) {
 		$attrs .= ' rel="noopener" target="_blank"';
@@ -177,15 +202,15 @@ function eo_render_header(): string {
 		if ( ! empty( $item['children'] ) ) {
 			$id   = 'sub-' . sanitize_title( $item['label'] );
 			$out .= '<li class="has-sub' . ( $classes ? ' ' . esc_attr( implode( ' ', $classes ) ) : '' ) . '">';
-			$out .= '<div class="nav-item-row">' . eo_link( $item )
+			$out .= '<div class="nav-item-row">' . eo_link( $item, '', true )
 				. '<button class="sub-toggle" type="button" aria-expanded="false" aria-controls="' . esc_attr( $id ) . '" aria-label="' . esc_attr( $item['label'] ) . ' submenu">' . eo_caret_svg() . '</button></div>';
 			$out .= '<ul class="sub-menu" id="' . esc_attr( $id ) . '">';
 			foreach ( $item['children'] as $child ) {
-				$out .= '<li>' . eo_link( $child ) . '</li>';
+				$out .= '<li>' . eo_link( $child, '', true ) . '</li>';
 			}
 			$out .= '</ul></li>';
 		} else {
-			$out .= '<li' . ( $classes ? ' class="' . esc_attr( implode( ' ', $classes ) ) . '"' : '' ) . '>' . eo_link( $item ) . '</li>';
+			$out .= '<li' . ( $classes ? ' class="' . esc_attr( implode( ' ', $classes ) ) . '"' : '' ) . '>' . eo_link( $item, '', true ) . '</li>';
 		}
 	}
 	$out .= '</ul></nav></div></header>' . "\n";

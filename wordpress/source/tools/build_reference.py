@@ -18,6 +18,9 @@ red = json.load(open(os.path.join(out, 'redirects', 'summary.json'), encoding='u
 rules = json.load(open(os.path.join(out, 'redirects', 'redirect-rules.json'), encoding='utf-8'))
 os.makedirs(ref, exist_ok=True)
 content = sorted((p for p in pages if not p['staging_only']), key=lambda p: (p['url'] != '/', p['url']))
+# analyze.py names the expired-block list after the day it ran (expired_as_of_YYYY-MM-DD).
+EXPIRED = next(k for k in pages[0] if k.startswith('expired_as_of_'))
+AS_OF = EXPIRED[len('expired_as_of_'):]
 
 
 def cell(text):
@@ -43,7 +46,7 @@ for i, p in enumerate(content, 1):
     n = len(p['staging_copy_lines'])
     if n:
         notes.append('%d staging-only line%s' % (n, '' if n == 1 else 's'))
-    exp = p['expired_as_of_2026-11-20']
+    exp = p[EXPIRED]
     if exp:
         notes.append('%d expired election block%s (do not port)' % (len(exp), '' if len(exp) == 1 else 's'))
     if p['self_links_to_wordpress']:
@@ -56,7 +59,7 @@ for i, p in enumerate(content, 1):
         cell(p['h1']), p['text_words'], cell('; '.join(notes)) or '—'))
 L += ['', 'Totals: %d pages, %d words, %d forms, %d staging-only lines, %d expired blocks, %d links back to equalityohio.org.' % (
     len(content), sum(p['text_words'] for p in content), sum(len(p['forms']) for p in content),
-    sum(len(p['staging_copy_lines']) for p in content), sum(len(p['expired_as_of_2026-11-20']) for p in content),
+    sum(len(p['staging_copy_lines']) for p in content), sum(len(p[EXPIRED]) for p in content),
     sum(len(p['self_links_to_wordpress']) for p in content)), '',
     'Not ported: `/gate` (the Vercel staging gate). The branded 404 becomes `templates/404.html`.', '',
     '## SEO Registry', '',
@@ -70,11 +73,14 @@ open(os.path.join(ref, 'page-map.md'), 'w', encoding='utf-8').write('\n'.join(L)
 
 # ---------------------------------------------------------------- launch blockers
 L = ['# Staging-Only Content, Expired Content and Links Back to WordPress', '',
-     'Generated from the source pages on 2026-11-20 with the same patterns the source repo\'s own tests use '
+     'Generated from the source pages on %s with the same patterns the source repo\'s own tests use ' % AS_OF +
      '(`tests/site-rules.test.mjs`, `tests/freshness.test.mjs`). Line numbers refer to the file under `source/nextjs/`.', '',
-     '## 1. Expired Blocks: Do Not Port', '',
-     'Each carries `data-expires="2026-11-04"` and an `<!-- ELECTION: … -->` comment telling the next editor to delete it after Election Day.', '',
-     '| Page | Element | What it is |', '|---|---|---|']
+     '## 1. Expired Blocks: Do Not Port', '']
+if inv['expired']:
+    L += ['Each carries `data-expires="2026-11-04"` and an `<!-- ELECTION: … -->` comment telling the next editor to delete it after Election Day.', '',
+          '| Page | Element | What it is |', '|---|---|---|']
+else:
+    L += ['None as of %s. The four 2026 election blocks (`data-expires="2026-11-04"`) were deleted from the source after Election Day.' % AS_OF]
 what = {('/', 'section'): 'The "Make your plan to vote in 2026!" section with the scorecard banner',
         ('/', 'article'): 'The "Make your plan to vote" card in "The latest"',
         ('/news', 'div'): 'The election alert card at the top of News & Policy',

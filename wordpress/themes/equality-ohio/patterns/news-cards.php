@@ -54,5 +54,29 @@
 <p class="card__link-wrap"><a class="card__link" href="/votersguide/">See the scorecard</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></article>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"article","className":"card news-card","layout":{"type":"default"}} -->
+<article class="wp-block-group card news-card"><!-- wp:eo/text {"className":"news-card__media alt-b"} -->
+<div class="news-card__media alt-b"><span class="pill pill--on-media">Strategic Plan</span></div>
+<!-- /wp:eo/text -->
+
+<!-- wp:group {"className":"news-card__body","layout":{"type":"default"}} -->
+<div class="wp-block-group news-card__body"><!-- wp:eo/text {"className":"news-card__date"} -->
+<div class="news-card__date">February 2026</div>
+<!-- /wp:eo/text -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Roadmap Back to Equality: The Equality Ohio Strategic Plan (2026–2028)</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Where we’re headed over the next three years — and how the movement gets there together.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"card__link-wrap"} -->
+<p class="card__link-wrap"><a class="card__link" href="/news/">Read more<span class="sr-only">: Roadmap Back to Equality: The Equality Ohio Strategic Plan (2026–2028)</span></a></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></article>
 <!-- /wp:group --></div>
 <!-- /wp:group -->

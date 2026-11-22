@@ -33,10 +33,23 @@
 <!-- /wp:buttons --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"hero__art","layout":{"type":"default"}} -->
-<div class="wp-block-group hero__art"><!-- wp:image {"url":"<?php echo esc_url( get_template_directory_uri() ); ?>/assets/logo/equality-ohio-logo.png","alt":"Equality Ohio logo","width":"400px","height":"174px"} -->
-<figure class="wp-block-image is-resized"><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/logo/equality-ohio-logo.png" alt="Equality Ohio logo" style="width:400px;height:174px"/></figure>
-<!-- /wp:image --></div>
-<!-- /wp:group --></div>
+<!-- wp:html -->
+<div class="hero__art" aria-hidden="true">
+      <svg class="eq-art" viewBox="0 0 480 360" width="480" height="360" focusable="false">
+        <g class="eq-art__layer eq-art__layer--back">
+          <rect class="eq-art__ghost eq-art__ghost--top" x="0" y="45.33" width="480" height="94" />
+          <rect class="eq-art__ghost eq-art__ghost--bottom" x="0" y="173.91" width="480" height="94" />
+        </g>
+        <g class="eq-art__layer eq-art__layer--front">
+          <rect class="eq-art__bar eq-art__bar--green" style="--i:0" x="14" y="96" width="42.77" height="121.24" />
+          <rect class="eq-art__bar eq-art__bar--green" style="--i:1" x="91" y="96" width="42.84" height="121.24" />
+          <rect class="eq-art__bar eq-art__bar--purple eq-art__bar--x" style="--i:2" x="176.53" y="96" width="119.84" height="43.33" />
+          <rect class="eq-art__bar eq-art__bar--purple eq-art__bar--x" style="--i:3" x="176.53" y="173.91" width="119.84" height="43.33" />
+          <rect class="eq-art__bar eq-art__bar--blue" style="--i:4" x="339.08" y="96" width="42.84" height="121.24" />
+          <rect class="eq-art__bar eq-art__bar--blue" style="--i:5" x="416.15" y="96" width="42.84" height="121.24" />
+        </g>
+      </svg>
+    </div>
+<!-- /wp:html --></div>
 <!-- /wp:group --></section>
 <!-- /wp:group -->
